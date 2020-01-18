@@ -1,0 +1,127 @@
+﻿<UserControl
+  x:Class="RM_Messenger.View.SigningInControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:gif="http://wpfanimatedgif.codeplex.com"
+  xmlns:local="clr-namespace:RM_Messenger.View"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Background="White"
+  mc:Ignorable="d">
+  <!--  Background="#782370"  -->
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Grid Margin="7,0,7,7" Background="#76246E">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="*" />
+    </Grid.RowDefinitions>
+
+    <!--<Image
+      Grid.RowSpan="9"
+      VerticalAlignment="Top"
+      Opacity="0.4"
+      Source="pack://application:,,,/ChatApp;component/Resources/shadow.png" />-->
+
+    <DockPanel Margin="0">
+      <Menu Background="Transparent" DockPanel.Dock="Top">
+        <MenuItem Foreground="White" Header="Messenger">
+          <MenuItem Foreground="Black" Header="_New">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="OpenInNew" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Foreground="Black" Header="_Open">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="MenuOpen" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Foreground="Black" Header="_Save">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="ContentSave" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
+          <MenuItem Foreground="Black" Header="_Exit">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="ExitRun" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </MenuItem>
+        <MenuItem Foreground="White" Header="_Help" />
+      </Menu>
+
+    </DockPanel>
+
+    <Image
+      Grid.Row="1"
+      Width="180"
+      Height="120"
+      Margin="0,20,0,0"
+      gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerAwake.gif" />
+    <!--  pack://application:,,,/ChatApp;component/Resources/YahooMessengerSleep.gif  -->
+    <!--<Image
+      Grid.Row="1"
+      Width="90"
+      Height="90"
+      Margin="0,50,0,20"
+      HorizontalAlignment="Center"
+      Source="pack://application:,,,/ChatApp;component/Resources/YahooMessenger.png" />-->
+    
+    <TextBox
+      Grid.Row="3"
+      Width="100"
+      Margin="40,30"
+      HorizontalAlignment="Center"
+      Background="Transparent"
+      BorderThickness="0"
+      FontSize="13"
+      FontWeight="Bold"
+      Foreground="LightGray"
+      Text="{Binding MessageOnSingingIn}"
+      TextAlignment="Center"
+      TextWrapping="Wrap"/>
+    
+    <Button
+      x:Name="Cancel"
+      Grid.Row="6"
+      Width="80"
+      Height="23"
+      HorizontalAlignment="Center"
+      VerticalAlignment="Top"
+      BorderBrush="White"
+      BorderThickness="0.5"
+      Command="{Binding CancelCommand}"
+      Content="Cancel"
+      FontSize="13"
+      Foreground="White"
+      Style="{StaticResource MaterialDesignRaisedAccentButton}"
+     >
+      <Button.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <GradientStop Offset="0" Color="#7B4171" />
+          <GradientStop Offset="0.445" Color="#693060" />
+          <GradientStop Offset="0.53" Color="#481041" />
+        </LinearGradientBrush>
+      </Button.Background>
+    </Button>
+
+  </Grid>
+</UserControl>

@@ -1,0 +1,20 @@
+﻿namespace RM_Messenger.Model
+{
+  class UserModel
+  {
+    private static UserModel _instance;
+
+    public static UserModel Instance => _instance ?? (_instance = new UserModel());
+
+    public string Username { get; set; }
+    public string ID { get; set; }
+
+    public string FirstName { get; set; }
+
+    public string LastName { get; set; }
+
+    public bool IsOnline { get; set; } = true;
+    public string EncryptedPassword { get; set; }
+
+  }
+}

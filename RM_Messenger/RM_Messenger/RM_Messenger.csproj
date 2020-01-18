@@ -1,0 +1,411 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{53DC2F84-5DBE-4582-947B-096E0F57FA6A}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>RM_Messenger</RootNamespace>
+    <AssemblyName>RM_Messenger</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.2.920, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.0.1.920, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.3.0.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.ConfigurationManager, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Configuration.ConfigurationManager.4.7.0\lib\net461\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.AccessControl, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.AccessControl.4.7.0\lib\net461\System.Security.AccessControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Permissions, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Permissions.4.7.0\lib\net461\System.Security.Permissions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Security.Principal.Windows, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Principal.Windows.4.7.0\lib\net461\System.Security.Principal.Windows.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WpfAnimatedGif, Version=1.4.18.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WpfAnimatedGif.1.4.18\lib\net\WpfAnimatedGif.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Constants\LoginConstants.cs" />
+    <Compile Include="Database\EntityFramework.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFramework.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\EntityFramework.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\EntityFramework.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\User.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\AccountManager.cs" />
+    <Compile Include="Helpers\AppConfigManager.cs" />
+    <Compile Include="Helpers\ApplicationConfigurationManager.cs" />
+    <Compile Include="Helpers\AutoScrollHelper.cs" />
+    <Compile Include="Helpers\WindowManager.cs" />
+    <Compile Include="Model\ErrorMessageModel.cs" />
+    <Compile Include="Model\UserModel.cs" />
+    <Compile Include="ViewModel\ErrorMessageViewModel.cs" />
+    <Compile Include="ViewModel\HomepageViewModel.cs" />
+    <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\SigningInViewModel.cs" />
+    <Compile Include="View\ErrorMessageControl.xaml.cs">
+      <DependentUpon>ErrorMessageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\HomepageControl.xaml.cs">
+      <DependentUpon>HomepageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SigningInControl.xaml.cs">
+      <DependentUpon>SigningInControl.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EntityDeploy Include="Database\EntityFramework.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntityFramework.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Database\EntityFramework.edmx.diagram">
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Settings.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="View\ErrorMessageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\HomepageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SigningInControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Resources\ActivitiesButtonIcon.png" />
+    <Resource Include="Resources\ActivitiesButtonIcon_MouseOver.png" />
+    <Resource Include="Resources\AddFriend.png" />
+    <Resource Include="Resources\Audibles.png" />
+    <Resource Include="Resources\Audibles_MouseOver.png" />
+    <Resource Include="Resources\Background.jpg" />
+    <Resource Include="Resources\banner.png" />
+    <Resource Include="Resources\Busy.ico" />
+    <Resource Include="Resources\BuzzIcon.png" />
+    <Resource Include="Resources\BuzzIcon_MouseOver.png" />
+    <Resource Include="Resources\Chat.ico" />
+    <Resource Include="Resources\ChatBubble.png" />
+    <Resource Include="Resources\ClearSearchIcon.png" />
+    <Resource Include="Resources\CloseButton.png" />
+    <Resource Include="Resources\ContactsButton.png" />
+    <Resource Include="Resources\Emoticons.png" />
+    <Resource Include="Resources\Emoticons_MouseOver.png" />
+    <Resource Include="Resources\Empty.png" />
+    <Resource Include="Resources\games.png" />
+    <Resource Include="Resources\GridIcon.png" />
+    <Resource Include="Resources\Icon.ico" />
+    <Resource Include="Resources\Icon.png" />
+    <Resource Include="Resources\Idle.ico" />
+    <Resource Include="Resources\IMVironmentsButtonIcon.png" />
+    <Resource Include="Resources\IMVironmentsButtonIcon_MouseOver.png" />
+    <Resource Include="Resources\LoginControlBackground.png" />
+    <Resource Include="Resources\mobile.png" />
+    <Resource Include="Resources\Offline.ico" />
+    <Resource Include="Resources\OfflineProfilePicture.jpg" />
+    <Resource Include="Resources\Online.ico" />
+    <Resource Include="Resources\phone.png" />
+    <Resource Include="Resources\PhotosButtonIcon.png" />
+    <Resource Include="Resources\PhotosButtonIcon_MouseOver.png" />
+    <Resource Include="Resources\ProfilePcture.jpg" />
+    <Resource Include="Resources\ProfilePicture.jpg" />
+    <Resource Include="Resources\ProfilePicture2.jpg" />
+    <Resource Include="Resources\ProfilePicture3.jpg" />
+    <Resource Include="Resources\ProfilePicture4.jpg" />
+    <Resource Include="Resources\ProfilePictureAccount.jpg" />
+    <Resource Include="Resources\RecentContact_Icon.png" />
+    <Resource Include="Resources\SearchBanner.png" />
+    <Resource Include="Resources\SearchIcon.png" />
+    <Resource Include="Resources\SendEmailImage.png" />
+    <Resource Include="Resources\SendImage.png" />
+    <Resource Include="Resources\shadow.png" />
+    <Resource Include="Resources\TextFormat.png" />
+    <Resource Include="Resources\TextFormat_MouseOver.png" />
+    <Resource Include="Resources\UpdatesButton.png" />
+    <Resource Include="Resources\VideoCall.png" />
+    <Resource Include="Resources\VideoCall_MouseOver.png" />
+    <Resource Include="Resources\VoiceCall.png" />
+    <Resource Include="Resources\VoiceCall_MouseOver.png" />
+    <Resource Include="Resources\YahooMessenger.png" />
+    <Resource Include="Resources\YahooMessengerAwake.GIF" />
+    <Resource Include="Resources\YahooMessengerSleep.gif" />
+    <Resource Include="Resources\YahooMessengerSleep2.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Emoticons\1.gif" />
+    <Resource Include="Resources\Emoticons\10.gif" />
+    <Resource Include="Resources\Emoticons\100.gif" />
+    <Resource Include="Resources\Emoticons\101.gif" />
+    <Resource Include="Resources\Emoticons\102.gif" />
+    <Resource Include="Resources\Emoticons\103.gif" />
+    <Resource Include="Resources\Emoticons\104.gif" />
+    <Resource Include="Resources\Emoticons\105.gif" />
+    <Resource Include="Resources\Emoticons\106.gif" />
+    <Resource Include="Resources\Emoticons\107.gif" />
+    <Resource Include="Resources\Emoticons\108.gif" />
+    <Resource Include="Resources\Emoticons\109.gif" />
+    <Resource Include="Resources\Emoticons\11.gif" />
+    <Resource Include="Resources\Emoticons\110.gif" />
+    <Resource Include="Resources\Emoticons\111.gif" />
+    <Resource Include="Resources\Emoticons\112.gif" />
+    <Resource Include="Resources\Emoticons\113.gif" />
+    <Resource Include="Resources\Emoticons\114.gif" />
+    <Resource Include="Resources\Emoticons\115.gif" />
+    <Resource Include="Resources\Emoticons\12.gif" />
+    <Resource Include="Resources\Emoticons\120.gif" />
+    <Resource Include="Resources\Emoticons\121.gif" />
+    <Resource Include="Resources\Emoticons\122.gif" />
+    <Resource Include="Resources\Emoticons\123.gif" />
+    <Resource Include="Resources\Emoticons\124.gif" />
+    <Resource Include="Resources\Emoticons\125.gif" />
+    <Resource Include="Resources\Emoticons\126.gif" />
+    <Resource Include="Resources\Emoticons\127.gif" />
+    <Resource Include="Resources\Emoticons\128.gif" />
+    <Resource Include="Resources\Emoticons\129.gif" />
+    <Resource Include="Resources\Emoticons\13.gif" />
+    <Resource Include="Resources\Emoticons\130.gif" />
+    <Resource Include="Resources\Emoticons\131.gif" />
+    <Resource Include="Resources\Emoticons\132.gif" />
+    <Resource Include="Resources\Emoticons\133.gif" />
+    <Resource Include="Resources\Emoticons\134.gif" />
+    <Resource Include="Resources\Emoticons\135.gif" />
+    <Resource Include="Resources\Emoticons\136.gif" />
+    <Resource Include="Resources\Emoticons\137.gif" />
+    <Resource Include="Resources\Emoticons\138.gif" />
+    <Resource Include="Resources\Emoticons\139.gif" />
+    <Resource Include="Resources\Emoticons\14.gif" />
+    <Resource Include="Resources\Emoticons\140.gif" />
+    <Resource Include="Resources\Emoticons\141.gif" />
+    <Resource Include="Resources\Emoticons\15.gif" />
+    <Resource Include="Resources\Emoticons\16.gif" />
+    <Resource Include="Resources\Emoticons\17.gif" />
+    <Resource Include="Resources\Emoticons\18.gif" />
+    <Resource Include="Resources\Emoticons\19.gif" />
+    <Resource Include="Resources\Emoticons\2.gif" />
+    <Resource Include="Resources\Emoticons\20.gif" />
+    <Resource Include="Resources\Emoticons\21.gif" />
+    <Resource Include="Resources\Emoticons\22.gif" />
+    <Resource Include="Resources\Emoticons\23.gif" />
+    <Resource Include="Resources\Emoticons\24.gif" />
+    <Resource Include="Resources\Emoticons\25.gif" />
+    <Resource Include="Resources\Emoticons\26.gif" />
+    <Resource Include="Resources\Emoticons\27.gif" />
+    <Resource Include="Resources\Emoticons\28.gif" />
+    <Resource Include="Resources\Emoticons\29.gif" />
+    <Resource Include="Resources\Emoticons\3.gif" />
+    <Resource Include="Resources\Emoticons\30.gif" />
+    <Resource Include="Resources\Emoticons\31.gif" />
+    <Resource Include="Resources\Emoticons\32.gif" />
+    <Resource Include="Resources\Emoticons\33.gif" />
+    <Resource Include="Resources\Emoticons\34.gif" />
+    <Resource Include="Resources\Emoticons\35.gif" />
+    <Resource Include="Resources\Emoticons\36.gif" />
+    <Resource Include="Resources\Emoticons\37.gif" />
+    <Resource Include="Resources\Emoticons\38.gif" />
+    <Resource Include="Resources\Emoticons\39.gif" />
+    <Resource Include="Resources\Emoticons\4.gif" />
+    <Resource Include="Resources\Emoticons\40.gif" />
+    <Resource Include="Resources\Emoticons\41.gif" />
+    <Resource Include="Resources\Emoticons\42.gif" />
+    <Resource Include="Resources\Emoticons\43.gif" />
+    <Resource Include="Resources\Emoticons\44.gif" />
+    <Resource Include="Resources\Emoticons\45.gif" />
+    <Resource Include="Resources\Emoticons\46.gif" />
+    <Resource Include="Resources\Emoticons\47.gif" />
+    <Resource Include="Resources\Emoticons\48.gif" />
+    <Resource Include="Resources\Emoticons\49.gif" />
+    <Resource Include="Resources\Emoticons\5.gif" />
+    <Resource Include="Resources\Emoticons\50.gif" />
+    <Resource Include="Resources\Emoticons\51.gif" />
+    <Resource Include="Resources\Emoticons\52.gif" />
+    <Resource Include="Resources\Emoticons\53.gif" />
+    <Resource Include="Resources\Emoticons\54.gif" />
+    <Resource Include="Resources\Emoticons\55.gif" />
+    <Resource Include="Resources\Emoticons\56.gif" />
+    <Resource Include="Resources\Emoticons\57.gif" />
+    <Resource Include="Resources\Emoticons\58.gif" />
+    <Resource Include="Resources\Emoticons\59.gif" />
+    <Resource Include="Resources\Emoticons\6.gif" />
+    <Resource Include="Resources\Emoticons\60.gif" />
+    <Resource Include="Resources\Emoticons\61.gif" />
+    <Resource Include="Resources\Emoticons\62.gif" />
+    <Resource Include="Resources\Emoticons\63.gif" />
+    <Resource Include="Resources\Emoticons\64.gif" />
+    <Resource Include="Resources\Emoticons\65.gif" />
+    <Resource Include="Resources\Emoticons\66.gif" />
+    <Resource Include="Resources\Emoticons\67.gif" />
+    <Resource Include="Resources\Emoticons\68.gif" />
+    <Resource Include="Resources\Emoticons\69.gif" />
+    <Resource Include="Resources\Emoticons\7.gif" />
+    <Resource Include="Resources\Emoticons\70.gif" />
+    <Resource Include="Resources\Emoticons\71.gif" />
+    <Resource Include="Resources\Emoticons\72.gif" />
+    <Resource Include="Resources\Emoticons\73.gif" />
+    <Resource Include="Resources\Emoticons\74.gif" />
+    <Resource Include="Resources\Emoticons\75.gif" />
+    <Resource Include="Resources\Emoticons\76.gif" />
+    <Resource Include="Resources\Emoticons\77.gif" />
+    <Resource Include="Resources\Emoticons\78.gif" />
+    <Resource Include="Resources\Emoticons\79.gif" />
+    <Resource Include="Resources\Emoticons\8.gif" />
+    <Resource Include="Resources\Emoticons\9.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Database\EntityFramework.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+      <LastGenOutput>EntityFramework.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Database\EntityFramework.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EntityFramework.edmx</DependentUpon>
+      <LastGenOutput>EntityFramework.cs</LastGenOutput>
+    </Content>
+    <Resource Include="Resources\YahooMessengerEmoticon.png" />
+    <Resource Include="Resources\SadEmoticon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.targets')" />
+</Project>

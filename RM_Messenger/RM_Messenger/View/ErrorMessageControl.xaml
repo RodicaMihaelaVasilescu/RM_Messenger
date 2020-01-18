@@ -1,0 +1,71 @@
+﻿<UserControl
+  x:Class="RM_Messenger.View.ErrorMessageControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:RM_Messenger.View"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="200"
+  d:DesignWidth="400"
+  Background="#76246E"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Grid.ColumnDefinitions>
+      <ColumnDefinition />
+      <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Image
+      Width="35"
+      Height="35"
+      Margin="5 5 5 0"
+      Source="{Binding ImagePath}" />
+    <TextBlock
+      VerticalAlignment="Center"
+      Grid.Column="1"
+      Margin="15 0"
+      FontSize="11"
+      Foreground="White"
+      Text="{Binding ErrorMessage}"
+      TextWrapping="Wrap" />
+    <Button
+      x:Name="SignInButton"
+      Grid.Row="1"
+      Grid.ColumnSpan="2"
+      Width="80"
+      Height="20"
+      Margin= "0 0 0 10"
+      BorderBrush="White"
+      BorderThickness="0.5"
+      Command="{Binding CloseCommand}"
+      Content="OK"
+      VerticalContentAlignment="Top"
+      FontSize="11"
+      Foreground="White"
+      Style="{StaticResource MaterialDesignRaisedAccentButton}">
+      <!--<Button.Background>-->
+      <!--  Background="#53244E"  -->
+      <Button.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <GradientStop Offset="0" Color="#7B4171" />
+          <GradientStop Offset="0.445" Color="#693060" />
+          <GradientStop Offset="0.53" Color="#481041" />
+        </LinearGradientBrush>
+      </Button.Background>
+    </Button>
+  </Grid>
+</UserControl>
