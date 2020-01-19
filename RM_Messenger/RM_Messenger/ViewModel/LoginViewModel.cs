@@ -8,7 +8,6 @@ using RM_Messenger.Properties;
 using RM_Messenger.Command;
 using RM_Messenger.Helpers;
 using RM_Messenger.Database;
-using System.Linq;
 using RM_Messenger.Constants;
 
 namespace RM_Messenger.ViewModel

@@ -120,7 +120,6 @@
     <Compile Include="Database\User.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\AccountManager.cs" />
     <Compile Include="Helpers\AppConfigManager.cs" />
     <Compile Include="Helpers\ApplicationConfigurationManager.cs" />
     <Compile Include="Helpers\AutoScrollHelper.cs" />

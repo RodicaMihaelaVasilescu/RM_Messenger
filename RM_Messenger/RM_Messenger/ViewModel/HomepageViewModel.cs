@@ -4,7 +4,6 @@ using RM_Messenger.Model;
 using RM_Messenger.Properties;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.IO;
 using System.Windows;

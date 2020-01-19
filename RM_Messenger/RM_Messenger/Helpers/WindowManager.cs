@@ -3,11 +3,9 @@ using RM_Messenger.Properties;
 using RM_Messenger.View;
 using RM_Messenger.ViewModel;
 using System;
-using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.Helper

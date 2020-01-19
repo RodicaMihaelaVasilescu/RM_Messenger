@@ -1,7 +1,6 @@
 ﻿using RM_Messenger.Command;
 using RM_Messenger.Helper;
 using RM_Messenger.Properties;
-using RM_Messenger.ViewModel;
 using System;
 using System.Windows;
 using System.Windows.Controls.Primitives;
