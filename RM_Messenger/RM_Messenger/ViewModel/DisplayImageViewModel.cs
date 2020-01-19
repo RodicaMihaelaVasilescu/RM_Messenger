@@ -1,8 +1,12 @@
 ﻿using RM_Messenger.Command;
+using RM_Messenger.Converters;
+using RM_Messenger.Database;
+using RM_Messenger.Model;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
+using System.Linq;
+using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 
@@ -16,14 +20,14 @@ namespace RM_Messenger.ViewModel
     public ICommand CloseCommand { get; set; }
     public ICommand SelectImageCommand { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
-
-    public BitmapImage ProfilePicturePath
+    private Window window;
+    public BitmapImage ProfilePicture
     {
-      get { return profilePicturePath; }
+      get { return _profilePicture; }
       set
       {
-        profilePicturePath = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicturePath"));
+        _profilePicture = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicture"));
       }
     }
 
@@ -31,22 +35,18 @@ namespace RM_Messenger.ViewModel
 
     #region Private Properties
 
-    private BitmapImage profilePicturePath;
+    private BitmapImage _profilePicture;
 
     #endregion
 
     #region Constructor
 
-    public DisplayImageViewModel()
+    public DisplayImageViewModel(Window window)
     {
+      this.window = window;
       CloseCommand = new RelayCommand(CloseCommandExecute);
       SelectImageCommand = new RelayCommand(SelectImageCommandExecute);
-      ProfilePicturePath = new BitmapImage(new Uri(@"pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg"))
-      {
-        CacheOption = BitmapCacheOption.None
-      };
-      Image selectedImage = Image.FromFile(Path.GetDirectoryName( Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) +"\\Resources\\ProfilePicture.jpg");
-      selectedImage.Dispose();
+      ProfilePicture = GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
     }
 
     #endregion
@@ -65,31 +65,28 @@ namespace RM_Messenger.ViewModel
         Filter = "All files (*.*)|*.*|PNG files (*.png)|*.png*|JPG files (*.jpg)|*.jpg*"
       };
       dialog.ShowDialog();
+
       var newFile = dialog.FileName;
-      if (string.IsNullOrEmpty(newFile) || ProfilePicturePath == null)
+      if (string.IsNullOrEmpty(newFile) || ProfilePicture == null)
       {
         return;
       }
 
-      try
-      {
-        string path = Path.GetDirectoryName( Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) +  "\\Resources\\ProfilePicture.jpg"; ;
-        Image selectedImage = Image.FromFile(path);
-        selectedImage.Dispose();
-        File.Delete(path); 
-        File.Copy(newFile, path);
-        ProfilePicturePath = new BitmapImage(new Uri(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg"))
-        {
-          CacheOption = BitmapCacheOption.None
-        };
-        Image image = Image.FromFile(Path.GetDirectoryName(  Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg");
-        image.Dispose();
-      }
-      catch (Exception)
-      {
-      }
-
+      UserModel.Instance.ProfilePicture = File.ReadAllBytes(newFile);
+      ProfilePicture = GeneralConverters.ConvertToBitmapImage(newFile);
+      SetProfilePicture(newFile);
+      window.Close();
     }
+
+    private void SetProfilePicture(string newFile)
+    {
+      var context = new RMMessengerEntities();
+      var user = context.Users.FirstOrDefault(u=>u.Username == UserModel.Instance.Username);
+      user.ProfilePicture = GeneralConverters.ConvertToByteArray(newFile);
+      context.SaveChanges();
+    }
+
+
     #endregion
   }
 }

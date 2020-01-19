@@ -129,7 +129,7 @@ namespace RM_Messenger.ViewModel
 
       WindowManager.ResizeWindow(window);
       window.ResizeMode = ResizeMode.NoResize;
-      signingInViewModel.LoadWindow();
+      signingInViewModel.ValidateLogin();
     }
 
     private void CreateNewAccountCommandExecute()

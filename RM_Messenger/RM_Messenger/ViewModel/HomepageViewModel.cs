@@ -4,7 +4,6 @@ using RM_Messenger.Model;
 using RM_Messenger.Properties;
 using System;
 using System.ComponentModel;
-using System.Drawing;
 using System.IO;
 using System.Windows;
 using System.Windows.Input;
@@ -20,7 +19,7 @@ namespace RM_Messenger.ViewModel
     public ICommand LogoutCommand { get; set; }
     public ICommand SendCommand { get; set; }
     public string OnlineIcoPath { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
-
+ 
     public string Email
     {
       get { return _email; }
@@ -32,14 +31,14 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-    public BitmapImage ProfilePicturePath
+    public BitmapImage ProfilePicture
     {
-      get { return profilePicturePath; }
+      get { return profilePicture; }
       set
       {
-        profilePicturePath = value;
-        if (value != null) profilePicturePath.CacheOption = BitmapCacheOption.None;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicturePath"));
+        profilePicture = value;
+        if (value != null) profilePicture.CacheOption = BitmapCacheOption.None;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicture"));
       }
     }
 
@@ -49,7 +48,7 @@ namespace RM_Messenger.ViewModel
 
     private string _email;
     private Window window;
-    private BitmapImage profilePicturePath;
+    private BitmapImage profilePicture;
 
     #endregion
 
@@ -58,28 +57,20 @@ namespace RM_Messenger.ViewModel
     public HomepageViewModel(Window window)
     {
       this.window = window;
+      window.Activated += new EventHandler(windowActivated);
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       InitializeUserProfile();
+    }
+
+    private void windowActivated(object sender, EventArgs e)
+    {
+      ProfilePicture =Converters.GeneralConverters.ConvertToBitmapImage( UserModel.Instance.ProfilePicture);
     }
 
     private void InitializeUserProfile()
     {
       Email = UserModel.Instance.Username;
-
-      ProfilePicturePath = new BitmapImage(new Uri(@"pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg"))
-      {
-        CacheOption = BitmapCacheOption.None
-      };
-      var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg";
-      if (!File.Exists(path))
-      {
-        File.Create(path);
-      }
-      else
-      {
-        Image image = Image.FromFile(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg");
-        image.Dispose();
-      }
+      ProfilePicture = GetProfilePicture(UserModel.Instance.ProfilePicture);
     }
     #endregion
 
@@ -97,6 +88,20 @@ namespace RM_Messenger.ViewModel
         {
           win.Close();
         }
+      }
+    }
+
+    private BitmapImage GetProfilePicture(byte[] data)
+    {
+      using (MemoryStream memoryStream = new MemoryStream(data))
+      {
+        var imageSource = new BitmapImage();
+        imageSource.BeginInit();
+        imageSource.CacheOption = BitmapCacheOption.None;
+        imageSource.StreamSource = memoryStream;
+        imageSource.CacheOption = BitmapCacheOption.OnLoad;
+        imageSource.EndInit();
+        return imageSource;
       }
     }
 

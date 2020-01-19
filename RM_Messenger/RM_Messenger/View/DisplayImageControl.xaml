@@ -51,10 +51,10 @@
         Background="Transparent">
         <StackPanel>
           <Image
+            Name="profilePicture"
             Width="80"
             Height="80"
-            Source="{Binding ProfilePicturePath, UpdateSourceTrigger=PropertyChanged}" />
-
+            Source="{Binding Path=ProfilePicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
       </Button>
 

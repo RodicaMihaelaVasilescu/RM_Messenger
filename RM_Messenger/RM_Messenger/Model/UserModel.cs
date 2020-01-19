@@ -8,6 +8,7 @@
 
     public string Username { get; set; }
     public string ID { get; set; }
+    public byte[] ProfilePicture { get; set; }
 
     public string FirstName { get; set; }
 

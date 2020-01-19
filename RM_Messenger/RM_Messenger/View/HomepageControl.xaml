@@ -151,7 +151,7 @@
               x:Name="ProfilePicture"
               Width="50"
               Height="50"
-              Source="{Binding ProfilePicturePath}" />
+              Source="{Binding ProfilePicture,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
           </StackPanel>
 
         </Button>

@@ -1,4 +1,6 @@
-﻿using RM_Messenger.ViewModel;
+﻿using RM_Messenger.Model;
+using RM_Messenger.ViewModel;
+using System;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -9,17 +11,20 @@ namespace RM_Messenger.View
   /// </summary>
   public partial class HomepageControl : UserControl
   {
+    ChangeProfilePictureViewModel changeProfilePictureViewModel;
     public HomepageControl()
     {
       InitializeComponent();
-      var viewModel = new ChangeProfilePictureViewModel();
-      viewModel.popup = ProfilePicturePopupTooltip;
-      ChangeProfilePictureControl.DataContext = viewModel;
+      changeProfilePictureViewModel = new ChangeProfilePictureViewModel();
+      changeProfilePictureViewModel.popup = ProfilePicturePopupTooltip;
+      ChangeProfilePictureControl.DataContext = changeProfilePictureViewModel;
     }
 
     private void Button_MouseEnter(object sender, MouseEventArgs e)
     {
       ProfilePicturePopupTooltip.IsOpen = true;
+      changeProfilePictureViewModel.ProfilePicture =
+        Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
     }
     private void Tooltip_MouseLeave(object sender, MouseEventArgs e)
     {

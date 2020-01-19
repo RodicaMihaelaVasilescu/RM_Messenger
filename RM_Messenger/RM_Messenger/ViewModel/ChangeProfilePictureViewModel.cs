@@ -2,13 +2,16 @@
 using RM_Messenger.Helper;
 using RM_Messenger.Properties;
 using System;
+using System.ComponentModel;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
 {
-  class ChangeProfilePictureViewModel //: INotifyPropertyChanged
+  class ChangeProfilePictureViewModel : INotifyPropertyChanged
   {
     #region public Properties
 
@@ -20,7 +23,19 @@ namespace RM_Messenger.ViewModel
 
     public Popup popup;
 
-    //public event PropertyChangedEventHandler PropertyChanged;
+    private BitmapImage _profilePicture;
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public BitmapImage ProfilePicture
+    {
+      get { return _profilePicture; }
+      set
+      {
+        _profilePicture = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicture"));
+      }
+    }
 
     #endregion
 
@@ -39,8 +54,9 @@ namespace RM_Messenger.ViewModel
     private void DisplayImageCommandExecute()
     {
       var window = new Window();
-      var displayImageViewModel = new DisplayImageViewModel();
+      var displayImageViewModel = new DisplayImageViewModel(window);
       WindowManager.ChangeWindowContent(window, displayImageViewModel, Resources.DisplayImageTitle, Resources.DisplayImagePath);
+
       window.Width = 400;
       var padding = 20;
       window.Left = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width - window.Width - padding;

@@ -39,7 +39,7 @@ namespace RM_Messenger.ViewModel
     {
       _context = new RMMessengerEntities();
       var email = string.IsNullOrEmpty(UserModel.Instance.Username) ? string.Empty : UserModel.Instance.Username.Split('@')[0];
-      MessageOnSingingIn = "Signing in as " + email ;
+      MessageOnSingingIn = "Signing in as " + email;
       this.window = window;
       cancelButtonPressed = false;
       CancelCommand = new RelayCommand(CancelCommandExecute);
@@ -52,7 +52,7 @@ namespace RM_Messenger.ViewModel
       WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
     }
 
-    public async void LoadWindow()
+    public async void ValidateLogin()
     {
       await Task.Delay(5000);
       //SwitchToLoginindow();
@@ -62,14 +62,20 @@ namespace RM_Messenger.ViewModel
         return;
       }
 
-      if (!_context.Users.Any(u => u.Username == UserModel.Instance.Username &&
-   u.Password == UserModel.Instance.EncryptedPassword))
+      var user = _context.Users.FirstOrDefault(u => u.Username == UserModel.Instance.Username &&
+   u.Password == UserModel.Instance.EncryptedPassword);
+      if (user == null)
       {
         CancelCommandExecute();
-       WindowManager.OpenLoginErrorWindow(window,Resources.IncorrectIDAndPassword);
+        WindowManager.OpenLoginErrorWindow(window, Resources.IncorrectIDAndPassword);
         return;
       }
+      UserModel.Instance.ProfilePicture = user.ProfilePicture;
+      OpenHomepageWindow();
+    }
 
+    private void OpenHomepageWindow()
+    {
       var homepageViewModel = new HomepageViewModel(window);
       WindowManager.ChangeWindowContent(window, homepageViewModel, Resources.HomepageWindowTitle, Resources.HomepageControlPath);
 

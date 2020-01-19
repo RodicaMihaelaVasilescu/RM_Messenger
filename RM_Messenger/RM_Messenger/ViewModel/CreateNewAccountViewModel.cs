@@ -7,11 +7,13 @@ using RM_Messenger.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
 {
@@ -51,6 +53,7 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PasswordValidationMessage"));
       }
     }
+
     public CreateNewAccountViewModel(Window window)
     {
       this.window = window;
@@ -81,14 +84,24 @@ namespace RM_Messenger.ViewModel
 
       string validationMessage = Validator.ValidateEmail(UserModel.Instance.Username);
       validationMessage += PasswordValidationMessage;
- 
+
       if (!string.IsNullOrEmpty(validationMessage))
       {
         WindowManager.OpenLoginErrorWindow(window, validationMessage);
         return;
       }
 
-      var user = new User { User_ID = Guid.NewGuid(), Username = UserModel.Instance.Username, Password = UserModel.Instance.EncryptedPassword };
+      string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\Resources\\OfflineProfilePicture.jpg";
+      byte[] data = File.ReadAllBytes(path);
+      UserModel.Instance.ProfilePicture = data;
+
+      var user = new User
+      {
+        User_ID = Guid.NewGuid(),
+        Username = UserModel.Instance.Username,
+        Password = UserModel.Instance.EncryptedPassword,
+        ProfilePicture = UserModel.Instance.ProfilePicture,
+      };
       _context.Users.Add(user);
       _context.SaveChanges();
 

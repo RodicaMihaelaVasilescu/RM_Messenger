@@ -17,5 +17,6 @@ namespace RM_Messenger.Database
         public System.Guid User_ID { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
+        public byte[] ProfilePicture { get; set; }
     }
 }
