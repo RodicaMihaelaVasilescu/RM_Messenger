@@ -29,6 +29,7 @@ namespace RM_Messenger.ViewModel
       {
         if (_email == value) return;
         _email = value;
+        UserModel.Instance.Username = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
       }
     }
@@ -99,15 +100,12 @@ namespace RM_Messenger.ViewModel
 
     public void LoginCommandExecute()
     {
+      
       if (RememberMyIDPassword)
       {
         AppConfigManager.Set(LoginConstants.Username, UserModel.Instance.Username);
         //Email = UserModel.Instance.Username;
         AppConfigManager.Set(LoginConstants.EncryptedPassword, UserModel.Instance.EncryptedPassword);
-      }
-      else
-      {
-        UserModel.Instance.Username = Email;
       }
 
       if (String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword) || String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword))

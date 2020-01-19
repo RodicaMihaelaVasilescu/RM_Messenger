@@ -127,10 +127,18 @@
     <Compile Include="Helpers\WindowManager.cs" />
     <Compile Include="Model\ErrorMessageModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
+    <Compile Include="ViewModel\DisplayImageViewModel.cs" />
     <Compile Include="ViewModel\ErrorMessageViewModel.cs" />
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\SigningInViewModel.cs" />
+    <Compile Include="View\ChangeProfilePictureControl.xaml.cs">
+      <DependentUpon>ChangeProfilePictureControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\DisplayImageControl.xaml.cs">
+      <DependentUpon>DisplayImageControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ErrorMessageControl.xaml.cs">
       <DependentUpon>ErrorMessageControl.xaml</DependentUpon>
     </Compile>
@@ -183,6 +191,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\ChangeProfilePictureControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\DisplayImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ErrorMessageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -160,9 +160,9 @@
           MouseLeave="Tooltip_MouseLeave"
           Placement="Left"
           PlacementTarget="{Binding ElementName=ProfileImage}">
-          <!--<StackPanel>
+          <StackPanel>
             <local:ChangeProfilePictureControl x:Name="ChangeProfilePictureControl" />
-          </StackPanel>-->
+          </StackPanel>
         </Popup>
 
         <Button

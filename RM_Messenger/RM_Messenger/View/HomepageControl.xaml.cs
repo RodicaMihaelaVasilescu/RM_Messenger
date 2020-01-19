@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RM_Messenger.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,9 +25,9 @@ namespace RM_Messenger.View
     {
       InitializeComponent();
       var x = Mouse.GetPosition(ProfilePicturePopupTooltip);
-      //var viewModel = new ChangeProfilePictureViewModel();
-      //viewModel.popup = ProfilePicturePopupTooltip;
-      //ChangeProfilePictureControl.DataContext = viewModel;
+      var viewModel = new ChangeProfilePictureViewModel();
+      viewModel.popup = ProfilePicturePopupTooltip;
+      ChangeProfilePictureControl.DataContext = viewModel;
     }
 
     private void Button_MouseEnter(object sender, MouseEventArgs e)

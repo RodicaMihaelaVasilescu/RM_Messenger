@@ -1,0 +1,130 @@
+﻿<UserControl
+  x:Class="RM_Messenger.View.ChangeProfilePictureControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:RM_Messenger.View"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Background="#782370"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+
+  <Border BorderBrush="MediumPurple" BorderThickness="1">
+    <Grid>
+      <Grid.Background>
+        <ImageBrush ImageSource="../Resources/shadow.png" Opacity="0.4" />
+      </Grid.Background>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="auto" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+
+      <Button
+        Grid.Column="1"
+        HorizontalAlignment="Right"
+        VerticalAlignment="Top"
+        Background="Transparent"
+        BorderThickness="0"
+        Command="{Binding CloseCommand}"
+        Style="{StaticResource MaterialDesignRaisedAccentButton}">
+
+        <StackPanel>
+          <Image
+            Width="10"
+            Height="10"
+            Source="pack://application:,,,/RM_Messenger;component/Resources/CloseButton.png" />
+        </StackPanel>
+      </Button>
+
+      <Label Content="Username" Foreground="White" />
+
+      <Image
+        Grid.Row="2"
+        Width="100"
+        Height="100"
+        Margin="5,0,0,5"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Source="pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg" />
+      <StackPanel
+        Grid.Row="1"
+        Grid.Column="1"
+        Margin="0,0,50,0"
+        HorizontalAlignment="Left"
+        VerticalAlignment="Top"
+        Visibility="{Binding VisibilityOfLoginFields, Mode=TwoWay}">
+        <Button
+          x:Name="DisplayImage"
+          Height="21"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          HorizontalContentAlignment="Left"
+          VerticalContentAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Command="{Binding DisplayImageCommand}"
+          Content="Display Image"
+          FontSize="10"
+          Foreground="DodgerBlue"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+        <Button
+          x:Name="ForgotPassword"
+          Height="21"
+          Margin="0,10,0,0"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Command="{Binding ForgotPasswordCommand}"
+          Content="Contact Details"
+          FontSize="10"
+          Foreground="DodgerBlue"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+        <Button
+          Height="21"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Command="{Binding ForgotPasswordCommand}"
+          Content="My Profile"
+          FontSize="10"
+          Foreground="DodgerBlue"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+
+        <Button
+          Height="21"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Bottom"
+          HorizontalContentAlignment="Center"
+          VerticalContentAlignment="Center"
+          Background="Transparent"
+          BorderThickness="0"
+          Command="{Binding ForgotPasswordCommand}"
+          Content="Account Info"
+          FontSize="10"
+          Foreground="DodgerBlue"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+
+      </StackPanel>
+    </Grid>
+  </Border>
+
+</UserControl>

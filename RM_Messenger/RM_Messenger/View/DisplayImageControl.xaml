@@ -1,0 +1,79 @@
+﻿<UserControl
+  x:Class="RM_Messenger.View.DisplayImageControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:RM_Messenger.View"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  d:DesignHeight="450"
+  Background="#76246E"
+  mc:Ignorable="d">
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <StackPanel>
+    <StackPanel.Background>
+      <ImageBrush ImageSource="../Resources/shadow.png" Opacity="0.4" />
+    </StackPanel.Background>
+    <Label
+      Margin="10"
+      Content="When I start a conversation"
+      Foreground="White" />
+    <RadioButton
+      Margin="30,10"
+      Content="Don't share a display image"
+      Foreground="White" />
+    <Separator Margin="50,0,10,0" />
+
+    <Grid Margin="30,10,10,0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+      <RadioButton
+        HorizontalAlignment="Stretch"
+        Content="Share my picture"
+        Foreground="White" />
+
+      <Button
+        x:Name="ProfileImage"
+        Grid.Column="1"
+        Width="80"
+        Height="80"
+        HorizontalAlignment="Center"
+        Background="Transparent">
+        <StackPanel>
+          <Image
+            Width="80"
+            Height="80"
+            Source="{Binding ProfilePicturePath, UpdateSourceTrigger=PropertyChanged}" />
+
+        </StackPanel>
+      </Button>
+
+      <Button
+        Grid.Column="2"
+        Height="25"
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Top"
+        Background="#53244E"
+        BorderBrush="White"
+        BorderThickness="0.5"
+        Command="{Binding SelectImageCommand}"
+        Content="Select.."
+        FontSize="13"
+        Foreground="White"
+        Style="{StaticResource MaterialDesignRaisedAccentButton}"
+        Visibility="{Binding VisibilityOfLoginFields, Mode=TwoWay}" />
+    </Grid>
+
+    <Separator Margin="50,30,0,0" />
+  </StackPanel>
+</UserControl>
