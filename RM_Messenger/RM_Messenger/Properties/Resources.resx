@@ -123,6 +123,12 @@
   <data name="ChatWindowTitle" xml:space="preserve">
     <value>RM!Messenger - Chat</value>
   </data>
+  <data name="CreateNewAccountControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.CreateNewAccountControl</value>
+  </data>
+  <data name="CreateNewAccountWindowTitle" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
   <data name="DisplayImagePath" xml:space="preserve">
     <value>RM_Messenger.View.DisplayImageControl</value>
   </data>

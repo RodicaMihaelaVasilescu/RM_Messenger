@@ -17,7 +17,7 @@ namespace RM_Messenger.ViewModel
     #region Public Properties
 
     public ICommand LoginCommand { get; set; }
-    public ICommand RegisterCommand { get; set; }
+    public ICommand CreateNewAccountCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public Action CloseAction { get; set; }
 
@@ -89,7 +89,7 @@ namespace RM_Messenger.ViewModel
       this.window = window;
 
       LoginCommand = new RelayCommand(LoginCommandExecute);
-      RegisterCommand = new RelayCommand(RegisterCommandExecute);
+      CreateNewAccountCommand = new RelayCommand(CreateNewAccountCommandExecute);
       ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
     }
 
@@ -132,9 +132,18 @@ namespace RM_Messenger.ViewModel
       signingInViewModel.LoadWindow();
     }
 
-    private void RegisterCommandExecute()
+    private void CreateNewAccountCommandExecute()
     {
-      //to do
+        var createNewAccountViewModel = new CreateNewAccountViewModel(window);
+        WindowManager.ChangeWindowContent(window, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
+
+        if (createNewAccountViewModel.CloseAction == null)
+        {
+          createNewAccountViewModel.CloseAction = () => window.Close();
+        }
+
+        WindowManager.ResizeWindow(window);
+        window.ResizeMode = ResizeMode.NoResize;
     }
 
     public void ForgotPasswordCommandExecute()

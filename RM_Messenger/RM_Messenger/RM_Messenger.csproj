@@ -124,6 +124,7 @@
     <Compile Include="Helpers\ApplicationConfigurationManager.cs" />
     <Compile Include="Helpers\AutoScrollHelper.cs" />
     <Compile Include="Helpers\EncryptionSHA256.cs" />
+    <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Helpers\WindowManager.cs" />
     <Compile Include="Model\ContactListsModel.cs" />
     <Compile Include="Model\DisplayedContactModel.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\ContactListsViewModel.cs" />
+    <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
     <Compile Include="ViewModel\DisplayImageViewModel.cs" />
     <Compile Include="ViewModel\EmoticonsViewModel.cs" />
     <Compile Include="ViewModel\ErrorMessageViewModel.cs" />
@@ -147,6 +149,9 @@
     </Compile>
     <Compile Include="View\ContactListsControl.xaml.cs">
       <DependentUpon>ContactListsControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CreateNewAccountControl.xaml.cs">
+      <DependentUpon>CreateNewAccountControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DisplayImageControl.xaml.cs">
       <DependentUpon>DisplayImageControl.xaml</DependentUpon>
@@ -215,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ContactListsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CreateNewAccountControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

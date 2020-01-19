@@ -44,11 +44,11 @@ namespace RM_Messenger.ViewModel
     CloseCommand = new RelayCommand(LoginCommandExecute);
       if (errorMessage == Properties.Resources.YouMustEnterAnIDAndPasswordError)
       {
-        _imagePath = "pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerEmoticon.png";
+        _imagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
       }
       else
       {
-        _imagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
+        _imagePath = "pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerEmoticon.png";
       }
       _errorMessage = errorMessage;
     }

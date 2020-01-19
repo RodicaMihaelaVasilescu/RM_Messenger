@@ -79,6 +79,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.CreateNewAccountControl.
+        /// </summary>
+        public static string CreateNewAccountControlPath {
+            get {
+                return ResourceManager.GetString("CreateNewAccountControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Account.
+        /// </summary>
+        public static string CreateNewAccountWindowTitle {
+            get {
+                return ResourceManager.GetString("CreateNewAccountWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.DisplayImageControl.
         /// </summary>
         public static string DisplayImagePath {

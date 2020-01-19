@@ -33,11 +33,13 @@
       Width="35"
       Height="35"
       Margin="5 5 5 0"
+      VerticalAlignment="Top"
+      HorizontalAlignment="Left"
       Source="{Binding ImagePath}" />
     <TextBlock
       VerticalAlignment="Center"
       Grid.Column="1"
-      Margin="15 0"
+      Margin="15 5"
       FontSize="11"
       Foreground="White"
       Text="{Binding ErrorMessage}"
