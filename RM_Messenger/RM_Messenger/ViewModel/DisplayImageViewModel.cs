@@ -74,8 +74,8 @@ namespace RM_Messenger.ViewModel
 
       UserModel.Instance.ProfilePicture = File.ReadAllBytes(newFile);
       ProfilePicture = GeneralConverters.ConvertToBitmapImage(newFile);
-      SetProfilePicture(newFile);
       window.Close();
+      SetProfilePicture(newFile);
     }
 
     private void SetProfilePicture(string newFile)
