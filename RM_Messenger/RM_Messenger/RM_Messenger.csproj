@@ -124,11 +124,18 @@
     <Compile Include="Helpers\AppConfigManager.cs" />
     <Compile Include="Helpers\ApplicationConfigurationManager.cs" />
     <Compile Include="Helpers\AutoScrollHelper.cs" />
+    <Compile Include="Helpers\EncryptionSHA256.cs" />
     <Compile Include="Helpers\WindowManager.cs" />
+    <Compile Include="Model\ContactListsModel.cs" />
+    <Compile Include="Model\DisplayedContactModel.cs" />
     <Compile Include="Model\ErrorMessageModel.cs" />
+    <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
+    <Compile Include="ViewModel\ChatViewModel.cs" />
+    <Compile Include="ViewModel\ContactListsViewModel.cs" />
     <Compile Include="ViewModel\DisplayImageViewModel.cs" />
+    <Compile Include="ViewModel\EmoticonsViewModel.cs" />
     <Compile Include="ViewModel\ErrorMessageViewModel.cs" />
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
@@ -136,8 +143,17 @@
     <Compile Include="View\ChangeProfilePictureControl.xaml.cs">
       <DependentUpon>ChangeProfilePictureControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ChatControl.xaml.cs">
+      <DependentUpon>ChatControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ContactListsControl.xaml.cs">
+      <DependentUpon>ContactListsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DisplayImageControl.xaml.cs">
       <DependentUpon>DisplayImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmoticonsControl.xaml.cs">
+      <DependentUpon>EmoticonsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ErrorMessageControl.xaml.cs">
       <DependentUpon>ErrorMessageControl.xaml</DependentUpon>
@@ -195,7 +211,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ChatControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ContactListsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DisplayImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmoticonsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

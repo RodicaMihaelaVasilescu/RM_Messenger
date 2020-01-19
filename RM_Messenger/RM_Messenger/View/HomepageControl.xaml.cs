@@ -24,7 +24,6 @@ namespace RM_Messenger.View
     public HomepageControl()
     {
       InitializeComponent();
-      var x = Mouse.GetPosition(ProfilePicturePopupTooltip);
       var viewModel = new ChangeProfilePictureViewModel();
       viewModel.popup = ProfilePicturePopupTooltip;
       ChangeProfilePictureControl.DataContext = viewModel;

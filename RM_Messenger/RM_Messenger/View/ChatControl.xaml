@@ -1,0 +1,532 @@
+﻿<UserControl x:Class="RM_Messenger.View.ChatControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:converter="clr-namespace:RM_Messenger.Converters"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:helper="clr-namespace:RM_Messenger.Helpers"
+  xmlns:local="clr-namespace:RM_Messenger.View"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Width="600"
+  Height="500"
+  Background="White"
+  mc:Ignorable="d">
+
+  <UserControl.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+      <converter:ValueToHorizontalAlignmentConverter x:Key="AlignmentConverter" />
+      <converter:NameConverter x:Key="NameConverter" />
+
+      <Style x:Key="ButtonHighlight" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="Gray" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <Border Background="{TemplateBinding Background}">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Setter Property="Background" Value="DarkGoldenrod" />
+          </Trigger>
+        </Style.Triggers>
+      </Style>
+
+    </ResourceDictionary>
+  </UserControl.Resources>
+  <!--<UserControl.Background>
+    <ImageBrush ImageSource="pack://application:,,,/RM_Messenger;component/Resources/Background.jpg" />
+  </UserControl.Background>-->
+
+  <Grid Margin="7,0,7,7" Background="#782370">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+    <Image Opacity="0.3" Source="pack://application:,,,/RM_Messenger;component/Resources/Banner.png" />
+    <DockPanel Margin="0">
+      <Menu Background="Transparent" DockPanel.Dock="Top">
+
+        <MenuItem Foreground="White" Header="_Conversation">
+          <MenuItem Foreground="Black" Header="_New">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="OpenInNew" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Foreground="Black" Header="_Open">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="MenuOpen" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <MenuItem Foreground="Black" Header="_Save">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="ContentSave" />
+            </MenuItem.Icon>
+          </MenuItem>
+          <Separator />
+          <MenuItem Foreground="Black" Header="_Exit">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="ExitRun" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </MenuItem>
+
+        <MenuItem Foreground="White" Header="_Edit" />
+        <MenuItem Foreground="White" Header="_View" />
+        <MenuItem Foreground="White" Header="_Actions" />
+        <MenuItem Foreground="White" Header="_Help" />
+      </Menu>
+    </DockPanel>
+
+    <DockPanel Grid.Row="1" Margin="0,5">
+      <Button
+        Background="Transparent"
+        BorderThickness="0"
+        Cursor="Hand"
+        ToolTip="Video Call">
+        <Button.Template>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <StackPanel>
+              <Image
+                x:Name="VideoCallImage"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Center"
+                Source="pack://application:,,,/RM_Messenger;component/Resources/VideoCall.png" />
+              <Label
+                Background="Transparent"
+                Content="Video Call"
+                Foreground="White" />
+            </StackPanel>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter TargetName="VideoCallImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/VideoCall_MouseOver.png" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+
+      <Button
+        HorizontalAlignment="Left"
+        Background="Transparent"
+        BorderThickness="0"
+        Cursor="Hand"
+        ToolTip="Voice Call">
+        <Button.Template>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <StackPanel>
+              <Image
+                x:Name="VoiceCallImage"
+                Width="30"
+                Height="30"
+                HorizontalAlignment="Center"
+                Source="pack://application:,,,/RM_Messenger;component/Resources/VoiceCall.png" />
+              <Label
+                Background="Transparent"
+                Content="Voice Call"
+                Foreground="White" />
+            </StackPanel>
+            <ControlTemplate.Triggers>
+              <Trigger Property="Button.IsMouseOver" Value="True">
+                <Setter TargetName="VoiceCallImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/VoiceCall_MouseOver.png" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Button.Template>
+      </Button>
+
+      <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+        <Button
+          x:Name="IMVironmentsButton"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          ToolTip="IMVironments">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="IMVironmentsImage"
+                  Width="30"
+                  Height="30"
+                  VerticalAlignment="Bottom"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/IMVironmentsButtonIcon.png" />
+                <Label
+                  Grid.Row="1"
+                  HorizontalContentAlignment="Center"
+                  Background="Transparent"
+                  Content="IMVironments"
+                  Foreground="White" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="IMVironmentsImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/IMVironmentsButtonIcon_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+
+        </Button>
+
+        <Button
+          x:Name="ActivitiesButton"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          ToolTip="Activities">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="ActivitiesImage"
+                  Width="30"
+                  Height="30"
+                  VerticalAlignment="Bottom"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/ActivitiesButtonIcon.png" />
+                <Label
+                  HorizontalContentAlignment="Center"
+                  Background="Transparent"
+                  Content="Activities"
+                  Foreground="White" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="ActivitiesImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/ActivitiesButtonIcon_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+
+        </Button>
+
+        <Button
+          x:Name="PhotosButton"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          ToolTip="Photos">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="PhotosImage"
+                  Width="30"
+                  Height="30"
+                  VerticalAlignment="Bottom"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/PhotosButtonIcon.png" />
+                <Label
+                  HorizontalContentAlignment="Center"
+                  Background="Transparent"
+                  Content="Photos"
+                  Foreground="White" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="PhotosImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/PhotosButtonIcon_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+
+        </Button>
+      </StackPanel>
+    </DockPanel>
+
+
+
+    <Button
+      Grid.Row="2"
+      Grid.Column="0"
+      Height="12"
+      Margin="5,10,0,0"
+      HorizontalAlignment="Left"
+      Background="Transparent"
+      BorderThickness="0"
+      Style="{StaticResource MaterialDesignRaisedAccentButton}">
+
+      <StackPanel Margin="-5" Orientation="Horizontal">
+        <Image
+          Width="10"
+          Height="10"
+          Margin="-10,0,0,0"
+          Source="{Binding User.OnlineIcoPath}" />
+        <Label
+          Margin="0,-9"
+          Content="{Binding User.Name}"
+          FontSize="12"
+          Foreground="White" />
+      </StackPanel>
+    </Button>
+
+    <Grid Grid.Row="3" Grid.Column="0">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="4*" />
+        <ColumnDefinition />
+      </Grid.ColumnDefinitions>
+      <DockPanel
+        Grid.RowSpan="4"
+        Grid.Column="1"
+        Margin="0,5,5,5"
+        Background="#945F8D">
+        <Grid>
+          <Image
+            Grid.Row="0"
+            VerticalAlignment="Top"
+            Cursor="Hand"
+            Source="{Binding ProfilePicture}"
+            ToolTip="Profile Picture" />
+          <Image
+            Grid.Row="1"
+            Margin="20,0"
+            VerticalAlignment="Bottom"
+            Source="{Binding PersonalProfilePicture}" />
+        </Grid>
+      </DockPanel>
+      <Button
+        Grid.Row="1"
+        Margin="10"
+        HorizontalContentAlignment="Left"
+        Foreground="White">
+        <Button.Content>
+          <MultiBinding Converter="{StaticResource NameConverter}" ConverterParameter="FormatFirstLast">
+            <Binding Path="User.FirstName" />
+            <Binding Path="User.LastName" />
+          </MultiBinding>
+        </Button.Content>
+      </Button>
+      <Border
+        Grid.Row="1"
+        Margin="5"
+        Background="White"
+        BorderBrush="#1E98F7"
+        BorderThickness="1">
+        <ScrollViewer
+          x:Name="AutoScrollViewer"
+          helper:AutoScrollHelper.AutoScroll="{Binding IsLogsChangedPropertyInViewModel}"
+          PreviewMouseWheel="TS_PreviewMouseWheel"
+          VerticalScrollBarVisibility="Auto">
+          <ListBox ItemsSource="{Binding MessagesList, Mode=OneWay}">
+            <ListBox.Resources>
+              <Style TargetType="{x:Type ListBoxItem}">
+                <Setter Property="OverridesDefaultStyle" Value="true" />
+                <Setter Property="SnapsToDevicePixels" Value="true" />
+                <Setter Property="Template">
+                  <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                      <Grid
+                        MaxWidth="300"
+                        Margin="20,5"
+                        HorizontalAlignment="{Binding HorizontalAlignment, Converter={StaticResource AlignmentConverter}}"
+                        VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                          <RowDefinition Height="auto" />
+                          <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Foreground="#693060" Text="{Binding SentBy}" />
+                        <Rectangle
+                          Grid.Row="1"
+                          Fill="#d5cad9"
+                          RadiusX="10"
+                          RadiusY="10"
+                          Stroke="#693060"
+                          StrokeThickness="1" />
+                        <TextBlock
+                          Grid.Row="1"
+                          Margin="5"
+                          Text="{Binding Content}"
+                          TextWrapping="Wrap" />
+                      </Grid>
+                    </ControlTemplate>
+                  </Setter.Value>
+                </Setter>
+              </Style>
+            </ListBox.Resources>
+          </ListBox>
+        </ScrollViewer>
+      </Border>
+
+      <DockPanel Grid.Row="2" Margin="5,0">
+        <Button
+          x:Name="Emoticons"
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          MouseEnter="EmoticonsButton_MouseEnter"
+          MouseLeave="EmoticonsButton_MouseLeave"
+          ToolTip="Emoticons">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="EmoticonsImage"
+                  Width="21"
+                  Height="21"
+                  Margin="0,-3,0,0"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/Emoticons.png" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="EmoticonsImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/Emoticons_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+          <Popup
+            x:Name="EmoticonsPopupTooltip"
+            MouseLeave="EmoticonsTooltip_MouseLeave"
+            Placement="Top"
+            PlacementTarget="{Binding ElementName=Emoticons}">
+            <StackPanel>
+              <local:EmoticonsControl x:Name="EmoticonsControl" />
+            </StackPanel>
+          </Popup>
+        </Button>
+
+        <Button
+          x:Name="Audibles"
+          Margin="5,0"
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          ToolTip="Audibles">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="AudiblesImage"
+                  Width="18"
+                  Height="18"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/Audibles.png" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="AudiblesImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/Audibles_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+
+        <Button
+          x:Name="TextFormat"
+          Margin="5,0"
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          ToolTip="Format">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="TextFormatImage"
+                  Width="18"
+                  Height="18"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/TextFormat.png" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="TextFormatImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/TextFormat_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+
+        <Button
+          x:Name="BuzzIcon"
+          Margin="5,0"
+          HorizontalAlignment="Left"
+          Background="Transparent"
+          BorderThickness="0"
+          Cursor="Hand"
+          ToolTip="Buzz">
+          <Button.Template>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <StackPanel>
+                <Image
+                  x:Name="BuzzImage"
+                  Width="18"
+                  Height="18"
+                  Source="pack://application:,,,/RM_Messenger;component/Resources/BuzzIcon.png" />
+              </StackPanel>
+              <ControlTemplate.Triggers>
+                <Trigger Property="Button.IsMouseOver" Value="True">
+                  <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/BuzzIcon_MouseOver.png" />
+                </Trigger>
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Button.Template>
+        </Button>
+
+      </DockPanel>
+
+      <Grid
+        Grid.Row="3"
+        Margin="5"
+        Background="White">
+        <TextBox
+          x:Name="MessageBox"
+          Grid.Row="2"
+          MaxHeight="30"
+          Margin="10,5,60,5"
+          VerticalContentAlignment="Center"
+          BorderBrush="Gray"
+          BorderThickness="0"
+          FontSize="15"
+          Foreground="Black"
+          Text="{Binding MessageBoxContent, UpdateSourceTrigger=PropertyChanged}"
+          TextWrapping="Wrap">
+          <TextBox.InputBindings>
+            <KeyBinding Key="Enter" Command="{Binding SendCommand}" />
+          </TextBox.InputBindings>
+        </TextBox>
+
+        <Button
+          Grid.Row="3"
+          Width="80"
+          Height="23"
+          Margin="3"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          BorderBrush="Indigo"
+          BorderThickness="2"
+          Command="{Binding SendCommand}"
+          Content="Send"
+          Cursor="Hand"
+          Foreground="White"
+          Style="{StaticResource ButtonHighlight}">
+          <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Offset="0" Color="#7B4171" />
+              <GradientStop Offset="0.445" Color="#693060" />
+              <GradientStop Offset="0.53" Color="#481041" />
+            </LinearGradientBrush>
+          </Button.Background>
+        </Button>
+
+        <materialDesign:HintAssist.Hint>
+          <TextBlock Foreground="Gray">Write your message here...</TextBlock>
+        </materialDesign:HintAssist.Hint>
+      </Grid>
+    </Grid>
+  </Grid>
+</UserControl>

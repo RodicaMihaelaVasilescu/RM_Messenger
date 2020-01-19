@@ -402,12 +402,12 @@
         </Button>
       </Grid>
 
-      <!--<StackPanel
+      <StackPanel
         Grid.Row="3"
         Margin="10,0"
         Background="White">
         <local:ContactListsControl x:Name="ContactListsControlControl" />
-      </StackPanel>-->
+      </StackPanel>
 
       <Button
         x:Name="Logout"

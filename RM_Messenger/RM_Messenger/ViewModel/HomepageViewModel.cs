@@ -67,8 +67,10 @@ namespace RM_Messenger.ViewModel
     {
       Email = UserModel.Instance.Username;
 
-      ProfilePicturePath = new BitmapImage(new Uri(@"pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg"));
-      ProfilePicturePath.CacheOption = BitmapCacheOption.None;
+      ProfilePicturePath = new BitmapImage(new Uri(@"pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg"))
+      {
+        CacheOption = BitmapCacheOption.None
+      };
       var path = Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg";
       if (!File.Exists(path))
       {

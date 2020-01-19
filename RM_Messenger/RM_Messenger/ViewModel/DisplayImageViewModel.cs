@@ -41,8 +41,10 @@ namespace RM_Messenger.ViewModel
     {
       CloseCommand = new RelayCommand(CloseCommandExecute);
       SelectImageCommand = new RelayCommand(SelectImageCommandExecute);
-      ProfilePicturePath = new BitmapImage(new Uri(@"pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg"));
-      ProfilePicturePath.CacheOption = BitmapCacheOption.None;
+      ProfilePicturePath = new BitmapImage(new Uri(@"pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg"))
+      {
+        CacheOption = BitmapCacheOption.None
+      };
       Image selectedImage = Image.FromFile(Path.GetDirectoryName( Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) +"\\Resources\\ProfilePicture.jpg");
       selectedImage.Dispose();
     }
@@ -58,8 +60,10 @@ namespace RM_Messenger.ViewModel
 
     private void SelectImageCommandExecute()
     {
-      Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
-      dialog.Filter = "All files (*.*)|*.*|PNG files (*.png)|*.png*|JPG files (*.jpg)|*.jpg*";
+      Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog
+      {
+        Filter = "All files (*.*)|*.*|PNG files (*.png)|*.png*|JPG files (*.jpg)|*.jpg*"
+      };
       dialog.ShowDialog();
       var newFile = dialog.FileName;
       if (string.IsNullOrEmpty(newFile) || ProfilePicturePath == null)
@@ -74,12 +78,14 @@ namespace RM_Messenger.ViewModel
         selectedImage.Dispose();
         File.Delete(path); 
         File.Copy(newFile, path);
-        ProfilePicturePath = new BitmapImage(new Uri(Path.GetDirectoryName( Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) +"\\Resources\\ProfilePicture.jpg"));
-        ProfilePicturePath.CacheOption = BitmapCacheOption.None;
+        ProfilePicturePath = new BitmapImage(new Uri(Path.GetDirectoryName(Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg"))
+        {
+          CacheOption = BitmapCacheOption.None
+        };
         Image image = Image.FromFile(Path.GetDirectoryName(  Path.GetDirectoryName(System.IO.Directory.GetCurrentDirectory())) + "\\Resources\\ProfilePicture.jpg");
         image.Dispose();
       }
-      catch (Exception e)
+      catch (Exception)
       {
       }
 

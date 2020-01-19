@@ -74,7 +74,7 @@ namespace RM_Messenger.ViewModel
     #region Private Properties
 
     private string _email;
-    private RMMessengerEntities _context;
+    private readonly RMMessengerEntities _context;
     private Window window;
 
     private bool _rememberMyIDPassword = Convert.ToBoolean(AppConfigManager.Get(LoginConstants.RememberMyIDPassword));

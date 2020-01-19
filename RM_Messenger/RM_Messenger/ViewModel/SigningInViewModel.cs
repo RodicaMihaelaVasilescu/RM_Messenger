@@ -18,9 +18,11 @@ namespace RM_Messenger.ViewModel
   {
     public Action CloseAction { get; set; }
     public ICommand CancelCommand { get; set; }
-    Window window;
+
+    readonly Window window;
     private bool cancelButtonPressed;
     private string messageOnSingingIn;
+    private RMMessengerEntities _context;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -37,6 +39,7 @@ namespace RM_Messenger.ViewModel
 
     public SigningInViewModel(Window window)
     {
+      _context = new RMMessengerEntities();
       var email = string.IsNullOrEmpty(UserModel.Instance.Username) ? string.Empty : UserModel.Instance.Username.Split('@')[0];
       MessageOnSingingIn = "Signing in as " + email ;
       this.window = window;
@@ -60,7 +63,7 @@ namespace RM_Messenger.ViewModel
         //SwitchToLoginindow();
         return;
       }
-      var _context = new RMMessengerEntities();
+
       if (!_context.Users.Any(u => u.Username == UserModel.Instance.Username &&
    u.Password == UserModel.Instance.EncryptedPassword))
       {

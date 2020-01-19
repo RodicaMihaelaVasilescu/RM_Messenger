@@ -68,39 +68,41 @@ namespace RM_Messenger.Helper
       window.ResizeMode = ResizeMode.NoResize;
     }
 
-   
-    //public static void OpenChatWindow(DisplayedContactModel displayedContact)
-    //{
-    //  if (displayedContact == null)
-    //  {
-    //    return;
-    //  }
-    //  UserModel user = new UserModel
-    //  {
-    //    Email = displayedContact.Name,
-    //    FirstName = displayedContact.Name,
-    //    LastName = displayedContact.Name,
-    //    IsOnline = false
-    //  };
-    //  foreach (Window win in App.Current.Windows)
-    //  {
-    //    if (win != null)
-    //      if (win.Tag != null && win.Tag.ToString() == user.Email + "Child")
-    //      {
-    //        win.Focus();
-    //        return;
-    //      }
-    //  }
-    //  Window child = new Window();
-    //  child.Tag = user.Email + "Child";
-    //  child.Title = Resources.ChatWindowTitle;
-    //  var chatControl = new ChatControl();
-    //  var chatViewModel = new ChatViewModel(child, displayedContact, chatControl.AutoScrollViewer);
-    //  chatControl.DataContext = chatViewModel;
-    //  child.Content = chatControl;
-    //  child.SizeToContent = SizeToContent.WidthAndHeight;
-    //  child.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/Chat.ico", UriKind.RelativeOrAbsolute));
-    //  child.Show();
-    //}
+
+    public static void OpenChatWindow(DisplayedContactModel displayedContact)
+    {
+      if (displayedContact == null)
+      {
+        return;
+      }
+      UserModel user = new UserModel
+      {
+        Username = displayedContact.Name,
+        FirstName = displayedContact.Name,
+        LastName = displayedContact.Name,
+        IsOnline = false
+      };
+      foreach (Window win in App.Current.Windows)
+      {
+        if (win != null)
+          if (win.Tag != null && win.Tag.ToString() == user.Username + "Child")
+          {
+            win.Focus();
+            return;
+          }
+      }
+      Window child = new Window
+      {
+        Tag = user.Username + "Child",
+        Title = Resources.ChatWindowTitle
+      };
+      var chatControl = new ChatControl();
+      var chatViewModel = new ChatViewModel(child, displayedContact, chatControl.AutoScrollViewer);
+      chatControl.DataContext = chatViewModel;
+      child.Content = chatControl;
+      child.SizeToContent = SizeToContent.WidthAndHeight;
+      child.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/Chat.ico", UriKind.RelativeOrAbsolute));
+      child.Show();
+    }
   }
 }
