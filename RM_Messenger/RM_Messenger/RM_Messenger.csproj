@@ -100,6 +100,8 @@
     </Compile>
     <Compile Include="Command\RelayCommand.cs" />
     <Compile Include="Constants\LoginConstants.cs" />
+    <Compile Include="Converters\NameConverter.cs" />
+    <Compile Include="Converters\ValueToHorizontalAlignmentConverter.cs" />
     <Compile Include="Database\EntityFramework.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

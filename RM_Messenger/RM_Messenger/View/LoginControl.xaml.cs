@@ -24,23 +24,40 @@ namespace RM_Messenger.View
   /// </summary>
   public partial class LoginControl : UserControl
   {
+    bool predefinedChecks = false;
     public LoginControl()
     {
       InitializeComponent();
       VerticalAlignment = VerticalAlignment.Top;
+      ExecutePredifinedChecks();
       Email.Focus();
+    }
+
+    private void ExecutePredifinedChecks()
+    {
       bool rememberMyIDPassword = Convert.ToBoolean(AppConfigManager.Get(Properties.Resources.RememberMyIDPassword));
       if (rememberMyIDPassword && string.IsNullOrEmpty(Email.Text) && string.IsNullOrEmpty(Password.Password))
       {
-        Email.Text = AppConfigManager.Get(Properties.Resources.Username);
+        predefinedChecks = true;
+
         UserModel.Instance.Username = AppConfigManager.Get(Properties.Resources.Username);
         UserModel.Instance.EncryptedPassword = AppConfigManager.Get(Properties.Resources.EncryptedPassword);
+
+        Email.Text = AppConfigManager.Get(Properties.Resources.Username);
         Password.Password = AppConfigManager.Get(Properties.Resources.EncryptedPassword);
       }
     }
+
     private void Password_PasswordChanged(object sender, RoutedEventArgs e)
     {
-      UserModel.Instance.EncryptedPassword = getHashSha256(Password.Password);
+      if (!predefinedChecks)
+      {
+        UserModel.Instance.EncryptedPassword = getHashSha256(Password.Password);
+      }
+      else
+      {
+        predefinedChecks = false;
+      }
     }
     public static string getHashSha256(string text)
     {

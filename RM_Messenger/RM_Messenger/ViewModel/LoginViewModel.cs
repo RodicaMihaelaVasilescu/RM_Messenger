@@ -87,18 +87,10 @@ namespace RM_Messenger.ViewModel
     {
       _context = new RMMessengerEntities();
       this.window = window;
-      UserModel.Instance.Username = string.IsNullOrEmpty(Email) ? string.Empty : Email.Split('@')[0]; ;
 
       LoginCommand = new RelayCommand(LoginCommandExecute);
       RegisterCommand = new RelayCommand(RegisterCommandExecute);
       ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
-      bool rememberMyIDPassword = Convert.ToBoolean(AppConfigManager.Get(Properties.Resources.RememberMyIDPassword));
-      if (rememberMyIDPassword)
-      {
-        Email = AppConfigManager.Get(Properties.Resources.Username);
-        UserModel.Instance.Username = AppConfigManager.Get(Properties.Resources.Username);
-        UserModel.Instance.EncryptedPassword = AppConfigManager.Get(Properties.Resources.EncryptedPassword);
-      }
     }
 
     #endregion
@@ -107,19 +99,23 @@ namespace RM_Messenger.ViewModel
 
     public void LoginCommandExecute()
     {
-      if (Email == string.Empty || UserModel.Instance.EncryptedPassword == string.Empty)
+      if (RememberMyIDPassword)
+      {
+        AppConfigManager.Set(LoginConstants.Username, UserModel.Instance.Username);
+        //Email = UserModel.Instance.Username;
+        AppConfigManager.Set(LoginConstants.EncryptedPassword, UserModel.Instance.EncryptedPassword);
+      }
+      else
+      {
+        UserModel.Instance.Username = Email;
+      }
+
+      if (String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword) || String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword))
       {
         WindowManager.OpenLoginErrorWindow(window, Resources.YouMustEnterAnIDAndPasswordError);
         return;
       }
 
-      UserModel.Instance.Username = Email;
-      if (RememberMyIDPassword)
-      {
-        AppConfigManager.Set(LoginConstants.Username, UserModel.Instance.Username);
-        //UserModel.Instance.EncryptedPassword = Email;
-        AppConfigManager.Set(LoginConstants.EncryptedPassword, UserModel.Instance.EncryptedPassword);
-      }
 
       OpenSigningInWindow();
     }
