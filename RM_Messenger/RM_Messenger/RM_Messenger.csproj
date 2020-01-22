@@ -123,6 +123,9 @@
     <Compile Include="Converters\GeneralConverters.cs" />
     <Compile Include="Converters\NameConverter.cs" />
     <Compile Include="Converters\ValueToHorizontalAlignmentConverter.cs" />
+    <Compile Include="Database\AddressBook.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\EntityFramework.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -137,6 +140,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EntityFramework.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Database\Message.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\User.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>

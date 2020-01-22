@@ -5,8 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="7a76a80bcc3f442cab03ec514c9c0364" Name="Diagram1">
-        <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="0.75" />
-      </Diagram>
+        <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="RMMessengerModel.FK_Messages_Receiver_User" />
+        <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" />
+        <EntityTypeShape EntityType="RMMessengerModel.AddressBook" Width="1.5" PointX="3" PointY="4.125" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_Friend_User" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_User" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

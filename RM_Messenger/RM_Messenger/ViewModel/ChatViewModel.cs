@@ -1,11 +1,14 @@
 ﻿using RM_Messenger.Command;
+using RM_Messenger.Database;
 using RM_Messenger.Model;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
 {
@@ -19,18 +22,20 @@ namespace RM_Messenger.ViewModel
     public ScrollViewer AutoScroll;
     public bool IsLogsChangedPropertyInViewModel { get; set; } = true;
 
-    public DisplayedContactModel User
+    private RMMessengerEntities _context;
+
+    public DisplayedContactModel DisplayedUser
     {
-      get { return user; }
+      get { return _displayedUser; }
       set
       {
-        if (user == value) return;
-        user = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("User"));
+        if (_displayedUser == value) return;
+        _displayedUser = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DisplayedUser"));
       }
     }
 
-    public string ProfilePicture
+    public BitmapImage ProfilePicture
     {
       get { return _profilePicture; }
       set
@@ -76,53 +81,64 @@ namespace RM_Messenger.ViewModel
 
     #region Private Properties
 
-    private string _profilePicture;
+    private BitmapImage _profilePicture;
     private string _personalProfilePicture;
     private string messageBoxContent;
-    private DisplayedContactModel user;
-    private ObservableCollection<MessageModel> messagesList;
+    private DisplayedContactModel _displayedUser;
+    private ObservableCollection<MessageModel> messagesList = new ObservableCollection<MessageModel>();
 
     #endregion
 
     #region Constructor
-    public ChatViewModel(Window window, DisplayedContactModel user, ScrollViewer scroll)
+    public ChatViewModel(Window window, DisplayedContactModel displayedUser, ScrollViewer scroll)
     {
-      User = user;
-      user.OnlineIcoPath = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+      _context = new RMMessengerEntities();
+      DisplayedUser = displayedUser;
+      displayedUser.OnlineIcoPath = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
       AutoScroll = scroll;
       SendCommand = new RelayCommand(SendCommandExecute);
-      ProfilePicture = user.ImagePath;
+      ProfilePicture = displayedUser.ImagePath;
       PersonalProfilePicture = "pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg";
-
-      //add fake messages 
-      //TO DO : Server
-      AddFakeMessages();
+      LoadMessages();
     }
 
     #endregion
 
     #region Private Methods
 
-    private void AddFakeMessages()
+    private void LoadMessages()
     {
-      MessagesList = new ObservableCollection<MessageModel>
-      {
-        new MessageModel { SentBy = user.Name + "\n05-Sep-19 23:35:44", Content = "My first Message", HorizontalAlignment = HorizontalAlignment.Left },
-        new MessageModel { SentBy = UserModel.Instance.Username + "\n05-Sep-19 23:36:43", Content = "My second Message", HorizontalAlignment = HorizontalAlignment.Right },
-        new MessageModel { SentBy = user.Name + "\n05-Sep-19 23:37:29", HorizontalAlignment = HorizontalAlignment.Left, Content = "My third Message.AWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" },
-        new MessageModel { SentBy = user.Name + "\n05-Sep-19 23:37:45", HorizontalAlignment = HorizontalAlignment.Left, Content = "My Message." },
-        new MessageModel { SentBy = user.Name + "\n05-Sep-19 23:37:53", HorizontalAlignment = HorizontalAlignment.Left, Content = "Another Message." },
-        new MessageModel { SentBy = UserModel.Instance.Username + "\n05-Sep-19 23:38:21", Content = "My last Message", HorizontalAlignment = HorizontalAlignment.Right }
-      };
+      MessagesList = new ObservableCollection<MessageModel>( _context.Messages.OrderBy(m => m.Date).Where(u => u.SentTo_User_ID == DisplayedUser.Name && u.SentBy_User_ID == UserModel.Instance.Username ||
+        u.SentBy_User_ID == DisplayedUser.Name && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
+        new MessageModel
+        {
+          SentBy = string.Format("{0}\n{1}",m.SentBy_User_ID , m.Date.ToString("dd/MM/yyyy HH:mm")),
+          SentTo = m.SentTo_User_ID,
+          Content = m.Message_Content,
+          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.Name ? HorizontalAlignment.Right : HorizontalAlignment.Left
+        }));
     }
 
     private void SendCommandExecute()
     {
-      if(string.IsNullOrEmpty(messageBoxContent))
+      if (string.IsNullOrEmpty(messageBoxContent))
       {
         return;
       }
-      MessagesList.Add(new MessageModel {SentBy = UserModel.Instance.Username+ "\n" + DateTime.Now, Content = MessageBoxContent, HorizontalAlignment = HorizontalAlignment.Right });
+
+      var message = new Message
+      {
+        Date = DateTime.Now,
+        SentTo_User_ID = DisplayedUser.Name,
+        SentBy_User_ID = UserModel.Instance.Username,
+        Message_Content = MessageBoxContent
+      };
+      _context.Messages.Add(message); ;
+      _context.SaveChanges();
+
+
+      MessagesList.Add(new MessageModel { SentBy = message.SentBy_User_ID + "\n" + message.Date.ToString(), SentTo = message.SentTo_User_ID, Content = MessageBoxContent, HorizontalAlignment = HorizontalAlignment.Right });
+
       MessageBoxContent = string.Empty;
       AutoScroll.ScrollToEnd();
     }

@@ -14,9 +14,26 @@ namespace RM_Messenger.Database
     
     public partial class User
     {
-        public System.Guid User_ID { get; set; }
-        public string Username { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public User()
+        {
+            this.Messages = new HashSet<Message>();
+            this.Messages1 = new HashSet<Message>();
+            this.AddressBooks = new HashSet<AddressBook>();
+            this.AddressBooks1 = new HashSet<AddressBook>();
+        }
+    
+        public string User_ID { get; set; }
         public string Password { get; set; }
         public byte[] ProfilePicture { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Message> Messages1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddressBook> AddressBooks { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddressBook> AddressBooks1 { get; set; }
     }
 }

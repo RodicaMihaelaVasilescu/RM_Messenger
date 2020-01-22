@@ -5,17 +5,101 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="RMMessengerModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AddressBook">
+          <Key>
+            <PropertyRef Name="AddressBook_ID" />
+          </Key>
+          <Property Name="AddressBook_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Friend_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="Message_ID" />
+          </Key>
+          <Property Name="Message_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SentBy_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SentTo_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Message_Content" Type="nvarchar" MaxLength="500" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Users">
           <Key>
             <PropertyRef Name="User_ID" />
           </Key>
-          <Property Name="User_ID" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="500" Nullable="false" />
           <Property Name="ProfilePicture" Type="varbinary(max)" />
         </EntityType>
+        <Association Name="FK_AddressBook_Friend_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AddressBook" Type="Self.AddressBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddressBook">
+              <PropertyRef Name="Friend_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressBook_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AddressBook" Type="Self.AddressBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddressBook">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Receiver_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="SentBy_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Sender_User">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="SentTo_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RMMessengerModelStoreContainer">
+          <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AddressBook_Friend_User" Association="Self.FK_AddressBook_Friend_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AddressBook" EntitySet="AddressBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressBook_User" Association="Self.FK_AddressBook_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AddressBook" EntitySet="AddressBook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Receiver_User" Association="Self.FK_Messages_Receiver_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Sender_User" Association="Self.FK_Messages_Sender_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -23,17 +107,109 @@
       <Schema Namespace="RMMessengerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityContainer Name="RMMessengerEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Users" EntityType="RMMessengerModel.User" />
-        </EntityContainer>
+          <EntitySet Name="Messages" EntityType="RMMessengerModel.Message" />
+          <AssociationSet Name="FK_Messages_Receiver_User" Association="RMMessengerModel.FK_Messages_Receiver_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Messages_Sender_User" Association="RMMessengerModel.FK_Messages_Sender_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <EntitySet Name="AddressBooks" EntityType="RMMessengerModel.AddressBook" />
+          <AssociationSet Name="FK_AddressBook_Friend_User" Association="RMMessengerModel.FK_AddressBook_Friend_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AddressBook" EntitySet="AddressBooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddressBook_User" Association="RMMessengerModel.FK_AddressBook_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AddressBook" EntitySet="AddressBooks" />
+          </AssociationSet>
+          </EntityContainer>
         <EntityType Name="User">
           <Key>
             <PropertyRef Name="User_ID" />
           </Key>
-          <Property Name="User_ID" Type="Guid" Nullable="false" />
-          <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="ProfilePicture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Messages" Relationship="RMMessengerModel.FK_Messages_Receiver_User" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="Messages1" Relationship="RMMessengerModel.FK_Messages_Sender_User" FromRole="User" ToRole="Message" />
+          <NavigationProperty Name="AddressBooks" Relationship="RMMessengerModel.FK_AddressBook_Friend_User" FromRole="User" ToRole="AddressBook" />
+          <NavigationProperty Name="AddressBooks1" Relationship="RMMessengerModel.FK_AddressBook_User" FromRole="User" ToRole="AddressBook" />
+          </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="Message_ID" />
+          </Key>
+          <Property Name="Message_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SentBy_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SentTo_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Message_Content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_Messages_Receiver_User" FromRole="Message" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="RMMessengerModel.FK_Messages_Sender_User" FromRole="Message" ToRole="User" />
         </EntityType>
-      </Schema>
+        <Association Name="FK_Messages_Receiver_User">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SentBy_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Messages_Sender_User">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SentTo_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AddressBook">
+          <Key>
+            <PropertyRef Name="AddressBook_ID" />
+          </Key>
+          <Property Name="AddressBook_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Friend_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_AddressBook_Friend_User" FromRole="AddressBook" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="RMMessengerModel.FK_AddressBook_User" FromRole="AddressBook" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AddressBook_Friend_User">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.AddressBook" Role="AddressBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddressBook">
+              <PropertyRef Name="Friend_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddressBook_User">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.AddressBook" Role="AddressBook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddressBook">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -44,8 +220,28 @@
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="ProfilePicture" ColumnName="ProfilePicture" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Username" ColumnName="Username" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="RMMessengerModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Message_Content" ColumnName="Message_Content" />
+                <ScalarProperty Name="SentTo_User_ID" ColumnName="SentTo_User_ID" />
+                <ScalarProperty Name="SentBy_User_ID" ColumnName="SentBy_User_ID" />
+                <ScalarProperty Name="Message_ID" ColumnName="Message_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddressBooks">
+            <EntityTypeMapping TypeName="RMMessengerModel.AddressBook">
+              <MappingFragment StoreEntitySet="AddressBook">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Friend_User_ID" ColumnName="Friend_User_ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="AddressBook_ID" ColumnName="AddressBook_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

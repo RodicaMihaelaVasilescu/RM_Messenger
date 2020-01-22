@@ -76,7 +76,7 @@ namespace RM_Messenger.ViewModel
 
     private void CreateAccountCommandExecute()
     {
-      if (_context.Users.Any(u => u.Username == UserModel.Instance.Username))
+      if (_context.Users.Any(u => u.User_ID == UserModel.Instance.Username))
       {
         WindowManager.OpenLoginErrorWindow(window, "This ID is not available.\n");
         return;
@@ -97,8 +97,7 @@ namespace RM_Messenger.ViewModel
 
       var user = new User
       {
-        User_ID = Guid.NewGuid(),
-        Username = UserModel.Instance.Username,
+        User_ID =  UserModel.Instance.Username,
         Password = UserModel.Instance.EncryptedPassword,
         ProfilePicture = UserModel.Instance.ProfilePicture,
       };

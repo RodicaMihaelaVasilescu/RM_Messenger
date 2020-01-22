@@ -62,7 +62,7 @@ namespace RM_Messenger.ViewModel
         return;
       }
 
-      var user = _context.Users.FirstOrDefault(u => u.Username == UserModel.Instance.Username &&
+      var user = _context.Users.FirstOrDefault(u => u.User_ID == UserModel.Instance.Username &&
    u.Password == UserModel.Instance.EncryptedPassword);
       if (user == null)
       {

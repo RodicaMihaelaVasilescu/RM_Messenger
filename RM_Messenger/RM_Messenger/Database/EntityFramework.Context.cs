@@ -26,5 +26,7 @@ namespace RM_Messenger.Database
         }
     
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<AddressBook> AddressBooks { get; set; }
     }
 }

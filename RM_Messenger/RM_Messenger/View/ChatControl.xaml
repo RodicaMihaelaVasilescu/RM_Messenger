@@ -259,10 +259,10 @@
           Width="10"
           Height="10"
           Margin="-10,0,0,0"
-          Source="{Binding User.OnlineIcoPath}" />
+          Source="{Binding DisplayedUser.OnlineIcoPath}" />
         <Label
           Margin="0,-9"
-          Content="{Binding User.Name}"
+          Content="{Binding DisplayedUser.Name}"
           FontSize="12"
           Foreground="White" />
       </StackPanel>
@@ -305,8 +305,8 @@
         Foreground="White">
         <Button.Content>
           <MultiBinding Converter="{StaticResource NameConverter}" ConverterParameter="FormatFirstLast">
-            <Binding Path="User.FirstName" />
-            <Binding Path="User.LastName" />
+            <Binding Path="DisplayedUser.FirstName" />
+            <Binding Path="DisplayedUser.LastName" />
           </MultiBinding>
         </Button.Content>
       </Button>
