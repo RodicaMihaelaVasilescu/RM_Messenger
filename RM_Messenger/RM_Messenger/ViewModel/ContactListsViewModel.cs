@@ -1,14 +1,20 @@
-﻿using RM_Messenger.Database;
+﻿using RM_Messenger.Command;
+using RM_Messenger.Database;
+using RM_Messenger.Helper;
 using RM_Messenger.Model;
+using RM_Messenger.Properties;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Windows;
+using System.Windows.Input;
 
 namespace RM_Messenger.ViewModel
 {
   class ContactListsViewModel : INotifyPropertyChanged
   {
+    public ICommand AddFriendCommand { get; set; }
     private List<ContactListsModel> _contactsLists;
     private RMMessengerEntities _context;
 
@@ -32,9 +38,37 @@ namespace RM_Messenger.ViewModel
     {
       _context = new RMMessengerEntities();
       ContactsLists = new List<ContactListsModel>();
-
+      AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
       LoadRecentList();
+      LoadFriendList();
       LoadAddressBook();
+    }
+
+    private void LoadFriendList()
+    {
+      var currentUser = UserModel.Instance.Username;
+      var friendsList = new ContactListsModel();
+      // to do
+      friendsList.ContactsList = new List<DisplayedContactModel>();
+      friendsList.ListName = string.Format("Friends ({0}/{1})", friendsList.ContactsList.Where(c => c.OnlineIcoPath.Contains("Online")).Count(), friendsList.ContactsList.Count);
+      ContactsLists.Add(friendsList);
+    }
+
+    private void AddFriendCommandExecute()
+    {
+      var addContactViewModel = new AddContactModel();
+      var errorWindow = new Window();
+      WindowManager.CreateErrorWindow(errorWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactControlPath);
+
+      if (addContactViewModel.CloseAction == null)
+      {
+        addContactViewModel.CloseAction = () => errorWindow.Close();
+      }
+
+      errorWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+      errorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+      errorWindow.ShowDialog();
+
     }
 
     private void LoadAddressBook()

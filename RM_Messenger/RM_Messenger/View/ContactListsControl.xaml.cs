@@ -11,7 +11,6 @@ namespace RM_Messenger.View
     public ContactListsControl()
     {
       InitializeComponent();
-      DataContext = new ContactListsViewModel();
     }
   }
 }

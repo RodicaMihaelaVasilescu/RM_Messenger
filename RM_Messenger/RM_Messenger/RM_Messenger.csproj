@@ -37,6 +37,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Chat.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
@@ -158,6 +161,7 @@
     <Compile Include="Model\ErrorMessageModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\UserModel.cs" />
+    <Compile Include="ViewModel\AddContactModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\ContactListsViewModel.cs" />
@@ -168,6 +172,9 @@
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\SigningInViewModel.cs" />
+    <Compile Include="View\AddContactControl.xaml.cs">
+      <DependentUpon>AddContactControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\ChangeProfilePictureControl.xaml.cs">
       <DependentUpon>ChangeProfilePictureControl.xaml</DependentUpon>
     </Compile>
@@ -238,6 +245,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AddContactControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\ChangeProfilePictureControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -461,6 +472,7 @@
     <Resource Include="Resources\Emoticons\9.gif" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Chat.ico" />
     <Content Include="Database\EntityFramework.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>EntityFramework.edmx</DependentUpon>

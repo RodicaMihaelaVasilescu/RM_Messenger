@@ -137,7 +137,7 @@ namespace RM_Messenger.ViewModel
       _context.SaveChanges();
 
 
-      MessagesList.Add(new MessageModel { SentBy = message.SentBy_User_ID + "\n" + message.Date.ToString(), SentTo = message.SentTo_User_ID, Content = MessageBoxContent, HorizontalAlignment = HorizontalAlignment.Right });
+      MessagesList.Add(new MessageModel { SentBy = message.SentBy_User_ID + "\n" + message.Date.ToString("dd/MM/yyyy HH:mm"), SentTo = message.SentTo_User_ID, Content = MessageBoxContent, HorizontalAlignment = HorizontalAlignment.Right });
 
       MessageBoxContent = string.Empty;
       AutoScroll.ScrollToEnd();

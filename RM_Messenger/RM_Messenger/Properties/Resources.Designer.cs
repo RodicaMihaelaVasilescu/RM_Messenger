@@ -61,6 +61,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.AddContactControl.
+        /// </summary>
+        public static string AddContactControlPath {
+            get {
+                return ResourceManager.GetString("AddContactControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add to Messenger List.
+        /// </summary>
+        public static string AddContactWindowTitle {
+            get {
+                return ResourceManager.GetString("AddContactWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.ChatControl.
         /// </summary>
         public static string ChatControlPath {

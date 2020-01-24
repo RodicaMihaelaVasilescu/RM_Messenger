@@ -406,7 +406,7 @@
         Grid.Row="3"
         Margin="10,0"
         Background="White">
-        <local:ContactListsControl x:Name="ContactListsControlControl" />
+        <local:ContactListsControl  x:Name="ContactListsControl"  />
       </StackPanel>
 
       <Button

@@ -39,7 +39,10 @@
       <Button
         HorizontalAlignment="Left"
         Background="Transparent"
-        BorderThickness="0">
+        BorderThickness="0"
+        Command="{Binding AddFriendCommand}"
+        Cursor="Hand"
+        ToolTip="Add contact">
         <Image Height="20" Source="pack://application:,,,/RM_Messenger;component/Resources/AddFriend.png" />
       </Button>
       <Button
