@@ -161,7 +161,7 @@
     <Compile Include="Model\ErrorMessageModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\UserModel.cs" />
-    <Compile Include="ViewModel\AddContactModel.cs" />
+    <Compile Include="ViewModel\AddContactViewModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />

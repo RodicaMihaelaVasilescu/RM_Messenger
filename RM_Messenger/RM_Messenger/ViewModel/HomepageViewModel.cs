@@ -108,7 +108,7 @@ namespace RM_Messenger.ViewModel
 
     private void AddFriendCommandExecute()
     {
-      var addContactViewModel = new AddContactModel();
+      var addContactViewModel = new AddContactViewModel();
       var addContactWindow = new Window();
       addContactWindow.Closed += new EventHandler(ReloadContactLists);
       WindowManager.CreateErrorWindow(addContactWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactControlPath);

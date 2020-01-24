@@ -11,7 +11,7 @@ using System.Windows.Input;
 
 namespace RM_Messenger.ViewModel
 {
-  class AddContactModel : INotifyPropertyChanged
+  class AddContactViewModel : INotifyPropertyChanged
   {
     private string _email;
     public ICommand NextCommand { get; set; }
@@ -28,7 +28,7 @@ namespace RM_Messenger.ViewModel
     public Action CloseAction { get; set; }
 
     public event PropertyChangedEventHandler PropertyChanged;
-    public AddContactModel(string email = "")
+    public AddContactViewModel(string email = "")
     {
       Email = email;
       NextCommand = new RelayCommand(AddContactCommandExecute);
