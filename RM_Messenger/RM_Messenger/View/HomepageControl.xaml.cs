@@ -18,7 +18,6 @@ namespace RM_Messenger.View
       changeProfilePictureViewModel = new ChangeProfilePictureViewModel();
       changeProfilePictureViewModel.popup = ProfilePicturePopupTooltip;
       ChangeProfilePictureControl.DataContext = changeProfilePictureViewModel;
-      ContactListsControl.DataContext = new ContactListsViewModel();
     }
 
     private void Button_MouseEnter(object sender, MouseEventArgs e)

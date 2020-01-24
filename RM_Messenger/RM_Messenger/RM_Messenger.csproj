@@ -164,7 +164,6 @@
     <Compile Include="ViewModel\AddContactModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
-    <Compile Include="ViewModel\ContactListsViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
     <Compile Include="ViewModel\DisplayImageViewModel.cs" />
     <Compile Include="ViewModel\EmoticonsViewModel.cs" />
@@ -180,9 +179,6 @@
     </Compile>
     <Compile Include="View\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\ContactListsControl.xaml.cs">
-      <DependentUpon>ContactListsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CreateNewAccountControl.xaml.cs">
       <DependentUpon>CreateNewAccountControl.xaml</DependentUpon>
@@ -254,10 +250,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\ChatControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\ContactListsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
