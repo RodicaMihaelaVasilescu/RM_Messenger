@@ -64,7 +64,11 @@
       HorizontalAlignment="Stretch"
       IsReadOnly="True"
       SelectedIndex="0">
-      <ComboBoxItem Name="create" IsSelected="True">Yahoo! Messenger</ComboBoxItem>
+      <ComboBoxItem IsSelected="True">Yahoo! Messenger</ComboBoxItem>
+      <ComboBoxItem >LCS</ComboBoxItem>
+      <ComboBoxItem >Windowsn Live (MSN)</ComboBoxItem>
+      <ComboBoxItem >Lotus Sametime</ComboBoxItem>
+      SelectedIndex="0">
     </ComboBox>
 
     <Label

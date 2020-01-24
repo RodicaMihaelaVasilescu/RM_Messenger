@@ -75,7 +75,6 @@ namespace RM_Messenger.ViewModel
     {
       this.window = window;
       window.Activated += new EventHandler(RefreshProfilePicture);
-      window.Activated += new EventHandler(ReloadContactLists);
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       InitializeUserProfile();
       InitializeContactList();
@@ -111,6 +110,7 @@ namespace RM_Messenger.ViewModel
     {
       var addContactViewModel = new AddContactModel();
       var addContactWindow = new Window();
+      addContactWindow.Closed += new EventHandler(ReloadContactLists);
       WindowManager.CreateErrorWindow(addContactWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactControlPath);
 
       if (addContactViewModel.CloseAction == null)
@@ -121,7 +121,6 @@ namespace RM_Messenger.ViewModel
       addContactWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
       addContactWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
       addContactWindow.ShowDialog();
-      //addContactWindow.Closed += new EventHandler(ReloadContactLists);
     }
 
     private void LoadAddressBook()
