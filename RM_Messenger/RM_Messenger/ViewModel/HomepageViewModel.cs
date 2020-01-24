@@ -74,7 +74,8 @@ namespace RM_Messenger.ViewModel
     public HomepageViewModel(Window window)
     {
       this.window = window;
-      window.Activated += new EventHandler(windowActivated);
+      window.Activated += new EventHandler(RefreshProfilePicture);
+      window.Activated += new EventHandler(ReloadContactLists);
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       InitializeUserProfile();
       InitializeContactList();
@@ -85,6 +86,12 @@ namespace RM_Messenger.ViewModel
       _context = new RMMessengerEntities();
       ContactsLists = new List<ContactListsModel>();
       AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
+      LoadContactLists();
+    }
+
+    private void LoadContactLists()
+    {
+      ContactsLists = new List<ContactListsModel>();
       LoadRecentList();
       LoadFriendList();
       LoadAddressBook();
@@ -103,18 +110,18 @@ namespace RM_Messenger.ViewModel
     private void AddFriendCommandExecute()
     {
       var addContactViewModel = new AddContactModel();
-      var errorWindow = new Window();
-      WindowManager.CreateErrorWindow(errorWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactControlPath);
+      var addContactWindow = new Window();
+      WindowManager.CreateErrorWindow(addContactWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactControlPath);
 
       if (addContactViewModel.CloseAction == null)
       {
-        addContactViewModel.CloseAction = () => errorWindow.Close();
+        addContactViewModel.CloseAction = () => addContactWindow.Close();
       }
 
-      errorWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
-      errorWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-      errorWindow.ShowDialog();
-
+      addContactWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
+      addContactWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+      addContactWindow.ShowDialog();
+      //addContactWindow.Closed += new EventHandler(ReloadContactLists);
     }
 
     private void LoadAddressBook()
@@ -124,7 +131,7 @@ namespace RM_Messenger.ViewModel
       var addressBook = new ContactListsModel
       {
         ContactsList = new List<DisplayedContactModel>(_context.AddressBooks.
-        Where(a => a.User_ID == UserModel.Instance.Username).ToList().Select(a => new DisplayedContactModel { Name = a.Friend_User_ID }))
+        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a=>a.Date).Select(a => new DisplayedContactModel { Name = a.Friend_User_ID }))
       };
 
       foreach (var address in addressBook.ContactsList)
@@ -149,11 +156,14 @@ namespace RM_Messenger.ViewModel
       ContactsLists.Add(recentList);
     }
 
-    private void windowActivated(object sender, EventArgs e)
+    private void RefreshProfilePicture(object sender, EventArgs e)
     {
       ProfilePicture =Converters.GeneralConverters.ConvertToBitmapImage( UserModel.Instance.ProfilePicture);
     }
-
+    private void ReloadContactLists(object sender, EventArgs e)
+    {
+      LoadContactLists();
+    }
     private void InitializeUserProfile()
     {
       Email = UserModel.Instance.Username;

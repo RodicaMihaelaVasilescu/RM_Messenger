@@ -31,10 +31,10 @@ namespace RM_Messenger.ViewModel
     public AddContactModel(string email = "")
     {
       Email = email;
-      NextCommand = new RelayCommand(LoginCommandExecute);
+      NextCommand = new RelayCommand(AddContactCommandExecute);
     }
 
-    private void LoginCommandExecute()
+    private void AddContactCommandExecute()
     {
       var context = new RMMessengerEntities();
       if (context.Users.Any(u => u.User_ID == Email))
@@ -44,7 +44,8 @@ namespace RM_Messenger.ViewModel
           context.AddressBooks.Add(new AddressBook
           {
             User_ID = UserModel.Instance.Username,
-            Friend_User_ID = Email
+            Friend_User_ID = Email,
+            Date = DateTime.Now
           });
           context.SaveChanges();
         }
