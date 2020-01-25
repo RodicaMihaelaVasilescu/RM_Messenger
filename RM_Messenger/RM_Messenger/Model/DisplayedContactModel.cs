@@ -4,9 +4,9 @@ namespace RM_Messenger.Model
 {
   public class DisplayedContactModel
   {
-    public string Name { get; set; }
-    public string Image { get; set; }
+    public string UserId { get; set; }
+    public string Status { get; set; } = "Add request pending";
     public BitmapImage ImagePath { get; set; }
-    public string OnlineIcoPath { get; set; }
+    public string OnOffImage { get; set; }
   }
 }

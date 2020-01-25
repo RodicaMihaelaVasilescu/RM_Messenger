@@ -546,7 +546,7 @@
         <ListView
           BorderThickness="0"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
-          ItemsSource="{Binding ContactsLists}">
+          ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}">
           <ListView.ItemTemplate>
             <DataTemplate DataType="{x:Type model:ContactListsModel}">
               <StackPanel Orientation="Vertical">
@@ -730,13 +730,38 @@
                             Height="30"
                             Source="{Binding ImagePath}" />
 
-                          <StackPanel Margin="5,0" Orientation="Horizontal">
+                          <Grid Margin="5,0">
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition />
+                              <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                              <RowDefinition />
+                              <RowDefinition />
+                            </Grid.RowDefinitions>
                             <Image
                               Width="10"
                               Height="10"
-                              Source="{Binding OnlineIcoPath}" />
-                            <Label Content="{Binding Name}" FontSize="12" />
-                          </StackPanel>
+                              Margin="0,5,0,0"
+                              VerticalAlignment="Top"
+                              Source="{Binding OnOffImage}" />
+
+                            <TextBlock
+                              Grid.Column="1"
+                              Margin="5,0,0,0"
+                              VerticalAlignment="Top"
+                              FontSize="12"
+                              Text="{Binding UserId}" />
+                            <TextBlock
+                              Grid.Row="1"
+                              Grid.Column="1"
+                              Margin="5,0,0,0"
+                              VerticalAlignment="Top"
+                              FontSize="10"
+                              FontWeight="Thin"
+                              Text="{Binding Status}" />
+
+                          </Grid>
                         </StackPanel>
                       </DataTemplate>
                     </ListView.ItemTemplate>

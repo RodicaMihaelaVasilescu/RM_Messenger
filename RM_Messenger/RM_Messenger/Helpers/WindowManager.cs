@@ -75,9 +75,9 @@ namespace RM_Messenger.Helper
       }
       UserModel user = new UserModel
       {
-        Username = displayedContact.Name,
-        FirstName = displayedContact.Name,
-        LastName = displayedContact.Name,
+        Username = displayedContact.UserId,
+        FirstName = displayedContact.UserId,
+        LastName = displayedContact.UserId,
         IsOnline = false
       };
       foreach (Window win in App.Current.Windows)

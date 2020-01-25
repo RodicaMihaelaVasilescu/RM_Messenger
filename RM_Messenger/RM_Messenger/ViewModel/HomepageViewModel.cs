@@ -23,7 +23,7 @@ namespace RM_Messenger.ViewModel
     public ICommand LogoutCommand { get; set; }
     public ICommand SendCommand { get; set; }
     public ICommand AddFriendCommand { get; set; }
-    public string OnlineIcoPath { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+    public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
     public List<ContactListsModel> ContactsLists
     {
@@ -102,7 +102,7 @@ namespace RM_Messenger.ViewModel
       var friendsList = new ContactListsModel();
       // to do
       friendsList.ContactsList = new List<DisplayedContactModel>();
-      friendsList.ListName = string.Format("Friends ({0}/{1})", friendsList.ContactsList.Where(c => c.OnlineIcoPath.Contains("Online")).Count(), friendsList.ContactsList.Count);
+      friendsList.ListName = string.Format("Friends ({0}/{1})", friendsList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendsList.ContactsList.Count);
       ContactsLists.Add(friendsList);
     }
 
@@ -131,17 +131,17 @@ namespace RM_Messenger.ViewModel
       var addressBook = new ContactListsModel
       {
         ContactsList = new List<DisplayedContactModel>(_context.AddressBooks.
-        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a=>a.Date).Select(a => new DisplayedContactModel { Name = a.Friend_User_ID }))
+        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a=>a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_User_ID }))
       };
 
       foreach (var address in addressBook.ContactsList)
       {
         address.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(
-          _context.Users.Where(u => u.User_ID == address.Name).Select(u => u.ProfilePicture).FirstOrDefault());
-        address.OnlineIcoPath = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+          _context.Users.Where(u => u.User_ID == address.UserId).Select(u => u.ProfilePicture).FirstOrDefault());
+        address.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
       }
 
-      addressBook.ListName = string.Format("Address Book ({0}/{1})", addressBook.ContactsList.Where(c => c.OnlineIcoPath.Contains("Online")).Count(), addressBook.ContactsList.Count);
+      addressBook.ListName = string.Format("Address Book ({0}/{1})", addressBook.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), addressBook.ContactsList.Count);
       ContactsLists.Add(addressBook);
 
     }
@@ -152,7 +152,7 @@ namespace RM_Messenger.ViewModel
       var recentList = new ContactListsModel();
       // to do
       recentList.ContactsList = new List<DisplayedContactModel>();
-      recentList.ListName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnlineIcoPath.Contains("Online")).Count(), recentList.ContactsList.Count);
+      recentList.ListName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), recentList.ContactsList.Count);
       ContactsLists.Add(recentList);
     }
 

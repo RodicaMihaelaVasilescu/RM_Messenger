@@ -8,7 +8,6 @@ using RM_Messenger.Properties;
 using RM_Messenger.Command;
 using RM_Messenger.Helpers;
 using RM_Messenger.Database;
-using RM_Messenger.Constants;
 
 namespace RM_Messenger.ViewModel
 {
@@ -40,7 +39,7 @@ namespace RM_Messenger.ViewModel
       {
         if (_rememberMyIDPassword == value) return;
         _rememberMyIDPassword = value;
-        AppConfigManager.Set(LoginConstants.RememberMyIDPassword, value.ToString());
+        AppConfigManager.Set(Resources.RememberMyIDPassword, value.ToString());
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RememberMyIDPassword"));
       }
     }
@@ -51,7 +50,7 @@ namespace RM_Messenger.ViewModel
       {
         if (_signInAutomatically == value) return;
         _signInAutomatically = value;
-        AppConfigManager.Set(LoginConstants.SignInAutomatically, value.ToString());
+        AppConfigManager.Set(Resources.SignInAutomatically, value.ToString());
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SignInAutomatically"));
       }
     }
@@ -63,7 +62,7 @@ namespace RM_Messenger.ViewModel
       {
         _signInAsInvisible = value;
         UserModel.Instance.IsOnline = !value;
-        AppConfigManager.Set(LoginConstants.SignInAsInvisible, value.ToString());
+        AppConfigManager.Set(Resources.SignInAsInvisible, value.ToString());
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SignInAsInvisible"));
       }
     }
@@ -76,9 +75,9 @@ namespace RM_Messenger.ViewModel
     private readonly RMMessengerEntities _context;
     private Window window;
 
-    private bool _rememberMyIDPassword = Convert.ToBoolean(AppConfigManager.Get(LoginConstants.RememberMyIDPassword));
-    private bool _signInAutomatically = Convert.ToBoolean(AppConfigManager.Get(LoginConstants.SignInAutomatically));
-    private bool _signInAsInvisible = Convert.ToBoolean(AppConfigManager.Get(LoginConstants.SignInAsInvisible));
+    private bool _rememberMyIDPassword = Convert.ToBoolean(AppConfigManager.Get(Resources.RememberMyIDPassword));
+    private bool _signInAutomatically = Convert.ToBoolean(AppConfigManager.Get(Resources.SignInAutomatically));
+    private bool _signInAsInvisible = Convert.ToBoolean(AppConfigManager.Get(Resources.SignInAsInvisible));
 
     #endregion
 
@@ -102,9 +101,9 @@ namespace RM_Messenger.ViewModel
       
       if (RememberMyIDPassword)
       {
-        AppConfigManager.Set(LoginConstants.Username, UserModel.Instance.Username);
+        AppConfigManager.Set(Resources.Username, UserModel.Instance.Username);
         //Email = UserModel.Instance.Username;
-        AppConfigManager.Set(LoginConstants.EncryptedPassword, UserModel.Instance.EncryptedPassword);
+        AppConfigManager.Set(Resources.EncryptedPassword, UserModel.Instance.EncryptedPassword);
       }
 
       if (String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword) || String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword))

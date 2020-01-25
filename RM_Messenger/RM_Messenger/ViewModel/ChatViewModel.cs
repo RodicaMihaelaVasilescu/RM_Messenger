@@ -94,7 +94,7 @@ namespace RM_Messenger.ViewModel
     {
       _context = new RMMessengerEntities();
       DisplayedUser = displayedUser;
-      displayedUser.OnlineIcoPath = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+      displayedUser.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
       AutoScroll = scroll;
       SendCommand = new RelayCommand(SendCommandExecute);
       ProfilePicture = displayedUser.ImagePath;
@@ -108,14 +108,14 @@ namespace RM_Messenger.ViewModel
 
     private void LoadMessages()
     {
-      MessagesList = new ObservableCollection<MessageModel>( _context.Messages.OrderBy(m => m.Date).Where(u => u.SentTo_User_ID == DisplayedUser.Name && u.SentBy_User_ID == UserModel.Instance.Username ||
-        u.SentBy_User_ID == DisplayedUser.Name && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
+      MessagesList = new ObservableCollection<MessageModel>( _context.Messages.OrderBy(m => m.Date).Where(u => u.SentTo_User_ID == DisplayedUser.UserId && u.SentBy_User_ID == UserModel.Instance.Username ||
+        u.SentBy_User_ID == DisplayedUser.UserId && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
         new MessageModel
         {
           SentBy = string.Format("{0}\n{1}",m.SentBy_User_ID , m.Date.ToString("dd/MM/yyyy HH:mm")),
           SentTo = m.SentTo_User_ID,
           Content = m.Message_Content,
-          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.Name ? HorizontalAlignment.Right : HorizontalAlignment.Left
+          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
         }));
     }
 
@@ -129,7 +129,7 @@ namespace RM_Messenger.ViewModel
       var message = new Message
       {
         Date = DateTime.Now,
-        SentTo_User_ID = DisplayedUser.Name,
+        SentTo_User_ID = DisplayedUser.UserId,
         SentBy_User_ID = UserModel.Instance.Username,
         Message_Content = MessageBoxContent
       };

@@ -122,7 +122,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\RelayCommand.cs" />
-    <Compile Include="Constants\LoginConstants.cs" />
     <Compile Include="Converters\GeneralConverters.cs" />
     <Compile Include="Converters\NameConverter.cs" />
     <Compile Include="Converters\ValueToHorizontalAlignmentConverter.cs" />
