@@ -180,10 +180,12 @@
               Width="10"
               Height="10"
               Margin="-10,0,0,0"
-              Source="{Binding OnlineIcoPath}" />
-            <Label
-              Margin="0,-9"
-              Content="{Binding Email}"
+              VerticalAlignment="Center"
+              Source="{Binding OnOffImage}" />
+            <TextBlock
+              Margin="5,-9"
+              Text="{Binding Email}"
+              VerticalAlignment="Center"
               FontSize="12"
               Foreground="White" />
           </StackPanel>
