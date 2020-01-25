@@ -137,9 +137,9 @@
           x:Name="ProfileImage"
           Grid.RowSpan="3"
           Grid.Column="0"
-          Width="55"
-          Height="55"
-          Margin="5,10,5,0"
+          Width="60"
+          Height="60"
+          Margin="10,10,0,0"
           HorizontalAlignment="Left"
           Background="Transparent"
           Cursor="Hand"
@@ -149,8 +149,8 @@
           <StackPanel>
             <Image
               x:Name="ProfilePicture"
-              Width="50"
-              Height="50"
+              Width="55"
+              Height="55"
               Source="{Binding ProfilePicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
           </StackPanel>
 
@@ -175,19 +175,21 @@
           BorderThickness="0"
           Style="{StaticResource MaterialDesignRaisedAccentButton}">
 
-          <StackPanel Margin="-5" Orientation="Horizontal">
+          <StackPanel Margin="-10" Orientation="Horizontal">
             <Image
               Width="10"
               Height="10"
-              Margin="-10,0,0,0"
+              Margin="-5,0,0,0"
               VerticalAlignment="Center"
               Source="{Binding OnOffImage}" />
             <TextBlock
-              Margin="5,-9"
-              Text="{Binding Email}"
+              Height="15"
+              Margin="5,-5"
               VerticalAlignment="Center"
+              FontFamily="Calisto MT"
               FontSize="12"
-              Foreground="White" />
+              Foreground="White"
+              Text="{Binding Email}" />
           </StackPanel>
         </Button>
 
@@ -197,8 +199,8 @@
           Grid.Column="1"
           Grid.ColumnSpan="2"
           Height="19"
-          Margin="5,0,5,0"
-          Padding="5,0,5,0"
+          Margin="10,0"
+          Padding="10,0"
           HorizontalAlignment="Stretch"
           HorizontalContentAlignment="Left"
           VerticalContentAlignment="Center"
@@ -206,14 +208,13 @@
           BorderBrush="LightGray"
           BorderThickness="1"
           FontFamily="SegoeUI"
-          FontSize="12"
+          FontWeight="Thin"
           Foreground="LightGray"
           Text="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}">
 
           <TextBox.Style>
             <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="TextBox">
               <Style.Resources>
-
                 <VisualBrush
                   x:Key="GrayHelperTextBrush"
                   AlignmentX="Left"
@@ -223,9 +224,10 @@
                     <Label
                       Name="SearchLabel"
                       BorderBrush="LightGray"
-                      Content="Have something to share?"
-                      FontFamily="SegoeUI"
-                      FontSize="12"
+                      Content="Share a status message..."
+                      FontFamily="Calisto MT"
+                      FontSize="11"
+                      FontWeight="Thin"
                       Foreground="LightGray" />
                   </VisualBrush.Visual>
                 </VisualBrush>
@@ -238,9 +240,9 @@
                   <VisualBrush.Visual>
                     <Label
                       Name="SearchBlackLabel"
-                      Content="Have something to share?"
-                      FontFamily="SegoeUI"
-                      FontSize="12"
+                      Content="Share a status message..."
+                      FontFamily="Calisto MT"
+                      FontSize="11"
                       Foreground="DeepSkyBlue" />
                   </VisualBrush.Visual>
                 </VisualBrush>
@@ -309,10 +311,9 @@
           Grid.ColumnSpan="1"
           Width="20"
           Height="20"
-          Margin="5,0"
+          Margin="10,0"
           HorizontalAlignment="Right"
           Background="Transparent" />
-
 
         <Image
           Grid.Row="2"
@@ -462,9 +463,10 @@
                       <Label
                         Name="SearchLabel"
                         BorderBrush="LightGray"
-                        Content="Have something to share?"
-                        FontFamily="SegoeUI"
-                        FontSize="12"
+                        Content="Share a status message..."
+                        FontFamily="Calisto MT"
+                        FontSize="11"
+                        FontWeight="Thin"
                         Foreground="LightGray" />
                     </VisualBrush.Visual>
                   </VisualBrush>
@@ -477,9 +479,10 @@
                     <VisualBrush.Visual>
                       <Label
                         Name="SearchBlackLabel"
-                        Content="Have something to share?"
-                        FontFamily="SegoeUI"
-                        FontSize="12"
+                        Content="Share a status message..."
+                        FontFamily="Calisto MT"
+                        FontSize="11"
+                        FontWeight="Thin"
                         Foreground="DeepSkyBlue" />
                     </VisualBrush.Visual>
                   </VisualBrush>
