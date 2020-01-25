@@ -98,10 +98,15 @@ namespace RM_Messenger.ViewModel
       var user = new User
       {
         User_ID =  UserModel.Instance.Username,
-        Password = UserModel.Instance.EncryptedPassword,
-        ProfilePicture = UserModel.Instance.ProfilePicture,
+        Password = UserModel.Instance.EncryptedPassword
       };
       _context.Users.Add(user);
+      var account = new Account
+      {
+        User_ID = UserModel.Instance.Username,
+        Profile_Picture = UserModel.Instance.ProfilePicture
+      };
+      _context.Accounts.Add(account);
       _context.SaveChanges();
 
       WindowManager.OpenLoginErrorWindow(window, "Account successfully created");

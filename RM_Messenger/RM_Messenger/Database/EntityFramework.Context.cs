@@ -25,8 +25,10 @@ namespace RM_Messenger.Database
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<AddressBook> AddressBooks { get; set; }
+        public virtual DbSet<Friendship> Friendships { get; set; }
+        public virtual DbSet<Message> Messages { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     }
 }

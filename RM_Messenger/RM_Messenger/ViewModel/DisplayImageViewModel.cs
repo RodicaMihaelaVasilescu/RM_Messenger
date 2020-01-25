@@ -81,8 +81,8 @@ namespace RM_Messenger.ViewModel
     private void SetProfilePicture(string newFile)
     {
       var context = new RMMessengerEntities();
-      var user = context.Users.FirstOrDefault(u=>u.User_ID == UserModel.Instance.Username);
-      user.ProfilePicture = GeneralConverters.ConvertToByteArray(newFile);
+      var account = context.Accounts.FirstOrDefault(a=>a.User_ID == UserModel.Instance.Username);
+      account.Profile_Picture = GeneralConverters.ConvertToByteArray(newFile);
       context.SaveChanges();
     }
 

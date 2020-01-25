@@ -4,15 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="7a76a80bcc3f442cab03ec514c9c0364" Name="Diagram1">
-        <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="1" />
-        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="0.75" />
-        <AssociationConnector Association="RMMessengerModel.FK_Messages_Receiver_User" />
-        <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" />
-        <EntityTypeShape EntityType="RMMessengerModel.AddressBook" Width="1.5" PointX="3" PointY="4.125" />
-        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_Friend_User" />
-        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_User" />
-        </Diagram>
+      <Diagram DiagramId="d2d5f92840e94a39b755983a08c32d88" Name="Diagram1">
+        <EntityTypeShape EntityType="RMMessengerModel.Account" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RMMessengerModel.AddressBook" Width="1.5" PointX="3" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="RMMessengerModel.Friendship" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
+        <AssociationConnector Association="RMMessengerModel.FK_User_Account_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_Friend_User" ManuallyRouted="false" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_User" ManuallyRouted="false" />
+        <AssociationConnector Association="RMMessengerModel.FK_Friendships_User_Friend" ManuallyRouted="false" />
+        <AssociationConnector Association="RMMessengerModel.FK_Friendships_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="RMMessengerModel.FK_Messages_Receiver_User" ManuallyRouted="false" />
+        <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" ManuallyRouted="false" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

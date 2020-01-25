@@ -137,7 +137,7 @@ namespace RM_Messenger.ViewModel
       foreach (var address in addressBook.ContactsList)
       {
         address.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(
-          _context.Users.Where(u => u.User_ID == address.UserId).Select(u => u.ProfilePicture).FirstOrDefault());
+          _context.Accounts.Where(a => a.User_ID == address.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         address.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
       }
 

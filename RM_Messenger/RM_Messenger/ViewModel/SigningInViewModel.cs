@@ -70,7 +70,8 @@ namespace RM_Messenger.ViewModel
         WindowManager.OpenLoginErrorWindow(window, Resources.IncorrectIDAndPassword);
         return;
       }
-      UserModel.Instance.ProfilePicture = user.ProfilePicture;
+      var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();
+      UserModel.Instance.ProfilePicture = account.Profile_Picture;
       OpenHomepageWindow();
     }
 
