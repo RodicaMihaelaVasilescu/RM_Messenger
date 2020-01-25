@@ -17,6 +17,7 @@ namespace RM_Messenger.Database
         public int Friendship_ID { get; set; }
         public string User_ID { get; set; }
         public string Friend_ID { get; set; }
+        public System.DateTime Date { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

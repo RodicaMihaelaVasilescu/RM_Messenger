@@ -99,11 +99,22 @@ namespace RM_Messenger.ViewModel
     private void LoadFriendList()
     {
       var currentUser = UserModel.Instance.Username;
-      var friendsList = new ContactListsModel();
-      // to do
-      friendsList.ContactsList = new List<DisplayedContactModel>();
-      friendsList.ListName = string.Format("Friends ({0}/{1})", friendsList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendsList.ContactsList.Count);
-      ContactsLists.Add(friendsList);
+      var friendList = new ContactListsModel
+      {
+        ContactsList = new List<DisplayedContactModel>(_context.Friendships.
+        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a => a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_ID }))
+      };
+
+      foreach (var friend in friendList.ContactsList)
+      {
+        var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
+        friend.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(friendAccount.Profile_Picture);
+        friend.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+        friend.Status = _context.Friendships.Any(f => f.User_ID == friend.UserId && f.Friend_ID == currentUser) ? friendAccount.Status : "Add request pending";
+      }
+
+      friendList.ListName = string.Format("Friends ({0}/{1})", friendList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendList.ContactsList.Count);
+      ContactsLists.Add(friendList);
     }
 
     private void AddFriendCommandExecute()
@@ -139,9 +150,12 @@ namespace RM_Messenger.ViewModel
         address.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(
           _context.Accounts.Where(a => a.User_ID == address.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         address.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+        var friendAccount = _context.Accounts.Where(a => a.User_ID == address.UserId).FirstOrDefault();
+        address.Status = _context.Friendships.Any(f => f.User_ID == address.UserId && f.Friend_ID == currentUser) ? friendAccount.Status : "Add request pending";
+
       }
 
-      addressBook.ListName = string.Format("Address Book ({0}/{1})", addressBook.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), addressBook.ContactsList.Count);
+      addressBook.ListName = string.Format("Address Book ({0})", addressBook.ContactsList.Count);
       ContactsLists.Add(addressBook);
 
     }

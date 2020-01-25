@@ -14,6 +14,7 @@ namespace RM_Messenger.ViewModel
   {
     public ICommand FinishCommand { get; set; }
     private string newContact;
+    private string contactList;
     private string _message;
 
     public event PropertyChangedEventHandler PropertyChanged;

@@ -46,17 +46,16 @@
       Foreground="White" />
 
     <ComboBox
+      SelectedItem="{Binding SelectedContactList}"
+      ItemsSource="{Binding ContactLists}"
       Grid.Row="1"
+      Width="160"
       Grid.Column="1"
       Height="20"
       Margin="30,0"
       HorizontalAlignment="Left"
       IsReadOnly="True"
       SelectedIndex="0">
-      <ComboBoxItem IsSelected="True">Yahoo! Messenger</ComboBoxItem>
-      <ComboBoxItem>LCS</ComboBoxItem>
-      <ComboBoxItem>Windowsn Live (MSN)</ComboBoxItem>
-      <ComboBoxItem>Lotus Sametime</ComboBoxItem>
     </ComboBox>
 
     <Separator
@@ -197,7 +196,7 @@
         VerticalAlignment="Top"
         BorderBrush="White"
         BorderThickness="0.5"
-        Command="{Binding NextCommand}"
+        Command="{Binding CancelCommand}"
         Content="Cancel"
         FontSize="10"
         FontWeight="Thin"

@@ -20,7 +20,5 @@ namespace RM_Messenger.Database
         public string Last_Name { get; set; }
         public byte[] Profile_Picture { get; set; }
         public string Status { get; set; }
-    
-        public virtual User User { get; set; }
     }
 }

@@ -17,7 +17,9 @@ namespace RM_Messenger.ViewModel
   class AddContactFirstViewModel : INotifyPropertyChanged
   {
     private string _email;
+
     public ICommand NextCommand { get; set; }
+    public ICommand CancelCommand { get; set; }
     public string Email
     {
       get { return _email; }
@@ -52,10 +54,12 @@ namespace RM_Messenger.ViewModel
       this.window = window;
       Email = email;
       NextCommand = new RelayCommand(NextCommandExecute);
+      CancelCommand = new RelayCommand(CancelCommandExecute);
     }
-
-
-
+    private void CancelCommandExecute()
+    {
+      CloseAction?.Invoke();
+    }
     private void NextCommandExecute()
     {
 

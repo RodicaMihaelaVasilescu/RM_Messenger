@@ -172,7 +172,6 @@
 
       <Button
         x:Name="NextButton"
-        IsDefault="True"
         Width="80"
         Height="23"
         Margin="5,10"
@@ -180,12 +179,13 @@
         VerticalAlignment="Top"
         BorderBrush="White"
         BorderThickness="0.5"
-        IsEnabled="{Binding IsNextButtonEnabled,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Command="{Binding NextCommand}"
         Content="Next &gt;"
         FontSize="10"
         FontWeight="Thin"
         Foreground="White"
+        IsDefault="True"
+        IsEnabled="{Binding IsNextButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Background>
           <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
@@ -205,7 +205,7 @@
         VerticalAlignment="Top"
         BorderBrush="White"
         BorderThickness="0.5"
-        Command="{Binding NextCommand}"
+        Command="{Binding CancelCommand}"
         Content="Cancel"
         FontSize="10"
         FontWeight="Thin"

@@ -32,6 +32,7 @@
           <Property Name="Friendship_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Friend_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
         </EntityType>
         <EntityType Name="Messages">
           <Key>
@@ -74,7 +75,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Friendships_User_Friend">
+        <Association Name="FK_Friendships_Friend_ID">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Friendships" Type="Self.Friendships" Multiplicity="*" />
           <ReferentialConstraint>
@@ -86,7 +87,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Friendships_Users">
+        <Association Name="FK_Friendships_User_ID">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Friendships" Type="Self.Friendships" Multiplicity="*" />
           <ReferentialConstraint>
@@ -122,18 +123,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_User_Account_Users">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="User_ID" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="User_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="RMMessengerModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
@@ -148,11 +137,11 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="AddressBook" EntitySet="AddressBook" />
           </AssociationSet>
-          <AssociationSet Name="FK_Friendships_User_Friend" Association="Self.FK_Friendships_User_Friend">
+          <AssociationSet Name="FK_Friendships_Friend_ID" Association="Self.FK_Friendships_Friend_ID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friendships" EntitySet="Friendships" />
           </AssociationSet>
-          <AssociationSet Name="FK_Friendships_Users" Association="Self.FK_Friendships_Users">
+          <AssociationSet Name="FK_Friendships_User_ID" Association="Self.FK_Friendships_User_ID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friendships" EntitySet="Friendships" />
           </AssociationSet>
@@ -163,10 +152,6 @@
           <AssociationSet Name="FK_Messages_Sender_User" Association="Self.FK_Messages_Sender_User">
             <End Role="Users" EntitySet="Users" />
             <End Role="Messages" EntitySet="Messages" />
-          </AssociationSet>
-          <AssociationSet Name="FK_User_Account_Users" Association="Self.FK_User_Account_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Accounts" EntitySet="Accounts" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -184,7 +169,6 @@
           <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Profile_Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="User" Relationship="Self.FK_User_Account_Users" FromRole="Accounts" ToRole="Users" />
         </EntityType>
         <EntityType Name="AddressBook">
           <Key>
@@ -204,8 +188,9 @@
           <Property Name="Friendship_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="User_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Friend_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="User" Relationship="Self.FK_Friendships_User_Friend" FromRole="Friendships" ToRole="Users" />
-          <NavigationProperty Name="User1" Relationship="Self.FK_Friendships_Users" FromRole="Friendships" ToRole="Users" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Friendships_Friend_ID" FromRole="Friendships" ToRole="Users" />
+          <NavigationProperty Name="User1" Relationship="Self.FK_Friendships_User_ID" FromRole="Friendships" ToRole="Users" />
         </EntityType>
         <EntityType Name="Message">
           <Key>
@@ -225,26 +210,13 @@
           </Key>
           <Property Name="User_ID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="Accounts" Relationship="Self.FK_User_Account_Users" FromRole="Users" ToRole="Accounts" />
           <NavigationProperty Name="AddressBooks" Relationship="Self.FK_AddressBook_Friend_User" FromRole="Users" ToRole="AddressBook" />
           <NavigationProperty Name="AddressBooks1" Relationship="Self.FK_AddressBook_User" FromRole="Users" ToRole="AddressBook" />
-          <NavigationProperty Name="Friendships" Relationship="Self.FK_Friendships_User_Friend" FromRole="Users" ToRole="Friendships" />
-          <NavigationProperty Name="Friendships1" Relationship="Self.FK_Friendships_Users" FromRole="Users" ToRole="Friendships" />
+          <NavigationProperty Name="Friendships" Relationship="Self.FK_Friendships_Friend_ID" FromRole="Users" ToRole="Friendships" />
+          <NavigationProperty Name="Friendships1" Relationship="Self.FK_Friendships_User_ID" FromRole="Users" ToRole="Friendships" />
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Receiver_User" FromRole="Users" ToRole="Messages" />
           <NavigationProperty Name="Messages1" Relationship="Self.FK_Messages_Sender_User" FromRole="Users" ToRole="Messages" />
         </EntityType>
-        <Association Name="FK_User_Account_Users">
-          <End Role="Users" Type="Self.User" Multiplicity="1" />
-          <End Role="Accounts" Type="Self.Account" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="User_ID" />
-            </Principal>
-            <Dependent Role="Accounts">
-              <PropertyRef Name="User_ID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_AddressBook_Friend_User">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="AddressBook" Type="Self.AddressBook" Multiplicity="*" />
@@ -269,7 +241,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Friendships_User_Friend">
+        <Association Name="FK_Friendships_Friend_ID">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Friendships" Type="Self.Friendship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -281,7 +253,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Friendships_Users">
+        <Association Name="FK_Friendships_User_ID">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Friendships" Type="Self.Friendship" Multiplicity="*" />
           <ReferentialConstraint>
@@ -323,10 +295,6 @@
           <EntitySet Name="Friendships" EntityType="Self.Friendship" />
           <EntitySet Name="Messages" EntityType="Self.Message" />
           <EntitySet Name="Users" EntityType="Self.User" />
-          <AssociationSet Name="FK_User_Account_Users" Association="Self.FK_User_Account_Users">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="Accounts" EntitySet="Accounts" />
-          </AssociationSet>
           <AssociationSet Name="FK_AddressBook_Friend_User" Association="Self.FK_AddressBook_Friend_User">
             <End Role="Users" EntitySet="Users" />
             <End Role="AddressBook" EntitySet="AddressBooks" />
@@ -335,11 +303,11 @@
             <End Role="Users" EntitySet="Users" />
             <End Role="AddressBook" EntitySet="AddressBooks" />
           </AssociationSet>
-          <AssociationSet Name="FK_Friendships_User_Friend" Association="Self.FK_Friendships_User_Friend">
+          <AssociationSet Name="FK_Friendships_Friend_ID" Association="Self.FK_Friendships_Friend_ID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friendships" EntitySet="Friendships" />
           </AssociationSet>
-          <AssociationSet Name="FK_Friendships_Users" Association="Self.FK_Friendships_Users">
+          <AssociationSet Name="FK_Friendships_User_ID" Association="Self.FK_Friendships_User_ID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friendships" EntitySet="Friendships" />
           </AssociationSet>
@@ -386,6 +354,7 @@
                 <ScalarProperty Name="Friendship_ID" ColumnName="Friendship_ID" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="Friend_ID" ColumnName="Friend_ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

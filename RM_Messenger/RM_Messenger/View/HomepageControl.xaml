@@ -146,14 +146,13 @@
           MouseEnter="Button_MouseEnter"
           MouseLeave="Button_MouseLeave"
           ToolTip="Profile Picture">
-          <StackPanel>
+          <StackPanel Background="White">
             <Image
               x:Name="ProfilePicture"
               Width="55"
               Height="55"
               Source="{Binding ProfilePicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
           </StackPanel>
-
         </Button>
         <Popup
           x:Name="ProfilePicturePopupTooltip"
