@@ -161,7 +161,9 @@
     <Compile Include="Model\ErrorMessageModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
     <Compile Include="Model\UserModel.cs" />
-    <Compile Include="ViewModel\AddContactViewModel.cs" />
+    <Compile Include="ViewModel\AddContactSecondViewModel.cs" />
+    <Compile Include="ViewModel\AddContactThirdViewModel.cs" />
+    <Compile Include="ViewModel\AddContactFirstViewModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
@@ -171,8 +173,14 @@
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\SigningInViewModel.cs" />
-    <Compile Include="View\AddContactControl.xaml.cs">
-      <DependentUpon>AddContactControl.xaml</DependentUpon>
+    <Compile Include="View\AddContactFirstControl.xaml.cs">
+      <DependentUpon>AddContactFirstControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddContactSecondControl.xaml.cs">
+      <DependentUpon>AddContactSecondControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddContactThirdControl.xaml.cs">
+      <DependentUpon>AddContactThirdControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChangeProfilePictureControl.xaml.cs">
       <DependentUpon>ChangeProfilePictureControl.xaml</DependentUpon>
@@ -241,7 +249,15 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="View\AddContactControl.xaml">
+    <Page Include="View\AddContactFirstControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddContactSecondControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddContactThirdControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

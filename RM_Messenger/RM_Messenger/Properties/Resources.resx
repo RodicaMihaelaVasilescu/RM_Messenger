@@ -117,8 +117,14 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddContactControlPath" xml:space="preserve">
-    <value>RM_Messenger.View.AddContactControl</value>
+  <data name="AddContactFirstControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.AddContactFirstControl</value>
+  </data>
+  <data name="AddContactSecondControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.AddContactSecondControl</value>
+  </data>
+  <data name="AddContactThirdControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.AddContactThirdControl</value>
   </data>
   <data name="AddContactWindowTitle" xml:space="preserve">
     <value>Add to Messenger List</value>

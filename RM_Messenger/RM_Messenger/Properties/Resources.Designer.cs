@@ -61,11 +61,29 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RM_Messenger.View.AddContactControl.
+        ///   Looks up a localized string similar to RM_Messenger.View.AddContactFirstControl.
         /// </summary>
-        public static string AddContactControlPath {
+        public static string AddContactFirstControlPath {
             get {
-                return ResourceManager.GetString("AddContactControlPath", resourceCulture);
+                return ResourceManager.GetString("AddContactFirstControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.AddContactSecondControl.
+        /// </summary>
+        public static string AddContactSecondControlPath {
+            get {
+                return ResourceManager.GetString("AddContactSecondControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.AddContactThirdControl.
+        /// </summary>
+        public static string AddContactThirdControlPath {
+            get {
+                return ResourceManager.GetString("AddContactThirdControlPath", resourceCulture);
             }
         }
         

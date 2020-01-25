@@ -108,10 +108,10 @@ namespace RM_Messenger.ViewModel
 
     private void AddFriendCommandExecute()
     {
-      var addContactViewModel = new AddContactViewModel();
       var addContactWindow = new Window();
+      var addContactViewModel = new AddContactFirstViewModel(addContactWindow);
       addContactWindow.Closed += new EventHandler(ReloadContactLists);
-      WindowManager.CreateErrorWindow(addContactWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactControlPath);
+      WindowManager.CreateGeneralWindow(addContactWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactFirstControlPath);
 
       if (addContactViewModel.CloseAction == null)
       {
@@ -120,6 +120,7 @@ namespace RM_Messenger.ViewModel
 
       addContactWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
       addContactWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+      addContactWindow.Width = 500;
       addContactWindow.ShowDialog();
     }
 

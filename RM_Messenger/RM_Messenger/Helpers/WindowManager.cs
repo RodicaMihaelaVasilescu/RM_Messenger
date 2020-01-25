@@ -41,7 +41,7 @@ namespace RM_Messenger.Helper
       }
       var errorMessageViewModel = new ErrorMessageViewModel(errorMessage);
       var errorWindow = new Window();
-      WindowManager.CreateErrorWindow(errorWindow, errorMessageViewModel, Resources.SignInErrorWindowTitle, Resources.ErrorMessageControlPath);
+      WindowManager.CreateGeneralWindow(errorWindow, errorMessageViewModel, Resources.SignInErrorWindowTitle, Resources.ErrorMessageControlPath);
 
       if (errorMessageViewModel.CloseAction == null)
       {
@@ -53,7 +53,7 @@ namespace RM_Messenger.Helper
       errorWindow.ShowDialog();
     }
 
-    public static void CreateErrorWindow(Window window, object viewModel, string title, string controlPath)
+    public static void CreateGeneralWindow(Window window, object viewModel, string title, string controlPath)
     {
       window.Title = title;
       var controlAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetName().Name);

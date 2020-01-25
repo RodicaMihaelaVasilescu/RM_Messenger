@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace RM_Messenger.View
 {
   /// <summary>
-  /// Interaction logic for AddContactControl.xaml
+  /// Interaction logic for AddContactSecondControl.xaml
   /// </summary>
-  public partial class AddContactControl : UserControl
+  public partial class AddContactSecondControl : UserControl
   {
-    public AddContactControl()
+    public AddContactSecondControl()
     {
       InitializeComponent();
     }
