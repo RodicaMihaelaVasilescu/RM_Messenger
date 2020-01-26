@@ -504,6 +504,9 @@
       <DependentUpon>EntityFramework.edmx</DependentUpon>
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\facebook_ads.gif" />
+    <Resource Include="Resources\google_ads.gif" />
+    <Resource Include="Resources\coca_cola_ads.gif" />
     <Resource Include="Resources\yahoo_ads.gif" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
