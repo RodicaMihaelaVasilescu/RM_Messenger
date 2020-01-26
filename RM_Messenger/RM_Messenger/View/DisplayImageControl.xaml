@@ -49,11 +49,12 @@
         Height="80"
         HorizontalAlignment="Center"
         Background="Transparent">
-        <StackPanel>
+        <StackPanel Background="White">
           <Image
             Name="profilePicture"
-            Width="80"
-            Height="80"
+            Width="75"
+            Height="75"
+            Cursor="Hand"
             Source="{Binding Path=ProfilePicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
         </StackPanel>
       </Button>

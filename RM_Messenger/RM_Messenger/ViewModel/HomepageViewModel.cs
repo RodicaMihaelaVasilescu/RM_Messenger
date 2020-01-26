@@ -16,13 +16,15 @@ namespace RM_Messenger.ViewModel
 {
   class HomepageViewModel : INotifyPropertyChanged
   {
-  
+
     #region Public Properties
 
     public Action CloseAction { get; set; }
     public ICommand LogoutCommand { get; set; }
     public ICommand SendCommand { get; set; }
     public ICommand AddFriendCommand { get; set; }
+
+    public ICommand ChangeStatusCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
     public List<ContactListsModel> ContactsLists
@@ -45,7 +47,26 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
       }
     }
-
+    public string Status
+    {
+      get { return _status; }
+      set
+      {
+        if (_status == value) return;
+        _status = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Status"));
+      }
+    }
+    public string SearchedUser
+    {
+      get { return _searchedUser; }
+      set
+      {
+        if (_searchedUser == value) return;
+        _searchedUser = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SearchedUser"));
+      }
+    }
     public BitmapImage ProfilePicture
     {
       get { return profilePicture; }
@@ -66,6 +87,8 @@ namespace RM_Messenger.ViewModel
     private BitmapImage profilePicture;
     private List<ContactListsModel> _contactsLists;
     private RMMessengerEntities _context;
+    private string _status;
+    private string _searchedUser;
 
     #endregion
 
@@ -76,8 +99,15 @@ namespace RM_Messenger.ViewModel
       this.window = window;
       window.Activated += new EventHandler(RefreshProfilePicture);
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
+      ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
+
       InitializeUserProfile();
       InitializeContactList();
+    }
+
+    private void ChangeStatusCommandExecute()
+    {
+
     }
 
     private void InitializeContactList()
@@ -110,9 +140,11 @@ namespace RM_Messenger.ViewModel
         var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
         friend.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(friendAccount.Profile_Picture);
         friend.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
-        friend.Status = _context.Friendships.Any(f => f.User_ID == friend.UserId && f.Friend_ID == currentUser) ? friendAccount.Status : "Add request pending";
+        friend.Status = _context.Friendships.Any(f => f.User_ID == friend.UserId && f.Friend_ID == currentUser) ? 
+                friendAccount.Status : "Add request pending";
       }
 
+      friendList.IsExpanded = true;
       friendList.ListName = string.Format("Friends ({0}/{1})", friendList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendList.ContactsList.Count);
       ContactsLists.Add(friendList);
     }
@@ -120,7 +152,7 @@ namespace RM_Messenger.ViewModel
     private void AddFriendCommandExecute()
     {
       var addContactWindow = new Window();
-      var addContactViewModel = new AddContactFirstViewModel(addContactWindow);
+      var addContactViewModel = new AddContactFirstViewModel(addContactWindow, SearchedUser);
       addContactWindow.Closed += new EventHandler(ReloadContactLists);
       WindowManager.CreateGeneralWindow(addContactWindow, addContactViewModel, Resources.AddContactWindowTitle, Resources.AddContactFirstControlPath);
 
@@ -142,7 +174,7 @@ namespace RM_Messenger.ViewModel
       var addressBook = new ContactListsModel
       {
         ContactsList = new List<DisplayedContactModel>(_context.AddressBooks.
-        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a=>a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_User_ID }))
+        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a => a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_User_ID }))
       };
 
       foreach (var address in addressBook.ContactsList)
@@ -151,9 +183,11 @@ namespace RM_Messenger.ViewModel
           _context.Accounts.Where(a => a.User_ID == address.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         address.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
         var friendAccount = _context.Accounts.Where(a => a.User_ID == address.UserId).FirstOrDefault();
-        address.Status = _context.Friendships.Any(f => f.User_ID == address.UserId && f.Friend_ID == currentUser) ? friendAccount.Status : "Add request pending";
-
+        address.Status = _context.Friendships.Any(f => f.User_ID == address.UserId && f.Friend_ID == currentUser) ? friendAccount.Status
+                        : "Add request pending";
       }
+
+      addressBook.IsExpanded = false;
 
       addressBook.ListName = string.Format("Address Book ({0})", addressBook.ContactsList.Count);
       ContactsLists.Add(addressBook);
@@ -172,7 +206,7 @@ namespace RM_Messenger.ViewModel
 
     private void RefreshProfilePicture(object sender, EventArgs e)
     {
-      ProfilePicture =Converters.GeneralConverters.ConvertToBitmapImage( UserModel.Instance.ProfilePicture);
+      ProfilePicture = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
     }
     private void ReloadContactLists(object sender, EventArgs e)
     {
@@ -182,6 +216,7 @@ namespace RM_Messenger.ViewModel
     {
       Email = UserModel.Instance.Username;
       ProfilePicture = GetProfilePicture(UserModel.Instance.ProfilePicture);
+      Status = UserModel.Instance.Status;
     }
     #endregion
 

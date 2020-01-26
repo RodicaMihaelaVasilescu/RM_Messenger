@@ -1,6 +1,9 @@
-﻿using RM_Messenger.Model;
+﻿using RM_Messenger.Database;
+using RM_Messenger.Model;
 using RM_Messenger.ViewModel;
 using System;
+using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -36,6 +39,18 @@ namespace RM_Messenger.View
       if (!ProfilePicturePopupTooltip.IsMouseOver)
       {
         ProfilePicturePopupTooltip.IsOpen = false;
+      }
+    }
+
+    private void StatusTextBox_KeyDown(object sender, KeyEventArgs e)
+    {
+      if (e.Key == Key.Return)
+      {
+        var _context = new RMMessengerEntities();
+        var account =   _context.Accounts.Where(a => a.User_ID == UserModel.Instance.Username).FirstOrDefault();
+        account.Status = StatusTextBox.Text;
+        _context.SaveChanges();
+        ChangeStatusButton.Focus();
       }
     }
   }

@@ -108,7 +108,8 @@ namespace RM_Messenger.ViewModel
             _context.Friendships.Add(new Friendship
             {
               User_ID = UserModel.Instance.Username,
-              Friend_ID = newContact
+              Friend_ID = newContact,
+              Date = DateTime.Now
             });
           }
           else
@@ -124,7 +125,7 @@ namespace RM_Messenger.ViewModel
       }
       _context.SaveChanges();
 
-      var addContactThirdViewModel = new AddContactThirdViewModel(window, newContact, message);
+      var addContactThirdViewModel = new AddContactThirdViewModel(message);
       WindowManager.ChangeWindowContent(window, addContactThirdViewModel, Resources.AddContactWindowTitle, Resources.AddContactThirdControlPath);
       if (addContactThirdViewModel.CloseAction == null)
       {

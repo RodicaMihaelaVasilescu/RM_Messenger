@@ -6,6 +6,7 @@
 
     public static UserModel Instance => _instance ?? (_instance = new UserModel());
 
+    public string Status { get; set; }
     public string Username { get; set; }
     public string ID { get; set; }
     public byte[] ProfilePicture { get; set; }

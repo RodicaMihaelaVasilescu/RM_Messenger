@@ -36,41 +36,6 @@
         <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
       </Style>
 
-      <Style
-        x:Key="placeHolder"
-        BasedOn="{StaticResource {x:Type TextBox}}"
-        TargetType="{x:Type TextBox}">
-        <Setter Property="Template">
-          <Setter.Value>
-            <ControlTemplate TargetType="{x:Type TextBox}">
-              <Grid>
-                <TextBox
-                  x:Name="textSource"
-                  Panel.ZIndex="2"
-                  Background="Transparent"
-                  Text="{Binding Path=Text, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <TextBox
-                  Panel.ZIndex="1"
-                  Background="{TemplateBinding Background}"
-                  Text="{TemplateBinding Tag}">
-                  <TextBox.Style>
-                    <Style TargetType="{x:Type TextBox}">
-                      <Setter Property="Foreground" Value="Transparent" />
-                      <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=Text, Source={x:Reference textSource}}" Value="">
-                          <Setter Property="Foreground" Value="White" />
-                          <Setter Property="HorizontalContentAlignment" Value="Left" />
-                          <Setter Property="VerticalContentAlignment" Value="Center" />
-                        </DataTrigger>
-                      </Style.Triggers>
-                    </Style>
-                  </TextBox.Style>
-                </TextBox>
-              </Grid>
-            </ControlTemplate>
-          </Setter.Value>
-        </Setter>
-      </Style>
     </ResourceDictionary>
   </UserControl.Resources>
   <Grid Margin="7,0,7,7" Background="#76246E">
@@ -193,7 +158,7 @@
         </Button>
 
         <TextBox
-          Name="EmailTextBox"
+          Name="StatusTextBox"
           Grid.Row="1"
           Grid.Column="1"
           Grid.ColumnSpan="2"
@@ -206,11 +171,12 @@
           Panel.ZIndex="0"
           BorderBrush="LightGray"
           BorderThickness="1"
-          FontFamily="SegoeUI"
+          FontFamily="Calisto MT"
+          FontSize="11"
           FontWeight="Thin"
-          Foreground="LightGray"
+          Foreground="DeepSkyBlue"
+          KeyDown="StatusTextBox_KeyDown"
           Text="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}">
-
           <TextBox.Style>
             <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="TextBox">
               <Style.Resources>
@@ -222,6 +188,7 @@
                   <VisualBrush.Visual>
                     <Label
                       Name="SearchLabel"
+                      Background="Transparent"
                       BorderBrush="LightGray"
                       Content="Share a status message..."
                       FontFamily="Calisto MT"
@@ -239,6 +206,7 @@
                   <VisualBrush.Visual>
                     <Label
                       Name="SearchBlackLabel"
+                      Background="Transparent"
                       Content="Share a status message..."
                       FontFamily="Calisto MT"
                       FontSize="11"
@@ -305,6 +273,7 @@
         </TextBox>
 
         <Button
+          x:Name="ChangeStatusButton"
           Grid.Row="1"
           Grid.Column="2"
           Grid.ColumnSpan="1"
@@ -312,7 +281,8 @@
           Height="20"
           Margin="10,0"
           HorizontalAlignment="Right"
-          Background="Transparent" />
+          Background="Transparent"
+          Command="{Binding ChangeStatusCommand}" />
 
         <Image
           Grid.Row="2"
@@ -333,7 +303,7 @@
           BorderThickness="0"
           Content="RM! Voice"
           Cursor="Hand"
-          FontFamily="SegoeUI"
+          FontFamily="Calisto MT"
           FontSize="10"
           Foreground="White">
 
@@ -444,11 +414,14 @@
             Background="White"
             BorderBrush="LightGray"
             BorderThickness="1"
-            FontFamily="SegoeUI"
+            FontFamily="Calisto MT"
             FontSize="12"
+            FontWeight="Thin"
             Foreground="Black"
-            Text="{Binding Status, ValidatesOnDataErrors=True, UpdateSourceTrigger=LostFocus}">
-
+            Text="{Binding SearchedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <TextBox.InputBindings>
+              <KeyBinding Key="Return" Command="{Binding AddFriendCommand}" />
+            </TextBox.InputBindings>
             <TextBox.Style>
               <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="TextBox">
                 <Style.Resources>
@@ -550,7 +523,10 @@
         <ListView
           BorderThickness="0"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
-          ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}">
+          ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
+          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+          ScrollViewer.VerticalScrollBarVisibility="Auto"
+          MaxHeight="450">
           <ListView.ItemTemplate>
             <DataTemplate DataType="{x:Type model:ContactListsModel}">
               <StackPanel Orientation="Vertical">
@@ -559,7 +535,7 @@
                   ExpandDirection="Right"
                   FontWeight="Bold"
                   Foreground="Indigo"
-                  IsExpanded="True">
+                  IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
                   <Expander.Header>
                     <StackPanel Orientation="Horizontal">
                       <Image
@@ -728,7 +704,7 @@
 
                     <ListView.ItemTemplate>
                       <DataTemplate DataType="{x:Type model:DisplayedContactModel}">
-                        <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False">
                           <Image
                             Width="30"
                             Height="30"
@@ -759,11 +735,14 @@
                             <TextBlock
                               Grid.Row="1"
                               Grid.Column="1"
+                              MaxWidth="125"
                               Margin="5,0,0,0"
+                              HorizontalAlignment="Left"
                               VerticalAlignment="Top"
                               FontSize="10"
                               FontWeight="Thin"
-                              Text="{Binding Status}" />
+                              Text="{Binding Status}"
+                              TextWrapping="NoWrap" />
 
                           </Grid>
                         </StackPanel>

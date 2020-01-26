@@ -72,6 +72,7 @@ namespace RM_Messenger.ViewModel
       }
       var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();
       UserModel.Instance.ProfilePicture = account.Profile_Picture;
+      UserModel.Instance.Status = account.Status;
       OpenHomepageWindow();
     }
 
