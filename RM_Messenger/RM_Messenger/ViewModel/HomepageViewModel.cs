@@ -163,7 +163,6 @@ namespace RM_Messenger.ViewModel
 
       addContactWindow.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
       addContactWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-      addContactWindow.Width = 500;
       addContactWindow.ShowDialog();
     }
 

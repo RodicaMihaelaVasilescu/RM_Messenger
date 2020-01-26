@@ -115,6 +115,33 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} already exists in your Messenger List and Address Book..
+        /// </summary>
+        public static string ContactAlreadyExistsMessage {
+            get {
+                return ResourceManager.GetString("ContactAlreadyExistsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} does not exist. Make sure you have typed the correct Messenger ID or address..
+        /// </summary>
+        public static string ContactDoesNotExistsMessage {
+            get {
+                return ResourceManager.GetString("ContactDoesNotExistsMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} has been added to your Messenger List and Address Book, pending his or her response to your request..
+        /// </summary>
+        public static string ContactHasBeenAddedMessage {
+            get {
+                return ResourceManager.GetString("ContactHasBeenAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.CreateNewAccountControl.
         /// </summary>
         public static string CreateNewAccountControlPath {
@@ -165,6 +192,15 @@ namespace RM_Messenger.Properties {
         public static string ErrorMessageControlPath {
             get {
                 return ResourceManager.GetString("ErrorMessageControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Friends.
+        /// </summary>
+        public static string FriendListName {
+            get {
+                return ResourceManager.GetString("FriendListName", resourceCulture);
             }
         }
         

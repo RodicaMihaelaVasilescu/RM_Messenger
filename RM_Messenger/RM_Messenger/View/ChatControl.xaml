@@ -1,5 +1,6 @@
-﻿<UserControl x:Class="RM_Messenger.View.ChatControl"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+﻿<UserControl
+  x:Class="RM_Messenger.View.ChatControl"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converter="clr-namespace:RM_Messenger.Converters"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -20,6 +21,8 @@
       </ResourceDictionary.MergedDictionaries>
       <converter:ValueToHorizontalAlignmentConverter x:Key="AlignmentConverter" />
       <converter:NameConverter x:Key="NameConverter" />
+
+      <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
       <Style x:Key="ButtonHighlight" TargetType="{x:Type Button}">
         <Setter Property="Background" Value="Gray" />
@@ -258,13 +261,32 @@
         <Image
           Width="10"
           Height="10"
-          Margin="-10,0,0,0"
-          Source="{Binding DisplayedUser.OnlineIcoPath}" />
+          Margin="-10,0,5,0"
+          Source="{Binding DisplayedUser.OnOffImage}" />
+        <TextBlock
+          Margin="0,-9"
+          VerticalAlignment="Center"
+          FontFamily="Calisto MT"
+          FontSize="11"
+          Foreground="White"
+          Text="{Binding DisplayedUser.UserId}" />
         <Label
           Margin="0,-9"
-          Content="{Binding DisplayedUser.Name}"
-          FontSize="12"
-          Foreground="White" />
+          VerticalAlignment="Center"
+          Content=" - "
+          FontFamily="Calisto MT"
+          FontSize="11"
+          FontWeight="Thin"
+          Foreground="White"
+          Visibility="{Binding DisplayedUser.Status, Converter={StaticResource NullToVisibilityConverter}}" />
+        <TextBlock
+          Margin="0,-9"
+          VerticalAlignment="Center"
+          FontFamily="Calisto MT"
+          FontSize="11"
+          FontWeight="Thin"
+          Foreground="White"
+          Text="{Binding DisplayedUser.Status}" />
       </StackPanel>
     </Button>
 
@@ -318,7 +340,7 @@
         BorderThickness="1">
         <ScrollViewer
           x:Name="AutoScrollViewer"
-          helper:AutoScrollHelper.AutoScroll="{Binding IsLogsChangedPropertyInViewModel}"
+          helper:AutoScrollHelper.AutoScroll="True"
           PreviewMouseWheel="TS_PreviewMouseWheel"
           VerticalScrollBarVisibility="Auto">
           <ListBox ItemsSource="{Binding MessagesList, Mode=OneWay}">

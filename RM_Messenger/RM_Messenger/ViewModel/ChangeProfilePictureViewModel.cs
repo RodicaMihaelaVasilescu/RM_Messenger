@@ -4,7 +4,6 @@ using RM_Messenger.Properties;
 using System;
 using System.ComponentModel;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -13,18 +12,18 @@ namespace RM_Messenger.ViewModel
 {
   class ChangeProfilePictureViewModel : INotifyPropertyChanged
   {
-    #region public Properties
-
-    public Action CloseAction { get; set; }
-
-    public ICommand CloseCommand { get; set; }
-
-    public ICommand DisplayImageCommand { get; set; }
-
-    public Popup popup;
+    #region Private Properties
 
     private BitmapImage _profilePicture;
 
+    #endregion
+
+    #region public Properties
+
+    public Action CloseAction { get; set; }
+    public ICommand CloseCommand { get; set; }
+    public ICommand DisplayImageCommand { get; set; }
+    public Popup popup;
     public event PropertyChangedEventHandler PropertyChanged;
 
     public BitmapImage ProfilePicture

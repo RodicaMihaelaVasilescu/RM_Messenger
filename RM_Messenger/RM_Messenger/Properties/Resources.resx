@@ -135,6 +135,15 @@
   <data name="ChatWindowTitle" xml:space="preserve">
     <value>RM!Messenger - Chat</value>
   </data>
+  <data name="ContactAlreadyExistsMessage" xml:space="preserve">
+    <value>{0} already exists in your Messenger List and Address Book.</value>
+  </data>
+  <data name="ContactDoesNotExistsMessage" xml:space="preserve">
+    <value>{0} does not exist. Make sure you have typed the correct Messenger ID or address.</value>
+  </data>
+  <data name="ContactHasBeenAddedMessage" xml:space="preserve">
+    <value>{0} has been added to your Messenger List and Address Book, pending his or her response to your request.</value>
+  </data>
   <data name="CreateNewAccountControlPath" xml:space="preserve">
     <value>RM_Messenger.View.CreateNewAccountControl</value>
   </data>
@@ -152,6 +161,9 @@
   </data>
   <data name="ErrorMessageControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ErrorMessageControl</value>
+  </data>
+  <data name="FriendListName" xml:space="preserve">
+    <value>Friends</value>
   </data>
   <data name="HomepageControlPath" xml:space="preserve">
     <value>RM_Messenger.View.HomepageControl</value>

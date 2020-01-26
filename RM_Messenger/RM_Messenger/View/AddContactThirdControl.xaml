@@ -53,6 +53,8 @@
         VerticalContentAlignment="Center"
         Background="Transparent"
         BorderThickness="0"
+        Command="{Binding SendYourDetailsCommand}"
+        Cursor="Hand"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Content>
           <StackPanel Orientation="Horizontal">
@@ -81,6 +83,8 @@
         VerticalContentAlignment="Center"
         Background="Transparent"
         BorderThickness="0"
+        Command="{Binding RequestContactDetailsCommand}"
+        Cursor="Hand"
         FontSize="11"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Content>
@@ -108,6 +112,8 @@
         VerticalContentAlignment="Center"
         Background="Transparent"
         BorderThickness="0"
+        Command="{Binding AssociateThisIDCommand}"
+        Cursor="Hand"
         FontSize="11"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Content>
@@ -135,6 +141,8 @@
         VerticalContentAlignment="Center"
         Background="Transparent"
         BorderThickness="0"
+        Command="{Binding AddAnotherContactCommand}"
+        Cursor="Hand"
         FontSize="11"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Content>
@@ -219,7 +227,6 @@
       </Button>
 
       <Button
-        IsDefault="True"
         Width="80"
         Height="23"
         Margin="5,10,10,10"
@@ -232,6 +239,7 @@
         FontSize="11"
         FontWeight="Thin"
         Foreground="White"
+        IsDefault="True"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Background>
           <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">

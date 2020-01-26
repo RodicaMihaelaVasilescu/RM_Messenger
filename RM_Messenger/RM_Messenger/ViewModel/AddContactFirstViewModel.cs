@@ -1,14 +1,8 @@
 ﻿using RM_Messenger.Command;
-using RM_Messenger.Database;
 using RM_Messenger.Helper;
-using RM_Messenger.Model;
 using RM_Messenger.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,10 +10,20 @@ namespace RM_Messenger.ViewModel
 {
   class AddContactFirstViewModel : INotifyPropertyChanged
   {
-    private string _email;
+    #region Private properties
 
+    private Window window;
+    private string _email;
+    private bool _isNextButtonEnabled;
+
+    #endregion
+
+    #region Public properties
     public ICommand NextCommand { get; set; }
     public ICommand CancelCommand { get; set; }
+    public Action CloseAction { get; set; }
+    public event PropertyChangedEventHandler PropertyChanged;
+
     public string Email
     {
       get { return _email; }
@@ -34,48 +38,46 @@ namespace RM_Messenger.ViewModel
 
     public bool IsNextButtonEnabled
     {
-      get { return isNextButtonEnabled; }
+      get { return _isNextButtonEnabled; }
       set
       {
-        if (isNextButtonEnabled == value) return;
-        isNextButtonEnabled = value;
+        if (_isNextButtonEnabled == value) return;
+        _isNextButtonEnabled = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("IsNextButtonEnabled"));
       }
     }
 
-    public Action CloseAction { get; set; }
+    #endregion
 
-    public event PropertyChangedEventHandler PropertyChanged;
-    private Window window;
-    private bool isNextButtonEnabled;
+    #region Constructor
 
-    public AddContactFirstViewModel(Window window, string email = "")
+    public AddContactFirstViewModel(Window window, string email = null)
     {
       this.window = window;
       Email = email;
       NextCommand = new RelayCommand(NextCommandExecute);
       CancelCommand = new RelayCommand(CancelCommandExecute);
     }
+    #endregion
+
+    #region Private Methods
     private void CancelCommandExecute()
     {
       CloseAction?.Invoke();
     }
+
     private void NextCommandExecute()
     {
-
-      //context = new RMMessengerEntities();
-      //var newContact = context.Users.Where(u => u.User_ID == Email).FirstOrDefault();
+      // open AddContactSecond window
       var addContactSecondViewModel = new AddContactSecondViewModel(window, Email);
-
       WindowManager.ChangeWindowContent(window, addContactSecondViewModel, Resources.AddContactWindowTitle, Resources.AddContactSecondControlPath);
       if (addContactSecondViewModel.CloseAction == null)
       {
         addContactSecondViewModel.CloseAction = () => window.Close();
       }
-      //window.Owner = Application.Current.Windows.OfType<Window>().SingleOrDefault(x => x.IsActive);
       window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
- 
-
     }
+
+    #endregion
   }
 }

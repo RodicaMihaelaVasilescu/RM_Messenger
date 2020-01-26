@@ -14,15 +14,24 @@ namespace RM_Messenger.ViewModel
 {
   class ChatViewModel : INotifyPropertyChanged
   {
+
+    #region Private Properties
+
+    private RMMessengerEntities _context;
+    private BitmapImage _profilePicture;
+    private BitmapImage _personalProfilePicture;
+    private string messageBoxContent;
+    private DisplayedContactModel _displayedUser;
+    private ObservableCollection<MessageModel> messagesList = new ObservableCollection<MessageModel>();
+
+    #endregion
+
     #region Public Properties
 
     public ICommand SendCommand { get; set; }
     public Action CloseAction { get; set; }
-    public event PropertyChangedEventHandler PropertyChanged;
     public ScrollViewer AutoScroll;
-    public bool IsLogsChangedPropertyInViewModel { get; set; } = true;
-
-    private RMMessengerEntities _context;
+    public event PropertyChangedEventHandler PropertyChanged;
 
     public DisplayedContactModel DisplayedUser
     {
@@ -46,7 +55,7 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-    public string PersonalProfilePicture
+    public BitmapImage PersonalProfilePicture
     {
       get { return _personalProfilePicture; }
       set
@@ -56,6 +65,7 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PersonalProfilePicture"));
       }
     }
+
     public string MessageBoxContent
     {
       get { return messageBoxContent; }
@@ -66,6 +76,7 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MessageBoxContent"));
       }
     }
+
     public ObservableCollection<MessageModel> MessagesList
     {
       get { return messagesList; }
@@ -79,26 +90,16 @@ namespace RM_Messenger.ViewModel
 
     #endregion
 
-    #region Private Properties
-
-    private BitmapImage _profilePicture;
-    private string _personalProfilePicture;
-    private string messageBoxContent;
-    private DisplayedContactModel _displayedUser;
-    private ObservableCollection<MessageModel> messagesList = new ObservableCollection<MessageModel>();
-
-    #endregion
-
     #region Constructor
+
     public ChatViewModel(Window window, DisplayedContactModel displayedUser, ScrollViewer scroll)
     {
       _context = new RMMessengerEntities();
       DisplayedUser = displayedUser;
-      displayedUser.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
       AutoScroll = scroll;
       SendCommand = new RelayCommand(SendCommandExecute);
       ProfilePicture = displayedUser.ImagePath;
-      PersonalProfilePicture = "pack://application:,,,/RM_Messenger;component/Resources/ProfilePicture.jpg";
+      PersonalProfilePicture = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
       LoadMessages();
     }
 
