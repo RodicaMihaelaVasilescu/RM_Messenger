@@ -4,6 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converter="clr-namespace:RM_Messenger.Converters"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:gif="http://wpfanimatedgif.codeplex.com"
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -45,7 +46,8 @@
         <RowDefinition Height="auto" />
         <RowDefinition Height="auto" />
         <RowDefinition Height="auto" />
-        <RowDefinition Height="*" />
+        <RowDefinition Height="1*" />
+        <RowDefinition Height="auto" />
         <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
 
@@ -521,12 +523,13 @@
         <!--  list box  -->
 
         <ListView
+          Name="OuterListView"
+          MaxHeight="300"
           BorderThickness="0"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
           ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
           ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-          ScrollViewer.VerticalScrollBarVisibility="Auto"
-          MaxHeight="450">
+          ScrollViewer.VerticalScrollBarVisibility="Auto">
           <ListView.ItemTemplate>
             <DataTemplate DataType="{x:Type model:ContactListsModel}">
               <StackPanel Orientation="Vertical">
@@ -694,17 +697,19 @@
                   </Expander.Template>
 
                   <ListView
-                    MaxHeight="400"
+                    Name="InnerListView"
                     Margin="20,0,10,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Cursor="Hand"
                     ItemsSource="{Binding ContactsList}"
+                    ScrollViewer.CanContentScroll="True"
+                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
                     SelectedItem="{Binding SelectedContact}">
 
                     <ListView.ItemTemplate>
                       <DataTemplate DataType="{x:Type model:DisplayedContactModel}">
-                        <StackPanel Orientation="Horizontal" CanHorizontallyScroll="False">
+                        <StackPanel CanHorizontallyScroll="False" Orientation="Horizontal">
                           <Image
                             Width="30"
                             Height="30"
@@ -756,9 +761,14 @@
         </ListView>
       </StackPanel>
       <!--  end control  -->
+      <Image
+        Grid.Row="4"
+        Margin="10"
+        gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/yahoo_ads.gif" />
+
       <Button
         x:Name="Logout"
-        Grid.Row="4"
+        Grid.Row="5"
         Margin="10"
         Command="{Binding LogoutCommand}"
         Content="LOG OUT"
