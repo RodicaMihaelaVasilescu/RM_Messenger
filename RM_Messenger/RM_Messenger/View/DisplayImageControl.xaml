@@ -48,7 +48,8 @@
         Width="80"
         Height="80"
         HorizontalAlignment="Center"
-        Background="Transparent">
+        Background="Transparent"
+        Command="{Binding SelectImageCommand}">
         <StackPanel Background="White">
           <Image
             Name="profilePicture"
@@ -71,8 +72,7 @@
         Content="Select.."
         FontSize="13"
         Foreground="White"
-        Style="{StaticResource MaterialDesignRaisedAccentButton}"
-        Visibility="{Binding VisibilityOfLoginFields, Mode=TwoWay}" />
+        Style="{StaticResource MaterialDesignRaisedAccentButton}" />
     </Grid>
 
     <Separator Margin="50,30,0,0" />

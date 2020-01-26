@@ -307,17 +307,20 @@
         Margin="0,5,5,5"
         Background="#945F8D">
         <Grid>
-          <Image
+          <StackPanel
             Grid.Row="0"
             VerticalAlignment="Top"
-            Cursor="Hand"
-            Source="{Binding ProfilePicture}"
-            ToolTip="Profile Picture" />
-          <Image
+            Background="White"
+            Cursor="Hand">
+            <Image Source="{Binding ProfilePicture}" ToolTip="Profile Picture" />
+          </StackPanel>
+          <StackPanel
             Grid.Row="1"
             Margin="20,0"
             VerticalAlignment="Bottom"
-            Source="{Binding PersonalProfilePicture}" />
+            Background="White">
+            <Image Source="{Binding PersonalProfilePicture}" />
+          </StackPanel>
         </Grid>
       </DockPanel>
       <Button
