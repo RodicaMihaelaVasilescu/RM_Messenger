@@ -9,7 +9,7 @@ namespace RM_Messenger.Model
   {
     private DisplayedContactModel _selectedContact;
     public string ListName { get; set; }
-    public BitmapImage ImagePath { get; set; }
+    public string ImagePath { get; set; }
     public bool IsExpanded { get; set; } = false;
     public List<DisplayedContactModel> ContactsList { get; set; }
     public DisplayedContactModel SelectedContact

@@ -199,6 +199,7 @@ namespace RM_Messenger.ViewModel
       var recentList = new ContactListsModel();
       // to do
       recentList.ContactsList = new List<DisplayedContactModel>();
+      recentList.ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/RecentContact_Icon.png";
       recentList.ListName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), recentList.ContactsList.Count);
       ContactsLists.Add(recentList);
     }
