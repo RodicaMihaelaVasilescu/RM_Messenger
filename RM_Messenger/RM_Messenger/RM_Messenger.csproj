@@ -504,6 +504,8 @@
       <DependentUpon>EntityFramework.edmx</DependentUpon>
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\search_button.png" />
+    <Resource Include="Resources\yahoo_websearch.png" />
     <Resource Include="Resources\facebook_ads.gif" />
     <Resource Include="Resources\google_ads.gif" />
     <Resource Include="Resources\coca_cola_ads.gif" />

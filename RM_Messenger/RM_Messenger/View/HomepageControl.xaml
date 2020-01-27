@@ -52,7 +52,10 @@
       </Grid.RowDefinitions>
 
       <DockPanel Margin="0">
-        <Menu Background="Transparent" DockPanel.Dock="Top">
+        <Menu
+          Background="Transparent"
+          Cursor="Hand"
+          DockPanel.Dock="Top">
 
           <MenuItem Foreground="White" Header="_Messenger">
             <MenuItem Foreground="Black" Header="_New">
@@ -60,18 +63,28 @@
                 <materialDesign:PackIcon Kind="OpenInNew" />
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Foreground="Black" Header="_Open">
+            <MenuItem
+              Cursor="Hand"
+              Foreground="Black"
+              Header="_Open">
               <MenuItem.Icon>
                 <materialDesign:PackIcon Kind="MenuOpen" />
               </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Foreground="Black" Header="_Save">
+            <MenuItem
+              Cursor="Hand"
+              Foreground="Black"
+              Header="_Save">
               <MenuItem.Icon>
                 <materialDesign:PackIcon Kind="ContentSave" />
               </MenuItem.Icon>
             </MenuItem>
             <Separator />
-            <MenuItem Foreground="Black" Header="_Exit">
+            <MenuItem
+              Command="{Binding LogoutCommand}"
+              Cursor="Hand"
+              Foreground="Black"
+              Header="_Sign Out">
               <MenuItem.Icon>
                 <materialDesign:PackIcon Kind="ExitRun" />
               </MenuItem.Icon>
@@ -524,7 +537,7 @@
 
         <ListView
           Name="OuterListView"
-          MaxHeight="330"
+          MaxHeight="350"
           BorderThickness="0"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
           ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
@@ -698,7 +711,7 @@
 
                   <ListView
                     Name="InnerListView"
-                    MaxHeight="276"
+                    MaxHeight="340"
                     Margin="20,0,10,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
@@ -772,13 +785,42 @@
         <Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/yahoo_ads.gif" Cursor="Hand" />
       </StackPanel>
 
-      <Button
-        x:Name="Logout"
-        Grid.Row="5"
-        Margin="10"
-        Command="{Binding LogoutCommand}"
-        Content="LOG OUT"
-        FontSize="18" />
+      <Grid Grid.Row="5" Margin="10,0,10,5">
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto" />
+          <ColumnDefinition Width="*" />
+          <ColumnDefinition Width="auto" />
+        </Grid.ColumnDefinitions>
+        <Image
+          Height="25"
+          HorizontalAlignment="Left"
+          Cursor="Hand"
+          Source="pack://application:,,,/RM_Messenger;component/Resources/yahoo_websearch.png"
+          ToolTip="Web search" />
+        <TextBox
+          Grid.Column="1"
+          Grid.ColumnSpan="2"
+          Width="auto"
+          Margin="10,0,0,0"
+          Padding="5,0,30,0"
+          VerticalAlignment="Stretch"
+          VerticalContentAlignment="Center"
+          Background="White"
+          FontFamily="Calisto MT"
+          FontWeight="Thin"
+          Foreground="#76246E"
+          ToolTip="Search" />
+        <Image
+          Grid.Column="2"
+          Width="23"
+          Margin="0,2,0,0"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Center"
+          Cursor="Hand"
+          Source="pack://application:,,,/RM_Messenger;component/Resources/search_button.png"
+          ToolTip="Search" />
+
+      </Grid>
     </Grid>
   </Grid>
 </UserControl>
