@@ -101,20 +101,20 @@ namespace RM_Messenger.ViewModel
       int offset = 0;
       foreach (var request in addRequests)
       {
-        var addRequestViewModel = new AddToMessengerRequestViewModel(request);
-        Window addRequestDialog = new Window();
-        WindowManager.CreateGeneralWindow(addRequestDialog, addRequestViewModel, Resources.AddToMessengerRequestWindowTitle, Resources.AddToMessengerRequestControlPath);
+        Window addRequestWindow = new Window();
+        var addRequestViewModel = new AddToMessengerRequestFirstViewModel(addRequestWindow, request);
+        WindowManager.CreateGeneralWindow(addRequestWindow, addRequestViewModel, Resources.AddToMessengerRequestWindowTitle, Resources.AddToMessengerRequestFirstControlPath);
 
         if (addRequestViewModel.CloseAction == null)
         {
           addRequestViewModel.CloseAction = () => window.Close();
         }
-        addRequestDialog.Owner = window;
-        addRequestDialog.Left = window.Left - 400 + offset;
-        addRequestDialog.Top = window.Top + 150 + offset;
+        addRequestWindow.Owner = window;
+        addRequestWindow.Left = window.Left - 400 + offset;
+        addRequestWindow.Top = window.Top + 150 + offset;
         offset += 60;
-        addRequestDialog.Tag = "Child";
-        addRequestDialog.Show();
+        addRequestWindow.Tag = "Child";
+        addRequestWindow.Show();
       }
     }
 

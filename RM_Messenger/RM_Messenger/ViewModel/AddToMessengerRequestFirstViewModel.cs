@@ -4,20 +4,25 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using RM_Messenger.Command;
 using RM_Messenger.Database;
+using RM_Messenger.Helper;
+using RM_Messenger.Properties;
 
 namespace RM_Messenger.ViewModel
 {
-  class AddToMessengerRequestViewModel: INotifyPropertyChanged
+  class AddToMessengerRequestFirstViewModel : INotifyPropertyChanged
   {
+    private Window window;
     private AddRequest request;
     private string _dispplayedMessage;
     private bool _allowChecked;
     private bool _doNotAllowCheck;
     private bool _addToMessengerEnabled;
     private bool _addToMessengerChecked;
+    private string _nextButtonText;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -56,12 +61,13 @@ namespace RM_Messenger.ViewModel
         if (_doNotAllowCheck == value) return;
         _doNotAllowCheck = value;
         AddToMessengerEnabled = !value;
+        NextButtonText = value ? "Finish" : "Next";
         AddToMessengerChecked = false;
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DoNotAllowCheck"));
       }
     }
-   
+
     public bool AddToMessengerChecked
     {
       get { return _addToMessengerChecked; }
@@ -84,11 +90,23 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-
-
-    public AddToMessengerRequestViewModel(AddRequest request)
+    public string NextButtonText
     {
+      get { return _nextButtonText; }
+      set
+      {
+        if (_nextButtonText == value) return;
+        _nextButtonText = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NextButtonText"));
+      }
+    }
+
+    public AddToMessengerRequestFirstViewModel(Window window, AddRequest request)
+    {
+      this.window = window;
       this.request = request;
+
+      NextButtonText = "Next";
       _dispplayedMessage = string.Format("{0} would like to add you as his or her Messenger List ", request.SentBy_User_ID);
       AllowChecked = true;
       AddToMessengerEnabled = true;
@@ -98,7 +116,30 @@ namespace RM_Messenger.ViewModel
 
     private void NextCommandExecute()
     {
-      
+      if (AllowChecked)
+      {
+        OpenAddToMessengerRequestWindow();
+      }
+      else
+      {
+        var _context = new RMMessengerEntities();
+        var addRequest = _context.AddRequests.FirstOrDefault(a => a.AddRequest_ID == request.AddRequest_ID);
+        addRequest.Status = Resources.DeclinedStatus;
+        _context.SaveChanges();
+
+        CloseAction();
+      }
+    }
+
+    private void OpenAddToMessengerRequestWindow()
+    {
+      var addRequestViewModel = new AddToMessengerRequestSecondViewModel(window, request);
+      WindowManager.ChangeWindowContent(window, addRequestViewModel, Resources.AddToMessengerRequestWindowTitle, Resources.AddToMessengerRequestSecondControlPath);
+
+      if (addRequestViewModel.CloseAction == null)
+      {
+        addRequestViewModel.CloseAction = () => window.Close();
+      }
     }
   }
 }

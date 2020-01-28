@@ -97,11 +97,20 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RM_Messenger.View.AddToMessengerRequestControl.
+        ///   Looks up a localized string similar to RM_Messenger.View.AddToMessengerRequestFirstControl.
         /// </summary>
-        public static string AddToMessengerRequestControlPath {
+        public static string AddToMessengerRequestFirstControlPath {
             get {
-                return ResourceManager.GetString("AddToMessengerRequestControlPath", resourceCulture);
+                return ResourceManager.GetString("AddToMessengerRequestFirstControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.AddToMessengerRequestSecondControl.
+        /// </summary>
+        public static string AddToMessengerRequestSecondControlPath {
+            get {
+                return ResourceManager.GetString("AddToMessengerRequestSecondControlPath", resourceCulture);
             }
         }
         
@@ -174,6 +183,15 @@ namespace RM_Messenger.Properties {
         public static string CreateNewAccountWindowTitle {
             get {
                 return ResourceManager.GetString("CreateNewAccountWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Declined.
+        /// </summary>
+        public static string DeclinedStatus {
+            get {
+                return ResourceManager.GetString("DeclinedStatus", resourceCulture);
             }
         }
         

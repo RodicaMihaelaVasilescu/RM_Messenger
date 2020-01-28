@@ -173,7 +173,8 @@
     <Compile Include="ViewModel\AddContactSecondViewModel.cs" />
     <Compile Include="ViewModel\AddContactThirdViewModel.cs" />
     <Compile Include="ViewModel\AddContactFirstViewModel.cs" />
-    <Compile Include="ViewModel\AddToMessengerRequestViewModel.cs" />
+    <Compile Include="ViewModel\AddToMessengerRequestSecondViewModel.cs" />
+    <Compile Include="ViewModel\AddToMessengerRequestFirstViewModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
@@ -192,8 +193,11 @@
     <Compile Include="View\AddContactThirdControl.xaml.cs">
       <DependentUpon>AddContactThirdControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\AddToMessengerRequestControl.xaml.cs">
-      <DependentUpon>AddToMessengerRequestControl.xaml</DependentUpon>
+    <Compile Include="View\AddToMessengerRequestFirstControl.xaml.cs">
+      <DependentUpon>AddToMessengerRequestFirstControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddToMessengerRequestSecondControl.xaml.cs">
+      <DependentUpon>AddToMessengerRequestSecondControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChangeProfilePictureControl.xaml.cs">
       <DependentUpon>ChangeProfilePictureControl.xaml</DependentUpon>
@@ -274,7 +278,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\AddToMessengerRequestControl.xaml">
+    <Page Include="View\AddToMessengerRequestFirstControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddToMessengerRequestSecondControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
