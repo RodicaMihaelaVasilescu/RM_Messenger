@@ -129,6 +129,12 @@
   <data name="AddContactWindowTitle" xml:space="preserve">
     <value>Add to Messenger List</value>
   </data>
+  <data name="AddToMessengerRequestControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.AddToMessengerRequestControl</value>
+  </data>
+  <data name="AddToMessengerRequestWindowTitle" xml:space="preserve">
+    <value>Add To Messenger Request</value>
+  </data>
   <data name="ChatControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ChatControl</value>
   </data>
@@ -179,6 +185,9 @@
   </data>
   <data name="LoginWindowTitle" xml:space="preserve">
     <value>RM!Messenger</value>
+  </data>
+  <data name="NoResponseStatus" xml:space="preserve">
+    <value>No response</value>
   </data>
   <data name="RememberMyIDPassword" xml:space="preserve">
     <value>RememberMyIDPassword</value>

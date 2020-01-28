@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 namespace RM_Messenger.ViewModel
 {
@@ -88,6 +89,34 @@ namespace RM_Messenger.ViewModel
 
       WindowManager.ResizeWindow(window);
       window.ResizeMode = ResizeMode.NoResize;
+      window.Show();
+
+      OpenAddRequests();
     }
+
+    private void OpenAddRequests()
+    {
+      var addRequests = _context.AddRequests.Where(a => a.SentTo_User_ID == UserModel.Instance.Username && a.Status == Resources.NoResponseStatus).ToList();
+
+      int offset = 0;
+      foreach (var request in addRequests)
+      {
+        var addRequestViewModel = new AddToMessengerRequestViewModel(request);
+        Window addRequestDialog = new Window();
+        WindowManager.CreateGeneralWindow(addRequestDialog, addRequestViewModel, Resources.AddToMessengerRequestWindowTitle, Resources.AddToMessengerRequestControlPath);
+
+        if (addRequestViewModel.CloseAction == null)
+        {
+          addRequestViewModel.CloseAction = () => window.Close();
+        }
+        addRequestDialog.Owner = window;
+        addRequestDialog.Left = window.Left - 400 + offset;
+        addRequestDialog.Top = window.Top + 150 + offset;
+        offset += 60;
+        addRequestDialog.Tag = "Child";
+        addRequestDialog.Show();
+      }
+    }
+
   }
 }

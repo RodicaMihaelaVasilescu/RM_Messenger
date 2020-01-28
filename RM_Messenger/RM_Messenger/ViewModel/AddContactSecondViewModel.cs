@@ -78,6 +78,7 @@ namespace RM_Messenger.ViewModel
       //todo : database contact lists
       ContactLists = new List<string>();
       ContactLists.Add(Resources.FriendListName);
+      ContactLists.Add("Address Book");
       selectedContactList = ContactLists.FirstOrDefault();
     }
 
@@ -100,6 +101,15 @@ namespace RM_Messenger.ViewModel
 
       if (_context.Users.Any(u => u.User_ID == newContact))
       {
+        if(!_context.AddRequests.Any(a=> a.SentBy_User_ID == currentUserID && a.SentTo_User_ID == newContact))
+        {
+          _context.AddRequests.Add(new AddRequest
+          {
+            SentBy_User_ID = UserModel.Instance.Username,
+            SentTo_User_ID = newContact,
+            Status = Resources.NoResponseStatus
+          }) ;
+        }
         if (!_context.AddressBooks.Any(a => a.User_ID == currentUserID && a.Friend_User_ID == newContact) && currentUserID != newContact)
         {
           _context.AddressBooks.Add(new AddressBook

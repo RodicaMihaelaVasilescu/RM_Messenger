@@ -16,6 +16,15 @@
           <Property Name="Profile_Picture" Type="varbinary(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="AddRequests">
+          <Key>
+            <PropertyRef Name="AddRequest_ID" />
+          </Key>
+          <Property Name="AddRequest_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SentBy_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SentTo_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="AddressBook">
           <Key>
             <PropertyRef Name="AddressBook_ID" />
@@ -60,6 +69,30 @@
             </Principal>
             <Dependent Role="Accounts">
               <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddRequests_SentBy">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AddRequests" Type="Self.AddRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddRequests">
+              <PropertyRef Name="SentBy_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddRequests_SentTo">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="AddRequests" Type="Self.AddRequests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddRequests">
+              <PropertyRef Name="SentTo_User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -137,6 +170,7 @@
         </Association>
         <EntityContainer Name="RMMessengerModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AddRequests" EntityType="Self.AddRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
@@ -144,6 +178,14 @@
           <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
             <End Role="Users" EntitySet="Users" />
             <End Role="Accounts" EntitySet="Accounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddRequests_SentBy" Association="Self.FK_AddRequests_SentBy">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AddRequests" EntitySet="AddRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddRequests_SentTo" Association="Self.FK_AddRequests_SentTo">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="AddRequests" EntitySet="AddRequests" />
           </AssociationSet>
           <AssociationSet Name="FK_AddressBook_Friend_User" Association="Self.FK_AddressBook_Friend_User">
             <End Role="Users" EntitySet="Users" />
@@ -221,6 +263,8 @@
           <NavigationProperty Name="Messages" Relationship="Self.FK_Messages_Receiver_User" FromRole="Users" ToRole="Messages" />
           <NavigationProperty Name="Messages1" Relationship="Self.FK_Messages_Sender_User" FromRole="Users" ToRole="Messages" />
           <NavigationProperty Name="Accounts" Relationship="RMMessengerModel.FK_Accounts_Users" FromRole="User" ToRole="Account" />
+          <NavigationProperty Name="AddRequests" Relationship="RMMessengerModel.FK_AddRequests_SentBy" FromRole="User" ToRole="AddRequest" />
+          <NavigationProperty Name="AddRequests1" Relationship="RMMessengerModel.FK_AddRequests_SentTo" FromRole="User" ToRole="AddRequest" />
         </EntityType>
         <Association Name="FK_AddressBook_Friend_User">
           <End Role="Users" Type="Self.User" Multiplicity="1" />
@@ -328,6 +372,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Account" EntitySet="Accounts" />
           </AssociationSet>
+          <EntitySet Name="AddRequests" EntityType="RMMessengerModel.AddRequest" />
+          <AssociationSet Name="FK_AddRequests_SentBy" Association="RMMessengerModel.FK_AddRequests_SentBy">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AddRequest" EntitySet="AddRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AddRequests_SentTo" Association="RMMessengerModel.FK_AddRequests_SentTo">
+            <End Role="User" EntitySet="Users" />
+            <End Role="AddRequest" EntitySet="AddRequests" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -350,6 +403,41 @@
             </Principal>
             <Dependent Role="Account">
               <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AddRequest">
+          <Key>
+            <PropertyRef Name="AddRequest_ID" />
+          </Key>
+          <Property Name="AddRequest_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SentBy_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SentTo_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_AddRequests_SentBy" FromRole="AddRequest" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="RMMessengerModel.FK_AddRequests_SentTo" FromRole="AddRequest" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_AddRequests_SentBy">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.AddRequest" Role="AddRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddRequest">
+              <PropertyRef Name="SentBy_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AddRequests_SentTo">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.AddRequest" Role="AddRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="AddRequest">
+              <PropertyRef Name="SentTo_User_ID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -407,6 +495,16 @@
                 <ScalarProperty Name="First_Name" ColumnName="First_Name" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="User_Account_ID" ColumnName="User_Account_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AddRequests">
+            <EntityTypeMapping TypeName="RMMessengerModel.AddRequest">
+              <MappingFragment StoreEntitySet="AddRequests">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SentTo_User_ID" ColumnName="SentTo_User_ID" />
+                <ScalarProperty Name="SentBy_User_ID" ColumnName="SentBy_User_ID" />
+                <ScalarProperty Name="AddRequest_ID" ColumnName="AddRequest_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -17,6 +17,9 @@
         <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" ManuallyRouted="false" />
         <EntityTypeShape EntityType="RMMessengerModel.Account" Width="1.5" PointX="3" PointY="11.25" />
         <AssociationConnector Association="RMMessengerModel.FK_Accounts_Users" />
+        <EntityTypeShape EntityType="RMMessengerModel.AddRequest" Width="1.5" PointX="3" PointY="14.5" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddRequests_SentBy" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddRequests_SentTo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

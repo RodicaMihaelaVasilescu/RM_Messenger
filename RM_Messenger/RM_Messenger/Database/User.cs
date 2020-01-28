@@ -24,6 +24,8 @@ namespace RM_Messenger.Database
             this.Messages = new HashSet<Message>();
             this.Messages1 = new HashSet<Message>();
             this.Accounts = new HashSet<Account>();
+            this.AddRequests = new HashSet<AddRequest>();
+            this.AddRequests1 = new HashSet<AddRequest>();
         }
     
         public string User_ID { get; set; }
@@ -43,5 +45,9 @@ namespace RM_Messenger.Database
         public virtual ICollection<Message> Messages1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Account> Accounts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddRequest> AddRequests { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AddRequest> AddRequests1 { get; set; }
     }
 }

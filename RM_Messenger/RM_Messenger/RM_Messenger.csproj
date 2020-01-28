@@ -129,6 +129,9 @@
     <Compile Include="Database\Account.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\AddRequest.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\AddressBook.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
@@ -170,6 +173,7 @@
     <Compile Include="ViewModel\AddContactSecondViewModel.cs" />
     <Compile Include="ViewModel\AddContactThirdViewModel.cs" />
     <Compile Include="ViewModel\AddContactFirstViewModel.cs" />
+    <Compile Include="ViewModel\AddToMessengerRequestViewModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
@@ -187,6 +191,9 @@
     </Compile>
     <Compile Include="View\AddContactThirdControl.xaml.cs">
       <DependentUpon>AddContactThirdControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\AddToMessengerRequestControl.xaml.cs">
+      <DependentUpon>AddToMessengerRequestControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ChangeProfilePictureControl.xaml.cs">
       <DependentUpon>ChangeProfilePictureControl.xaml</DependentUpon>
@@ -264,6 +271,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\AddContactThirdControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\AddToMessengerRequestControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -504,6 +515,7 @@
       <DependentUpon>EntityFramework.edmx</DependentUpon>
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
+    <Resource Include="Resources\AddFriendRequest.png" />
     <Resource Include="Resources\search_button.png" />
     <Resource Include="Resources\yahoo_websearch.png" />
     <Resource Include="Resources\facebook_ads.gif" />

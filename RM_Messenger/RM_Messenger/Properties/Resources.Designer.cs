@@ -97,6 +97,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.AddToMessengerRequestControl.
+        /// </summary>
+        public static string AddToMessengerRequestControlPath {
+            get {
+                return ResourceManager.GetString("AddToMessengerRequestControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add To Messenger Request.
+        /// </summary>
+        public static string AddToMessengerRequestWindowTitle {
+            get {
+                return ResourceManager.GetString("AddToMessengerRequestWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.ChatControl.
         /// </summary>
         public static string ChatControlPath {
@@ -246,6 +264,15 @@ namespace RM_Messenger.Properties {
         public static string LoginWindowTitle {
             get {
                 return ResourceManager.GetString("LoginWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No response.
+        /// </summary>
+        public static string NoResponseStatus {
+            get {
+                return ResourceManager.GetString("NoResponseStatus", resourceCulture);
             }
         }
         
