@@ -107,7 +107,7 @@ namespace RM_Messenger.ViewModel
 
         if (addRequestViewModel.CloseAction == null)
         {
-          addRequestViewModel.CloseAction = () => window.Close();
+          addRequestViewModel.CloseAction = () => addRequestWindow.Close();
         }
         addRequestWindow.Owner = window;
         addRequestWindow.Left = window.Left - 400 + offset;
