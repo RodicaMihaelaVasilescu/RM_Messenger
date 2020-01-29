@@ -9,12 +9,14 @@ using System.Windows.Input;
 using RM_Messenger.Command;
 using RM_Messenger.Database;
 using RM_Messenger.Helper;
+using RM_Messenger.Model;
 using RM_Messenger.Properties;
 
 namespace RM_Messenger.ViewModel
 {
   class AddToMessengerRequestFirstViewModel : INotifyPropertyChanged
   {
+    private RMMessengerEntities _context;
     private Window window;
     private AddRequest request;
     private string _dispplayedMessage;
@@ -23,6 +25,7 @@ namespace RM_Messenger.ViewModel
     private bool _addToMessengerEnabled;
     private bool _addToMessengerChecked;
     private string _nextButtonText;
+    private Visibility _addToMessengerVisibility;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -61,7 +64,6 @@ namespace RM_Messenger.ViewModel
         if (_doNotAllowCheck == value) return;
         _doNotAllowCheck = value;
         AddToMessengerEnabled = !value;
-        NextButtonText = value ? "Finish" : "Next";
         AddToMessengerChecked = false;
 
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DoNotAllowCheck"));
@@ -75,9 +77,23 @@ namespace RM_Messenger.ViewModel
       {
         if (_addToMessengerChecked == value) return;
         _addToMessengerChecked = value;
+        NextButtonText = value ? Resources.Next : Resources.Finish;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddToMessengerChecked"));
       }
     }
+
+    public Visibility AddToMessengerVisibility
+    {
+      get { return _addToMessengerVisibility; }
+      set
+      {
+        if (_addToMessengerVisibility == value) return;
+        _addToMessengerVisibility = value;
+        NextButtonText = value == Visibility.Visible ? Resources.Next : Resources.Finish;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AddToMessengerVisibility"));
+      }
+    }
+
 
     public bool AddToMessengerEnabled
     {
@@ -103,35 +119,37 @@ namespace RM_Messenger.ViewModel
 
     public AddToMessengerRequestFirstViewModel(Window window, AddRequest request)
     {
+
+      _context = new RMMessengerEntities();
       this.window = window;
       this.request = request;
-
-      NextButtonText = "Next";
+      _addToMessengerVisibility = _context.Friendships.Any(f => f.User_ID == UserModel.Instance.Username && f.Friend_ID == request.SentBy_User_ID) ? Visibility.Hidden : Visibility.Visible;
       _dispplayedMessage = string.Format("{0} would like to add you as his or her Messenger List ", request.SentBy_User_ID);
       AllowChecked = true;
-      AddToMessengerEnabled = true;
-      AddToMessengerChecked = true;
+      AddToMessengerEnabled = _addToMessengerVisibility == Visibility.Visible;
+      AddToMessengerChecked = _addToMessengerVisibility == Visibility.Visible;
+      NextButtonText = AddToMessengerChecked ? Resources.Next : Resources.Finish;
+
       NextCommand = new RelayCommand(NextCommandExecute);
     }
 
     private void NextCommandExecute()
     {
-      if (AllowChecked)
+      if (NextButtonText == Resources.Next)
       {
-        OpenAddToMessengerRequestWindow();
+        OpenAddToMessengerRequestNextWindow();
       }
       else
       {
-        var _context = new RMMessengerEntities();
         var addRequest = _context.AddRequests.FirstOrDefault(a => a.AddRequest_ID == request.AddRequest_ID);
-        addRequest.Status = Resources.DeclinedStatus;
+        addRequest.Status = AllowChecked ? Resources.AcceptedStatus : Resources.DeclinedStatus;
         _context.SaveChanges();
 
         CloseAction();
       }
     }
 
-    private void OpenAddToMessengerRequestWindow()
+    private void OpenAddToMessengerRequestNextWindow()
     {
       var addRequestViewModel = new AddToMessengerRequestSecondViewModel(window, request);
       WindowManager.ChangeWindowContent(window, addRequestViewModel, Resources.AddToMessengerRequestWindowTitle, Resources.AddToMessengerRequestSecondControlPath);

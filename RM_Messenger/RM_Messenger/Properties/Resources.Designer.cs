@@ -61,6 +61,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accepted.
+        /// </summary>
+        public static string AcceptedStatus {
+            get {
+                return ResourceManager.GetString("AcceptedStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.AddContactFirstControl.
         /// </summary>
         public static string AddContactFirstControlPath {
@@ -232,6 +241,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        public static string Finish {
+            get {
+                return ResourceManager.GetString("Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Friends.
         /// </summary>
         public static string FriendListName {
@@ -282,6 +300,15 @@ namespace RM_Messenger.Properties {
         public static string LoginWindowTitle {
             get {
                 return ResourceManager.GetString("LoginWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Next.
+        /// </summary>
+        public static string Next {
+            get {
+                return ResourceManager.GetString("Next", resourceCulture);
             }
         }
         

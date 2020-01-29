@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcceptedStatus" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
   <data name="AddContactFirstControlPath" xml:space="preserve">
     <value>RM_Messenger.View.AddContactFirstControl</value>
   </data>
@@ -174,6 +177,9 @@
   <data name="ErrorMessageControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ErrorMessageControl</value>
   </data>
+  <data name="Finish" xml:space="preserve">
+    <value>Finish</value>
+  </data>
   <data name="FriendListName" xml:space="preserve">
     <value>Friends</value>
   </data>
@@ -191,6 +197,9 @@
   </data>
   <data name="LoginWindowTitle" xml:space="preserve">
     <value>RM!Messenger</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next</value>
   </data>
   <data name="NoResponseStatus" xml:space="preserve">
     <value>No response</value>

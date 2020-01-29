@@ -208,7 +208,7 @@ namespace RM_Messenger.ViewModel
     {
       ProfilePicture = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
     }
-    private void ReloadContactLists(object sender, EventArgs e)
+    public void ReloadContactLists(object sender, EventArgs e)
     {
       LoadContactLists();
     }

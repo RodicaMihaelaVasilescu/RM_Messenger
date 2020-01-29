@@ -91,7 +91,7 @@
     <StackPanel
       Grid.Row="3"
       Grid.Column="2"
-      Margin="20,0,0,0">
+      Margin="20,5,0,0">
 
       <RadioButton
         HorizontalAlignment="Left"
@@ -102,13 +102,14 @@
         IsChecked="{Binding AllowChecked}"
         ToolTip="Web search" />
       <CheckBox
-        Margin="17,10,0,5"
+        Margin="17,5,0,5"
         Background="White"
         Content="And add this person to my Messenger list"
         Cursor="Hand"
         FontFamily="Calisto MT"
         FontSize="12"
         Foreground="White"
+        Visibility="{Binding AddToMessengerVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         IsChecked="{Binding AddToMessengerChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         IsEnabled="{Binding AddToMessengerEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 

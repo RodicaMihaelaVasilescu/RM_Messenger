@@ -22,6 +22,7 @@ namespace RM_Messenger.ViewModel
     private bool cancelButtonPressed;
     private string messageOnSingingIn;
     private RMMessengerEntities _context;
+    private HomepageViewModel homepageViewModel;
 
     public event PropertyChangedEventHandler PropertyChanged;
 
@@ -79,7 +80,7 @@ namespace RM_Messenger.ViewModel
 
     private void OpenHomepageWindow()
     {
-      var homepageViewModel = new HomepageViewModel(window);
+      homepageViewModel = new HomepageViewModel(window);
       WindowManager.ChangeWindowContent(window, homepageViewModel, Resources.HomepageWindowTitle, Resources.HomepageControlPath);
 
       if (homepageViewModel.CloseAction == null)
@@ -108,6 +109,7 @@ namespace RM_Messenger.ViewModel
         if (addRequestViewModel.CloseAction == null)
         {
           addRequestViewModel.CloseAction = () => addRequestWindow.Close();
+        addRequestWindow.Closed += new EventHandler(homepageViewModel.ReloadContactLists);
         }
         addRequestWindow.Owner = window;
         addRequestWindow.Left = window.Left - 400 + offset;
