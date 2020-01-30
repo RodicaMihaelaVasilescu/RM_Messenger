@@ -140,8 +140,8 @@ namespace RM_Messenger.ViewModel
         var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
         friend.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(friendAccount.Profile_Picture);
         friend.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
-        friend.Status = _context.Friendships.Any(f => f.User_ID == friend.UserId && f.Friend_ID == currentUser) ? 
-                friendAccount.Status : "Add request pending";
+        friend.Status = _context.AddRequests.Any(f => f.SentTo_User_ID == friend.UserId &&
+           f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? friendAccount.Status : Resources.AddRequestPendingStatus;
       }
 
       friendList.IsExpanded = true;
@@ -182,8 +182,8 @@ namespace RM_Messenger.ViewModel
           _context.Accounts.Where(a => a.User_ID == address.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         address.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
         var friendAccount = _context.Accounts.Where(a => a.User_ID == address.UserId).FirstOrDefault();
-        address.Status = _context.Friendships.Any(f => f.User_ID == address.UserId && f.Friend_ID == currentUser) ? friendAccount.Status
-                        : "Add request pending";
+        address.Status = _context.AddRequests.Any(f => f.SentTo_User_ID == address.UserId &&
+            f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? friendAccount.Status : Resources.AddRequestPendingStatus;
       }
 
       addressBook.IsExpanded = false;

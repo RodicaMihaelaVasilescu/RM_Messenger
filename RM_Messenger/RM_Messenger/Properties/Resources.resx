@@ -132,6 +132,9 @@
   <data name="AddContactWindowTitle" xml:space="preserve">
     <value>Add to Messenger List</value>
   </data>
+  <data name="AddRequestPendingStatus" xml:space="preserve">
+    <value>Add request pending</value>
+  </data>
   <data name="AddToMessengerRequestFirstControlPath" xml:space="preserve">
     <value>RM_Messenger.View.AddToMessengerRequestFirstControl</value>
   </data>

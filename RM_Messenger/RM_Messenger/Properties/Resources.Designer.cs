@@ -106,6 +106,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add request pending.
+        /// </summary>
+        public static string AddRequestPendingStatus {
+            get {
+                return ResourceManager.GetString("AddRequestPendingStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.AddToMessengerRequestFirstControl.
         /// </summary>
         public static string AddToMessengerRequestFirstControlPath {
