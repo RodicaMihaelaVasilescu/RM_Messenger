@@ -1,4 +1,5 @@
 ﻿using RM_Messenger.Database;
+using RM_Messenger.Helper;
 using RM_Messenger.Model;
 using RM_Messenger.ViewModel;
 using System;
@@ -53,5 +54,14 @@ namespace RM_Messenger.View
         ChangeStatusButton.Focus();
       }
     }
+
+    private void InnerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+    {
+      var value = sender as ListView;
+      var selected = value.SelectedItem as DisplayedContactModel;
+      WindowManager.OpenChatWindow(selected);
+
+    }
+
   }
 }

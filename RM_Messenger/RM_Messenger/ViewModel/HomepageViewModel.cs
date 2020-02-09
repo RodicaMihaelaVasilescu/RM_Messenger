@@ -5,6 +5,7 @@ using RM_Messenger.Model;
 using RM_Messenger.Properties;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace RM_Messenger.ViewModel
     public ICommand ChangeStatusCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
-    public List<ContactListsModel> ContactsLists
+    public ObservableCollection<ContactListsModel> ContactsLists
     {
       get { return _contactsLists; }
       set
@@ -67,6 +68,17 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SearchedUser"));
       }
     }
+
+    public DisplayedContactModel SelectedContact
+    {
+      get { return _selectedContact; }
+      set
+      {
+        if (_selectedContact == value) return;
+        _selectedContact = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedContact"));
+      }
+    }
     public BitmapImage ProfilePicture
     {
       get { return profilePicture; }
@@ -85,10 +97,11 @@ namespace RM_Messenger.ViewModel
     private string _email;
     private Window window;
     private BitmapImage profilePicture;
-    private List<ContactListsModel> _contactsLists;
+    private ObservableCollection<ContactListsModel> _contactsLists;
     private RMMessengerEntities _context;
     private string _status;
     private string _searchedUser;
+    private DisplayedContactModel _selectedContact;
 
     #endregion
 
@@ -100,6 +113,7 @@ namespace RM_Messenger.ViewModel
       window.Activated += new EventHandler(RefreshProfilePicture);
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
+
 
       InitializeUserProfile();
       InitializeContactList();
@@ -113,14 +127,14 @@ namespace RM_Messenger.ViewModel
     private void InitializeContactList()
     {
       _context = new RMMessengerEntities();
-      ContactsLists = new List<ContactListsModel>();
+      ContactsLists = new ObservableCollection<ContactListsModel>();
       AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
       LoadContactLists();
     }
 
     private void LoadContactLists()
     {
-      ContactsLists = new List<ContactListsModel>();
+      ContactsLists = new ObservableCollection<ContactListsModel>();
       LoadRecentList();
       LoadFriendList();
       LoadAddressBook();
@@ -131,7 +145,7 @@ namespace RM_Messenger.ViewModel
       var currentUser = UserModel.Instance.Username;
       var friendList = new ContactListsModel
       {
-        ContactsList = new List<DisplayedContactModel>(_context.Friendships.
+        ContactsList = new ObservableCollection<DisplayedContactModel>(_context.Friendships.
         Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a => a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_ID }))
       };
 
@@ -145,7 +159,7 @@ namespace RM_Messenger.ViewModel
       }
 
       friendList.IsExpanded = true;
-      friendList.ListName = string.Format("Friends ({0}/{1})", friendList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendList.ContactsList.Count);
+      friendList.DisplayedName = string.Format("Friends ({0}/{1})", friendList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendList.ContactsList.Count);
       ContactsLists.Add(friendList);
     }
 
@@ -172,7 +186,7 @@ namespace RM_Messenger.ViewModel
       var currentUser = UserModel.Instance.Username;
       var addressBook = new ContactListsModel
       {
-        ContactsList = new List<DisplayedContactModel>(_context.AddressBooks.
+        ContactsList = new ObservableCollection<DisplayedContactModel>(_context.AddressBooks.
         Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a => a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_User_ID }))
       };
 
@@ -188,7 +202,7 @@ namespace RM_Messenger.ViewModel
 
       addressBook.IsExpanded = false;
 
-      addressBook.ListName = string.Format("Address Book ({0})", addressBook.ContactsList.Count);
+      addressBook.DisplayedName = string.Format("Address Book ({0})", addressBook.ContactsList.Count);
       ContactsLists.Add(addressBook);
 
     }
@@ -198,9 +212,9 @@ namespace RM_Messenger.ViewModel
       var currentUser = UserModel.Instance.Username;
       var recentList = new ContactListsModel();
       // to do
-      recentList.ContactsList = new List<DisplayedContactModel>();
+      recentList.ContactsList = new ObservableCollection<DisplayedContactModel>();
       recentList.ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/RecentContact_Icon.png";
-      recentList.ListName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), recentList.ContactsList.Count);
+      recentList.DisplayedName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), recentList.ContactsList.Count);
       ContactsLists.Add(recentList);
     }
 

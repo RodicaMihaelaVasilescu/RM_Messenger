@@ -562,7 +562,7 @@
                       <TextBlock
                         Margin="7,0,0,0"
                         VerticalAlignment="Center"
-                        Text="{Binding ListName}" />
+                        Text="{Binding DisplayedName}" />
                     </StackPanel>
                   </Expander.Header>
                   <Expander.Resources>
@@ -717,9 +717,18 @@
                     BorderThickness="0"
                     Cursor="Hand"
                     ItemsSource="{Binding ContactsList}"
+                    MouseDoubleClick="InnerListView_MouseDoubleClick"
                     ScrollViewer.CanContentScroll="True"
                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
                     SelectedItem="{Binding SelectedContact}">
+                    <ListView.ContextMenu>
+                      <ContextMenu Cursor="Hand">
+                        <MenuItem
+                          Command="{Binding DeleteCommand}"
+                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                          Header="Delete" />
+                      </ContextMenu>
+                    </ListView.ContextMenu>
 
                     <ListView.ItemTemplate>
                       <DataTemplate DataType="{x:Type model:DisplayedContactModel}">
