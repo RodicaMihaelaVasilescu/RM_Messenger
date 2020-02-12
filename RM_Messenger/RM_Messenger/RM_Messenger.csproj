@@ -159,6 +159,10 @@
     <Compile Include="Database\User.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="EmoticonRichTextBox\EmoticonCollection.cs" />
+    <Compile Include="EmoticonRichTextBox\EmoticonMapper.cs" />
+    <Compile Include="EmoticonRichTextBox\EmoticonRichTextBox.cs" />
+    <Compile Include="EmoticonRichTextBox\WordBreaker.cs" />
     <Compile Include="Helpers\AppConfigManager.cs" />
     <Compile Include="Helpers\ApplicationConfigurationManager.cs" />
     <Compile Include="Helpers\AutoScrollHelper.cs" />

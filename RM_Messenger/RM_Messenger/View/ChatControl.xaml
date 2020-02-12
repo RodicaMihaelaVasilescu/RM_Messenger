@@ -4,10 +4,12 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converter="clr-namespace:RM_Messenger.Converters"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:gif="http://wpfanimatedgif.codeplex.com"
   xmlns:helper="clr-namespace:RM_Messenger.Helpers"
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:rm_messenger="clr-namespace:RM_Messenger"
   Width="600"
   Height="500"
   Background="White"
@@ -508,7 +510,53 @@
         Grid.Row="3"
         Margin="5"
         Background="White">
-        <TextBox
+        <rm_messenger:EmoticonRichTextBox
+          x:Name="MessageBox"
+          MaxHeight="29"
+          Margin="0"
+          Padding="0,0,80,0"
+          FontSize="15"
+          Foreground="Black"
+          IsUndoEnabled="False">
+          <rm_messenger:EmoticonRichTextBox.Emoticons>
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/1.gif" Text=":)" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/2.gif" Text=":(" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/3.gif" Text=";)" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/4.gif" Text=":D" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/5.gif" Text=";;)" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/5.gif" Text=":&gt;" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/6.gif" Text=":&gt;:D:&lt;" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/7.gif" Text=":-/" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/7.gif" Text=":/" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/8.gif" Text=":x" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/8.gif" Text=":X" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/9.gif" Text=":'&gt;" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":p" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":-p" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":P" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":-P" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/11.gif" Text=":*" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/12.gif" Text="=((" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/13.gif" Text=":o" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/14.gif" Text="x(" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/15.gif" Text=":&gt;" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/16.gif" Text="b-)" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/17.gif" Text=":s" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/18.gif" Text="#:-S" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/19.gif" Text="&gt;:)" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/20.gif" Text=":((" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/21.gif" Text=":))" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/22.gif" Text=":|" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/23.gif" Text="/:)" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/24.gif" Text="=))" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/36.gif" Text="&lt;:-p" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/36.gif" Text="&lt;:-P" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/65.gif" Text=":-&quot;" />
+            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/102.gif" Text="~x(;" />
+          </rm_messenger:EmoticonRichTextBox.Emoticons>
+        </rm_messenger:EmoticonRichTextBox>
+
+        <!--<TextBox
           x:Name="MessageBox"
           Grid.Row="2"
           MaxHeight="30"
@@ -523,7 +571,7 @@
           <TextBox.InputBindings>
             <KeyBinding Key="Enter" Command="{Binding SendCommand}" />
           </TextBox.InputBindings>
-        </TextBox>
+        </TextBox>-->
 
         <Button
           Grid.Row="3"
