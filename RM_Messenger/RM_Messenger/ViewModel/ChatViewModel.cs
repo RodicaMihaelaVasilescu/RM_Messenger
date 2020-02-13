@@ -111,15 +111,15 @@ namespace RM_Messenger.ViewModel
 
     private void LoadMessages()
     {
-      MessagesList = new ObservableCollection<MessageModel>( _context.Messages.OrderBy(m => m.Date).Where(u => u.SentTo_User_ID == DisplayedUser.UserId && u.SentBy_User_ID == UserModel.Instance.Username ||
-        u.SentBy_User_ID == DisplayedUser.UserId && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
-        new MessageModel
-        {
-          SentBy = string.Format("{0}\n{1}",m.SentBy_User_ID , m.Date.ToString("dd/MM/yyyy HH:mm")),
-          SentTo = m.SentTo_User_ID,
-          Content = m.Message_Content,
-          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
-        }));
+      MessagesList = new ObservableCollection<MessageModel>(_context.Messages.OrderBy(m => m.Date).Where(u => u.SentTo_User_ID == DisplayedUser.UserId && u.SentBy_User_ID == UserModel.Instance.Username ||
+       u.SentBy_User_ID == DisplayedUser.UserId && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
+       new MessageModel
+       {
+         SentBy = string.Format("{0}\n{1}", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm")),
+         SentTo = m.SentTo_User_ID,
+         Content = m.Message_Content,
+         HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
+       }));
     }
 
     private void SendCommandExecute()
@@ -137,7 +137,11 @@ namespace RM_Messenger.ViewModel
 
       messageBoxContent = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd).Text;
       //remove new line \r\n
-      messageBoxContent = messageBoxContent.Remove(messageBoxContent.Length - 2);
+      if ( messageBoxContent.Length < 2)
+      {
+        return;
+      }
+        messageBoxContent = messageBoxContent.Remove(messageBoxContent.Length - 2);
       var message = new Message
       {
         Date = DateTime.Now,

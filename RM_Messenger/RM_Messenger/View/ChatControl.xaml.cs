@@ -21,6 +21,7 @@ namespace RM_Messenger.View
     private void OnForceUpdateClick(object sender, RoutedEventArgs e)
     {
       this.MessageBox.UpdateDocumentBindings();
+      MessageBox.FocusTextBox();
     }
     private void TS_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
@@ -52,5 +53,6 @@ namespace RM_Messenger.View
         EmoticonsPopupTooltip.IsOpen = false;
       }
     }
+
   }
 }
