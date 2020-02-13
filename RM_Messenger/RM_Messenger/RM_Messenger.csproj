@@ -122,6 +122,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Command\RelayCommand.cs" />
+    <Compile Include="Converters\FlowDocumentToXamlConverter.cs" />
     <Compile Include="Converters\GeneralConverters.cs" />
     <Compile Include="Converters\NameConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
@@ -215,6 +216,9 @@
     <Compile Include="View\DisplayImageControl.xaml.cs">
       <DependentUpon>DisplayImageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EmoticonRichTextBoxControl.xaml.cs">
+      <DependentUpon>EmoticonRichTextBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmoticonsControl.xaml.cs">
       <DependentUpon>EmoticonsControl.xaml</DependentUpon>
     </Compile>
@@ -303,6 +307,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DisplayImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmoticonRichTextBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

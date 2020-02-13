@@ -32,14 +32,14 @@
     <Image
       Width="35"
       Height="35"
-      Margin="5 5 5 0"
-      VerticalAlignment="Top"
+      Margin="5,5,5,0"
       HorizontalAlignment="Left"
+      VerticalAlignment="Top"
       Source="{Binding ImagePath}" />
     <TextBlock
-      VerticalAlignment="Center"
       Grid.Column="1"
-      Margin="15 5"
+      Margin="15,5"
+      VerticalAlignment="Center"
       FontSize="11"
       Foreground="White"
       Text="{Binding ErrorMessage}"
@@ -50,12 +50,12 @@
       Grid.ColumnSpan="2"
       Width="80"
       Height="20"
-      Margin= "0 0 0 10"
+      Margin="0,0,0,10"
+      VerticalContentAlignment="Top"
       BorderBrush="White"
       BorderThickness="0.5"
       Command="{Binding CloseCommand}"
       Content="OK"
-      VerticalContentAlignment="Top"
       FontSize="11"
       Foreground="White"
       Style="{StaticResource MaterialDesignRaisedAccentButton}">

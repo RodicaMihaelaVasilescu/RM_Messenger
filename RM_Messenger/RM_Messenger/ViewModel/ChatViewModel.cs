@@ -7,7 +7,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
@@ -126,7 +128,16 @@ namespace RM_Messenger.ViewModel
       {
         return;
       }
+      var flowDocument = new FlowDocument();
+      if (messageBoxContent != null)
+      {
+        var xamlText = (string)messageBoxContent;
+        flowDocument = (FlowDocument)XamlReader.Parse(xamlText);
+      }
 
+      messageBoxContent = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd).Text;
+      //remove new line \r\n
+      messageBoxContent = messageBoxContent.Remove(messageBoxContent.Length - 2);
       var message = new Message
       {
         Date = DateTime.Now,

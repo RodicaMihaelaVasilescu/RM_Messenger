@@ -6,6 +6,7 @@
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:gif="http://wpfanimatedgif.codeplex.com"
   xmlns:helper="clr-namespace:RM_Messenger.Helpers"
+  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -23,7 +24,7 @@
       </ResourceDictionary.MergedDictionaries>
       <converter:ValueToHorizontalAlignmentConverter x:Key="AlignmentConverter" />
       <converter:NameConverter x:Key="NameConverter" />
-
+      <converter:FlowDocumentToXamlConverter x:Key="flowDocumentConverter" />
       <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
       <Style x:Key="ButtonHighlight" TargetType="{x:Type Button}">
@@ -510,11 +511,23 @@
         Grid.Row="3"
         Margin="5"
         Background="White">
-        <rm_messenger:EmoticonRichTextBox
+
+        <local:EmoticonRichTextBoxControl
+          x:Name="MessageBox"
+          Grid.Row="0"
+          MaxHeight="30"
+          Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
+          <!--<local:EmoticonRichTextBoxControl.InputBindings>
+            <KeyBinding Key="Enter" Command="{Binding SendCommand}" />
+          </local:EmoticonRichTextBoxControl.InputBindings>-->
+        </local:EmoticonRichTextBoxControl>
+
+        <!--<rm_messenger:EmoticonRichTextBox
           x:Name="MessageBox"
           MaxHeight="29"
           Margin="0"
           Padding="0,0,80,0"
+          Document="{Binding Autobiography}"
           FontSize="15"
           Foreground="Black"
           IsUndoEnabled="False">
@@ -554,7 +567,7 @@
             <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/65.gif" Text=":-&quot;" />
             <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/102.gif" Text="~x(;" />
           </rm_messenger:EmoticonRichTextBox.Emoticons>
-        </rm_messenger:EmoticonRichTextBox>
+        </rm_messenger:EmoticonRichTextBox>-->
 
         <!--<TextBox
           x:Name="MessageBox"
@@ -574,6 +587,7 @@
         </TextBox>-->
 
         <Button
+          x:Name="SendButton"
           Grid.Row="3"
           Width="80"
           Height="23"
@@ -582,6 +596,7 @@
           VerticalAlignment="Center"
           BorderBrush="Indigo"
           BorderThickness="2"
+          Click="OnForceUpdateClick"
           Command="{Binding SendCommand}"
           Content="Send"
           Cursor="Hand"

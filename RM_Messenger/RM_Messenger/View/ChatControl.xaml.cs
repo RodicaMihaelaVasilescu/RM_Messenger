@@ -1,4 +1,5 @@
 ﻿using RM_Messenger.ViewModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -14,7 +15,12 @@ namespace RM_Messenger.View
     {
       InitializeComponent();
       EmoticonsControl.DataContext = new EmoticonsViewModel();
-      MessageBox.Focus();
+      MessageBox.SendButton = SendButton;
+      this.MessageBox.FocusTextBox();
+    }
+    private void OnForceUpdateClick(object sender, RoutedEventArgs e)
+    {
+      this.MessageBox.UpdateDocumentBindings();
     }
     private void TS_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {

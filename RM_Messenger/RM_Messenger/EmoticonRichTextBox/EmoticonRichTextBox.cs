@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -14,21 +15,25 @@ namespace RM_Messenger
   public class EmoticonRichTextBox : RichTextBox
   {
     private DispatcherTimer _timer;
+    // Document property
+    //public static readonly DependencyProperty DocumentProperty =
+    //    DependencyProperty.Register("Document", typeof(FlowDocument),
+    //    typeof(EmoticonRichTextBox), new PropertyMetadata(OnDocumentChanged));
+    //private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+    //{
+
+    //}
+
+    //public string Document
+    //{
+    //  get { return (string)GetValue(DocumentProperty); }
+    //  set { SetValue(DocumentProperty, value); }
+    //}
+
 
     public EmoticonRichTextBox()
     {
       Emoticons = new EmoticonCollection();
-    }
-
-    protected override void OnPreviewKeyDown(KeyEventArgs e)
-    {
-      if (e.Key == Key.Return)
-      {
-        // DO YOUR WORK HERE and then set e.Handled to true on condition if you want to stop going to next line//
-
-        e.Handled = true;
-      }
-      base.OnPreviewKeyDown(e);
     }
 
     /// <summary>
