@@ -16,12 +16,12 @@ namespace RM_Messenger.View
       InitializeComponent();
       EmoticonsControl.DataContext = new EmoticonsViewModel();
       MessageBox.SendButton = SendButton;
-      this.MessageBox.FocusTextBox();
+      this.MessageBox.InitializeAndFocusTextBox();
     }
     private void OnForceUpdateClick(object sender, RoutedEventArgs e)
     {
       this.MessageBox.UpdateDocumentBindings();
-      MessageBox.FocusTextBox();
+      MessageBox.InitializeAndFocusTextBox();
     }
     private void TS_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {

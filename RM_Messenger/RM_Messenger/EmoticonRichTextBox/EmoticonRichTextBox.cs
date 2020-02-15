@@ -53,8 +53,14 @@ namespace RM_Messenger
     /// </summary>
     private void UpdateSmileys()
     {
-      var tp = Document.ContentStart;
-      var word = WordBreaker.GetWordRange(tp);
+      var textPointer = Document.ContentStart;
+      var textRange = new TextRange(Document.ContentStart, Document.ContentEnd).Text;
+      if(string.IsNullOrEmpty(textRange))
+      {
+        textPointer.InsertTextInRun(" ");
+        CaretPosition = Document.ContentEnd;
+      }
+      var word = WordBreaker.GetWordRange(textPointer);
 
       while (word.End.GetNextInsertionPosition(LogicalDirection.Forward) != null)
       {
@@ -72,7 +78,7 @@ namespace RM_Messenger
           ReplaceTextRangeWithImage(word, img);
           var image = new BitmapImage();
           image.BeginInit();
-          image.UriSource = new Uri(emoticon.Icon);//("pack://application:,,,/RM_Messenger;component/Resources/Emoticons/8.gif");
+          image.UriSource = new Uri(emoticon.Icon);
           image.EndInit();
           ImageBehavior.SetAnimatedSource(img, image);
         }
@@ -108,7 +114,7 @@ namespace RM_Messenger
 
       }
     }
-
+  
     /// <summary>
     /// The collection of Emoticon mappers
     /// </summary>
