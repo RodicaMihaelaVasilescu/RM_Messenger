@@ -219,6 +219,9 @@
     <Compile Include="View\EmoticonRichTextBoxControl.xaml.cs">
       <DependentUpon>EmoticonRichTextBoxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\EmoticonRichTextBoxMessagesControl.xaml.cs">
+      <DependentUpon>EmoticonRichTextBoxMessagesControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EmoticonsControl.xaml.cs">
       <DependentUpon>EmoticonsControl.xaml</DependentUpon>
     </Compile>
@@ -311,6 +314,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EmoticonRichTextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmoticonRichTextBoxMessagesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

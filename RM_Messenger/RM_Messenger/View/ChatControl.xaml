@@ -374,11 +374,12 @@
                           RadiusY="10"
                           Stroke="#693060"
                           StrokeThickness="1" />
-                        <TextBlock
+
+                        <local:EmoticonRichTextBoxMessagesControl
+                          x:Name="ChatContent"
                           Grid.Row="1"
                           Margin="5"
-                          Text="{Binding Content}"
-                          TextWrapping="Wrap" />
+                          Document="{Binding Path=Content, Converter={StaticResource flowDocumentConverter}}" />
                       </Grid>
                     </ControlTemplate>
                   </Setter.Value>
@@ -516,11 +517,7 @@
           x:Name="MessageBox"
           Grid.Row="0"
           MaxHeight="30"
-          Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
-          <!--<local:EmoticonRichTextBoxControl.InputBindings>
-            <KeyBinding Key="Enter" Command="{Binding SendCommand}" />
-          </local:EmoticonRichTextBoxControl.InputBindings>-->
-        </local:EmoticonRichTextBoxControl>
+          Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
 
         <!--<rm_messenger:EmoticonRichTextBox
           x:Name="MessageBox"

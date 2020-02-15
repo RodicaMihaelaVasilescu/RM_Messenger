@@ -1,7 +1,8 @@
-﻿using System.Windows.Data;
+﻿using System.Windows;
+using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Markup;
-
+using System.Windows.Media;
 namespace RM_Messenger.Converters
 {
   [ValueConversion(typeof(string), typeof(FlowDocument))]
@@ -20,7 +21,9 @@ namespace RM_Messenger.Converters
       if (!string.IsNullOrEmpty(value as string))
       {
         var xamlText = (string)value;
-        flowDocument = (FlowDocument)XamlReader.Parse(xamlText);
+       // flowDocument = (FlowDocument)XamlReader.Parse(xamlText);
+        var p = new Paragraph(new Run(xamlText));
+        flowDocument.Blocks.Add(p);
       }
 
       // Set return value
