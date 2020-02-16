@@ -118,7 +118,7 @@ namespace RM_Messenger.ViewModel
        {
          SentBy = string.Format("{0} ({1}): ", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
          SentTo = m.SentTo_User_ID,
-         ToolTip = string.Format("{0} ({1}): ", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+         ToolTip = string.Format("{0} ({1})", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
          Content = GetDocument(m.SentBy_User_ID, m.Message_Content),
          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
        }));
@@ -150,7 +150,7 @@ namespace RM_Messenger.ViewModel
 
     private void SendCommandExecute()
     {
-      if (string.IsNullOrEmpty(messageBoxContent) )
+      if (string.IsNullOrEmpty(messageBoxContent))
       {
         return;
       }
@@ -183,7 +183,7 @@ namespace RM_Messenger.ViewModel
       {
         SentBy = string.Format("{0} ({1}): ", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
         SentTo = message.SentTo_User_ID,
-        ToolTip = string.Format("{0} ({1}): ", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+        ToolTip = string.Format("{0} ({1})", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
         Content = GetDocument(message.SentBy_User_ID, MessageBoxContent),
         HorizontalAlignment = HorizontalAlignment.Right
       });

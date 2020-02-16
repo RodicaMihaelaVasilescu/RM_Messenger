@@ -15,8 +15,7 @@ namespace RM_Messenger
   {
     public EmoticonRichTextBox()
     {
-      var collection = new EmoticonCollection();
-      Emoticons = collection.Emoticons;
+      Emoticons = EmoticonCollection.Instance.Emoticons;
     }
 
     private DispatcherTimer _timer;
@@ -55,7 +54,7 @@ namespace RM_Messenger
     {
       var textPointer = Document.ContentStart;
       var textRange = new TextRange(Document.ContentStart, Document.ContentEnd).Text;
-      if(string.IsNullOrEmpty(textRange))
+      if (string.IsNullOrEmpty(textRange))
       {
         textPointer.InsertTextInRun(" ");
         CaretPosition = Document.ContentEnd;
@@ -114,7 +113,7 @@ namespace RM_Messenger
 
       }
     }
-  
+
     /// <summary>
     /// The collection of Emoticon mappers
     /// </summary>

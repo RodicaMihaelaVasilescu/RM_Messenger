@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.ObjectModel;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -23,14 +24,16 @@ namespace RM_Messenger.View
     public Button SendButton { get; set; }
 
     private int m_InternalUpdatePending;
+    private Collection<EmoticonMapper> emoticonsList;
 
     public EmoticonRichTextBoxControl()
     {
       InitializeComponent();
+      emoticonsList = EmoticonCollection.Instance.Emoticons;
       TextBox.Focus();
     }
     public void UpdateDocumentBindings()
-    { 
+    {
       m_InternalUpdatePending = 2;
 
       var originalInput = GetOriginalInput();
@@ -42,7 +45,6 @@ namespace RM_Messenger.View
 
     private string GetOriginalInput()
     {
-      var emoticons = new EmoticonCollection();
       string input = string.Empty;
       foreach (Block bk in TextBox.Document.Blocks)
       {
@@ -59,7 +61,7 @@ namespace RM_Messenger.View
               {
                 Image img = (Image)ui.Child;
                 string source = img.Source.ToString();
-                var emoticon = emoticons.Emoticons.FirstOrDefault(e => e.Icon == source);
+                var emoticon = emoticonsList.FirstOrDefault(e => e.Icon == source);
                 if (emoticon != null)
                 {
                   input += emoticon.Text + " ";

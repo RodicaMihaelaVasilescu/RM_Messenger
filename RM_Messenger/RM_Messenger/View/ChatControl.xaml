@@ -349,7 +349,10 @@
           helper:AutoScrollHelper.AutoScroll="True"
           PreviewMouseWheel="TS_PreviewMouseWheel"
           VerticalScrollBarVisibility="Auto">
-          <ListBox ItemsSource="{Binding MessagesList, Mode=OneWay}">
+          <ListBox
+            Margin="5"
+            BorderThickness="0"
+            ItemsSource="{Binding MessagesList, Mode=OneWay}">
             <ListBox.Resources>
               <Style TargetType="{x:Type ListBoxItem}">
                 <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -359,7 +362,7 @@
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
                       <Grid
                         MaxWidth="400"
-                        Margin="10,5"
+                        Margin="2"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
                         <Grid.RowDefinitions>
