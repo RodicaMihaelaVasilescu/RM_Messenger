@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
@@ -115,16 +116,41 @@ namespace RM_Messenger.ViewModel
        u.SentBy_User_ID == DisplayedUser.UserId && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
        new MessageModel
        {
-         SentBy = string.Format("{0}\n{1}", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm")),
+         SentBy = string.Format("{0} ({1}): ", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
          SentTo = m.SentTo_User_ID,
-         Content = m.Message_Content,
+         ToolTip = string.Format("{0} ({1}): ", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+         Content = GetDocument(m.SentBy_User_ID, m.Message_Content),
          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
        }));
     }
 
+    private FlowDocument GetDocument(string sentBy, string message)
+    {
+      var flowDocument = new FlowDocument();
+      if (!string.IsNullOrEmpty(sentBy as string))
+      {
+        var paragraph = new Paragraph();
+        if (sentBy == DisplayedUser.UserId)
+        {
+          Bold myBold = new Bold(new Run(sentBy + ": "));
+          myBold.Foreground = Brushes.DarkBlue;
+          paragraph.Inlines.Add(myBold);
+        }
+        else
+        {
+          Bold myBold = new Bold(new Run(sentBy + ": "));
+          myBold.Foreground = Brushes.Gray;
+          paragraph.Inlines.Add(myBold);
+        }
+        paragraph.Inlines.Add(message);
+        flowDocument.Blocks.Add(paragraph);
+      }
+      return flowDocument;
+    }
+
     private void SendCommandExecute()
     {
-      if (string.IsNullOrEmpty(messageBoxContent))
+      if (string.IsNullOrEmpty(messageBoxContent) )
       {
         return;
       }
@@ -136,12 +162,12 @@ namespace RM_Messenger.ViewModel
       }
 
       messageBoxContent = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd).Text;
-      //remove new line \r\n
-      if ( messageBoxContent.Length < 2)
+      if (messageBoxContent.Length < 4)
       {
         return;
       }
-        messageBoxContent = messageBoxContent.Remove(messageBoxContent.Length - 2);
+      //remove new line \r\n
+      messageBoxContent = messageBoxContent.Remove(messageBoxContent.Length - 2);
       var message = new Message
       {
         Date = DateTime.Now,
@@ -153,7 +179,14 @@ namespace RM_Messenger.ViewModel
       _context.SaveChanges();
 
 
-      MessagesList.Add(new MessageModel { SentBy = message.SentBy_User_ID + "\n" + message.Date.ToString("dd/MM/yyyy HH:mm"), SentTo = message.SentTo_User_ID, Content = MessageBoxContent, HorizontalAlignment = HorizontalAlignment.Right });
+      MessagesList.Add(new MessageModel
+      {
+        SentBy = string.Format("{0} ({1}): ", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+        SentTo = message.SentTo_User_ID,
+        ToolTip = string.Format("{0} ({1}): ", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+        Content = GetDocument(message.SentBy_User_ID, MessageBoxContent),
+        HorizontalAlignment = HorizontalAlignment.Right
+      });
 
       MessageBoxContent = string.Empty;
       AutoScroll.ScrollToEnd();
