@@ -350,7 +350,7 @@
           PreviewMouseWheel="TS_PreviewMouseWheel"
           VerticalScrollBarVisibility="Auto">
           <ListBox
-            Margin="5"
+            Margin="5,10"
             BorderThickness="0"
             ItemsSource="{Binding MessagesList, Mode=OneWay}">
             <ListBox.Resources>
