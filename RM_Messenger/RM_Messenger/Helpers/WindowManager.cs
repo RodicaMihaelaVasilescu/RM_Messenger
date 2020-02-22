@@ -15,8 +15,6 @@ namespace RM_Messenger.Helper
     public static void ChangeWindowContent(Window window, object viewModel, string title, string controlPath)
     {
       window.Title = title;
-      //window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-      //window.SizeToContent = SizeToContent.WidthAndHeight;
       var controlAssembly = Assembly.Load(Assembly.GetExecutingAssembly().GetName().Name);
       var controlType = controlAssembly.GetType(controlPath);
       var newControl = Activator.CreateInstance(controlType) as UserControl;
@@ -25,11 +23,11 @@ namespace RM_Messenger.Helper
     }
     public static void ResizeWindow(Window window)
     {
-      
+
       var desktopWorkingArea = SystemParameters.WorkArea;
-      window.Width = desktopWorkingArea.Right/4.5;
+      window.Width = desktopWorkingArea.Right / 4.5;
       window.Top = desktopWorkingArea.Top;
-      window.Height = desktopWorkingArea.Bottom+7;
+      window.Height = desktopWorkingArea.Bottom + 7;
       window.Left = desktopWorkingArea.Right - window.Width;
       window.ResizeMode = ResizeMode.NoResize;
     }
@@ -67,17 +65,17 @@ namespace RM_Messenger.Helper
     }
 
 
-    public static void OpenChatWindow(DisplayedContactModel displayedContact)
+    public static void OpenChatWindow(DisplayedContactModel selectedContact)
     {
-      if (displayedContact == null)
+      if (selectedContact == null)
       {
         return;
       }
       UserModel user = new UserModel
       {
-        Username = displayedContact.UserId,
-        FirstName = displayedContact.UserId,
-        LastName = displayedContact.UserId,
+        Username = selectedContact.UserId,
+        FirstName = selectedContact.UserId,
+        LastName = selectedContact.UserId,
         IsOnline = false
       };
       foreach (Window win in App.Current.Windows)
@@ -95,7 +93,7 @@ namespace RM_Messenger.Helper
         Title = Resources.ChatWindowTitle
       };
       var chatControl = new ChatControl();
-      var chatViewModel = new ChatViewModel(child, displayedContact, chatControl.AutoScrollViewer);
+      var chatViewModel = new ChatViewModel(child, selectedContact, chatControl.AutoScrollViewer);
       chatControl.DataContext = chatViewModel;
       child.Content = chatControl;
       child.SizeToContent = SizeToContent.WidthAndHeight;

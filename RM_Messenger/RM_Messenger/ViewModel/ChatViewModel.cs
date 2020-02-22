@@ -34,8 +34,19 @@ namespace RM_Messenger.ViewModel
     public ICommand SendCommand { get; set; }
     public Action CloseAction { get; set; }
     public ScrollViewer AutoScroll;
-    public event PropertyChangedEventHandler PropertyChanged;
+    private string documentXaml;
 
+    public event PropertyChangedEventHandler PropertyChanged;
+    public string DocumentXaml
+    {
+      get { return documentXaml; }
+
+      set
+      {
+        documentXaml = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DocumentXaml"));
+      }
+    }
     public DisplayedContactModel DisplayedUser
     {
       get { return _displayedUser; }
@@ -119,7 +130,7 @@ namespace RM_Messenger.ViewModel
          SentBy = string.Format("{0} ({1}): ", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
          SentTo = m.SentTo_User_ID,
          ToolTip = string.Format("{0} ({1})", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
-         Content = GetDocument(m.SentBy_User_ID, m.Message_Content),
+         Content = GetDocument(m.SentBy_User_ID, m.Text),
          HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
        }));
     }
@@ -147,33 +158,31 @@ namespace RM_Messenger.ViewModel
       }
       return flowDocument;
     }
-
-    private void SendCommandExecute()
+    public void SendMessage(object sender, EventArgs e)
     {
-      if (string.IsNullOrEmpty(messageBoxContent))
+      SendCommandExecute();
+    }
+    public void SendCommandExecute()
+    {
+      if (this.messageBoxContent == null)
       {
         return;
-      }
-      var flowDocument = new FlowDocument();
-      if (messageBoxContent != null)
-      {
-        var xamlText = (string)messageBoxContent;
-        flowDocument = (FlowDocument)XamlReader.Parse(xamlText);
       }
 
-      messageBoxContent = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd).Text;
-      if (messageBoxContent.Length < 4)
+      var flowDocument = (FlowDocument)XamlReader.Parse(messageBoxContent);
+      string text = new TextRange(flowDocument.ContentStart, flowDocument.ContentEnd).Text;
+      if (text.Length < 4)
       {
         return;
       }
-      //remove new line \r\n
-      messageBoxContent = messageBoxContent.Remove(messageBoxContent.Length - 2);
+      // remove new line \r\n
+      text = text.Remove(text.Length - 2);
       var message = new Message
       {
         Date = DateTime.Now,
         SentTo_User_ID = DisplayedUser.UserId,
         SentBy_User_ID = UserModel.Instance.Username,
-        Message_Content = MessageBoxContent
+        Text = text
       };
       _context.Messages.Add(message); ;
       _context.SaveChanges();
@@ -184,11 +193,11 @@ namespace RM_Messenger.ViewModel
         SentBy = string.Format("{0} ({1}): ", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
         SentTo = message.SentTo_User_ID,
         ToolTip = string.Format("{0} ({1})", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
-        Content = GetDocument(message.SentBy_User_ID, MessageBoxContent),
+        Content = GetDocument( message.SentBy_User_ID, text),
         HorizontalAlignment = HorizontalAlignment.Right
       });
 
-      MessageBoxContent = string.Empty;
+      MessageBoxContent = null;
       AutoScroll.ScrollToEnd();
     }
 

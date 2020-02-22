@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace RM_Messenger.View
 {
@@ -38,8 +27,6 @@ namespace RM_Messenger.View
     }
     public void UpdateDocumentBindings()
     {
-      messageContent = 2;
-      var FlowDoc = new TextRange(this.TextBox.Document.ContentStart, this.TextBox.Document.ContentEnd).Text;
       SetValue(DocumentProperty, this.TextBox.Document);
     }
     private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

@@ -17,7 +17,13 @@ namespace RM_Messenger.Database
         public int Message_ID { get; set; }
         public string SentBy_User_ID { get; set; }
         public string SentTo_User_ID { get; set; }
-        public string Message_Content { get; set; }
+        public string Text { get; set; }
+        public string FontStyle { get; set; }
+        public string FontSize { get; set; }
+        public Nullable<bool> Bold { get; set; }
+        public Nullable<bool> Italic { get; set; }
+        public Nullable<bool> Underline { get; set; }
+        public string Color { get; set; }
         public System.DateTime Date { get; set; }
     
         public virtual User User { get; set; }

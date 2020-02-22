@@ -4,13 +4,10 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converter="clr-namespace:RM_Messenger.Converters"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-  xmlns:gif="http://wpfanimatedgif.codeplex.com"
   xmlns:helper="clr-namespace:RM_Messenger.Helpers"
-  xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  xmlns:rm_messenger="clr-namespace:RM_Messenger"
   Width="600"
   Height="500"
   Background="White"
@@ -44,12 +41,80 @@
           </Trigger>
         </Style.Triggers>
       </Style>
+      <!--  Flat Button  -->
+      <ControlTemplate x:Key="FlatButtonControlTemplate" TargetType="{x:Type Button}">
+        <Border
+          x:Name="OuterBorder"
+          BorderBrush="Transparent"
+          BorderThickness="1"
+          CornerRadius="2">
+          <Border
+            x:Name="InnerBorder"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            BorderThickness="1"
+            CornerRadius="2">
+            <ContentPresenter
+              Margin="{TemplateBinding Padding}"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              RecognizesAccessKey="True" />
+          </Border>
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="Yellow" />
+            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="Green" />
+            <Setter TargetName="InnerBorder" Property="Background" Value="Purple" />
+          </Trigger>
+          <Trigger Property="IsPressed" Value="True">
+            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="Yellow" />
+            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="Green" />
+            <Setter TargetName="InnerBorder" Property="Background" Value="Purple" />
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate>
 
+      <!--  Flat Toggle Button  -->
+      <ControlTemplate x:Key="FlatToggleButtonControlTemplate" TargetType="{x:Type ToggleButton}">
+        <Border
+          x:Name="OuterBorder"
+          BorderBrush="Transparent"
+          BorderThickness="1"
+          CornerRadius="2">
+          <Border
+            x:Name="InnerBorder"
+            Background="Transparent"
+            BorderBrush="Transparent"
+            BorderThickness="1"
+            CornerRadius="2">
+            <ContentPresenter
+              Margin="{TemplateBinding Padding}"
+              HorizontalAlignment="Center"
+              VerticalAlignment="Center"
+              RecognizesAccessKey="True" />
+          </Border>
+        </Border>
+        <ControlTemplate.Triggers>
+          <Trigger Property="IsMouseOver" Value="True">
+            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="purple" />
+            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="pink" />
+            <Setter TargetName="InnerBorder" Property="Background" Value="plum" />
+          </Trigger>
+          <Trigger Property="IsPressed" Value="True">
+            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="purple" />
+            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="darkmagenta" />
+            <Setter TargetName="InnerBorder" Property="Background" Value="indigo" />
+          </Trigger>
+          <Trigger Property="IsChecked" Value="True">
+            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="purple" />
+            <Setter TargetName="InnerBorder" Property="BorderBrush" Value="violet" />
+            <Setter TargetName="InnerBorder" Property="Background" Value="#945F8D" />
+          </Trigger>
+        </ControlTemplate.Triggers>
+      </ControlTemplate>
     </ResourceDictionary>
   </UserControl.Resources>
-  <!--<UserControl.Background>
-    <ImageBrush ImageSource="pack://application:,,,/RM_Messenger;component/Resources/Background.jpg" />
-  </UserControl.Background>-->
 
   <Grid Margin="7,0,7,7" Background="#782370">
     <Grid.RowDefinitions>
@@ -156,6 +221,7 @@
           x:Name="IMVironmentsButton"
           Background="Transparent"
           BorderThickness="0"
+          Click="OnForceUpdateClick"
           Cursor="Hand"
           ToolTip="IMVironments">
           <Button.Template>
@@ -296,9 +362,8 @@
     <Grid Grid.Row="3" Grid.Column="0">
       <Grid.RowDefinitions>
         <RowDefinition Height="auto" />
+        <RowDefinition Height="3*" />
         <RowDefinition Height="*" />
-        <RowDefinition Height="auto" />
-        <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="4*" />
@@ -373,7 +438,7 @@
                         <local:EmoticonRichTextBoxMessagesControl
                           x:Name="ChatContent"
                           Grid.Row="1"
-                          Document="{Binding Content}"
+                          Document="{Binding Content, Mode=OneTime}"
                           ToolTip="{Binding ToolTip}" />
                       </Grid>
                     </ControlTemplate>
@@ -385,228 +450,20 @@
         </ScrollViewer>
       </Border>
 
-      <DockPanel Grid.Row="2" Margin="5,0">
-        <Button
-          x:Name="Emoticons"
-          HorizontalAlignment="Left"
-          Background="Transparent"
-          BorderThickness="0"
-          Cursor="Hand"
-          MouseEnter="EmoticonsButton_MouseEnter"
-          MouseLeave="EmoticonsButton_MouseLeave"
-          ToolTip="Emoticons">
-          <Button.Template>
-            <ControlTemplate TargetType="{x:Type Button}">
-              <StackPanel>
-                <Image
-                  x:Name="EmoticonsImage"
-                  Width="21"
-                  Height="21"
-                  Margin="0,-3,0,0"
-                  Source="pack://application:,,,/RM_Messenger;component/Resources/Emoticons.png" />
-              </StackPanel>
-              <ControlTemplate.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="True">
-                  <Setter TargetName="EmoticonsImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/Emoticons_MouseOver.png" />
-                </Trigger>
-              </ControlTemplate.Triggers>
-            </ControlTemplate>
-          </Button.Template>
-          <Popup
-            x:Name="EmoticonsPopupTooltip"
-            MouseLeave="EmoticonsTooltip_MouseLeave"
-            Placement="Top"
-            PlacementTarget="{Binding ElementName=Emoticons}">
-            <StackPanel>
-              <local:EmoticonsControl x:Name="EmoticonsControl" />
-            </StackPanel>
-          </Popup>
-        </Button>
-
-        <Button
-          x:Name="Audibles"
-          Margin="5,0"
-          HorizontalAlignment="Left"
-          Background="Transparent"
-          BorderThickness="0"
-          Cursor="Hand"
-          ToolTip="Audibles">
-          <Button.Template>
-            <ControlTemplate TargetType="{x:Type Button}">
-              <StackPanel>
-                <Image
-                  x:Name="AudiblesImage"
-                  Width="18"
-                  Height="18"
-                  Source="pack://application:,,,/RM_Messenger;component/Resources/Audibles.png" />
-              </StackPanel>
-              <ControlTemplate.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="True">
-                  <Setter TargetName="AudiblesImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/Audibles_MouseOver.png" />
-                </Trigger>
-              </ControlTemplate.Triggers>
-            </ControlTemplate>
-          </Button.Template>
-        </Button>
-
-        <Button
-          x:Name="TextFormat"
-          Margin="5,0"
-          HorizontalAlignment="Left"
-          Background="Transparent"
-          BorderThickness="0"
-          Cursor="Hand"
-          ToolTip="Format">
-          <Button.Template>
-            <ControlTemplate TargetType="{x:Type Button}">
-              <StackPanel>
-                <Image
-                  x:Name="TextFormatImage"
-                  Width="18"
-                  Height="18"
-                  Source="pack://application:,,,/RM_Messenger;component/Resources/TextFormat.png" />
-              </StackPanel>
-              <ControlTemplate.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="True">
-                  <Setter TargetName="TextFormatImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/TextFormat_MouseOver.png" />
-                </Trigger>
-              </ControlTemplate.Triggers>
-            </ControlTemplate>
-          </Button.Template>
-        </Button>
-
-        <Button
-          x:Name="BuzzIcon"
-          Margin="5,0"
-          HorizontalAlignment="Left"
-          Background="Transparent"
-          BorderThickness="0"
-          Cursor="Hand"
-          ToolTip="Buzz">
-          <Button.Template>
-            <ControlTemplate TargetType="{x:Type Button}">
-              <StackPanel>
-                <Image
-                  x:Name="BuzzImage"
-                  Width="18"
-                  Height="18"
-                  Source="pack://application:,,,/RM_Messenger;component/Resources/BuzzIcon.png" />
-              </StackPanel>
-              <ControlTemplate.Triggers>
-                <Trigger Property="Button.IsMouseOver" Value="True">
-                  <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/BuzzIcon_MouseOver.png" />
-                </Trigger>
-              </ControlTemplate.Triggers>
-            </ControlTemplate>
-          </Button.Template>
-        </Button>
-
-      </DockPanel>
-
-      <Grid
-        Grid.Row="3"
+      <local:ChatTextBoxControl
+        x:Name="ChatTextBoxControl"
+        Grid.Row="2"
         Margin="5"
-        Background="White">
+        Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, Mode=TwoWay}" />
 
-        <local:EmoticonRichTextBoxControl
-          x:Name="MessageBox"
-          Grid.Row="0"
-          MaxHeight="30"
-          Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" />
-
-        <!--<rm_messenger:EmoticonRichTextBox
-          x:Name="MessageBox"
-          MaxHeight="29"
-          Margin="0"
-          Padding="0,0,80,0"
-          Document="{Binding Autobiography}"
-          FontSize="15"
-          Foreground="Black"
-          IsUndoEnabled="False">
-          <rm_messenger:EmoticonRichTextBox.Emoticons>
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/1.gif" Text=":)" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/2.gif" Text=":(" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/3.gif" Text=";)" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/4.gif" Text=":D" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/5.gif" Text=";;)" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/5.gif" Text=":&gt;" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/6.gif" Text=":&gt;:D:&lt;" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/7.gif" Text=":-/" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/7.gif" Text=":/" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/8.gif" Text=":x" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/8.gif" Text=":X" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/9.gif" Text=":'&gt;" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":p" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":-p" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":P" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/10.gif" Text=":-P" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/11.gif" Text=":*" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/12.gif" Text="=((" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/13.gif" Text=":o" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/14.gif" Text="x(" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/15.gif" Text=":&gt;" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/16.gif" Text="b-)" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/17.gif" Text=":s" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/18.gif" Text="#:-S" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/19.gif" Text="&gt;:)" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/20.gif" Text=":((" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/21.gif" Text=":))" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/22.gif" Text=":|" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/23.gif" Text="/:)" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/24.gif" Text="=))" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/36.gif" Text="&lt;:-p" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/36.gif" Text="&lt;:-P" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/65.gif" Text=":-&quot;" />
-            <rm_messenger:EmoticonMapper Icon="pack://application:,,,/RM_Messenger;component/Resources/Emoticons/102.gif" Text="~x(;" />
-          </rm_messenger:EmoticonRichTextBox.Emoticons>
-        </rm_messenger:EmoticonRichTextBox>-->
-
-        <!--<TextBox
-          x:Name="MessageBox"
-          Grid.Row="2"
-          MaxHeight="30"
-          Margin="10,5,60,5"
-          VerticalContentAlignment="Center"
-          BorderBrush="Gray"
-          BorderThickness="0"
-          FontSize="15"
-          Foreground="Black"
-          Text="{Binding MessageBoxContent, UpdateSourceTrigger=PropertyChanged}"
-          TextWrapping="Wrap">
-          <TextBox.InputBindings>
-            <KeyBinding Key="Enter" Command="{Binding SendCommand}" />
-          </TextBox.InputBindings>
-        </TextBox>-->
-
-        <Button
-          x:Name="SendButton"
-          Grid.Row="3"
-          Width="80"
-          Height="23"
-          Margin="3"
-          HorizontalAlignment="Right"
-          VerticalAlignment="Center"
-          BorderBrush="Indigo"
-          BorderThickness="2"
-          Click="OnForceUpdateClick"
-          Command="{Binding SendCommand}"
-          Content="Send"
-          Cursor="Hand"
-          Foreground="White"
-          Style="{StaticResource ButtonHighlight}">
-          <Button.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-              <GradientStop Offset="0" Color="#7B4171" />
-              <GradientStop Offset="0.445" Color="#693060" />
-              <GradientStop Offset="0.53" Color="#481041" />
-            </LinearGradientBrush>
-          </Button.Background>
-        </Button>
-
-        <materialDesign:HintAssist.Hint>
-          <TextBlock Foreground="Gray">Write your message here...</TextBlock>
-        </materialDesign:HintAssist.Hint>
-      </Grid>
+      <Button
+        Name="SendCommandButton"
+        Grid.Row="2"
+        Width="0"
+        Height="0"
+        Margin="5"
+        Click="OnForceUpdateClick"
+        Command="{Binding SendCommand}" />
     </Grid>
   </Grid>
 </UserControl>

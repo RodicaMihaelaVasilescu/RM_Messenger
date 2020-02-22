@@ -1,28 +1,28 @@
-﻿using RM_Messenger.ViewModel;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
 
 namespace RM_Messenger.View
 {
   /// <summary>
   /// Interaction logic for ChatControl.xaml
   /// </summary>
+  /// 
   public partial class ChatControl : UserControl
   {
     public ChatControl()
     {
       InitializeComponent();
-      EmoticonsControl.DataContext = new EmoticonsViewModel();
-      MessageBox.SendButton = SendButton;
-      this.MessageBox.InitializeAndFocusTextBox();
+      ChatTextBoxControl.SendButton = SendCommandButton;
+      ChatTextBoxControl.TextBox.Focus();
     }
+
     private void OnForceUpdateClick(object sender, RoutedEventArgs e)
     {
-      this.MessageBox.UpdateDocumentBindings();
-      MessageBox.InitializeAndFocusTextBox();
+      this.ChatTextBoxControl.UpdateDocumentBindings();
+      ChatTextBoxControl.TextBox.Focus();
     }
+
     private void TS_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
     {
       ScrollViewer scrollviewer = sender as ScrollViewer;
@@ -36,23 +36,5 @@ namespace RM_Messenger.View
       }
       e.Handled = true;
     }
-
-    private void EmoticonsButton_MouseEnter(object sender, MouseEventArgs e)
-    {
-      EmoticonsPopupTooltip.IsOpen = true;
-    }
-    private void EmoticonsTooltip_MouseLeave(object sender, MouseEventArgs e)
-    {
-      EmoticonsPopupTooltip.IsOpen = false;
-    }
-
-    private void EmoticonsButton_MouseLeave(object sender, MouseEventArgs e)
-    {
-      if (!EmoticonsPopupTooltip.IsMouseOver)
-      {
-        EmoticonsPopupTooltip.IsOpen = false;
-      }
-    }
-
   }
 }

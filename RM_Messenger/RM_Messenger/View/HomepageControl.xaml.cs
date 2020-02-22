@@ -2,9 +2,7 @@
 using RM_Messenger.Helper;
 using RM_Messenger.Model;
 using RM_Messenger.ViewModel;
-using System;
 using System.Linq;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -48,7 +46,7 @@ namespace RM_Messenger.View
       if (e.Key == Key.Return)
       {
         var _context = new RMMessengerEntities();
-        var account =   _context.Accounts.Where(a => a.User_ID == UserModel.Instance.Username).FirstOrDefault();
+        var account = _context.Accounts.Where(a => a.User_ID == UserModel.Instance.Username).FirstOrDefault();
         account.Status = StatusTextBox.Text;
         _context.SaveChanges();
         ChangeStatusButton.Focus();
@@ -58,8 +56,8 @@ namespace RM_Messenger.View
     private void InnerListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
     {
       var value = sender as ListView;
-      var selected = value.SelectedItem as DisplayedContactModel;
-      WindowManager.OpenChatWindow(selected);
+      var selectedContact = value.SelectedItem as DisplayedContactModel;
+      WindowManager.OpenChatWindow(selectedContact);
 
     }
 

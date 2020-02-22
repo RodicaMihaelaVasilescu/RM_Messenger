@@ -7,19 +7,19 @@
       <Diagram DiagramId="8e6873040ebd4e0687a52c597df7a6b0" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="RMMessengerModel.AddressBook" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RMMessengerModel.Friendship" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
         <AssociationConnector Association="RMMessengerModel.FK_AddressBook_Friend_User" ManuallyRouted="false" />
         <AssociationConnector Association="RMMessengerModel.FK_AddressBook_User" ManuallyRouted="false" />
         <AssociationConnector Association="RMMessengerModel.FK_Friendships_Friend_ID" ManuallyRouted="false" />
         <AssociationConnector Association="RMMessengerModel.FK_Friendships_User_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="RMMessengerModel.FK_Messages_Receiver_User" ManuallyRouted="false" />
-        <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" ManuallyRouted="false" />
         <EntityTypeShape EntityType="RMMessengerModel.Account" Width="1.5" PointX="3" PointY="11.25" />
         <AssociationConnector Association="RMMessengerModel.FK_Accounts_Users" />
         <EntityTypeShape EntityType="RMMessengerModel.AddRequest" Width="1.5" PointX="3" PointY="14.5" />
         <AssociationConnector Association="RMMessengerModel.FK_AddRequests_SentBy" />
         <AssociationConnector Association="RMMessengerModel.FK_AddRequests_SentTo" />
+        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="17.75" />
+        <AssociationConnector Association="RMMessengerModel.FK_Messages_Receiver_User" />
+        <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

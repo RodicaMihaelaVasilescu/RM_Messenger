@@ -210,14 +210,14 @@
     <Compile Include="View\ChatControl.xaml.cs">
       <DependentUpon>ChatControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ChatTextBoxControl.xaml.cs">
+      <DependentUpon>ChatTextBoxControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\CreateNewAccountControl.xaml.cs">
       <DependentUpon>CreateNewAccountControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\DisplayImageControl.xaml.cs">
       <DependentUpon>DisplayImageControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\EmoticonRichTextBoxControl.xaml.cs">
-      <DependentUpon>EmoticonRichTextBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmoticonRichTextBoxMessagesControl.xaml.cs">
       <DependentUpon>EmoticonRichTextBoxMessagesControl.xaml</DependentUpon>
@@ -305,15 +305,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ChatTextBoxControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\CreateNewAccountControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\DisplayImageControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\EmoticonRichTextBoxControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -542,6 +542,7 @@
       <DependentUpon>EntityFramework.edmx</DependentUpon>
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
+    <Content Include="Resources\Sounds\buzz.wav" />
     <Resource Include="Resources\TextBox\TextFormat_Disabled.png" />
     <Resource Include="Resources\TextBox\TextFormat_Enabled.png" />
     <Resource Include="Resources\TextBox\FontBold.png" />
