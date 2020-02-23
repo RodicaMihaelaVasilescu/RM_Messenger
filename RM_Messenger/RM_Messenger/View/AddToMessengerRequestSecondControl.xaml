@@ -12,6 +12,7 @@
   FontSize="12"
   FontWeight="Thin"
   mc:Ignorable="d">
+
   <UserControl.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -20,7 +21,6 @@
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </UserControl.Resources>
-
 
   <Grid Margin="10,15">
     <Grid.RowDefinitions>
@@ -92,8 +92,8 @@
       Grid.Row="4"
       Grid.Column="1"
       Margin="40,0,0,0"
-      Foreground="White"
       VerticalAlignment="Center"
+      Foreground="White"
       Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
       TextWrapping="Wrap" />
 
