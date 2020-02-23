@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -77,7 +76,6 @@ namespace RM_Messenger.View
       FontSizeCombo.Items.Add("36");
     }
 
-
     private static void OnDocumentChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
       /* For unknown reasons, this method gets called twice when the 
@@ -107,7 +105,6 @@ namespace RM_Messenger.View
       SetValue(DocumentProperty, this.TextBox.Document);
       SendButton.Focus();
     }
-
 
     /// <summary>
     /// Changes the font family of selected text.
@@ -141,6 +138,7 @@ namespace RM_Messenger.View
       var textRange = new TextRange(TextBox.Selection.Start, TextBox.Selection.End);
       textRange.ApplyPropertyValue(TextElement.FontSizeProperty, pixelSize);
     }
+
     /// <summary>
     /// Formats regular text
     /// </summary>
