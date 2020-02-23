@@ -389,14 +389,6 @@
         </Button>
       </Grid>
 
-      <!--<StackPanel
-        Grid.Row="3"
-        Margin="10,0"
-        Background="White">
-        <local:ContactListsControl  x:Name="ContactListsControl"  />
-      </StackPanel>-->
-
-      <!--  Control  -->
       <StackPanel
         Grid.Row="3"
         Margin="10,0"
@@ -532,8 +524,6 @@
             </TextBox.Style>
           </TextBox>
         </DockPanel>
-
-        <!--  list box  -->
 
         <ListView
           Name="OuterListView"
@@ -783,7 +773,7 @@
           </ListView.ItemTemplate>
         </ListView>
       </StackPanel>
-      <!--  end control  -->
+
       <StackPanel
         Grid.Row="4"
         MaxWidth="474"
