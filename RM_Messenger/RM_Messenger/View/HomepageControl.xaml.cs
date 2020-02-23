@@ -58,7 +58,6 @@ namespace RM_Messenger.View
       var value = sender as ListView;
       var selectedContact = value.SelectedItem as DisplayedContactModel;
       WindowManager.OpenChatWindow(selectedContact);
-
     }
 
   }
