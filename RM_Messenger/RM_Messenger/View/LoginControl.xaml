@@ -9,7 +9,7 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Background="White"
   mc:Ignorable="d">
-  <!--  Background="#782370"  -->
+
   <UserControl.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -33,12 +33,6 @@
       <RowDefinition Height="auto" />
       <RowDefinition Height="*" />
     </Grid.RowDefinitions>
-
-    <!--<Image
-      Grid.RowSpan="9"
-      VerticalAlignment="Top"
-      Opacity="0.4"
-      Source="pack://application:,,,/RM_Messenger;component/Resources/shadow.png" />-->
 
     <DockPanel Margin="0">
       <Menu Background="Transparent" DockPanel.Dock="Top">
@@ -76,14 +70,6 @@
       Height="120"
       Margin="0,25,0,0"
       gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerSleep.gif" />
-    <!--  pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerSleep.gif  -->
-    <!--<Image
-      Grid.Row="1"
-      Width="90"
-      Height="90"
-      Margin="0,50,0,20"
-      HorizontalAlignment="Center"
-      Source="pack://application:,,,/RM_Messenger;component/Resources/YahooMessenger.png" />-->
 
     <Label
       Grid.Row="2"
@@ -190,8 +176,7 @@
       FontSize="10"
       Foreground="White"
       Style="{StaticResource MaterialDesignRaisedAccentButton}">
-      <!--<Button.Background>-->
-      <!--  Background="#53244E"  -->
+
       <Button.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
           <GradientStop Offset="0" Color="#7B4171" />
