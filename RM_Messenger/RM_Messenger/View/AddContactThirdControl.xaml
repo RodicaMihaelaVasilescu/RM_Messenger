@@ -41,8 +41,6 @@
       Text="{Binding Message}"
       TextWrapping="Wrap" />
 
-
-
     <StackPanel Grid.Row="2" Margin="20">
       <TextBlock Foreground="White" Text="Next you can:" />
       <Button
@@ -163,14 +161,13 @@
       </Button>
     </StackPanel>
 
-
-
     <Separator
       Grid.Row="3"
       Grid.ColumnSpan="2"
       Margin="10,50,10,0"
       VerticalAlignment="Bottom"
       HorizontalContentAlignment="Center" />
+
     <StackPanel
       Grid.Row="4"
       HorizontalAlignment="Right"
@@ -250,7 +247,6 @@
         </Button.Background>
       </Button>
     </StackPanel>
-
 
   </Grid>
 </UserControl>
