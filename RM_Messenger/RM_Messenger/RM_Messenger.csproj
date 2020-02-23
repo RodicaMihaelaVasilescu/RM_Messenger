@@ -170,7 +170,6 @@
     <Compile Include="EmoticonRichTextBox\EmoticonRichTextBox.cs" />
     <Compile Include="EmoticonRichTextBox\WordBreaker.cs" />
     <Compile Include="Helpers\AppConfigManager.cs" />
-    <Compile Include="Helpers\ApplicationConfigurationManager.cs" />
     <Compile Include="Helpers\AutoScrollHelper.cs" />
     <Compile Include="Helpers\EncryptionSHA256.cs" />
     <Compile Include="Helpers\Validator.cs" />
