@@ -9,6 +9,7 @@
   d:DesignHeight="450"
   d:DesignWidth="800"
   mc:Ignorable="d">
+
   <UserControl.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -108,6 +109,7 @@
       </Style>
     </ResourceDictionary>
   </UserControl.Resources>
+
   <Grid>
     <DockPanel LastChildFill="True">
       <Border
@@ -121,8 +123,6 @@
           Margin="0,3"
           Background="{Binding ElementName=FsRichTextBoxControl, Path=ToolbarBackground}"
           Orientation="Horizontal">
-
-          <!--  Font drop-down code from http://www.bennedik.de/2007/10/wpf-fast-font-drop-down-list.html  -->
 
           <!--  Font family combo box  -->
           <ToggleButton
@@ -334,10 +334,10 @@
             <!--<EventTrigger RoutedEvent="PreviewMouseDown">
             <SoundPlayerAction Source="pack://application:,,,/RM_Messenger;component/Resources/Sounds/buzz.wav" />
           </EventTrigger>-->
-
           </Button>
         </StackPanel>
       </Border>
+
       <Grid>
         <RichTextBox
           x:Name="TextBox"
@@ -377,6 +377,7 @@
         <materialDesign:HintAssist.Hint>
           <TextBlock Foreground="Gray">Write your message here...</TextBlock>
         </materialDesign:HintAssist.Hint>
+
       </Grid>
     </DockPanel>
   </Grid>
