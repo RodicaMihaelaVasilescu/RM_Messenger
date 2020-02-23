@@ -40,6 +40,7 @@
           </Trigger>
         </Style.Triggers>
       </Style>
+
       <!--  Flat Button  -->
       <ControlTemplate x:Key="FlatButtonControlTemplate" TargetType="{x:Type Button}">
         <Border
@@ -94,6 +95,7 @@
               RecognizesAccessKey="True" />
           </Border>
         </Border>
+
         <ControlTemplate.Triggers>
           <Trigger Property="IsMouseOver" Value="True">
             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="purple" />
@@ -313,8 +315,6 @@
       </StackPanel>
     </DockPanel>
 
-
-
     <Button
       Grid.Row="2"
       Grid.Column="0"
@@ -368,6 +368,7 @@
         <ColumnDefinition Width="4*" />
         <ColumnDefinition />
       </Grid.ColumnDefinitions>
+
       <DockPanel
         Grid.RowSpan="4"
         Grid.Column="1"
@@ -390,6 +391,7 @@
           </StackPanel>
         </Grid>
       </DockPanel>
+
       <Button
         Grid.Row="1"
         Margin="10"
@@ -402,6 +404,7 @@
           </MultiBinding>
         </Button.Content>
       </Button>
+
       <Border
         Grid.Row="1"
         Margin="5"
