@@ -78,7 +78,7 @@
     <Label
       Grid.Row="3"
       Margin="10"
-      Content="Example:  chatsalot77&#x0a;                 example@yahoo.com &#x0a;                 example@sbcglobal.net &#x0a;                 example@hatmail.com"
+      Content="Example: chatsalot77&#x0a;&#x09;example@yahoo.com&#x0a;&#x09;example@sbcglobal.net&#x0a;&#x09;example@hotmail.com"
       Foreground="Silver" />
 
     <Label
@@ -99,7 +99,7 @@
     <Label
       Grid.Row="6"
       Margin="10"
-      Content="Send SMS (text) from your computer.&#x0a;Example:  (408) 555-1212&#x0a;                 +1-408-555-1212 &#x0a;                 +91 98 222 49494 &#x0a;"
+      Content="Send SMS (text) from your computer.&#x0a;Example: (408) 555-1212&#x0a;&#x09;+1-408-555-1212 &#x0a;&#x09;+91 98 222 49494 &#x0a;"
       Foreground="Silver" />
 
     <StackPanel
