@@ -174,11 +174,20 @@
   <data name="DisplayImageTitle" xml:space="preserve">
     <value>Display Image</value>
   </data>
+  <data name="EmptyIdError" xml:space="preserve">
+    <value>The ID cannot be empty.</value>
+  </data>
+  <data name="EmptyPasswordError" xml:space="preserve">
+    <value>The password cannot be empty.</value>
+  </data>
   <data name="EncryptedPassword" xml:space="preserve">
     <value>EncryptedPassword</value>
   </data>
   <data name="ErrorMessageControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ErrorMessageControl</value>
+  </data>
+  <data name="ExistentIdError" xml:space="preserve">
+    <value>You can not used this ID.</value>
   </data>
   <data name="Finish" xml:space="preserve">
     <value>Finish</value>
@@ -191,6 +200,9 @@
   </data>
   <data name="HomepageWindowTitle" xml:space="preserve">
     <value>RM!Messenger</value>
+  </data>
+  <data name="IdShouldStartWithALetterError" xml:space="preserve">
+    <value>ID should start with a letter.</value>
   </data>
   <data name="IncorrectIDAndPassword" xml:space="preserve">
     <value>Your ID and password do not match.</value>
@@ -227,6 +239,12 @@
   </data>
   <data name="TextPath" xml:space="preserve">
     <value>..\..\Text\text.txt</value>
+  </data>
+  <data name="TooShortIdError" xml:space="preserve">
+    <value>ID should have at least 3 characters.</value>
+  </data>
+  <data name="TooShortPasswordError" xml:space="preserve">
+    <value>Password should have at least 8 characters.</value>
   </data>
   <data name="Username" xml:space="preserve">
     <value>Username</value>

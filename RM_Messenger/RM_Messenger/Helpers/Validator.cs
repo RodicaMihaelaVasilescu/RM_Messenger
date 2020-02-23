@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using RM_Messenger.Properties;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RM_Messenger.Helpers
 {
@@ -13,12 +10,12 @@ namespace RM_Messenger.Helpers
       string validationMessage = string.Empty;
       if (string.IsNullOrEmpty(password))
       {
-        validationMessage += "The password cannot be empty.\n";
+        validationMessage += string.Format("{0}\n", Resources.EmptyPasswordError);
       }
-    
+
       if (password.Any() && password.Count() < 8)
       {
-        validationMessage += "Password should have at least 8 characters.\n";
+        validationMessage += string.Format("{0}\n", Resources.TooShortPasswordError);
       }
       return validationMessage;
     }
@@ -28,20 +25,20 @@ namespace RM_Messenger.Helpers
       string validationMessage = string.Empty;
       if (!email.Any())
       {
-        validationMessage += "The ID cannot be empty.\n";
+        validationMessage += string.Format("{0}\n", Resources.EmptyIdError);
       }
 
       if (email.Any() && email.Count() < 3)
       {
-        validationMessage += "ID should have at least 3 characters.\n";
+        validationMessage += string.Format("{0}\n", Resources.TooShortIdError);
       }
       if (email.Any() && !char.IsLetter(email.First()))
       {
-        validationMessage += "ID should start with a letter.\n";
+        validationMessage += string.Format("{0}\n", Resources.IdShouldStartWithALetterError);
       }
-      if (email.Any(c => !(char.IsLetterOrDigit(c) || c == '.' || c =='_'|| c == '@')) || email.Count(c=>c=='_') > 1 || email.Count(c => c == '.') > 1 || email.Count(c => c == '@') > 1)
+      if (email.Any(c => !(char.IsLetterOrDigit(c) || c == '.' || c == '_' || c == '@')) || email.Count(c => c == '_') > 1 || email.Count(c => c == '.') > 1 || email.Count(c => c == '@') > 1)
       {
-        validationMessage += "You can not used this ID.\n";
+        validationMessage += string.Format("{0}\n", Resources.ExistentIdError);
       }
       return validationMessage;
     }

@@ -232,6 +232,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The ID cannot be empty..
+        /// </summary>
+        public static string EmptyIdError {
+            get {
+                return ResourceManager.GetString("EmptyIdError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The password cannot be empty..
+        /// </summary>
+        public static string EmptyPasswordError {
+            get {
+                return ResourceManager.GetString("EmptyPasswordError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EncryptedPassword.
         /// </summary>
         public static string EncryptedPassword {
@@ -246,6 +264,15 @@ namespace RM_Messenger.Properties {
         public static string ErrorMessageControlPath {
             get {
                 return ResourceManager.GetString("ErrorMessageControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can not used this ID..
+        /// </summary>
+        public static string ExistentIdError {
+            get {
+                return ResourceManager.GetString("ExistentIdError", resourceCulture);
             }
         }
         
@@ -282,6 +309,15 @@ namespace RM_Messenger.Properties {
         public static string HomepageWindowTitle {
             get {
                 return ResourceManager.GetString("HomepageWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID should start with a letter..
+        /// </summary>
+        public static string IdShouldStartWithALetterError {
+            get {
+                return ResourceManager.GetString("IdShouldStartWithALetterError", resourceCulture);
             }
         }
         
@@ -390,6 +426,24 @@ namespace RM_Messenger.Properties {
         public static string TextPath {
             get {
                 return ResourceManager.GetString("TextPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ID should have at least 3 characters..
+        /// </summary>
+        public static string TooShortIdError {
+            get {
+                return ResourceManager.GetString("TooShortIdError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Password should have at least 8 characters..
+        /// </summary>
+        public static string TooShortPasswordError {
+            get {
+                return ResourceManager.GetString("TooShortPasswordError", resourceCulture);
             }
         }
         
