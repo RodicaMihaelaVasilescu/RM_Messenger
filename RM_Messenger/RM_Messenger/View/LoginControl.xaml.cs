@@ -58,7 +58,6 @@ namespace RM_Messenger.View
 
     private void Password_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
-
       SignInButton.IsDefault = true;
     }
   }
