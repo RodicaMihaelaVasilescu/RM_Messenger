@@ -11,8 +11,7 @@ namespace RM_Messenger.View
     public ChangeProfilePictureControl()
     {
       InitializeComponent();
-      ProfilePicture.Source = 
-        Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
+      ProfilePicture.Source = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
     }
   }
 }
