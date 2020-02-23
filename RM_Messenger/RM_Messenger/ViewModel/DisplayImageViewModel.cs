@@ -14,13 +14,21 @@ namespace RM_Messenger.ViewModel
 {
   class DisplayImageViewModel : INotifyPropertyChanged
   {
+
+    #region Private Properties
+
+    private BitmapImage _profilePicture;
+    private Window window;
+
+    #endregion
+
     #region Public Properties
 
     public Action CloseAction { get; set; }
     public ICommand CloseCommand { get; set; }
     public ICommand SelectImageCommand { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
-    private Window window;
+
     public BitmapImage ProfilePicture
     {
       get { return _profilePicture; }
@@ -30,12 +38,6 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicture"));
       }
     }
-
-    #endregion
-
-    #region Private Properties
-
-    private BitmapImage _profilePicture;
 
     #endregion
 
@@ -81,12 +83,11 @@ namespace RM_Messenger.ViewModel
     private void SetProfilePicture(string newFile)
     {
       var context = new RMMessengerEntities();
-      var account = context.Accounts.FirstOrDefault(a=>a.User_ID == UserModel.Instance.Username);
+      var account = context.Accounts.FirstOrDefault(a => a.User_ID == UserModel.Instance.Username);
       account.Profile_Picture = GeneralConverters.ConvertToByteArray(newFile);
       context.SaveChanges();
     }
-
-
     #endregion
+
   }
 }

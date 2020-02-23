@@ -74,7 +74,6 @@ namespace RM_Messenger.ViewModel
     private string _email;
     private readonly RMMessengerEntities _context;
     private Window window;
-
     private bool _rememberMyIDPassword = Convert.ToBoolean(AppConfigManager.Get(Resources.RememberMyIDPassword));
     private bool _signInAutomatically = Convert.ToBoolean(AppConfigManager.Get(Resources.SignInAutomatically));
     private bool _signInAsInvisible = Convert.ToBoolean(AppConfigManager.Get(Resources.SignInAsInvisible));
@@ -86,7 +85,6 @@ namespace RM_Messenger.ViewModel
     {
       _context = new RMMessengerEntities();
       this.window = window;
-
       LoginCommand = new RelayCommand(LoginCommandExecute);
       CreateNewAccountCommand = new RelayCommand(CreateNewAccountCommandExecute);
       ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
@@ -98,11 +96,10 @@ namespace RM_Messenger.ViewModel
 
     public void LoginCommandExecute()
     {
-      
+
       if (RememberMyIDPassword)
       {
         AppConfigManager.Set(Resources.Username, UserModel.Instance.Username);
-        //Email = UserModel.Instance.Username;
         AppConfigManager.Set(Resources.EncryptedPassword, UserModel.Instance.EncryptedPassword);
       }
 
@@ -111,8 +108,6 @@ namespace RM_Messenger.ViewModel
         WindowManager.OpenLoginErrorWindow(window, Resources.YouMustEnterAnIDAndPasswordError);
         return;
       }
-
-
       OpenSigningInWindow();
     }
 
@@ -133,16 +128,16 @@ namespace RM_Messenger.ViewModel
 
     private void CreateNewAccountCommandExecute()
     {
-        var createNewAccountViewModel = new CreateNewAccountViewModel(window);
-        WindowManager.ChangeWindowContent(window, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
+      var createNewAccountViewModel = new CreateNewAccountViewModel(window);
+      WindowManager.ChangeWindowContent(window, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
 
-        if (createNewAccountViewModel.CloseAction == null)
-        {
-          createNewAccountViewModel.CloseAction = () => window.Close();
-        }
+      if (createNewAccountViewModel.CloseAction == null)
+      {
+        createNewAccountViewModel.CloseAction = () => window.Close();
+      }
 
-        WindowManager.ResizeWindow(window);
-        window.ResizeMode = ResizeMode.NoResize;
+      WindowManager.ResizeWindow(window);
+      window.ResizeMode = ResizeMode.NoResize;
     }
 
     public void ForgotPasswordCommandExecute()

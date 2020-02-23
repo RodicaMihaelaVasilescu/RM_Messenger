@@ -9,14 +9,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media;
 
 namespace RM_Messenger.ViewModel
 {
   class SigningInViewModel : INotifyPropertyChanged
   {
-    public Action CloseAction { get; set; }
-    public ICommand CancelCommand { get; set; }
+
+    #region Private fields
 
     readonly Window window;
     private bool cancelButtonPressed;
@@ -24,6 +23,12 @@ namespace RM_Messenger.ViewModel
     private RMMessengerEntities _context;
     private HomepageViewModel homepageViewModel;
 
+    #endregion
+
+    #region Public fields
+
+    public Action CloseAction { get; set; }
+    public ICommand CancelCommand { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
 
     public string MessageOnSingingIn
@@ -37,6 +42,10 @@ namespace RM_Messenger.ViewModel
       }
     }
 
+    #endregion
+
+    #region  Constructor
+
     public SigningInViewModel(Window window)
     {
       _context = new RMMessengerEntities();
@@ -47,35 +56,15 @@ namespace RM_Messenger.ViewModel
       CancelCommand = new RelayCommand(CancelCommandExecute);
     }
 
+    #endregion
+
+    #region Private Methods
+
     private void CancelCommandExecute()
     {
       cancelButtonPressed = true;
       var loginViewModel = new LoginViewModel(window);
       WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
-    }
-
-    public async void ValidateLogin()
-    {
-      await Task.Delay(5000);
-      //SwitchToLoginindow();
-      if (cancelButtonPressed)
-      {
-        //SwitchToLoginindow();
-        return;
-      }
-
-      var user = _context.Users.FirstOrDefault(u => u.User_ID == UserModel.Instance.Username &&
-   u.Password == UserModel.Instance.EncryptedPassword);
-      if (user == null)
-      {
-        CancelCommandExecute();
-        WindowManager.OpenLoginErrorWindow(window, Resources.IncorrectIDAndPassword);
-        return;
-      }
-      var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();
-      UserModel.Instance.ProfilePicture = account.Profile_Picture;
-      UserModel.Instance.Status = account.Status;
-      OpenHomepageWindow();
     }
 
     private void OpenHomepageWindow()
@@ -109,7 +98,7 @@ namespace RM_Messenger.ViewModel
         if (addRequestViewModel.CloseAction == null)
         {
           addRequestViewModel.CloseAction = () => addRequestWindow.Close();
-        addRequestWindow.Closed += new EventHandler(homepageViewModel.ReloadContactLists);
+          addRequestWindow.Closed += new EventHandler(homepageViewModel.ReloadContactLists);
         }
         addRequestWindow.Owner = window;
         addRequestWindow.Left = window.Left - 400 + offset;
@@ -119,6 +108,32 @@ namespace RM_Messenger.ViewModel
         addRequestWindow.Show();
       }
     }
+    #endregion
 
+    #region Public Methods
+
+    public async void ValidateLogin()
+    {
+      await Task.Delay(5000);
+      if (cancelButtonPressed)
+      {
+        return;
+      }
+
+      var user = _context.Users.FirstOrDefault(u => u.User_ID == UserModel.Instance.Username &&
+   u.Password == UserModel.Instance.EncryptedPassword);
+      if (user == null)
+      {
+        CancelCommandExecute();
+        WindowManager.OpenLoginErrorWindow(window, Resources.IncorrectIDAndPassword);
+        return;
+      }
+      var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();
+      UserModel.Instance.ProfilePicture = account.Profile_Picture;
+      UserModel.Instance.Status = account.Status;
+      OpenHomepageWindow();
+    }
+
+    #endregion
   }
 }

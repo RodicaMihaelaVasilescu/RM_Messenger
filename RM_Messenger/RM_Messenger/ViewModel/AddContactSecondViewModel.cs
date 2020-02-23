@@ -92,8 +92,8 @@ namespace RM_Messenger.ViewModel
         addContactFirstViewModel.CloseAction = () => window.Close();
       }
       window.WindowStartupLocation = WindowStartupLocation.CenterOwner;
-
     }
+
     private void NextCommandExecute()
     {
       var currentUserID = UserModel.Instance.Username;
@@ -101,15 +101,16 @@ namespace RM_Messenger.ViewModel
 
       if (_context.Users.Any(u => u.User_ID == newContact))
       {
-        if(!_context.AddRequests.Any(a=> a.SentBy_User_ID == currentUserID && a.SentTo_User_ID == newContact))
+        if (!_context.AddRequests.Any(a => a.SentBy_User_ID == currentUserID && a.SentTo_User_ID == newContact))
         {
           _context.AddRequests.Add(new AddRequest
           {
             SentBy_User_ID = UserModel.Instance.Username,
             SentTo_User_ID = newContact,
             Status = Resources.NoResponseStatus
-          }) ;
+          });
         }
+
         if (!_context.AddressBooks.Any(a => a.User_ID == currentUserID && a.Friend_User_ID == newContact) && currentUserID != newContact)
         {
           _context.AddressBooks.Add(new AddressBook
@@ -133,7 +134,7 @@ namespace RM_Messenger.ViewModel
           }
           else
           {
-            message = string.Format( Resources.ContactAlreadyExistsMessage, newContact);
+            message = string.Format(Resources.ContactAlreadyExistsMessage, newContact);
 
           }
         }

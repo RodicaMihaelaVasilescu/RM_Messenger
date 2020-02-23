@@ -5,22 +5,25 @@ using RM_Messenger.Helpers;
 using RM_Messenger.Model;
 using RM_Messenger.Properties;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
-using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
 {
   class CreateNewAccountViewModel : INotifyPropertyChanged
   {
-    private string _email;
 
+    #region Private Fields
+    private string _email;
+    private Window window;
+    private RMMessengerEntities _context;
+    private string _passwordValidationMessage;
+    #endregion
+
+    #region Public Fields
     public event PropertyChangedEventHandler PropertyChanged;
 
     public ICommand CreateAccountCommand { get; set; }
@@ -28,9 +31,6 @@ namespace RM_Messenger.ViewModel
     public ICommand CreateNewAccountCommand { get; set; }
     public ICommand ForgotPasswordCommand { get; set; }
     public Action CloseAction { get; set; }
-    private Window window;
-    private RMMessengerEntities _context;
-    private string _passwordValidationMessage;
 
     public string Email
     {
@@ -53,7 +53,9 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PasswordValidationMessage"));
       }
     }
+    #endregion
 
+    #region Constructor
     public CreateNewAccountViewModel(Window window)
     {
       this.window = window;
@@ -62,7 +64,9 @@ namespace RM_Messenger.ViewModel
       ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
       CancelCommand = new RelayCommand(CancelCommandExecute);
     }
+    #endregion
 
+    #region Private methods
     private void CancelCommandExecute()
     {
       var loginViewModel = new LoginViewModel(window);
@@ -97,7 +101,7 @@ namespace RM_Messenger.ViewModel
 
       var user = new User
       {
-        User_ID =  UserModel.Instance.Username,
+        User_ID = UserModel.Instance.Username,
         Password = UserModel.Instance.EncryptedPassword
       };
       _context.Users.Add(user);
@@ -113,5 +117,6 @@ namespace RM_Messenger.ViewModel
       var loginViewModel = new LoginViewModel(window);
       WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
     }
+    #endregion
   }
 }

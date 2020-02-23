@@ -4,7 +4,6 @@ using RM_Messenger.Helper;
 using RM_Messenger.Model;
 using RM_Messenger.Properties;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
@@ -24,7 +23,6 @@ namespace RM_Messenger.ViewModel
     public ICommand LogoutCommand { get; set; }
     public ICommand SendCommand { get; set; }
     public ICommand AddFriendCommand { get; set; }
-
     public ICommand ChangeStatusCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
@@ -38,6 +36,7 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ContactsLists"));
       }
     }
+
     public string Email
     {
       get { return _email; }
@@ -79,6 +78,7 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedContact"));
       }
     }
+
     public BitmapImage ProfilePicture
     {
       get { return profilePicture; }
@@ -95,12 +95,12 @@ namespace RM_Messenger.ViewModel
     #region Private Properties
 
     private string _email;
+    private string _status;
+    private string _searchedUser;
     private Window window;
     private BitmapImage profilePicture;
     private ObservableCollection<ContactListsModel> _contactsLists;
     private RMMessengerEntities _context;
-    private string _status;
-    private string _searchedUser;
     private DisplayedContactModel _selectedContact;
 
     #endregion
@@ -114,22 +114,26 @@ namespace RM_Messenger.ViewModel
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
 
-
       InitializeUserProfile();
       InitializeContactList();
     }
 
-    private void ChangeStatusCommandExecute()
-    {
+    #endregion
 
-    }
-
-    private void InitializeContactList()
+    #region Public methods
+    public void ReloadContactLists(object sender, EventArgs e)
     {
-      _context = new RMMessengerEntities();
-      ContactsLists = new ObservableCollection<ContactListsModel>();
-      AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
       LoadContactLists();
+    }
+    #endregion
+
+    #region Private Methods
+
+    private void InitializeUserProfile()
+    {
+      Email = UserModel.Instance.Username;
+      ProfilePicture = GetProfilePicture(UserModel.Instance.ProfilePicture);
+      Status = UserModel.Instance.Status;
     }
 
     private void LoadContactLists()
@@ -161,6 +165,19 @@ namespace RM_Messenger.ViewModel
       friendList.IsExpanded = true;
       friendList.DisplayedName = string.Format("Friends ({0}/{1})", friendList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendList.ContactsList.Count);
       ContactsLists.Add(friendList);
+    }
+
+    private void ChangeStatusCommandExecute()
+    {
+      //todo
+    }
+
+    private void InitializeContactList()
+    {
+      _context = new RMMessengerEntities();
+      ContactsLists = new ObservableCollection<ContactListsModel>();
+      AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
+      LoadContactLists();
     }
 
     private void AddFriendCommandExecute()
@@ -201,10 +218,8 @@ namespace RM_Messenger.ViewModel
       }
 
       addressBook.IsExpanded = false;
-
       addressBook.DisplayedName = string.Format("Address Book ({0})", addressBook.ContactsList.Count);
       ContactsLists.Add(addressBook);
-
     }
 
     private void LoadRecentList()
@@ -222,19 +237,6 @@ namespace RM_Messenger.ViewModel
     {
       ProfilePicture = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
     }
-    public void ReloadContactLists(object sender, EventArgs e)
-    {
-      LoadContactLists();
-    }
-    private void InitializeUserProfile()
-    {
-      Email = UserModel.Instance.Username;
-      ProfilePicture = GetProfilePicture(UserModel.Instance.ProfilePicture);
-      Status = UserModel.Instance.Status;
-    }
-    #endregion
-
-    #region Private Methods
 
     private void LogoutCommandExecute()
     {
@@ -264,8 +266,6 @@ namespace RM_Messenger.ViewModel
         return imageSource;
       }
     }
-
-
 
     #endregion
 

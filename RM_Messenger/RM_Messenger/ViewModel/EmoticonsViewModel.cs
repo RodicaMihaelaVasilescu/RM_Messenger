@@ -52,14 +52,14 @@ namespace RM_Messenger.ViewModel
       CancelCommand = new RelayCommand(CancelCommandExecute);
     }
 
-    private void CancelCommandExecute()
-    {
-
-    }
-
     #endregion
 
     #region Private Methods
+
+    private void CancelCommandExecute()
+    {
+      //todo
+    }
 
     private void InitializeEmoticonList()
     {
@@ -70,7 +70,7 @@ namespace RM_Messenger.ViewModel
         var emoticonsList = new List<string>();
         for (int column = 0; column < 6; column++)
         {
-            emoticonsList.Add(string.Format("pack://application:,,,/RM_Messenger;component/Resources/Emoticons/{0}.gif", emoticonId++));
+          emoticonsList.Add(string.Format("pack://application:,,,/RM_Messenger;component/Resources/Emoticons/{0}.gif", emoticonId++));
         }
 
         EmoticonsMatrix.Add(emoticonsList);

@@ -7,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -16,7 +14,7 @@ namespace RM_Messenger.ViewModel
 {
   class AddToMessengerRequestSecondViewModel : INotifyPropertyChanged
   {
-    public Action CloseAction { get; set; }
+    #region Private fields
 
     private AddRequest request;
     private Window window;
@@ -25,11 +23,13 @@ namespace RM_Messenger.ViewModel
     private List<string> contactLists;
     private string selectedContactList;
 
-    public event PropertyChangedEventHandler PropertyChanged;
+    #endregion
 
+    #region Public fields
+    public Action CloseAction { get; set; }
+    public event PropertyChangedEventHandler PropertyChanged;
     public ICommand BackCommand { get; set; }
     public ICommand FinishCommand { get; set; }
-
 
     public string DisplayedMessage
     {
@@ -74,6 +74,9 @@ namespace RM_Messenger.ViewModel
       }
     }
 
+    #endregion
+
+    #region Contructor
     public AddToMessengerRequestSecondViewModel(Window window, AddRequest request)
     {
       this.request = request;
@@ -84,6 +87,9 @@ namespace RM_Messenger.ViewModel
       FinishCommand = new RelayCommand(FinishCommandExecute);
       LoadContactLists();
     }
+    #endregion
+
+    #region Private methods
     private void LoadContactLists()
     {
       //todo : database contact lists
@@ -118,12 +124,12 @@ namespace RM_Messenger.ViewModel
 
       if (selectedContactList == Resources.FriendListName && !context.Friendships.Any(f => f.User_ID == UserModel.Instance.Username && f.Friend_ID == request.SentBy_User_ID))
       {
-          context.Friendships.Add(new Friendship
-          {
-            User_ID = UserModel.Instance.Username,
-            Friend_ID = request.SentBy_User_ID,
-            Date = DateTime.Now
-          });
+        context.Friendships.Add(new Friendship
+        {
+          User_ID = UserModel.Instance.Username,
+          Friend_ID = request.SentBy_User_ID,
+          Date = DateTime.Now
+        });
       }
 
       context.SaveChanges();
@@ -139,7 +145,8 @@ namespace RM_Messenger.ViewModel
       {
         addRequestViewModel.CloseAction = () => window.Close();
       }
-
     }
+
+    #endregion
   }
 }

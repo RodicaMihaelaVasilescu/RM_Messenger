@@ -18,7 +18,7 @@ namespace RM_Messenger.ViewModel
 
     #endregion
 
-    #region public Properties
+    #region Public Properties
 
     public Action CloseAction { get; set; }
     public ICommand CloseCommand { get; set; }
@@ -61,19 +61,11 @@ namespace RM_Messenger.ViewModel
       window.Left = Application.Current.MainWindow.Left + Application.Current.MainWindow.Width - window.Width - padding;
       window.Top = SystemParameters.WorkArea.Top + padding;
 
-      //foreach (Window win in App.Current.Windows)
-      //{
-      //  if (win.Tag != null && win.Tag.ToString().EndsWith("Child"))
-      //  {
-      //    win.Close();
-      //  }
-      //}
       window.ShowDialog();
     }
 
     private void CloseCommandExecute()
     {
-      //CloseAction?.Invoke();
       popup.IsOpen = false;
     }
 

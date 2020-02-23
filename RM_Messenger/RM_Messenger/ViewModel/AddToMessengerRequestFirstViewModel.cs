@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using RM_Messenger.Command;
@@ -16,6 +13,7 @@ namespace RM_Messenger.ViewModel
 {
   class AddToMessengerRequestFirstViewModel : INotifyPropertyChanged
   {
+    #region Private fields
     private RMMessengerEntities _context;
     private Window window;
     private AddRequest request;
@@ -26,9 +24,10 @@ namespace RM_Messenger.ViewModel
     private bool _addToMessengerChecked;
     private string _nextButtonText;
     private Visibility _addToMessengerVisibility;
+    #endregion
 
+    #region Public fields
     public event PropertyChangedEventHandler PropertyChanged;
-
     public ICommand NextCommand { get; set; }
     public Action CloseAction { get; set; }
 
@@ -51,7 +50,6 @@ namespace RM_Messenger.ViewModel
         if (_allowChecked == value) return;
         _allowChecked = value;
         AddToMessengerEnabled = value;
-
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AllowChecked"));
       }
     }
@@ -65,7 +63,6 @@ namespace RM_Messenger.ViewModel
         _doNotAllowCheck = value;
         AddToMessengerEnabled = !value;
         AddToMessengerChecked = false;
-
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DoNotAllowCheck"));
       }
     }
@@ -94,7 +91,6 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-
     public bool AddToMessengerEnabled
     {
       get { return _addToMessengerEnabled; }
@@ -117,9 +113,12 @@ namespace RM_Messenger.ViewModel
       }
     }
 
+    #endregion
+
+
+    #region Constructor
     public AddToMessengerRequestFirstViewModel(Window window, AddRequest request)
     {
-
       _context = new RMMessengerEntities();
       this.window = window;
       this.request = request;
@@ -129,10 +128,11 @@ namespace RM_Messenger.ViewModel
       AddToMessengerEnabled = _addToMessengerVisibility == Visibility.Visible;
       AddToMessengerChecked = _addToMessengerVisibility == Visibility.Visible;
       NextButtonText = AddToMessengerChecked ? Resources.Next : Resources.Finish;
-
       NextCommand = new RelayCommand(NextCommandExecute);
     }
+    #endregion
 
+    #region Private methods
     private void NextCommandExecute()
     {
       if (NextButtonText == Resources.Next)
@@ -159,5 +159,7 @@ namespace RM_Messenger.ViewModel
         addRequestViewModel.CloseAction = () => window.Close();
       }
     }
+
+    #endregion
   }
 }
