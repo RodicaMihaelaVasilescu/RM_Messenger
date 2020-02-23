@@ -48,10 +48,6 @@ namespace RM_Messenger.View
       }
     }
 
-    private void Click(object sender, RoutedEventArgs e)
-    {
-    }
-
     private void Email_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
     {
       if (e.Key == Key.Enter)
