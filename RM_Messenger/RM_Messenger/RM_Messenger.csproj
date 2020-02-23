@@ -132,7 +132,6 @@
     <Compile Include="Converters\GeneralConverters.cs" />
     <Compile Include="Converters\NameConverter.cs" />
     <Compile Include="Converters\NullToVisibilityConverter.cs" />
-    <Compile Include="Converters\ValueToHorizontalAlignmentConverter.cs" />
     <Compile Include="Database\Account.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>

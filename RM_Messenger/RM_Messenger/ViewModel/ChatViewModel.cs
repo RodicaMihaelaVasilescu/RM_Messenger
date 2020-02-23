@@ -127,11 +127,10 @@ namespace RM_Messenger.ViewModel
        u.SentBy_User_ID == DisplayedUser.UserId && u.SentTo_User_ID == UserModel.Instance.Username).ToList().Select(m =>
        new MessageModel
        {
-         SentBy = string.Format("{0} ({1}): ", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+         SentBy = m.SentBy_User_ID,
          SentTo = m.SentTo_User_ID,
          ToolTip = string.Format("{0} ({1})", m.SentBy_User_ID, m.Date.ToString("dd/MM/yyyy HH:mm:ss")),
          Content = GetDocument(m.SentBy_User_ID, m.Text),
-         HorizontalAlignment = m.SentTo_User_ID == DisplayedUser.UserId ? HorizontalAlignment.Right : HorizontalAlignment.Left
        }));
     }
 
@@ -190,11 +189,10 @@ namespace RM_Messenger.ViewModel
 
       MessagesList.Add(new MessageModel
       {
-        SentBy = string.Format("{0} ({1}): ", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
+        SentBy = message.SentBy_User_ID,
         SentTo = message.SentTo_User_ID,
         ToolTip = string.Format("{0} ({1})", message.SentBy_User_ID, message.Date.ToString("dd/MM/yyyy HH:mm:ss")),
-        Content = GetDocument( message.SentBy_User_ID, text),
-        HorizontalAlignment = HorizontalAlignment.Right
+        Content = GetDocument( message.SentBy_User_ID, text)
       });
 
       MessageBoxContent = null;

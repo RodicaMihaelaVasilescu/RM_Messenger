@@ -19,7 +19,6 @@
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
         <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
       </ResourceDictionary.MergedDictionaries>
-      <converter:ValueToHorizontalAlignmentConverter x:Key="AlignmentConverter" />
       <converter:NameConverter x:Key="NameConverter" />
       <converter:FlowDocumentToXamlConverter x:Key="flowDocumentConverter" />
       <converter:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />

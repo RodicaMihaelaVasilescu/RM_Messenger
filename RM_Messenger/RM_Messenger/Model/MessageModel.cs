@@ -10,6 +10,5 @@ namespace RM_Messenger.Model
     public string ToolTip { get; set; }
     public string SentTo { get; set; }
     public FlowDocument Content { get; set; }
-    public HorizontalAlignment HorizontalAlignment { get; set; } = HorizontalAlignment.Left;
   }
 }
