@@ -12,6 +12,7 @@
   FontSize="12"
   FontWeight="Thin"
   mc:Ignorable="d">
+
   <UserControl.Resources>
     <ResourceDictionary>
       <ResourceDictionary.MergedDictionaries>
@@ -20,7 +21,6 @@
       </ResourceDictionary.MergedDictionaries>
     </ResourceDictionary>
   </UserControl.Resources>
-
 
   <Grid Margin="10,15">
     <Grid.RowDefinitions>
@@ -109,9 +109,9 @@
         FontFamily="Calisto MT"
         FontSize="12"
         Foreground="White"
-        Visibility="{Binding AddToMessengerVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         IsChecked="{Binding AddToMessengerChecked, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-        IsEnabled="{Binding AddToMessengerEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+        IsEnabled="{Binding AddToMessengerEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        Visibility="{Binding AddToMessengerVisibility, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 
       <RadioButton
         Margin="0,5,0,0"
@@ -127,9 +127,11 @@
 
     <Button
       Grid.Row="3"
+      Grid.RowSpan="2"
       Grid.Column="1"
       Width="80"
       Height="23"
+      Margin="0,87,0,0"
       HorizontalAlignment="Right"
       VerticalAlignment="Top"
       BorderBrush="White"
@@ -141,7 +143,7 @@
       Foreground="White"
       IsDefault="True"
       IsEnabled="{Binding IsNextButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-      Style="{StaticResource MaterialDesignRaisedAccentButton}" Margin="0,87,0,0" Grid.RowSpan="2">
+      Style="{StaticResource MaterialDesignRaisedAccentButton}">
       <Button.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
           <GradientStop Offset="0" Color="#7B4171" />
