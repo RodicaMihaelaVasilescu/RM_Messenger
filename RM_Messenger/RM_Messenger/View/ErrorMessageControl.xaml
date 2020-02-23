@@ -59,8 +59,6 @@
       FontSize="11"
       Foreground="White"
       Style="{StaticResource MaterialDesignRaisedAccentButton}">
-      <!--<Button.Background>-->
-      <!--  Background="#53244E"  -->
       <Button.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
           <GradientStop Offset="0" Color="#7B4171" />
