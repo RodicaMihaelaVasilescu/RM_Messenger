@@ -17,6 +17,3 @@
 
 #### Updates: Add Emoticons
 ![alt text](Demo/Emoticons.gif)
-
-#### Initial Version of RM! Messenger
-![alt text](Demo/Version1.gif)
