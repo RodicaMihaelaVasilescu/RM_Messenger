@@ -30,7 +30,7 @@ namespace RM_Messenger
       if (_timer == null)
       {
         _timer = new DispatcherTimer(DispatcherPriority.Background);
-        _timer.Interval = TimeSpan.FromSeconds(0.25);
+        _timer.Interval = TimeSpan.FromSeconds(0);
         _timer.Tick += LookUp;
       }
 
