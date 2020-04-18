@@ -125,6 +125,7 @@ namespace RM_Messenger.ViewModel
     {
       LoadContactLists();
     }
+
     #endregion
 
     #region Private Methods

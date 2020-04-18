@@ -1,4 +1,5 @@
-﻿using System.Windows.Documents;
+﻿using System;
+using System.Windows.Documents;
 
 namespace RM_Messenger.Model
 {
@@ -7,6 +8,7 @@ namespace RM_Messenger.Model
     public string SentBy { get; set; }
     public string ToolTip { get; set; }
     public string SentTo { get; set; }
+    public DateTime Date { get; set; }
     public FlowDocument Content { get; set; }
   }
 }
