@@ -14,6 +14,7 @@ namespace RM_Messenger
     {
       Emoticons = new Collection<EmoticonMapper>();
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/1.gif", Text = ":)" });
+      Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/1.gif", Text = ":-)" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/2.gif", Text = ":(" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/3.gif", Text = ";)" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/4.gif", Text = ":D" });
