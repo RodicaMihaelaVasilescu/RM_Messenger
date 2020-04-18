@@ -38,7 +38,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Chat.ico</ApplicationIcon>
+    <ApplicationIcon>YahooMessenger.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -547,6 +547,7 @@
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
     <Content Include="Resources\Sounds\buzz.wav" />
+    <Resource Include="YahooMessenger.ico" />
     <Resource Include="Resources\TextBox\TextFormat_Disabled.png" />
     <Resource Include="Resources\TextBox\TextFormat_Enabled.png" />
     <Resource Include="Resources\TextBox\FontBold.png" />
