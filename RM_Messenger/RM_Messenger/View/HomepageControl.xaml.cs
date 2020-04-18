@@ -2,9 +2,11 @@
 using RM_Messenger.Helper;
 using RM_Messenger.Model;
 using RM_Messenger.ViewModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace RM_Messenger.View
 {
@@ -58,6 +60,12 @@ namespace RM_Messenger.View
       var value = sender as ListView;
       var selectedContact = value.SelectedItem as DisplayedContactModel;
       WindowManager.OpenChatWindow(selectedContact);
+    }
+
+    private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+    {
+      Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+      e.Handled = true;
     }
 
   }

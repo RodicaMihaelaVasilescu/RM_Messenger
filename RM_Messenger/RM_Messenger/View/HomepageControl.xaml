@@ -781,7 +781,13 @@
         Margin="10"
         Background="White"
         ToolTip="RM! Messenger Ads">
-        <Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/yahoo_ads.gif" Cursor="Hand" />
+        <Button Background="Transparent">
+          <TextBlock>
+            <Hyperlink NavigateUri="https://search.yahoo.com/" RequestNavigate="Hyperlink_RequestNavigate">
+              <Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/yahoo_ads.gif" Cursor="Hand" />
+            </Hyperlink>
+          </TextBlock>
+        </Button>
       </StackPanel>
 
       <Grid Grid.Row="5" Margin="10,0,10,5">
