@@ -180,8 +180,8 @@ namespace RM_Messenger.ViewModel
 
       Message lastMessageFromDb = _context.Messages.Where(m => m.SentBy_User_ID == chatUser &&
       m.SentTo_User_ID == currentUser).OrderByDescending(m => m.Date).FirstOrDefault();
-      if (lastMessageFromDb == null && MessagesList.Any() ||
-        DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) < 0)
+
+      if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) < 0)      
       {
         return;
       }
