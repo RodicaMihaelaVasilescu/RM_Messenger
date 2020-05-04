@@ -8,6 +8,7 @@ namespace RM_Messenger.Model
 {
   class ContactListsModel
   {
+    public string Name { get; set; }
     public string DisplayedName { get; set; }
     public string ImagePath { get; set; }
     public bool IsExpanded { get; set; } = false;

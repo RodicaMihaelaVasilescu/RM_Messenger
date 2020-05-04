@@ -161,15 +161,27 @@ namespace RM_Messenger.ViewModel
       var chatUser = DisplayedUser.UserId;
       var currentUser = UserModel.Instance.Username;
 
-      MessageModel lastDisplayedMessage = MessagesList.LastOrDefault();
-      if (lastDisplayedMessage == null)
+      if (!_context.RecentLists.Where(r => r.Sent_To == currentUser && r.Sent_To == DisplayedUser.UserId).Any())
       {
-        return;
+        _context.RecentLists.Add(new RecentList { Sent_To = currentUser, Sent_By = DisplayedUser.UserId });
+        _context.RecentLists.Add(new RecentList { Sent_To = DisplayedUser.UserId, Sent_By = currentUser });
+        _context.SaveChanges();
+      }
+
+      DateTime dateOfLastDisplayedMessage;
+      if (MessagesList.Any())
+      {
+        dateOfLastDisplayedMessage = MessagesList.LastOrDefault().Date;
+      }
+      else
+      {
+        dateOfLastDisplayedMessage = new DateTime();
       }
 
       Message lastMessageFromDb = _context.Messages.Where(m => m.SentBy_User_ID == chatUser &&
       m.SentTo_User_ID == currentUser).OrderByDescending(m => m.Date).FirstOrDefault();
-      if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, lastDisplayedMessage.Date) < 0)
+      if (lastMessageFromDb == null && MessagesList.Any() ||
+        DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) < 0)
       {
         return;
       }

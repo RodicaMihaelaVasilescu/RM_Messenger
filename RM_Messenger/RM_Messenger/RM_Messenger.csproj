@@ -162,6 +162,9 @@
     <Compile Include="Database\Message.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\RecentList.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\User.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>

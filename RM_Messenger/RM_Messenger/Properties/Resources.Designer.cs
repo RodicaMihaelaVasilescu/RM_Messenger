@@ -367,6 +367,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Recent.
+        /// </summary>
+        public static string RecentListName {
+            get {
+                return ResourceManager.GetString("RecentListName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RememberMyIDPassword.
         /// </summary>
         public static string RememberMyIDPassword {
