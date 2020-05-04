@@ -76,7 +76,7 @@ namespace RM_Messenger.ViewModel
 
     #endregion
 
-    #region Contructor
+    #region Constructor
     public AddToMessengerRequestSecondViewModel(Window window, AddRequest request)
     {
       this.request = request;
