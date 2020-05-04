@@ -110,9 +110,11 @@ namespace RM_Messenger.ViewModel
     public HomepageViewModel(Window window)
     {
       this.window = window;
+      _context = new RMMessengerEntities();
       window.Activated += new EventHandler(RefreshProfilePicture);
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
+      AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
 
       InitializeUserProfile();
       InitializeContactList();
@@ -123,7 +125,7 @@ namespace RM_Messenger.ViewModel
     #region Public methods
     public void ReloadContactLists(object sender, EventArgs e)
     {
-      LoadContactLists();
+      InitializeContactList();
     }
 
     #endregion
@@ -137,14 +139,6 @@ namespace RM_Messenger.ViewModel
       Status = UserModel.Instance.Status;
     }
 
-    private void LoadContactLists()
-    {
-      ContactsLists = new ObservableCollection<ContactListsModel>();
-      LoadRecentList();
-      LoadFriendList();
-      LoadAddressBook();
-    }
-
     private void LoadFriendList()
     {
       var currentUser = UserModel.Instance.Username;
@@ -156,9 +150,10 @@ namespace RM_Messenger.ViewModel
 
       foreach (var friend in friendList.ContactsList)
       {
-        var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
-        friend.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(friendAccount.Profile_Picture);
+        friend.ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(
+         _context.Accounts.Where(a => a.User_ID == friend.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         friend.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+        var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
         friend.Status = _context.AddRequests.Any(f => f.SentTo_User_ID == friend.UserId &&
            f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? friendAccount.Status : Resources.AddRequestPendingStatus;
       }
@@ -175,10 +170,10 @@ namespace RM_Messenger.ViewModel
 
     private void InitializeContactList()
     {
-      _context = new RMMessengerEntities();
       ContactsLists = new ObservableCollection<ContactListsModel>();
-      AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
-      LoadContactLists();
+      LoadRecentList();
+      LoadFriendList();
+      LoadAddressBook();
     }
 
     private void AddFriendCommandExecute()
@@ -227,8 +222,25 @@ namespace RM_Messenger.ViewModel
     {
       var currentUser = UserModel.Instance.Username;
       var recentList = new ContactListsModel();
-      // to do
       recentList.ContactsList = new ObservableCollection<DisplayedContactModel>();
+      var contacts = _context.RecentLists.Where(c => c.Sent_By == currentUser).ToList();
+      contacts.Reverse();
+      foreach (var contact in contacts)
+      {
+        var sent_to = _context.Accounts.Where(a => a.User_ID == contact.Sent_To).FirstOrDefault();
+        var status = _context.AddRequests.Any(f => f.SentTo_User_ID == sent_to.User_ID &&
+           f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? sent_to.Status : Resources.AddRequestPendingStatus;
+
+        recentList.ContactsList.Add(new DisplayedContactModel
+        {
+          UserId = sent_to.User_ID,
+          ImagePath = Converters.GeneralConverters.ConvertToBitmapImage(sent_to.Profile_Picture),
+          OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico",
+          Status = status
+        });
+        recentList.DisplayedName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), recentList.ContactsList.Count);
+      }
+      recentList.Name = Resources.RecentListName;
       recentList.ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/RecentContact_Icon.png";
       recentList.DisplayedName = string.Format("Recent ({0}/{1})", recentList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), recentList.ContactsList.Count);
       ContactsLists.Add(recentList);
