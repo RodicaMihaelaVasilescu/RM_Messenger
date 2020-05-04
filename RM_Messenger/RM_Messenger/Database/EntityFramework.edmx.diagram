@@ -4,22 +4,25 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="8e6873040ebd4e0687a52c597df7a6b0" Name="Diagram1" ZoomLevel="82">
-        <EntityTypeShape EntityType="RMMessengerModel.AddressBook" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="RMMessengerModel.Friendship" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
-        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_Friend_User" ManuallyRouted="false" />
-        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_User" ManuallyRouted="false" />
-        <AssociationConnector Association="RMMessengerModel.FK_Friendships_Friend_ID" ManuallyRouted="false" />
-        <AssociationConnector Association="RMMessengerModel.FK_Friendships_User_ID" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RMMessengerModel.Account" Width="1.5" PointX="3" PointY="11.25" />
+      <Diagram DiagramId="8e6873040ebd4e0687a52c597df7a6b0" Name="Diagram1" ZoomLevel="71">
+        <EntityTypeShape EntityType="RMMessengerModel.Account" Width="1.5" PointX="3" PointY="14.75" />
+        <EntityTypeShape EntityType="RMMessengerModel.AddRequest" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="RMMessengerModel.AddressBook" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="RMMessengerModel.Friendship" Width="1.5" PointX="3" PointY="11.875" />
+        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="7.625" />
+        <EntityTypeShape EntityType="RMMessengerModel.RecentList" Width="1.5" PointX="3" PointY="17.875" />
+        <EntityTypeShape EntityType="RMMessengerModel.User" Width="1.5" PointX="0.75" PointY="9.125" />
         <AssociationConnector Association="RMMessengerModel.FK_Accounts_Users" />
-        <EntityTypeShape EntityType="RMMessengerModel.AddRequest" Width="1.5" PointX="3" PointY="14.5" />
         <AssociationConnector Association="RMMessengerModel.FK_AddRequests_SentBy" />
         <AssociationConnector Association="RMMessengerModel.FK_AddRequests_SentTo" />
-        <EntityTypeShape EntityType="RMMessengerModel.Message" Width="1.5" PointX="3" PointY="17.75" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_Friend_User" />
+        <AssociationConnector Association="RMMessengerModel.FK_AddressBook_User" />
+        <AssociationConnector Association="RMMessengerModel.FK_Friendships_Friend_ID" />
+        <AssociationConnector Association="RMMessengerModel.FK_Friendships_User_ID" />
         <AssociationConnector Association="RMMessengerModel.FK_Messages_Receiver_User" />
         <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" />
+        <AssociationConnector Association="RMMessengerModel.FK_RecentList_Sent_By" />
+        <AssociationConnector Association="RMMessengerModel.FK_RecentList_Sent_To" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

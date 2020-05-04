@@ -219,6 +219,9 @@
   <data name="NoResponseStatus" xml:space="preserve">
     <value>No response</value>
   </data>
+  <data name="RecentListName" xml:space="preserve">
+    <value>Recent</value>
+  </data>
   <data name="RememberMyIDPassword" xml:space="preserve">
     <value>RememberMyIDPassword</value>
   </data>
