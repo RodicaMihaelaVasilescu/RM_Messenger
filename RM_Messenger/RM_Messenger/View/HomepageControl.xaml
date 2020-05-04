@@ -93,7 +93,17 @@
 
           <MenuItem Foreground="White" Header="_Contacts" />
 
-          <MenuItem Foreground="White" Header="_Actions" />
+          <MenuItem Foreground="White" Header="_Actions" >
+            <MenuItem
+              Command="{Binding RefreshCommand}"
+              Cursor="Hand"
+              Foreground="Black"
+              Header="_Refresh">
+              <MenuItem.Icon>
+                <materialDesign:PackIcon Kind="Refresh" />
+              </MenuItem.Icon>
+            </MenuItem>
+          </MenuItem>
 
           <MenuItem Foreground="White" Header="_View" />
         </Menu>
