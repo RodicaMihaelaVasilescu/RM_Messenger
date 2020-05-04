@@ -24,6 +24,7 @@ namespace RM_Messenger.ViewModel
     public ICommand SendCommand { get; set; }
     public ICommand AddFriendCommand { get; set; }
     public ICommand ChangeStatusCommand { get; set; }
+    public RelayCommand RefreshCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
     public ObservableCollection<ContactListsModel> ContactsLists
@@ -115,6 +116,7 @@ namespace RM_Messenger.ViewModel
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
       AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
+      RefreshCommand = new RelayCommand(RefreshCommandExecute);
 
       InitializeUserProfile();
       InitializeContactList();
@@ -131,6 +133,43 @@ namespace RM_Messenger.ViewModel
     #endregion
 
     #region Private Methods
+    void RefreshCommandExecute()
+    {
+      InitializeUserProfile();
+      InitializeContactList();
+      OpenAddRequests();
+    }
+
+    private void OpenAddRequests()
+    {
+      var request = _context.AddRequests.Where(a => a.SentTo_User_ID == UserModel.Instance.Username && a.Status == Resources.NoResponseStatus).FirstOrDefault();
+      if (request == null)
+      {
+        return;
+      }
+      request.Status = Resources.SentStatus;
+      _context.SaveChanges();
+      int offset = 0;
+      Application.Current.Dispatcher.Invoke((Action)delegate
+      {
+        Window addRequestWindow = new Window();
+        var addRequestViewModel = new AddToMessengerRequestFirstViewModel(addRequestWindow, request);
+        WindowManager.CreateGeneralWindow(addRequestWindow, addRequestViewModel, Resources.AddToMessengerRequestWindowTitle, Resources.AddToMessengerRequestFirstControlPath);
+
+        if (addRequestViewModel.CloseAction == null)
+        {
+          addRequestViewModel.CloseAction = () => addRequestWindow.Close();
+          addRequestWindow.Closed += new EventHandler(this.ReloadContactLists);
+        }
+        addRequestWindow.Owner = window;
+        addRequestWindow.Left = window.Left - 400 + offset;
+        addRequestWindow.Top = window.Top + 150 + offset;
+        offset += 60;
+        addRequestWindow.Tag = "Child";
+        addRequestWindow.Show();
+      });
+
+    }
 
     private void InitializeUserProfile()
     {

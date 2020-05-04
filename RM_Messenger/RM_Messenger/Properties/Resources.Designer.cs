@@ -385,6 +385,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sent.
+        /// </summary>
+        public static string SentStatus {
+            get {
+                return ResourceManager.GetString("SentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SignInAsInvisible.
         /// </summary>
         public static string SignInAsInvisible {
