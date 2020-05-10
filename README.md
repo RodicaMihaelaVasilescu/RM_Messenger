@@ -6,9 +6,6 @@
 #### Updates: Chat
 ![alt text](Demo/RM!Chat.gif)
 
-#### Older Version Chat
-![alt text](Demo/RM!Chat_OlderVersion.gif)
-
 #### Updates: Add To Messenger Request
 ![alt text](Demo/RM!AddToMessengerRequest.JPG)
 
