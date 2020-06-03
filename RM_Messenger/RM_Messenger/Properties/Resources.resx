@@ -225,6 +225,9 @@
   <data name="RememberMyIDPassword" xml:space="preserve">
     <value>RememberMyIDPassword</value>
   </data>
+  <data name="SentStatus" xml:space="preserve">
+    <value>Sent</value>
+  </data>
   <data name="SignInAsInvisible" xml:space="preserve">
     <value>SignInAsInvisible</value>
   </data>

@@ -5,6 +5,7 @@
   xmlns:converter="clr-namespace:RM_Messenger.Converters"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
   xmlns:gif="http://wpfanimatedgif.codeplex.com"
+  xmlns:helper="clr-namespace:RM_Messenger.Helpers"
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -93,7 +94,17 @@
 
           <MenuItem Foreground="White" Header="_Contacts" />
 
-          <MenuItem Foreground="White" Header="_Actions" />
+          <MenuItem Foreground="White" Header="_Actions">
+            <MenuItem
+              Command="{Binding RefreshCommand}"
+              Cursor="Hand"
+              Foreground="Black"
+              Header="_Refresh">
+              <MenuItem.Icon>
+                <materialDesign:PackIcon Kind="Refresh" />
+              </MenuItem.Icon>
+            </MenuItem>
+          </MenuItem>
 
           <MenuItem Foreground="White" Header="_View" />
         </Menu>
@@ -531,6 +542,7 @@
           BorderThickness="0"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
           ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
+          ScrollViewer.CanContentScroll="False"
           ScrollViewer.HorizontalScrollBarVisibility="Hidden"
           ScrollViewer.VerticalScrollBarVisibility="Auto">
           <ListView.ItemTemplate>
@@ -538,7 +550,9 @@
               <StackPanel Orientation="Vertical">
                 <Expander
                   x:Name="AddressBook"
+                  helper:ExpanderHelper.BringIntoViewOnExpand="True"
                   ExpandDirection="Right"
+                  Expanded="Expander_Expanded"
                   FontWeight="Bold"
                   Foreground="Indigo"
                   IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
@@ -701,14 +715,14 @@
 
                   <ListView
                     Name="InnerListView"
-                    MaxHeight="340"
                     Margin="20,0,10,0"
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Cursor="Hand"
                     ItemsSource="{Binding ContactsList}"
                     MouseDoubleClick="InnerListView_MouseDoubleClick"
-                    ScrollViewer.CanContentScroll="True"
+                    PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
+                    ScrollViewer.CanContentScroll="False"
                     ScrollViewer.VerticalScrollBarVisibility="Hidden"
                     SelectedItem="{Binding SelectedContact}">
                     <ListView.ContextMenu>

@@ -1,5 +1,4 @@
-﻿using RM_Messenger.Helper;
-using RM_Messenger.Helpers;
+﻿using RM_Messenger.Helpers;
 using RM_Messenger.ViewModel;
 using System;
 using System.Windows;

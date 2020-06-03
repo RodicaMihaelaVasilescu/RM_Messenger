@@ -1,9 +1,10 @@
 ﻿using RM_Messenger.Database;
-using RM_Messenger.Helper;
+using RM_Messenger.Helpers;
 using RM_Messenger.Model;
 using RM_Messenger.ViewModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
@@ -66,6 +67,23 @@ namespace RM_Messenger.View
     {
       Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
       e.Handled = true;
+    }
+    private void Expander_Expanded(object sender, RoutedEventArgs e)
+    {
+      ((Expander)sender).BringIntoView();
+    }
+
+    private void ScrollViewer_PreviewMouseWheel(object sender, MouseWheelEventArgs e)
+    {
+      if (sender is ListBox && !e.Handled)
+      {
+        e.Handled = true;
+        var eventArg = new MouseWheelEventArgs(e.MouseDevice, e.Timestamp, e.Delta);
+        eventArg.RoutedEvent = UIElement.MouseWheelEvent;
+        eventArg.Source = sender;
+        var parent = ((Control)sender).Parent as UIElement;
+        parent.RaiseEvent(eventArg);
+      }
     }
 
   }

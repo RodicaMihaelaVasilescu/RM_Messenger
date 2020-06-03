@@ -161,7 +161,7 @@ namespace RM_Messenger.ViewModel
       var chatUser = DisplayedUser.UserId;
       var currentUser = UserModel.Instance.Username;
 
-      if (!_context.RecentLists.Where(r => r.Sent_To == currentUser && r.Sent_To == DisplayedUser.UserId).Any())
+      if (!_context.RecentLists.Where(r => r.Sent_By == currentUser && r.Sent_To == DisplayedUser.UserId).Any())
       {
         _context.RecentLists.Add(new RecentList { Sent_To = currentUser, Sent_By = DisplayedUser.UserId });
         _context.RecentLists.Add(new RecentList { Sent_To = DisplayedUser.UserId, Sent_By = currentUser });
