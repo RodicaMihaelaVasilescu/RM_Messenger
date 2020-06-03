@@ -8,7 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-namespace RM_Messenger.Helper
+namespace RM_Messenger.Helpers
 {
   public class WindowManager
   {

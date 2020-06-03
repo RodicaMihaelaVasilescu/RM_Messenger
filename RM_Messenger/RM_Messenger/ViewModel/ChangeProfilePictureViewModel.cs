@@ -1,5 +1,5 @@
 ﻿using RM_Messenger.Command;
-using RM_Messenger.Helper;
+using RM_Messenger.Helpers;
 using RM_Messenger.Properties;
 using System;
 using System.ComponentModel;

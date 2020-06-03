@@ -3,10 +3,9 @@ using System.ComponentModel;
 using RM_Messenger.Model;
 using System.Windows;
 using System.Windows.Input;
-using RM_Messenger.Helper;
+using RM_Messenger.Helpers;
 using RM_Messenger.Properties;
 using RM_Messenger.Command;
-using RM_Messenger.Helpers;
 using RM_Messenger.Database;
 
 namespace RM_Messenger.ViewModel

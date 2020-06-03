@@ -175,6 +175,7 @@
     <Compile Include="Helpers\AppConfigManager.cs" />
     <Compile Include="Helpers\AutoScrollHelper.cs" />
     <Compile Include="Helpers\EncryptionSHA256.cs" />
+    <Compile Include="Helpers\ExpanderHelper.cs" />
     <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Helpers\WindowManager.cs" />
     <Compile Include="Model\ContactListsModel.cs" />
