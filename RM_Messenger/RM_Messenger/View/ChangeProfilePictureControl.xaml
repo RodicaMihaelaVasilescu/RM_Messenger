@@ -49,7 +49,7 @@
         </StackPanel>
       </Button>
 
-      <Label Content="Username" Foreground="White" />
+      <Label Content="Profile Picture" Foreground="White" />
 
       <Image
         x:Name="ProfilePicture"
@@ -58,8 +58,8 @@
         Height="100"
         Margin="5,0,0,5"
         HorizontalAlignment="Left"
-        VerticalAlignment="Top" 
-        Source="{Binding ProfilePicture,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        VerticalAlignment="Top"
+        Source="{Binding ProfilePicture, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
       <StackPanel
         Grid.Row="1"
         Grid.Column="1"
