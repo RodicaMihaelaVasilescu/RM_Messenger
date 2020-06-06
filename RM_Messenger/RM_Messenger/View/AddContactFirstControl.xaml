@@ -69,7 +69,7 @@
       HorizontalAlignment="Stretch"
       IsReadOnly="True"
       SelectedIndex="0">
-      <ComboBoxItem IsSelected="True">Yahoo! Messenger</ComboBoxItem>
+      <ComboBoxItem IsSelected="True">RM! Messenger</ComboBoxItem>
       <ComboBoxItem>LCS</ComboBoxItem>
       <ComboBoxItem>Windowsn Live (MSN)</ComboBoxItem>
       <ComboBoxItem>Lotus Sametime</ComboBoxItem>
