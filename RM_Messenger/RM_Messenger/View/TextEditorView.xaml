@@ -10,6 +10,7 @@
   d:DesignHeight="700"
   d:DesignWidth="800"
   Foreground="#693060"
+  Icon="/RM_Messenger;component/Resources/TextEditor/pink_butterfly.png"
   Loaded="Window_Loaded"
   WindowState="Maximized"
   mc:Ignorable="d">
@@ -233,24 +234,6 @@
             Content="{Binding TotalResults}"
             Foreground="#693060" />
           <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
-            <!--<Button
-              Width="85"
-              Height="20"
-              HorizontalAlignment="Right"
-              Command="{Binding FindPreviousWordCommand}"
-              Content="Previous"
-              Cursor="Hand"
-              Foreground="White"
-              IsEnabled="{Binding ArePrevAndNextButtonsEnabled}">
-
-              <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                  <GradientStop Offset="0" Color="#7B4171" />
-                  <GradientStop Offset="0.445" Color="#693060" />
-                  <GradientStop Offset="0.53" Color="#481041" />
-                </LinearGradientBrush>
-              </Button.Background>
-            </Button>-->
 
             <Button
               Width="80"
@@ -299,38 +282,9 @@
               </Button.Background>
             </Button>
 
-            <!--<Button
-              Width="85"
-              Height="20"
-              Margin="10,0,0,0"
-              HorizontalAlignment="Right"
-              Command="{Binding FindNextWordCommand}"
-              Content="Next"
-              Cursor="Hand"
-              Foreground="White"
-              IsEnabled="{Binding ArePrevAndNextButtonsEnabled}">
-
-              <Button.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                  <GradientStop Offset="0" Color="#7B4171" />
-                  <GradientStop Offset="0.445" Color="#693060" />
-                  <GradientStop Offset="0.53" Color="#481041" />
-                </LinearGradientBrush>
-              </Button.Background>
-            </Button>-->
           </StackPanel>
         </DockPanel>
       </StackPanel>
-
-
-      <!--<Image
-                Grid.Row="1"
-                Width="60"
-                Height="60"
-                Margin="0,20,0,0"
-                HorizontalAlignment="Right"
-                VerticalAlignment="Top"
-                Source="/RegularExpressions;component/Images/pink_butterfly.png" />-->
 
     </StackPanel>
   </ScrollViewer>
