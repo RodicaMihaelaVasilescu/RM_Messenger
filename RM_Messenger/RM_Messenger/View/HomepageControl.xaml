@@ -40,8 +40,8 @@
 
     </ResourceDictionary>
   </UserControl.Resources>
-  <Grid Margin="7,0,7,7" Background="#76246E">
-    <Grid Background="#76246E">
+  <Grid Margin="7,0,7,7" Background="{Binding BackgroundColor}">
+    <Grid Background="{Binding BackgroundColor}">
 
       <Grid.RowDefinitions>
         <RowDefinition Height="auto" />
@@ -52,26 +52,60 @@
         <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
 
-      <DockPanel Margin="0">
+      <DockPanel Margin="0" Cursor="Hand">
+
+        <DockPanel.Style>
+          <Style TargetType="DockPanel">
+            <Setter Property="Background">
+              <Setter.Value>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                  <GradientStop Offset="0.19" Color="{Binding DockpanelGradientColor2}" />
+                  <GradientStop Offset="0.8" Color="{Binding DockpanelGradientColor1}" />
+                </LinearGradientBrush>
+              </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Cursor" Value="Hand" />
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </DockPanel.Style>
         <Menu
           Background="Transparent"
           Cursor="Hand"
           DockPanel.Dock="Top">
 
           <MenuItem Foreground="White" Header="_Messenger">
-            <MenuItem Foreground="Black" Header="_New">
+            <MenuItem
+              Command="{Binding ChangeColorCommand}"
+              Foreground="Black"
+              Header="_New">
               <MenuItem.Icon>
                 <materialDesign:PackIcon Kind="OpenInNew" />
               </MenuItem.Icon>
             </MenuItem>
+
             <MenuItem
               Cursor="Hand"
               Foreground="Black"
-              Header="_Open">
+              Header="_Change Color">
               <MenuItem.Icon>
-                <materialDesign:PackIcon Kind="MenuOpen" />
+                <materialDesign:PackIcon Kind="ColorLens" />
               </MenuItem.Icon>
+              <MenuItem Cursor="Hand" Header="_Change Theme">
+                <MenuItem.Template>
+                  <ControlTemplate>
+                    <ListView
+                      Cursor="Hand"
+                      ItemsSource="{Binding ThemeColors}"
+                      SelectedItem="{Binding SelectedThemeColor}" />
+                  </ControlTemplate>
+                </MenuItem.Template>
+              </MenuItem>
+
             </MenuItem>
+
             <MenuItem
               Cursor="Hand"
               Foreground="Black"
@@ -106,7 +140,7 @@
             </MenuItem>
           </MenuItem>
 
-          <MenuItem Foreground="White" Header="_View" >
+          <MenuItem Foreground="White" Header="_View">
             <MenuItem
               Command="{Binding TextEditorCommand}"
               Cursor="Hand"

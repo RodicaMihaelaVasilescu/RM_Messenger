@@ -1,4 +1,5 @@
 ﻿using RM_Messenger.Command;
+using RM_Messenger.Constants;
 using RM_Messenger.Database;
 using RM_Messenger.Helpers;
 using RM_Messenger.Model;
@@ -7,10 +8,12 @@ using RM_Messenger.View;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace RM_Messenger.ViewModel
@@ -27,6 +30,7 @@ namespace RM_Messenger.ViewModel
     public ICommand ChangeStatusCommand { get; set; }
     public ICommand RefreshCommand { get; set; }
     public ICommand TextEditorCommand { get; set; }
+    public ICommand ChangeColorCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
     public ObservableCollection<ContactListsModel> ContactsLists
@@ -37,6 +41,62 @@ namespace RM_Messenger.ViewModel
         if (_contactsLists == value) return;
         _contactsLists = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ContactsLists"));
+      }
+    }
+
+    public ObservableCollection<String> ThemeColors
+    {
+      get { return _themeColors; }
+      set
+      {
+        if (_themeColors == value) return;
+        _themeColors = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ThemeColors"));
+      }
+    }
+
+    public String SelectedThemeColor
+    {
+      get { return _selectedThemeColor; }
+      set
+      {
+        if (_selectedThemeColor == value) return;
+        _selectedThemeColor = value;
+        ChangeColorCommandExecute();
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedThemeColor"));
+      }
+    }
+
+    public Brush BackgroundColor
+    {
+      get { return _backgroundColor; }
+      set
+      {
+        if (_backgroundColor == value) return;
+        _backgroundColor = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BackgroundColor"));
+      }
+    }
+
+    public Color DockpanelGradientColor1
+    {
+      get { return _dockpanelGradientColor1; }
+      set
+      {
+        if (_dockpanelGradientColor1 == value) return;
+        _dockpanelGradientColor1 = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DockpanelGradientColor1"));
+      }
+    }
+
+    public Color DockpanelGradientColor2
+    {
+      get { return _dockpanelGradientColor2; }
+      set
+      {
+        if (_dockpanelGradientColor2 == value) return;
+        _dockpanelGradientColor2 = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DockpanelGradientColor2"));
       }
     }
 
@@ -105,6 +165,11 @@ namespace RM_Messenger.ViewModel
     private ObservableCollection<ContactListsModel> _contactsLists;
     private RMMessengerEntities _context;
     private DisplayedContactModel _selectedContact;
+    private Color _dockpanelGradientColor1;
+    private Color _dockpanelGradientColor2;
+    private Brush _backgroundColor;
+    private ObservableCollection<string> _themeColors;
+    private string _selectedThemeColor;
 
     #endregion
 
@@ -120,9 +185,11 @@ namespace RM_Messenger.ViewModel
       AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
       RefreshCommand = new RelayCommand(RefreshCommandExecute);
       TextEditorCommand = new RelayCommand(TextEditorCommandExecute);
+      ChangeColorCommand = new RelayCommand(ChangeColorCommandExecute);
 
       InitializeUserProfile();
       InitializeContactList();
+      InitializeColors();
     }
 
     #endregion
@@ -144,10 +211,68 @@ namespace RM_Messenger.ViewModel
     }
 
     void TextEditorCommandExecute()
-    
     {
       var textEditorWindow = new TextEditorView();
       textEditorWindow.Show();
+    }
+    void InitializeColors()
+    {
+      ThemeColors = new ObservableCollection<string>(Constants.Colors.ColorsList);
+      SelectedThemeColor = ThemeColors.First();
+      BackgroundColor = Brushes.Purple;
+    }
+    void ChangeColorCommandExecute()
+    {
+      switch (SelectedThemeColor)
+      {
+        case Constants.Colors.PinkColor:
+          BackgroundColor = Brushes.DeepPink;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.DeepPink;
+          break;
+        case Constants.Colors.RedColor:
+          BackgroundColor = Brushes.Red;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.Red;
+          break;
+        case Constants.Colors.OrangeColor:
+          BackgroundColor = Brushes.Orange;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.Orange;
+          break;
+        case Constants.Colors.YellowColor:
+          BackgroundColor = Brushes.Goldenrod;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.Goldenrod;
+          break;
+        case Constants.Colors.GreenColor:
+          BackgroundColor = Brushes.Green;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.Green;
+          break;
+        case Constants.Colors.BlueColor:
+          BackgroundColor = Brushes.CornflowerBlue;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.CornflowerBlue;
+          break;
+        case Constants.Colors.IndigoColor:
+          BackgroundColor = Brushes.Indigo;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.Indigo;
+          break;
+        case Constants.Colors.BlackColor:
+          BackgroundColor = Brushes.Black;
+          DockpanelGradientColor1 = System.Windows.Media.Colors.White;
+          DockpanelGradientColor2 = System.Windows.Media.Colors.Black;
+          break;
+
+        default:
+          //purple
+          BackgroundColor = new SolidColorBrush(Color.FromRgb(0x76, 0x24, 0x6E));
+          DockpanelGradientColor1 = Color.FromRgb(0x48, 0x10, 0x41);
+          DockpanelGradientColor2 = Color.FromRgb(0x76, 0x24, 0x6E);
+          break;
+      }
 
     }
 
