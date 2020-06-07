@@ -106,7 +106,17 @@
             </MenuItem>
           </MenuItem>
 
-          <MenuItem Foreground="White" Header="_View" />
+          <MenuItem Foreground="White" Header="_View" >
+            <MenuItem
+              Command="{Binding TextEditorCommand}"
+              Cursor="Hand"
+              Foreground="Black"
+              Header="_Text Editor">
+              <MenuItem.Icon>
+                <materialDesign:PackIcon Kind="Abc" />
+              </MenuItem.Icon>
+            </MenuItem>
+          </MenuItem>
         </Menu>
 
       </DockPanel>

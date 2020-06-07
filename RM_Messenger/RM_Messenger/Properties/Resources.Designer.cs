@@ -331,6 +331,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invalid regex.
+        /// </summary>
+        public static string InvalidRegexError {
+            get {
+                return ResourceManager.GetString("InvalidRegexError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.LoginControl.
         /// </summary>
         public static string LoginControlPath {
@@ -435,6 +444,15 @@ namespace RM_Messenger.Properties {
         public static string SigningInWindowTitle {
             get {
                 return ResourceManager.GetString("SigningInWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text not found.
+        /// </summary>
+        public static string TextNotFoundError {
+            get {
+                return ResourceManager.GetString("TextNotFoundError", resourceCulture);
             }
         }
         

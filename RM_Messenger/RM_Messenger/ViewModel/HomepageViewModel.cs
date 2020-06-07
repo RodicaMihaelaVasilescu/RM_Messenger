@@ -3,6 +3,7 @@ using RM_Messenger.Database;
 using RM_Messenger.Helpers;
 using RM_Messenger.Model;
 using RM_Messenger.Properties;
+using RM_Messenger.View;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -24,7 +25,8 @@ namespace RM_Messenger.ViewModel
     public ICommand SendCommand { get; set; }
     public ICommand AddFriendCommand { get; set; }
     public ICommand ChangeStatusCommand { get; set; }
-    public RelayCommand RefreshCommand { get; set; }
+    public ICommand RefreshCommand { get; set; }
+    public ICommand TextEditorCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
 
     public ObservableCollection<ContactListsModel> ContactsLists
@@ -117,6 +119,7 @@ namespace RM_Messenger.ViewModel
       ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
       AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
       RefreshCommand = new RelayCommand(RefreshCommandExecute);
+      TextEditorCommand = new RelayCommand(TextEditorCommandExecute);
 
       InitializeUserProfile();
       InitializeContactList();
@@ -138,6 +141,14 @@ namespace RM_Messenger.ViewModel
       InitializeUserProfile();
       InitializeContactList();
       OpenAddRequests();
+    }
+
+    void TextEditorCommandExecute()
+    
+    {
+      var textEditorWindow = new TextEditorView();
+      textEditorWindow.Show();
+
     }
 
     private void OpenAddRequests()

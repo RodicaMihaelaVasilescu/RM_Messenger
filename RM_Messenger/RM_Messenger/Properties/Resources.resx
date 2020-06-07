@@ -207,6 +207,9 @@
   <data name="IncorrectIDAndPassword" xml:space="preserve">
     <value>Your ID and password do not match.</value>
   </data>
+  <data name="InvalidRegexError" xml:space="preserve">
+    <value>Invalid regex</value>
+  </data>
   <data name="LoginControlPath" xml:space="preserve">
     <value>RM_Messenger.View.LoginControl</value>
   </data>
@@ -242,6 +245,9 @@
   </data>
   <data name="SigningInWindowTitle" xml:space="preserve">
     <value>RM!Messenger</value>
+  </data>
+  <data name="TextNotFoundError" xml:space="preserve">
+    <value>Text not found</value>
   </data>
   <data name="TextPath" xml:space="preserve">
     <value>..\..\Text\text.txt</value>

@@ -197,6 +197,7 @@
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\SigningInViewModel.cs" />
+    <Compile Include="ViewModel\TextEditorViewModel.cs" />
     <Compile Include="View\AddContactFirstControl.xaml.cs">
       <DependentUpon>AddContactFirstControl.xaml</DependentUpon>
     </Compile>
@@ -247,6 +248,9 @@
     </Compile>
     <Compile Include="View\SigningInControl.xaml.cs">
       <DependentUpon>SigningInControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\TextEditorView.xaml.cs">
+      <DependentUpon>TextEditorView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -350,6 +354,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\SigningInControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\TextEditorView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -551,6 +559,9 @@
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
     <Content Include="Resources\Sounds\buzz.wav" />
+    <Resource Include="Resources\TextEditor\background.jpg" />
+    <Resource Include="Resources\TextEditor\pink_butterfly.png" />
+    <Resource Include="Resources\TextEditor\search_icon.png" />
     <Resource Include="YahooMessenger.ico" />
     <Resource Include="Resources\TextBox\TextFormat_Disabled.png" />
     <Resource Include="Resources\TextBox\TextFormat_Enabled.png" />
