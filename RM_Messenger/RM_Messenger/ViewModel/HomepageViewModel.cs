@@ -77,6 +77,27 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DockpanelGradientColor2"));
       }
     }
+    public Color DarkColorGradient
+    {
+      get { return _darkColorGradient; }
+      set
+      {
+        if (_darkColorGradient == value) return;
+        _darkColorGradient = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DarkColorGradient"));
+      }
+    }
+
+    public Color LightColorGradient
+    {
+      get { return _lightColorGradient; }
+      set
+      {
+        if (_lightColorGradient == value) return;
+        _lightColorGradient = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("LightColorGradient"));
+      }
+    }
 
 
     public ObservableCollection<String> ThemeColors
@@ -173,7 +194,8 @@ namespace RM_Messenger.ViewModel
     private Brush _backgroundColor = ThemeColorsHelper.GetThemeColors().BackgroundColor;
     private Color _dockpanelGradientColor1 = ThemeColorsHelper.GetThemeColors().DockpanelGradientColor1;
     private Color _dockpanelGradientColor2 = ThemeColorsHelper.GetThemeColors().DockpanelGradientColor2;
-    private Color _dockpanelGradientColor3 = ThemeColorsHelper.GetThemeColors().DockpanelGradientColor3;
+    private Color _darkColorGradient = ThemeColorsHelper.GetThemeColors().DarkColorGradient;
+    private Color _lightColorGradient = ThemeColorsHelper.GetThemeColors().LightColorGradient;
 
     #endregion
 
@@ -235,7 +257,8 @@ namespace RM_Messenger.ViewModel
       BackgroundColor = colors.BackgroundColor;
       DockpanelGradientColor1 = colors.DockpanelGradientColor1;
       DockpanelGradientColor2 = colors.DockpanelGradientColor2;
-
+      DarkColorGradient = colors.DarkColorGradient;
+      LightColorGradient = colors.LightColorGradient;
       AppConfigManager.Set(Resources.ThemeColorProperty, SelectedThemeColor);
     }
 

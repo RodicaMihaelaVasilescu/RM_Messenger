@@ -33,10 +33,140 @@
         </Setter>
       </Style>
 
+
       <Style x:Key="TabControlStyle" TargetType="TabControl">
         <Setter Property="TextElement.Foreground" Value="{DynamicResource MaterialDesignBody}" />
         <Setter Property="Background" Value="{DynamicResource MaterialDesignPaper}" />
       </Style>
+
+      <Style x:Key="TopLeftRoundCorner" TargetType="{x:Type Button}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <Grid x:Name="grid">
+                <Border
+                  x:Name="border"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  CornerRadius="10,0,0,0">
+                  <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                      <!--<GradientStop Offset="0" Color="#7B4171" />-->
+                      <!--<GradientStop Offset="0.445" Color="#693060" />
+                      <GradientStop Offset="0.53" Color="#481041" />-->
+                      <GradientStop Offset="0.1" Color="{Binding LightColorGradient}" />
+                      <GradientStop Offset="0.4" Color="{Binding DarkColorGradient}" />
+                    </LinearGradientBrush>
+                  </Border.Background>
+                  <ContentPresenter
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    TextElement.FontWeight="Bold" />
+                </Border>
+
+              </Grid>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                  <Setter TargetName="border" Property="Background">
+                    <Setter.Value>
+                      <RadialGradientBrush GradientOrigin="0.496,1.052">
+                        <RadialGradientBrush.RelativeTransform>
+                          <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="0.02" Y="0.3" />
+                          </TransformGroup>
+                        </RadialGradientBrush.RelativeTransform>
+                        <GradientStop Offset="0.3" Color="{Binding LightColorGradient}" />
+                        <GradientStop Offset="0.6" Color="{Binding LightColorGradient}" />
+                      </RadialGradientBrush>
+                    </Setter.Value>
+                  </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter TargetName="border" Property="BorderBrush" Value="#481041" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                  <Setter TargetName="grid" Property="Opacity" Value="0.25" />
+                </Trigger>
+
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+
+      <Style x:Key="TopRightRoundCorner" TargetType="{x:Type Button}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Padding" Value="1" />
+        <Setter Property="Foreground" Value="White" />
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="{x:Type Button}">
+              <Grid x:Name="grid">
+                <Border
+                  x:Name="border"
+                  BorderBrush="Black"
+                  BorderThickness="1"
+                  CornerRadius="0,10,0,0">
+                  <Border.Background>
+                    <RadialGradientBrush GradientOrigin="0.496,1.052">
+                      <RadialGradientBrush.RelativeTransform>
+                        <TransformGroup>
+                          <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5" />
+                          <TranslateTransform X="0.02" Y="0.3" />
+                        </TransformGroup>
+                      </RadialGradientBrush.RelativeTransform>
+                      <GradientStop Offset="1" Color="{Binding DarkColorGradient}" />
+                      <GradientStop Offset="0.3" Color="{Binding DarkColorGradient}" />
+                    </RadialGradientBrush>
+                  </Border.Background>
+                  <ContentPresenter
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    TextElement.FontWeight="Bold" />
+                </Border>
+
+              </Grid>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsPressed" Value="True">
+                  <Setter TargetName="border" Property="Background">
+                    <Setter.Value>
+                      <RadialGradientBrush GradientOrigin="0.496,1.052">
+                        <RadialGradientBrush.RelativeTransform>
+                          <TransformGroup>
+                            <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="1.5" ScaleY="1.5" />
+                            <TranslateTransform X="0.02" Y="0.3" />
+                          </TransformGroup>
+                        </RadialGradientBrush.RelativeTransform>
+                        <GradientStop Offset="0.3" Color="{Binding LightColorGradient}" />
+                        <GradientStop Offset="0.6" Color="{Binding LightColorGradient}" />
+                      </RadialGradientBrush>
+                    </Setter.Value>
+                  </Setter>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter TargetName="border" Property="BorderBrush" Value="#481041" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="False">
+                  <Setter TargetName="grid" Property="Opacity" Value="0.25" />
+                </Trigger>
+
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
 
     </ResourceDictionary>
   </UserControl.Resources>
@@ -71,6 +201,7 @@
             </Style.Triggers>
           </Style>
         </DockPanel.Style>
+
         <Menu
           Background="Transparent"
           Cursor="Hand"
@@ -98,8 +229,8 @@
                   <ControlTemplate>
                     <ListView
                       Cursor="Hand"
-                      MouseUp="ListView_Selected"
                       ItemsSource="{Binding ThemeColors}"
+                      MouseUp="ListView_Selected"
                       SelectedItem="{Binding SelectedThemeColor}" />
                   </ControlTemplate>
                 </MenuItem.Template>
@@ -429,20 +560,42 @@
           <ColumnDefinition />
           <ColumnDefinition />
         </Grid.ColumnDefinitions>
+
         <Button
+          Grid.Column="0"
+          Height="30"
+          Background="#3A0936"
+          BorderThickness="0"
+          Content="Contacts"
+          Foreground="White"
+          Style="{DynamicResource TopLeftRoundCorner}"
+          ToolTip="Contacts" />
+        <Button
+          Grid.Column="1"
+          Height="30"
+          Background="#3A0936"
+          BorderThickness="0"
+          Content="Y! Updates"
+          Foreground="White"
+          Style="{DynamicResource TopRightRoundCorner}"
+          ToolTip="Contacts" />
+
+        <!--<Button
+          Visibility="Hidden"
           Grid.Column="0"
           Background="#3A0936"
           BorderThickness="0"
           ToolTip="Contacts">
           <Image Source="pack://application:,,,/RM_Messenger;component/Resources/ContactsButton.png" />
-        </Button>
-        <Button
+        </Button>-->
+        <!--<Button
+          Visibility="Hidden"
           Grid.Column="1"
           Background="#3A0936"
           BorderThickness="0"
           ToolTip="Updates">
           <Image Source="pack://application:,,,/RM_Messenger;component/Resources/UpdatesButton.png" />
-        </Button>
+        </Button>-->
       </Grid>
 
       <StackPanel
@@ -584,7 +737,8 @@
         <ListView
           Name="OuterListView"
           MaxHeight="350"
-          BorderThickness="0"
+          BorderThickness="1"
+          BorderBrush="Black"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
           ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
           ScrollViewer.CanContentScroll="False"

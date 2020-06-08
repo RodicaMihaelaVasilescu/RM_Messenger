@@ -8,5 +8,7 @@ namespace RM_Messenger.Model
     public Color DockpanelGradientColor2;
     public Color DockpanelGradientColor3;
     public Brush Foreground;
+    public Color DarkColorGradient;
+    public Color LightColorGradient;
   }
 }
