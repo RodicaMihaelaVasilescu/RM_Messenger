@@ -10,5 +10,6 @@ namespace RM_Messenger.Model
     public Brush Foreground;
     public Color DarkColorGradient;
     public Color LightColorGradient;
+    public Brush DarkBackgroundColor;
   }
 }

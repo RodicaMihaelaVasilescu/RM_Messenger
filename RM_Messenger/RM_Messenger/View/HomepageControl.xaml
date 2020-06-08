@@ -57,9 +57,6 @@
                   CornerRadius="10,0,0,0">
                   <Border.Background>
                     <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                      <!--<GradientStop Offset="0" Color="#7B4171" />-->
-                      <!--<GradientStop Offset="0.445" Color="#693060" />
-                      <GradientStop Offset="0.53" Color="#481041" />-->
                       <GradientStop Offset="0.1" Color="{Binding LightColorGradient}" />
                       <GradientStop Offset="0.4" Color="{Binding DarkColorGradient}" />
                     </LinearGradientBrush>
@@ -161,6 +158,37 @@
                   <Setter TargetName="grid" Property="Opacity" Value="0.25" />
                 </Trigger>
 
+              </ControlTemplate.Triggers>
+            </ControlTemplate>
+          </Setter.Value>
+        </Setter>
+      </Style>
+
+      <Style
+        x:Key="ImageButton"
+        BasedOn="{StaticResource {x:Static ToolBar.ButtonStyleKey}}"
+        TargetType="Button">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+          <Setter.Value>
+            <ControlTemplate TargetType="Button">
+              <Border
+                Name="border"
+                Padding="{TemplateBinding Padding}"
+                Background="{TemplateBinding Background}"
+                BorderBrush="{TemplateBinding BorderBrush}"
+                BorderThickness="{TemplateBinding BorderThickness}"
+                CornerRadius="5">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+              </Border>
+              <ControlTemplate.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                  <Setter Property="BorderBrush" Value="Gainsboro" />
+                </Trigger>
+                <Trigger Property="IsEnabled" Value="false">
+                  <Setter Property="Opacity" Value="0.25" />
+                  <Setter Property="BorderBrush" Value="Transparent" />
+                </Trigger>
               </ControlTemplate.Triggers>
             </ControlTemplate>
           </Setter.Value>
@@ -553,6 +581,7 @@
 
       <Grid
         Grid.Row="2"
+        Height="27"
         Margin="10,10,10,0"
         Background="Transparent"
         Cursor="Hand">
@@ -563,7 +592,6 @@
 
         <Button
           Grid.Column="0"
-          Height="30"
           Background="#3A0936"
           BorderThickness="0"
           Content="Contacts"
@@ -572,420 +600,429 @@
           ToolTip="Contacts" />
         <Button
           Grid.Column="1"
-          Height="30"
           Background="#3A0936"
           BorderThickness="0"
           Content="Y! Updates"
           Foreground="White"
           Style="{DynamicResource TopRightRoundCorner}"
           ToolTip="Contacts" />
-
-        <!--<Button
-          Visibility="Hidden"
-          Grid.Column="0"
-          Background="#3A0936"
-          BorderThickness="0"
-          ToolTip="Contacts">
-          <Image Source="pack://application:,,,/RM_Messenger;component/Resources/ContactsButton.png" />
-        </Button>-->
-        <!--<Button
-          Visibility="Hidden"
-          Grid.Column="1"
-          Background="#3A0936"
-          BorderThickness="0"
-          ToolTip="Updates">
-          <Image Source="pack://application:,,,/RM_Messenger;component/Resources/UpdatesButton.png" />
-        </Button>-->
       </Grid>
-
-      <StackPanel
+      <Border
         Grid.Row="3"
         Margin="10,0"
         HorizontalAlignment="Stretch"
-        Background="White"
-        Orientation="Vertical">
-        <DockPanel HorizontalAlignment="Stretch" Background="#3E0C3A">
-          <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderThickness="0"
-            Command="{Binding AddFriendCommand}"
-            Cursor="Hand"
-            ToolTip="Add contact">
-            <Image Height="20" Source="pack://application:,,,/RM_Messenger;component/Resources/AddFriend.png" />
-          </Button>
-          <Button
-            HorizontalAlignment="Left"
-            Background="Transparent"
-            BorderThickness="0">
-            <Image Height="20" Source="pack://application:,,,/RM_Messenger;component/Resources/GridIcon.png" />
-          </Button>
-          <TextBox
-            Margin="0,1"
-            Padding="5,0,5,0"
-            HorizontalAlignment="Stretch"
-            HorizontalContentAlignment="Left"
-            VerticalContentAlignment="Center"
-            Panel.ZIndex="0"
-            Background="White"
-            BorderBrush="LightGray"
-            BorderThickness="1"
-            FontFamily="Calisto MT"
-            FontSize="12"
-            FontWeight="Thin"
-            Foreground="Black"
-            Text="{Binding SearchedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-            <TextBox.InputBindings>
-              <KeyBinding Key="Return" Command="{Binding AddFriendCommand}" />
-            </TextBox.InputBindings>
-            <TextBox.Style>
-              <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="TextBox">
-                <Style.Resources>
-
-                  <VisualBrush
-                    x:Key="GrayHelperTextBrush"
-                    AlignmentX="Left"
-                    AlignmentY="Center"
-                    Stretch="None">
-                    <VisualBrush.Visual>
-                      <Label
-                        Name="SearchLabel"
-                        BorderBrush="LightGray"
-                        Content="Share a status message..."
-                        FontFamily="Calisto MT"
-                        FontSize="11"
-                        FontWeight="Thin"
-                        Foreground="LightGray" />
-                    </VisualBrush.Visual>
-                  </VisualBrush>
-
-                  <VisualBrush
-                    x:Key="BlackHelperTextBrush"
-                    AlignmentX="Left"
-                    AlignmentY="Center"
-                    Stretch="None">
-                    <VisualBrush.Visual>
-                      <Label
-                        Name="SearchBlackLabel"
-                        Content="Share a status message..."
-                        FontFamily="Calisto MT"
-                        FontSize="11"
-                        FontWeight="Thin"
-                        Foreground="DeepSkyBlue" />
-                    </VisualBrush.Visual>
-                  </VisualBrush>
-
-                </Style.Resources>
+        Background="Black"
+        BorderBrush="Black"
+        BorderThickness="1">
+        <StackPanel
+          Grid.Row="3"
+          HorizontalAlignment="Stretch"
+          Background="White"
+          Orientation="Vertical">
+          <DockPanel HorizontalAlignment="Stretch">
+            <DockPanel.Style>
+              <Style TargetType="DockPanel">
+                <Setter Property="Background">
+                  <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+                      <GradientStop Offset="0.1" Color="{Binding LightColorGradient}" />
+                      <GradientStop Offset="0.4" Color="{Binding DarkColorGradient}" />
+                    </LinearGradientBrush>
+                  </Setter.Value>
+                </Setter>
                 <Style.Triggers>
-
-                  <Trigger Property="IsKeyboardFocused" Value="True">
-                    <Setter Property="Background" Value="White" />
+                  <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Cursor" Value="Hand" />
                   </Trigger>
-
-                  <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                      <Condition Property="Text" Value="{x:Null}" />
-                      <Condition Property="IsMouseOver" Value="False" />
-                      <Condition Property="IsMouseCaptured" Value="False" />
-                      <Condition Property="IsFocused" Value="False" />
-                    </MultiTrigger.Conditions>
-                    <MultiTrigger.Setters>
-                      <Setter Property="Background" Value="{StaticResource GrayHelperTextBrush}" />
-                    </MultiTrigger.Setters>
-                  </MultiTrigger>
-
-                  <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                      <Condition Property="Text" Value="{x:Static sys:String.Empty}" />
-                      <Condition Property="IsMouseOver" Value="False" />
-                      <Condition Property="IsMouseCaptured" Value="False" />
-                      <Condition Property="IsFocused" Value="False" />
-                    </MultiTrigger.Conditions>
-                    <MultiTrigger.Setters>
-                      <Setter Property="Background" Value="{StaticResource GrayHelperTextBrush}" />
-                    </MultiTrigger.Setters>
-                  </MultiTrigger>
-
-                  <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                      <Condition Property="Text" Value="{x:Null}" />
-                      <Condition Property="IsMouseOver" Value="True" />
-                      <Condition Property="IsFocused" Value="False" />
-                    </MultiTrigger.Conditions>
-                    <MultiTrigger.Setters>
-                      <Setter Property="Background" Value="{StaticResource BlackHelperTextBrush}" />
-                    </MultiTrigger.Setters>
-                  </MultiTrigger>
-
-                  <MultiTrigger>
-                    <MultiTrigger.Conditions>
-                      <Condition Property="Text" Value="{x:Static sys:String.Empty}" />
-                      <Condition Property="IsMouseOver" Value="True" />
-                      <Condition Property="IsFocused" Value="False" />
-                    </MultiTrigger.Conditions>
-                    <MultiTrigger.Setters>
-                      <Setter Property="Background" Value="{StaticResource BlackHelperTextBrush}" />
-                    </MultiTrigger.Setters>
-                  </MultiTrigger>
-
                 </Style.Triggers>
               </Style>
-            </TextBox.Style>
-          </TextBox>
-        </DockPanel>
+            </DockPanel.Style>
+            <Button
+              Margin="10,2,0,2"
+              HorizontalAlignment="Left"
+              Background="Transparent"
+              BorderThickness="0"
+              Command="{Binding AddFriendCommand}"
+              Cursor="Hand"
+              Style="{StaticResource ImageButton}"
+              ToolTip="Add contact">
+              <Image Height="17" Source="pack://application:,,,/RM_Messenger;component/Resources/AddFriend.png" />
+            </Button>
+            <Button
+              Margin="5,2"
+              HorizontalAlignment="Left"
+              Background="Transparent"
+              BorderThickness="0"
+              Cursor="Hand"
+              Style="{StaticResource ImageButton}">
+              <Image Height="17" Source="pack://application:,,,/RM_Messenger;component/Resources/GridIcon.png" />
+            </Button>
+            <TextBox
+              Margin="2,2,5,2"
+              Padding="5,0,5,0"
+              HorizontalAlignment="Stretch"
+              HorizontalContentAlignment="Left"
+              VerticalContentAlignment="Center"
+              Panel.ZIndex="0"
+              Background="White"
+              BorderBrush="LightGray"
+              BorderThickness="1"
+              FontFamily="Calisto MT"
+              FontSize="12"
+              FontWeight="Thin"
+              Foreground="Black"
+              Text="{Binding SearchedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+              <TextBox.InputBindings>
+                <KeyBinding Key="Return" Command="{Binding AddFriendCommand}" />
+              </TextBox.InputBindings>
+              <TextBox.Style>
+                <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="TextBox">
+                  <Style.Resources>
 
-        <ListView
-          Name="OuterListView"
-          MaxHeight="350"
-          BorderThickness="0"
-          ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
-          ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
-          ScrollViewer.CanContentScroll="False"
-          ScrollViewer.HorizontalScrollBarVisibility="Hidden"
-          ScrollViewer.VerticalScrollBarVisibility="Auto">
-          <ListView.ItemTemplate>
-            <DataTemplate DataType="{x:Type model:ContactListsModel}">
-              <StackPanel Orientation="Vertical">
-                <Expander
-                  x:Name="AddressBook"
-                  helper:ExpanderHelper.BringIntoViewOnExpand="True"
-                  ExpandDirection="Right"
-                  Expanded="Expander_Expanded"
-                  FontWeight="Bold"
-                  Foreground="Indigo"
-                  IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
-                  <Expander.Header>
-                    <StackPanel Orientation="Horizontal">
-                      <Image
-                        Name="img"
-                        Width="auto"
-                        Height="auto"
-                        Source="{Binding ImagePath}" />
-                      <TextBlock
-                        Margin="7,0,0,0"
-                        VerticalAlignment="Center"
-                        Text="{Binding DisplayedName}" />
-                    </StackPanel>
-                  </Expander.Header>
-                  <Expander.Resources>
-                    <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="Gray" />
-                    <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="Gray" />
-                    <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="Gray" />
-                    <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="Transparent" />
-                    <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="Gray" />
-                    <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
-                      <Setter Property="Template">
-                        <Setter.Value>
-                          <ControlTemplate TargetType="{x:Type ToggleButton}">
-                            <Border Padding="{TemplateBinding Padding}">
-                              <Grid Background="Transparent" SnapsToDevicePixels="False">
-                                <Grid.ColumnDefinitions>
-                                  <ColumnDefinition Width="Auto" />
-                                  <ColumnDefinition Width="*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid>
-                                  <Grid.LayoutTransform>
-                                    <TransformGroup>
-                                      <TransformGroup.Children>
-                                        <TransformCollection>
-                                          <RotateTransform Angle="-90" />
-                                        </TransformCollection>
-                                      </TransformGroup.Children>
-                                    </TransformGroup>
-                                  </Grid.LayoutTransform>
-                                  <Ellipse
-                                    x:Name="circle"
-                                    Width="19"
-                                    Height="19"
+                    <VisualBrush
+                      x:Key="GrayHelperTextBrush"
+                      AlignmentX="Left"
+                      AlignmentY="Center"
+                      Stretch="None">
+                      <VisualBrush.Visual>
+                        <Label
+                          Name="SearchLabel"
+                          BorderBrush="LightGray"
+                          Content="Share a status message..."
+                          FontFamily="Calisto MT"
+                          FontSize="11"
+                          FontWeight="Thin"
+                          Foreground="LightGray" />
+                      </VisualBrush.Visual>
+                    </VisualBrush>
+
+                    <VisualBrush
+                      x:Key="BlackHelperTextBrush"
+                      AlignmentX="Left"
+                      AlignmentY="Center"
+                      Stretch="None">
+                      <VisualBrush.Visual>
+                        <Label
+                          Name="SearchBlackLabel"
+                          Content="Share a status message..."
+                          FontFamily="Calisto MT"
+                          FontSize="11"
+                          FontWeight="Thin"
+                          Foreground="DeepSkyBlue" />
+                      </VisualBrush.Visual>
+                    </VisualBrush>
+
+                  </Style.Resources>
+                  <Style.Triggers>
+
+                    <Trigger Property="IsKeyboardFocused" Value="True">
+                      <Setter Property="Background" Value="White" />
+                    </Trigger>
+
+                    <MultiTrigger>
+                      <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="{x:Null}" />
+                        <Condition Property="IsMouseOver" Value="False" />
+                        <Condition Property="IsMouseCaptured" Value="False" />
+                        <Condition Property="IsFocused" Value="False" />
+                      </MultiTrigger.Conditions>
+                      <MultiTrigger.Setters>
+                        <Setter Property="Background" Value="{StaticResource GrayHelperTextBrush}" />
+                      </MultiTrigger.Setters>
+                    </MultiTrigger>
+
+                    <MultiTrigger>
+                      <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="{x:Static sys:String.Empty}" />
+                        <Condition Property="IsMouseOver" Value="False" />
+                        <Condition Property="IsMouseCaptured" Value="False" />
+                        <Condition Property="IsFocused" Value="False" />
+                      </MultiTrigger.Conditions>
+                      <MultiTrigger.Setters>
+                        <Setter Property="Background" Value="{StaticResource GrayHelperTextBrush}" />
+                      </MultiTrigger.Setters>
+                    </MultiTrigger>
+
+                    <MultiTrigger>
+                      <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="{x:Null}" />
+                        <Condition Property="IsMouseOver" Value="True" />
+                        <Condition Property="IsFocused" Value="False" />
+                      </MultiTrigger.Conditions>
+                      <MultiTrigger.Setters>
+                        <Setter Property="Background" Value="{StaticResource BlackHelperTextBrush}" />
+                      </MultiTrigger.Setters>
+                    </MultiTrigger>
+
+                    <MultiTrigger>
+                      <MultiTrigger.Conditions>
+                        <Condition Property="Text" Value="{x:Static sys:String.Empty}" />
+                        <Condition Property="IsMouseOver" Value="True" />
+                        <Condition Property="IsFocused" Value="False" />
+                      </MultiTrigger.Conditions>
+                      <MultiTrigger.Setters>
+                        <Setter Property="Background" Value="{StaticResource BlackHelperTextBrush}" />
+                      </MultiTrigger.Setters>
+                    </MultiTrigger>
+
+                  </Style.Triggers>
+                </Style>
+              </TextBox.Style>
+            </TextBox>
+          </DockPanel>
+
+          <ListView
+            Name="OuterListView"
+            MaxHeight="350"
+            BorderThickness="0"
+            ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
+            ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
+            ScrollViewer.CanContentScroll="False"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+            ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <ListView.ItemTemplate>
+              <DataTemplate DataType="{x:Type model:ContactListsModel}">
+                <StackPanel Orientation="Vertical">
+                  <Expander
+                    x:Name="AddressBook"
+                    helper:ExpanderHelper.BringIntoViewOnExpand="True"
+                    ExpandDirection="Right"
+                    Expanded="Expander_Expanded"
+                    FontWeight="Bold"
+                    Foreground="Indigo"
+                    IsExpanded="{Binding IsExpanded, Mode=TwoWay}">
+                    <Expander.Header>
+                      <StackPanel Orientation="Horizontal">
+                        <Image
+                          Name="img"
+                          Width="auto"
+                          Height="auto"
+                          Source="{Binding ImagePath}" />
+                        <TextBlock
+                          Margin="7,0,0,0"
+                          VerticalAlignment="Center"
+                          Text="{Binding DisplayedName}" />
+                      </StackPanel>
+                    </Expander.Header>
+                    <Expander.Resources>
+                      <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="Gray" />
+                      <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="Gray" />
+                      <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="Gray" />
+                      <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="Transparent" />
+                      <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="Gray" />
+                      <Style x:Key="ExpanderRightHeaderStyle" TargetType="{x:Type ToggleButton}">
+                        <Setter Property="Template">
+                          <Setter.Value>
+                            <ControlTemplate TargetType="{x:Type ToggleButton}">
+                              <Border Padding="{TemplateBinding Padding}">
+                                <Grid Background="Transparent" SnapsToDevicePixels="False">
+                                  <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                  </Grid.ColumnDefinitions>
+                                  <Grid>
+                                    <Grid.LayoutTransform>
+                                      <TransformGroup>
+                                        <TransformGroup.Children>
+                                          <TransformCollection>
+                                            <RotateTransform Angle="-90" />
+                                          </TransformCollection>
+                                        </TransformGroup.Children>
+                                      </TransformGroup>
+                                    </Grid.LayoutTransform>
+                                    <Ellipse
+                                      x:Name="circle"
+                                      Width="19"
+                                      Height="19"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Fill="{StaticResource Expander.Static.Circle.Fill}"
+                                      Stroke="{StaticResource Expander.Static.Circle.Stroke}" />
+                                    <Path
+                                      x:Name="arrow"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Data="M -2,1.5 L -0.5,4 L 1,1.5 Z"
+                                      SnapsToDevicePixels="false"
+                                      Stroke="{StaticResource Expander.Static.Arrow.Stroke}"
+                                      StrokeThickness="3" />
+                                  </Grid>
+                                  <ContentPresenter
+                                    Grid.Column="1"
+                                    Margin="4,4,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    Fill="{StaticResource Expander.Static.Circle.Fill}"
-                                    Stroke="{StaticResource Expander.Static.Circle.Stroke}" />
-                                  <Path
-                                    x:Name="arrow"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Data="M -2,1.5 L -0.5,4 L 1,1.5 Z"
-                                    SnapsToDevicePixels="false"
-                                    Stroke="{StaticResource Expander.Static.Arrow.Stroke}"
-                                    StrokeThickness="3" />
+                                    RecognizesAccessKey="True"
+                                    SnapsToDevicePixels="True" />
                                 </Grid>
-                                <ContentPresenter
-                                  Grid.Column="1"
-                                  Margin="4,4,0,0"
-                                  HorizontalAlignment="Center"
-                                  VerticalAlignment="Center"
-                                  RecognizesAccessKey="True"
-                                  SnapsToDevicePixels="True" />
-                              </Grid>
-                            </Border>
-                            <ControlTemplate.Triggers>
-                              <Trigger Property="IsChecked" Value="true">
-                                <Setter TargetName="arrow" Property="Data" Value="M -0.5,1.5 L -2.5,2.75 L -0.5, 4 Z" />
-                              </Trigger>
-                            </ControlTemplate.Triggers>
-                          </ControlTemplate>
-                        </Setter.Value>
-                      </Setter>
-                    </Style>
-                  </Expander.Resources>
+                              </Border>
+                              <ControlTemplate.Triggers>
+                                <Trigger Property="IsChecked" Value="true">
+                                  <Setter TargetName="arrow" Property="Data" Value="M -0.5,1.5 L -2.5,2.75 L -0.5, 4 Z" />
+                                </Trigger>
+                              </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                          </Setter.Value>
+                        </Setter>
+                      </Style>
+                    </Expander.Resources>
 
-                  <Expander.Template>
-                    <ControlTemplate TargetType="{x:Type Expander}">
-                      <Border
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="3"
-                        SnapsToDevicePixels="true">
-                        <Grid>
-                          <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition Height="*" />
-                          </Grid.RowDefinitions>
-                          <ToggleButton
-                            x:Name="HeaderSite"
-                            MinWidth="0"
-                            MinHeight="0"
-                            Margin="1"
-                            Padding="{TemplateBinding Padding}"
-                            HorizontalAlignment="Left"
-                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Content="{TemplateBinding Header}"
-                            ContentTemplate="{TemplateBinding HeaderTemplate}"
-                            ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
-                            Cursor="Hand"
-                            FontFamily="{TemplateBinding FontFamily}"
-                            FontSize="{TemplateBinding FontSize}"
-                            FontStretch="{TemplateBinding FontStretch}"
-                            FontStyle="{TemplateBinding FontStyle}"
-                            FontWeight="{TemplateBinding FontWeight}"
-                            Foreground="{TemplateBinding Foreground}"
-                            IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                            Style="{StaticResource ExpanderRightHeaderStyle}">
-                            <ToggleButton.FocusVisualStyle>
-                              <Style>
-                                <Setter Property="Control.Template">
-                                  <Setter.Value>
-                                    <ControlTemplate>
-                                      <Border>
-                                        <Rectangle
-                                          Margin="0"
-                                          SnapsToDevicePixels="true"
-                                          Stroke="Black"
-                                          StrokeDashArray="1 2"
-                                          StrokeThickness="1" />
-                                      </Border>
-                                    </ControlTemplate>
-                                  </Setter.Value>
-                                </Setter>
-                              </Style>
-                            </ToggleButton.FocusVisualStyle>
-                          </ToggleButton>
-                          <ContentPresenter
-                            x:Name="ExpandSite"
-                            Grid.Row="1"
-                            Margin="{TemplateBinding Padding}"
-                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Focusable="false"
-                            Visibility="Collapsed" />
-                        </Grid>
-                      </Border>
-                      <ControlTemplate.Triggers>
-                        <Trigger Property="IsExpanded" Value="true">
-                          <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
-                        </Trigger>
-                        <Trigger Property="IsEnabled" Value="false">
-                          <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
-                        </Trigger>
-                      </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                  </Expander.Template>
-
-                  <ListView
-                    Name="InnerListView"
-                    Margin="20,5,10,20"
-                    VerticalAlignment="Top"
-                    BorderThickness="0"
-                    Cursor="Hand"
-                    ItemsSource="{Binding ContactsList}"
-                    MouseDoubleClick="InnerListView_MouseDoubleClick"
-                    PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
-                    ScrollViewer.CanContentScroll="False"
-                    ScrollViewer.VerticalScrollBarVisibility="Hidden"
-                    SelectedItem="{Binding SelectedContact}">
-                    <ListView.ContextMenu>
-                      <ContextMenu Cursor="Hand">
-                        <MenuItem
-                          Command="{Binding DeleteCommand}"
-                          CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
-                          Header="Delete" />
-                      </ContextMenu>
-                    </ListView.ContextMenu>
-
-                    <ListView.ItemTemplate>
-                      <DataTemplate DataType="{x:Type model:DisplayedContactModel}">
-                        <StackPanel Orientation="Horizontal">
-                          <Image
-                            Width="30"
-                            Height="30"
-                            Source="{Binding ImagePath}" />
-
-                          <Grid Margin="5,0">
-                            <Grid.ColumnDefinitions>
-                              <ColumnDefinition />
-                              <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
+                    <Expander.Template>
+                      <ControlTemplate TargetType="{x:Type Expander}">
+                        <Border
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          CornerRadius="3"
+                          SnapsToDevicePixels="true">
+                          <Grid>
                             <Grid.RowDefinitions>
                               <RowDefinition />
-                              <RowDefinition />
+                              <RowDefinition Height="*" />
                             </Grid.RowDefinitions>
-                            <Image
-                              Width="10"
-                              Height="10"
-                              Margin="0,5,0,0"
-                              VerticalAlignment="Top"
-                              Source="{Binding OnOffImage}" />
-
-                            <TextBlock
-                              Grid.Column="1"
-                              Margin="5,0,0,0"
-                              VerticalAlignment="Top"
-                              FontSize="12"
-                              Text="{Binding UserId}" />
-                            <TextBlock
-                              Grid.Row="1"
-                              Grid.Column="1"
-                              MaxWidth="125"
-                              Margin="5,0,0,0"
+                            <ToggleButton
+                              x:Name="HeaderSite"
+                              MinWidth="0"
+                              MinHeight="0"
+                              Margin="1"
+                              Padding="{TemplateBinding Padding}"
                               HorizontalAlignment="Left"
-                              VerticalAlignment="Top"
-                              FontSize="10"
-                              FontWeight="Thin"
-                              Text="{Binding Status}"
-                              TextWrapping="NoWrap" />
-
+                              HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Content="{TemplateBinding Header}"
+                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                              ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                              Cursor="Hand"
+                              FontFamily="{TemplateBinding FontFamily}"
+                              FontSize="{TemplateBinding FontSize}"
+                              FontStretch="{TemplateBinding FontStretch}"
+                              FontStyle="{TemplateBinding FontStyle}"
+                              FontWeight="{TemplateBinding FontWeight}"
+                              Foreground="{TemplateBinding Foreground}"
+                              IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                              Style="{StaticResource ExpanderRightHeaderStyle}">
+                              <ToggleButton.FocusVisualStyle>
+                                <Style>
+                                  <Setter Property="Control.Template">
+                                    <Setter.Value>
+                                      <ControlTemplate>
+                                        <Border>
+                                          <Rectangle
+                                            Margin="0"
+                                            SnapsToDevicePixels="true"
+                                            Stroke="Black"
+                                            StrokeDashArray="1 2"
+                                            StrokeThickness="1" />
+                                        </Border>
+                                      </ControlTemplate>
+                                    </Setter.Value>
+                                  </Setter>
+                                </Style>
+                              </ToggleButton.FocusVisualStyle>
+                            </ToggleButton>
+                            <ContentPresenter
+                              x:Name="ExpandSite"
+                              Grid.Row="1"
+                              Margin="{TemplateBinding Padding}"
+                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                              Focusable="false"
+                              Visibility="Collapsed" />
                           </Grid>
-                        </StackPanel>
-                      </DataTemplate>
-                    </ListView.ItemTemplate>
-                  </ListView>
-                </Expander>
-              </StackPanel>
-            </DataTemplate>
-          </ListView.ItemTemplate>
-        </ListView>
-      </StackPanel>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                          <Trigger Property="IsExpanded" Value="true">
+                            <Setter TargetName="ExpandSite" Property="Visibility" Value="Visible" />
+                          </Trigger>
+                          <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}" />
+                          </Trigger>
+                        </ControlTemplate.Triggers>
+                      </ControlTemplate>
+                    </Expander.Template>
 
+                    <ListView
+                      Name="InnerListView"
+                      Margin="20,5,10,20"
+                      VerticalAlignment="Top"
+                      BorderThickness="0"
+                      Cursor="Hand"
+                      ItemsSource="{Binding ContactsList}"
+                      MouseDoubleClick="InnerListView_MouseDoubleClick"
+                      PreviewMouseWheel="ScrollViewer_PreviewMouseWheel"
+                      ScrollViewer.CanContentScroll="False"
+                      ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                      SelectedItem="{Binding SelectedContact}">
+                      <ListView.ContextMenu>
+                        <ContextMenu Cursor="Hand">
+                          <MenuItem
+                            Command="{Binding DeleteCommand}"
+                            CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=ContextMenu}, Path=PlacementTarget.SelectedItem}"
+                            Header="Delete" />
+                        </ContextMenu>
+                      </ListView.ContextMenu>
+
+                      <ListView.ItemTemplate>
+                        <DataTemplate DataType="{x:Type model:DisplayedContactModel}">
+                          <StackPanel Orientation="Horizontal">
+                            <Image
+                              Width="30"
+                              Height="30"
+                              Source="{Binding ImagePath}" />
+
+                            <Grid Margin="5,0">
+                              <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                              </Grid.ColumnDefinitions>
+                              <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                              </Grid.RowDefinitions>
+                              <Image
+                                Width="10"
+                                Height="10"
+                                Margin="0,5,0,0"
+                                VerticalAlignment="Top"
+                                Source="{Binding OnOffImage}" />
+
+                              <TextBlock
+                                Grid.Column="1"
+                                Margin="5,0,0,0"
+                                VerticalAlignment="Top"
+                                FontSize="12"
+                                Text="{Binding UserId}" />
+                              <TextBlock
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                MaxWidth="125"
+                                Margin="5,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                FontSize="10"
+                                FontWeight="Thin"
+                                Text="{Binding Status}"
+                                TextWrapping="NoWrap" />
+
+                            </Grid>
+                          </StackPanel>
+                        </DataTemplate>
+                      </ListView.ItemTemplate>
+                    </ListView>
+                  </Expander>
+                </StackPanel>
+              </DataTemplate>
+            </ListView.ItemTemplate>
+          </ListView>
+        </StackPanel>
+      </Border>
       <StackPanel
         Grid.Row="4"
         MaxWidth="474"

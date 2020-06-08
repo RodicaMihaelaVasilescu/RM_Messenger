@@ -55,6 +55,17 @@ namespace RM_Messenger.ViewModel
       }
     }
 
+    public Brush DarkBackgroundColor
+    {
+      get { return _darkBackgroundColor; }
+      set
+      {
+        if (_darkBackgroundColor == value) return;
+        _darkBackgroundColor = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("DarkBackgroundColor"));
+      }
+    }
+
 
     public Color DockpanelGradientColor1
     {
@@ -196,6 +207,7 @@ namespace RM_Messenger.ViewModel
     private Color _dockpanelGradientColor2 = ThemeColorsHelper.GetThemeColors().DockpanelGradientColor2;
     private Color _darkColorGradient = ThemeColorsHelper.GetThemeColors().DarkColorGradient;
     private Color _lightColorGradient = ThemeColorsHelper.GetThemeColors().LightColorGradient;
+    private Brush _darkBackgroundColor;
 
     #endregion
 
@@ -259,6 +271,7 @@ namespace RM_Messenger.ViewModel
       DockpanelGradientColor2 = colors.DockpanelGradientColor2;
       DarkColorGradient = colors.DarkColorGradient;
       LightColorGradient = colors.LightColorGradient;
+      DarkBackgroundColor = colors.DarkBackgroundColor;
       AppConfigManager.Set(Resources.ThemeColorProperty, SelectedThemeColor);
     }
 
