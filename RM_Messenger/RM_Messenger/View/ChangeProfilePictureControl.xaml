@@ -55,7 +55,7 @@
         </StackPanel>
       </Button>
 
-      <Label Content="Profile Picture" Foreground="White" />
+      <Label Content="Profile Picture" x:Name="ProfilePictureLabel" Foreground="White" />
 
       <Image
         x:Name="ProfilePicture"

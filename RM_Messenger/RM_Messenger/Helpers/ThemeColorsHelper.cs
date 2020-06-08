@@ -63,6 +63,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.Green;
           colorModel.DarkColorGradient = Colors.DarkGreen;
           colorModel.LightColorGradient = Colors.LightGreen;
+          colorModel.Foreground = Brushes.Black;
 
           break;
 

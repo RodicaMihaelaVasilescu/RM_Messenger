@@ -27,6 +27,7 @@ namespace RM_Messenger.View
       ContactDetailsButton.Foreground = themeColor.Foreground ?? Brushes.DodgerBlue;
       AccountInfoButton.Foreground = themeColor.Foreground ?? Brushes.DodgerBlue;
       MyProfileButton.Foreground = themeColor.Foreground ?? Brushes.DodgerBlue;
+      ProfilePictureLabel.Foreground = themeColor.Foreground ?? Brushes.White;
     }
   }
 }
