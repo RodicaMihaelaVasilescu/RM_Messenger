@@ -737,6 +737,7 @@
         <ListView
           Name="OuterListView"
           MaxHeight="350"
+          BorderThickness="0"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
           ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
           ScrollViewer.CanContentScroll="False"
