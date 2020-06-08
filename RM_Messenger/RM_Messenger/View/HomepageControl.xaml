@@ -737,8 +737,6 @@
         <ListView
           Name="OuterListView"
           MaxHeight="350"
-          BorderThickness="1"
-          BorderBrush="Black"
           ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
           ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
           ScrollViewer.CanContentScroll="False"
@@ -914,7 +912,7 @@
 
                   <ListView
                     Name="InnerListView"
-                    Margin="20,0,10,0"
+                    Margin="20,5,10,20"
                     VerticalAlignment="Top"
                     BorderThickness="0"
                     Cursor="Hand"
