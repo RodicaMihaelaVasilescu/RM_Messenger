@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using RM_Messenger.Helpers;
+using RM_Messenger.ViewModel;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -14,6 +16,7 @@ namespace RM_Messenger.View
     {
       InitializeComponent();
       ChatTextBoxControl.SendButton = SendCommandButton;
+      SetBackgroundColors();
       ChatTextBoxControl.TextBox.Focus();
     }
 
@@ -35,6 +38,18 @@ namespace RM_Messenger.View
         scrollviewer.LineDown();
       }
       e.Handled = true;
+    }
+
+    public void SetBackgroundColors()
+    {
+      var themeColor = ThemeColorsHelper.GetThemeColors();
+      GridChat.Background = themeColor.BackgroundColor;
+      DockPanelChat.Background = themeColor.BackgroundColor;
+      DockpanelGradientColor1.Color = themeColor.DockpanelGradientColor1;
+      DockpanelGradientColor2.Color = themeColor.DockpanelGradientColor2;
+      ChatTextBoxControl.GradientColor1.Color = themeColor.DockpanelGradientColor1;
+      ChatTextBoxControl.GradientColor2.Color = themeColor.DockpanelGradientColor2;
+      ChatTextBoxControl.GradientColor3.Color = themeColor.DockpanelGradientColor3;
     }
   }
 }

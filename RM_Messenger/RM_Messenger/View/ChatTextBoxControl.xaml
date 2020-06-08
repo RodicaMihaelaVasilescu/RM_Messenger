@@ -367,9 +367,9 @@
           Style="{StaticResource ButtonHighlight}">
           <Button.Background>
             <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-              <GradientStop Offset="0" Color="#7B4171" />
-              <GradientStop Offset="0.445" Color="#693060" />
-              <GradientStop Offset="0.53" Color="#481041" />
+              <GradientStop x:Name="GradientColor2" Offset="0.8" />
+              <GradientStop x:Name="GradientColor3" Offset="0.4" />
+              <GradientStop x:Name="GradientColor1" Offset="0" />
             </LinearGradientBrush>
           </Button.Background>
         </Button>

@@ -65,12 +65,10 @@
           <Trigger Property="IsMouseOver" Value="True">
             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="Yellow" />
             <Setter TargetName="InnerBorder" Property="BorderBrush" Value="Green" />
-            <Setter TargetName="InnerBorder" Property="Background" Value="Purple" />
           </Trigger>
           <Trigger Property="IsPressed" Value="True">
             <Setter TargetName="OuterBorder" Property="BorderBrush" Value="Yellow" />
             <Setter TargetName="InnerBorder" Property="BorderBrush" Value="Green" />
-            <Setter TargetName="InnerBorder" Property="Background" Value="Purple" />
           </Trigger>
         </ControlTemplate.Triggers>
       </ControlTemplate>
@@ -117,15 +115,20 @@
     </ResourceDictionary>
   </UserControl.Resources>
 
-  <Grid Margin="7,0,7,7" Background="#782370">
+  <Grid x:Name="GridChat" Margin="7,0,7,7">
     <Grid.RowDefinitions>
       <RowDefinition Height="auto" />
       <RowDefinition Height="auto" />
       <RowDefinition Height="auto" />
       <RowDefinition />
     </Grid.RowDefinitions>
-    <Image Opacity="0.3" Source="pack://application:,,,/RM_Messenger;component/Resources/Banner.png" />
     <DockPanel Margin="0">
+      <DockPanel.Background>
+        <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
+          <GradientStop x:Name="DockpanelGradientColor2" Offset="0.19" />
+          <GradientStop x:Name="DockpanelGradientColor1" Offset="0.8" />
+        </LinearGradientBrush>
+      </DockPanel.Background>
       <Menu Background="Transparent" DockPanel.Dock="Top">
 
         <MenuItem Foreground="White" Header="_Conversation">
@@ -369,10 +372,10 @@
       </Grid.ColumnDefinitions>
 
       <DockPanel
+        Name="DockPanelChat"
         Grid.RowSpan="4"
         Grid.Column="1"
-        Margin="0,5,5,5"
-        Background="#945F8D">
+        Margin="0,5,5,5">
         <Grid>
           <StackPanel
             Grid.Row="0"

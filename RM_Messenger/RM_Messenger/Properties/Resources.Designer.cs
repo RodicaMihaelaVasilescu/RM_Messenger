@@ -466,6 +466,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ThemeColorProperty.
+        /// </summary>
+        public static string ThemeColorProperty {
+            get {
+                return ResourceManager.GetString("ThemeColorProperty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ID should have at least 3 characters..
         /// </summary>
         public static string TooShortIdError {

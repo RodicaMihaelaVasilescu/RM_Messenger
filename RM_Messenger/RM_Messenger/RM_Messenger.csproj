@@ -177,12 +177,14 @@
     <Compile Include="Helpers\AutoScrollHelper.cs" />
     <Compile Include="Helpers\EncryptionSHA256.cs" />
     <Compile Include="Helpers\ExpanderHelper.cs" />
+    <Compile Include="Helpers\ThemeColorsHelper.cs" />
     <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Helpers\WindowManager.cs" />
     <Compile Include="Model\ContactListsModel.cs" />
     <Compile Include="Model\DisplayedContactModel.cs" />
     <Compile Include="Model\ErrorMessageModel.cs" />
     <Compile Include="Model\MessageModel.cs" />
+    <Compile Include="Model\ThemeColorModel.cs" />
     <Compile Include="Model\UserModel.cs" />
     <Compile Include="ViewModel\AddContactSecondViewModel.cs" />
     <Compile Include="ViewModel\AddContactThirdViewModel.cs" />

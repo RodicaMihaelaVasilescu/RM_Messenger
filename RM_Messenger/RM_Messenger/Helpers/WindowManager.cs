@@ -65,11 +65,11 @@ namespace RM_Messenger.Helpers
     }
 
 
-    public static void OpenChatWindow(DisplayedContactModel selectedContact)
+    public static ChatControl OpenChatWindow(DisplayedContactModel selectedContact)
     {
       if (selectedContact == null)
       {
-        return;
+        return null;
       }
       UserModel user = new UserModel
       {
@@ -84,7 +84,7 @@ namespace RM_Messenger.Helpers
           if (win.Tag != null && win.Tag.ToString() == user.Username + "Child")
           {
             win.Focus();
-            return;
+            return null;
           }
       }
       Window child = new Window
@@ -99,6 +99,8 @@ namespace RM_Messenger.Helpers
       child.SizeToContent = SizeToContent.WidthAndHeight;
       child.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/Chat.ico", UriKind.RelativeOrAbsolute));
       child.Show();
+
+      return chatControl;
     }
   }
 }

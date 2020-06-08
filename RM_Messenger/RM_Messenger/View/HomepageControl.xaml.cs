@@ -17,6 +17,8 @@ namespace RM_Messenger.View
   public partial class HomepageControl : UserControl
   {
     ChangeProfilePictureViewModel changeProfilePictureViewModel;
+    private ChatControl chatControl;
+
     public HomepageControl()
     {
       InitializeComponent();
@@ -60,7 +62,7 @@ namespace RM_Messenger.View
     {
       var value = sender as ListView;
       var selectedContact = value.SelectedItem as DisplayedContactModel;
-      WindowManager.OpenChatWindow(selectedContact);
+      chatControl = WindowManager.OpenChatWindow(selectedContact);
     }
 
     private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -86,5 +88,9 @@ namespace RM_Messenger.View
       }
     }
 
+    private void ListView_Selected(object sender, RoutedEventArgs e)
+    {
+      chatControl?.SetBackgroundColors();
+    }
   }
 }

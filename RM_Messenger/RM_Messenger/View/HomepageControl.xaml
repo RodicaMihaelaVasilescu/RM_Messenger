@@ -98,6 +98,7 @@
                   <ControlTemplate>
                     <ListView
                       Cursor="Hand"
+                      MouseUp="ListView_Selected"
                       ItemsSource="{Binding ThemeColors}"
                       SelectedItem="{Binding SelectedThemeColor}" />
                   </ControlTemplate>

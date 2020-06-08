@@ -252,6 +252,9 @@
   <data name="TextPath" xml:space="preserve">
     <value>..\..\Text\text.txt</value>
   </data>
+  <data name="ThemeColorProperty" xml:space="preserve">
+    <value>ThemeColorProperty</value>
+  </data>
   <data name="TooShortIdError" xml:space="preserve">
     <value>ID should have at least 3 characters.</value>
   </data>

@@ -6,7 +6,7 @@
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-  Background="#782370"
+  Loaded="UserControl_Loaded"
   mc:Ignorable="d">
 
   <UserControl.Resources>
@@ -18,11 +18,17 @@
     </ResourceDictionary>
   </UserControl.Resources>
 
+  <UserControl.Background>
+    <LinearGradientBrush x:Name="GradientBackground" StartPoint="0,1" EndPoint="0,0">
+      <GradientStop x:Name="BackgroundColor2" Offset="0.01" />
+      <GradientStop x:Name="BackgroundColor3" Offset="0.2" />
+      <GradientStop x:Name="BackgroundColor1" Offset="0.8" />
+    </LinearGradientBrush>
+
+  </UserControl.Background>
+
   <Border BorderBrush="MediumPurple" BorderThickness="1">
     <Grid>
-      <Grid.Background>
-        <ImageBrush ImageSource="../Resources/shadow.png" Opacity="0.4" />
-      </Grid.Background>
       <Grid.RowDefinitions>
         <RowDefinition Height="auto" />
         <RowDefinition />
@@ -79,10 +85,9 @@
           Command="{Binding DisplayImageCommand}"
           Content="Display Image"
           FontSize="10"
-          Foreground="DodgerBlue"
           Style="{StaticResource MaterialDesignRaisedAccentButton}" />
         <Button
-          x:Name="ForgotPassword"
+          x:Name="ContactDetailsButton"
           Height="21"
           Margin="0,10,0,0"
           HorizontalAlignment="Left"
@@ -91,12 +96,11 @@
           VerticalContentAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
-          Command="{Binding ForgotPasswordCommand}"
           Content="Contact Details"
           FontSize="10"
-          Foreground="DodgerBlue"
           Style="{StaticResource MaterialDesignRaisedAccentButton}" />
         <Button
+          x:Name="MyProfileButton"
           Height="21"
           HorizontalAlignment="Left"
           VerticalAlignment="Bottom"
@@ -104,13 +108,12 @@
           VerticalContentAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
-          Command="{Binding ForgotPasswordCommand}"
           Content="My Profile"
           FontSize="10"
-          Foreground="DodgerBlue"
           Style="{StaticResource MaterialDesignRaisedAccentButton}" />
 
         <Button
+          x:Name="AccountInfoButton"
           Height="21"
           HorizontalAlignment="Left"
           VerticalAlignment="Bottom"
@@ -118,10 +121,8 @@
           VerticalContentAlignment="Center"
           Background="Transparent"
           BorderThickness="0"
-          Command="{Binding ForgotPasswordCommand}"
           Content="Account Info"
           FontSize="10"
-          Foreground="DodgerBlue"
           Style="{StaticResource MaterialDesignRaisedAccentButton}" />
 
       </StackPanel>
