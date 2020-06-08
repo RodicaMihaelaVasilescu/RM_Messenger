@@ -103,7 +103,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor2 = Color.FromRgb(0x76, 0x24, 0x6E);
           colorModel.DockpanelGradientColor3 = Color.FromRgb(0x69, 0x30, 0x60);
           colorModel.DarkColorGradient = Color.FromRgb(0x48, 0x10, 0x41);
-          colorModel.LightColorGradient = Color.FromRgb(0xcf, 0xa4, 0xc9);
+          colorModel.LightColorGradient = Color.FromRgb(0x76, 0x24, 0x6E);
           break;
       }
       return colorModel;
