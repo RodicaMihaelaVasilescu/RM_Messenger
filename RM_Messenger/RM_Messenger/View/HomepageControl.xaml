@@ -624,9 +624,9 @@
               <Style TargetType="DockPanel">
                 <Setter Property="Background">
                   <Setter.Value>
-                    <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
-                      <GradientStop Offset="0.1" Color="{Binding LightColorGradient}" />
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
                       <GradientStop Offset="0.4" Color="{Binding DarkColorGradient}" />
+                      <GradientStop Offset="0.1" Color="{Binding LightColorGradient}" />
                     </LinearGradientBrush>
                   </Setter.Value>
                 </Setter>
@@ -658,6 +658,7 @@
               <Image Height="17" Source="pack://application:,,,/RM_Messenger;component/Resources/GridIcon.png" />
             </Button>
             <TextBox
+              Height="18"
               Margin="2,2,5,2"
               Padding="5,0,5,0"
               HorizontalAlignment="Stretch"

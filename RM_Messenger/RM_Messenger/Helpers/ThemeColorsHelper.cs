@@ -23,7 +23,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.Pink;
           colorModel.DarkColorGradient = Colors.MediumVioletRed;
           colorModel.LightColorGradient = Colors.LightPink;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
           break;
 
         case Constants.Colors.RedColor:
@@ -34,7 +34,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.OrangeRed;
           colorModel.DarkColorGradient = Colors.Crimson;
           colorModel.LightColorGradient = Colors.MistyRose;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
           break;
 
         case Constants.Colors.OrangeColor:
@@ -43,7 +43,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.BlanchedAlmond;
           colorModel.DockpanelGradientColor2 = Colors.Orange;
           colorModel.DockpanelGradientColor3 = Colors.Orange;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
           colorModel.DarkColorGradient = Colors.DarkOrange;
           colorModel.LightColorGradient = Colors.BlanchedAlmond;
           break;
@@ -57,7 +57,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.Gold;
           colorModel.DarkColorGradient = Colors.Goldenrod;
           colorModel.LightColorGradient = Colors.Yellow;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
           break;
 
         case Constants.Colors.GreenColor:
@@ -68,7 +68,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.Green;
           colorModel.DarkColorGradient = Colors.DarkGreen;
           colorModel.LightColorGradient = Colors.LightGreen;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
 
           break;
 
@@ -80,7 +80,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.CornflowerBlue;
           colorModel.DarkColorGradient = Colors.DarkBlue;
           colorModel.LightColorGradient = Colors.CornflowerBlue;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
           break;
 
         case Constants.Colors.IndigoColor:
@@ -91,7 +91,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor3 = Colors.Indigo;
           colorModel.DarkColorGradient = Colors.Navy;
           colorModel.LightColorGradient = Colors.MediumPurple;
-          colorModel.Foreground = Brushes.Black;
+          colorModel.Foreground = Brushes.White;
           break;
 
         case Constants.Colors.BlackColor:

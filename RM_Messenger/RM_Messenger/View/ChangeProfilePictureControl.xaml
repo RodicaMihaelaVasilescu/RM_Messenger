@@ -21,7 +21,6 @@
   <UserControl.Background>
     <LinearGradientBrush x:Name="GradientBackground" StartPoint="0,1" EndPoint="0,0">
       <GradientStop x:Name="BackgroundColor2" Offset="0.01" />
-      <GradientStop x:Name="BackgroundColor3" Offset="0.2" />
       <GradientStop x:Name="BackgroundColor1" Offset="0.8" />
     </LinearGradientBrush>
 

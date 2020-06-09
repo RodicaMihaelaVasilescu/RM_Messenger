@@ -20,9 +20,8 @@ namespace RM_Messenger.View
     private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
     {
       var themeColor = ThemeColorsHelper.GetThemeColors();
-      BackgroundColor1.Color = themeColor.DockpanelGradientColor1;
+      BackgroundColor1.Color = themeColor.DarkColorGradient;
       BackgroundColor2.Color = themeColor.DockpanelGradientColor2;
-      BackgroundColor3.Color = themeColor.DockpanelGradientColor3;
       DisplayImage.Foreground = themeColor.Foreground ?? Brushes.DodgerBlue;
       ContactDetailsButton.Foreground = themeColor.Foreground ?? Brushes.DodgerBlue;
       AccountInfoButton.Foreground = themeColor.Foreground ?? Brushes.DodgerBlue;
