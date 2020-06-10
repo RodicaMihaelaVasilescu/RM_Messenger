@@ -21,6 +21,7 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.LightPink;
           colorModel.DockpanelGradientColor2 = Colors.DeepPink;
           colorModel.DockpanelGradientColor3 = Colors.Pink;
+          colorModel.MediumColorGradient = Colors.MediumVioletRed;
           colorModel.DarkColorGradient = Colors.MediumVioletRed;
           colorModel.LightColorGradient = Colors.LightPink;
           colorModel.Foreground = Brushes.White;
@@ -32,8 +33,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.MistyRose;
           colorModel.DockpanelGradientColor2 = Colors.Red;
           colorModel.DockpanelGradientColor3 = Colors.OrangeRed;
-          colorModel.DarkColorGradient = Colors.Crimson;
           colorModel.LightColorGradient = Colors.MistyRose;
+          colorModel.MediumColorGradient = Colors.Crimson;
+          colorModel.DarkColorGradient = Colors.Crimson;
           colorModel.Foreground = Brushes.White;
           break;
 
@@ -44,8 +46,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor2 = Colors.Orange;
           colorModel.DockpanelGradientColor3 = Colors.Orange;
           colorModel.Foreground = Brushes.White;
-          colorModel.DarkColorGradient = Colors.DarkOrange;
           colorModel.LightColorGradient = Colors.BlanchedAlmond;
+          colorModel.MediumColorGradient = Colors.Orange;
+          colorModel.DarkColorGradient = Colors.DarkOrange;
           break;
         case Constants.Colors.YellowColor:
 
@@ -55,8 +58,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.Yellow;
           colorModel.DockpanelGradientColor2 = Colors.Goldenrod;
           colorModel.DockpanelGradientColor3 = Colors.Gold;
-          colorModel.DarkColorGradient = Colors.Goldenrod;
           colorModel.LightColorGradient = Colors.Yellow;
+          colorModel.MediumColorGradient = Colors.Gold;
+          colorModel.DarkColorGradient = Colors.Goldenrod;
           colorModel.Foreground = Brushes.White;
           break;
 
@@ -66,8 +70,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.LightGreen;
           colorModel.DockpanelGradientColor2 = Colors.Green;
           colorModel.DockpanelGradientColor3 = Colors.Green;
-          colorModel.DarkColorGradient = Colors.DarkGreen;
           colorModel.LightColorGradient = Colors.LightGreen;
+          colorModel.MediumColorGradient = Colors.Green;
+          colorModel.DarkColorGradient = Colors.DarkGreen;
           colorModel.Foreground = Brushes.White;
 
           break;
@@ -78,8 +83,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.LightBlue;
           colorModel.DockpanelGradientColor2 = Colors.CornflowerBlue;
           colorModel.DockpanelGradientColor3 = Colors.CornflowerBlue;
-          colorModel.DarkColorGradient = Colors.DarkBlue;
           colorModel.LightColorGradient = Colors.CornflowerBlue;
+          colorModel.MediumColorGradient = Colors.CornflowerBlue;
+          colorModel.DarkColorGradient = Colors.DarkBlue;
           colorModel.Foreground = Brushes.White;
           break;
 
@@ -89,8 +95,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.Lavender;
           colorModel.DockpanelGradientColor2 = Colors.Indigo;
           colorModel.DockpanelGradientColor3 = Colors.Indigo;
-          colorModel.DarkColorGradient = Colors.Navy;
           colorModel.LightColorGradient = Colors.MediumPurple;
+          colorModel.MediumColorGradient = Colors.Indigo;
+          colorModel.DarkColorGradient = Colors.Navy;
           colorModel.Foreground = Brushes.White;
           break;
 
@@ -100,8 +107,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor1 = Colors.Gray;
           colorModel.DockpanelGradientColor2 = Colors.Black;
           colorModel.DockpanelGradientColor3 = Colors.Black;
-          colorModel.DarkColorGradient = Colors.Black;
           colorModel.LightColorGradient = Colors.Gray;
+          colorModel.MediumColorGradient = Colors.Black;
+          colorModel.DarkColorGradient = Colors.Black;
           break;
 
         default:
@@ -111,7 +119,9 @@ namespace RM_Messenger.Helpers
           colorModel.DockpanelGradientColor2 = Color.FromRgb(0x76, 0x24, 0x6E);
           colorModel.DockpanelGradientColor3 = Color.FromRgb(0x69, 0x30, 0x60);
           colorModel.DarkColorGradient = Color.FromRgb(0x48, 0x10, 0x41);
-          colorModel.LightColorGradient = Color.FromRgb(0x76, 0x24, 0x6E);
+          //colorModel.LightColorGradient = Color.FromRgb(0x76, 0x24, 0x6E);
+          colorModel.LightColorGradient  = Color.FromRgb(0x69, 0x30, 0x60);
+          colorModel.MediumColorGradient = Color.FromRgb(0x7B, 0x41, 0x71);
           colorModel.DarkBackgroundColor = new SolidColorBrush(Color.FromRgb(0x48, 0x10, 0x41));
           break;
       }
