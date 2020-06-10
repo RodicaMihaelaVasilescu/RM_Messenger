@@ -8,6 +8,8 @@ using RM_Messenger.View;
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -228,17 +230,20 @@ namespace RM_Messenger.ViewModel
       InitializeUserProfile();
       InitializeContactList();
       InitializeColors();
+      RegisterSqlDependency();
     }
 
     #endregion
 
     #region Public methods
+
     public void ReloadContactLists(object sender, EventArgs e)
     {
       InitializeContactList();
     }
 
     #endregion
+
 
     #region Private Methods
     void RefreshCommandExecute()
@@ -253,6 +258,7 @@ namespace RM_Messenger.ViewModel
       var textEditorWindow = new TextEditorView();
       textEditorWindow.Show();
     }
+
     void InitializeColors()
     {
       ThemeColors = new ObservableCollection<string>(Constants.Colors.ColorsList);
@@ -263,7 +269,50 @@ namespace RM_Messenger.ViewModel
         SelectedThemeColor = ThemeColors.FirstOrDefault();
       }
     }
-    void ChangeColorCommandExecute()
+
+    void RegisterSqlDependency()
+    {
+      string SqlConnectionString = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+      SqlConnection connection = new SqlConnection(SqlConnectionString);
+
+      SqlDependency.Start(SqlConnectionString);
+      connection.Open();
+      var query = string.Format("SELECT SentBy_User_ID, SentTo_User_ID, Status, Date FROM dbo.AddRequests where SentTo_User_ID = '{0}'", UserModel.Instance.Username);
+      // Create a new SqlCommand object.
+      using (SqlCommand command = new SqlCommand(query
+         , connection))
+      {
+        // Create a dependency and associate it with the SqlCommand.
+        SqlDependency dependency = new SqlDependency(command);
+        // Maintain the reference in a class member.
+
+        // Subscribe to the SqlDependency event.
+        dependency.OnChange += new OnChangeEventHandler(OnAddRequestDependencyChange);
+
+        // Execute the command.
+
+        using (SqlDataReader reader = command.ExecuteReader())
+        {
+          // Process the DataReader.
+        }
+      }
+      connection.Close();
+    }
+
+    // Handler method
+    void OnAddRequestDependencyChange(object sender,
+       SqlNotificationEventArgs e)
+    {
+      RegisterSqlDependency();
+
+      var currentUser = UserModel.Instance.Username;
+      App.Current.Dispatcher.Invoke(() =>
+      {
+        OpenAddRequests();
+      });
+    }
+
+    private void ChangeColorCommandExecute()
     {
       var colors = ThemeColorsHelper.GetThemeColors(SelectedThemeColor);
       BackgroundColor = colors.BackgroundColor;
