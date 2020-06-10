@@ -7,7 +7,6 @@
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Width="460"
   Height="250"
-  Background="#76246E"
   FontFamily="Calisto MT"
   FontSize="12"
   FontWeight="Thin"
@@ -114,10 +113,10 @@
       Foreground="White"
       Style="{StaticResource MaterialDesignRaisedAccentButton}">
       <Button.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-          <GradientStop Offset="0" Color="#7B4171" />
-          <GradientStop Offset="0.445" Color="#693060" />
-          <GradientStop Offset="0.53" Color="#481041" />
+        <LinearGradientBrush x:Name="LinearGradient" StartPoint="0,0" EndPoint="0,1">
+          <GradientStop x:Name="Gradient1" Offset="0.53" Color="#481041" />
+          <GradientStop x:Name="Gradient2" Offset="0.445" Color="#693060" />
+          <GradientStop x:Name="Gradient3" Offset="0" Color="#7B4171" />
         </LinearGradientBrush>
       </Button.Background>
     </Button>
@@ -144,7 +143,7 @@
         Foreground="White"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Background>
-          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <LinearGradientBrush x:Name="LinearGradient2" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Offset="0" Color="#7B4171" />
             <GradientStop Offset="0.445" Color="#693060" />
             <GradientStop Offset="0.53" Color="#481041" />
@@ -168,7 +167,7 @@
         IsEnabled="{Binding IsNextButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
         Style="{StaticResource MaterialDesignRaisedAccentButton}">
         <Button.Background>
-          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <LinearGradientBrush x:Name="LinearGradient3" StartPoint="0,0" EndPoint="0,1">
             <GradientStop Offset="0" Color="#7B4171" />
             <GradientStop Offset="0.445" Color="#693060" />
             <GradientStop Offset="0.53" Color="#481041" />
