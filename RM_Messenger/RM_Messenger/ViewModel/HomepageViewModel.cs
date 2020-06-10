@@ -381,7 +381,7 @@ namespace RM_Messenger.ViewModel
            f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? friendAccount.Status : Resources.AddRequestPendingStatus;
       }
 
-      friendList.IsExpanded = true;
+      friendList.IsExpanded = friendList.ContactsList.Any();
       friendList.DisplayedName = string.Format("Friends ({0}/{1})", friendList.ContactsList.Where(c => c.OnOffImage.Contains("Online")).Count(), friendList.ContactsList.Count);
       ContactsLists.Add(friendList);
     }
