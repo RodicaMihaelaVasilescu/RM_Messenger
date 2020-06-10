@@ -167,6 +167,14 @@ namespace RM_Messenger.ViewModel
         _context.RecentLists.Add(new RecentList { Sent_To = DisplayedUser.UserId, Sent_By = currentUser });
         _context.SaveChanges();
       }
+      else
+      {
+        var receivedMessage = _context.RecentLists.Where(r => r.Sent_By == currentUser && r.Sent_To == DisplayedUser.UserId).FirstOrDefault();
+        receivedMessage.Date = DateTime.Now;
+        var sentMessage = _context.RecentLists.Where(r => r.Sent_By == DisplayedUser.UserId && r.Sent_To == currentUser).FirstOrDefault();
+        sentMessage.Date = DateTime.Now;
+        _context.SaveChanges();
+      }
 
       DateTime dateOfLastDisplayedMessage;
       if (MessagesList.Any())
@@ -181,7 +189,7 @@ namespace RM_Messenger.ViewModel
       Message lastMessageFromDb = _context.Messages.Where(m => m.SentBy_User_ID == chatUser &&
       m.SentTo_User_ID == currentUser).OrderByDescending(m => m.Date).FirstOrDefault();
 
-      if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) < 0)      
+      if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) <= 0)      
       {
         return;
       }
