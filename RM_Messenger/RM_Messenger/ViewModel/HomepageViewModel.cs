@@ -397,7 +397,7 @@ namespace RM_Messenger.ViewModel
       var currentUser = UserModel.Instance.Username;
       var recentList = new ContactListsModel();
       recentList.ContactsList = new ObservableCollection<DisplayedContactModel>();
-      var contacts = _context.RecentLists.Where(c => c.Sent_By == currentUser).Select(s => s.Sent_To).ToList();
+      var contacts = _context.RecentLists.Where(c => c.Sent_By == currentUser).OrderByDescending(c => c.Date).Select(s => s.Sent_To).ToList();
       contacts = contacts.Distinct().ToList();
       contacts.Reverse();
       foreach (var contact in contacts)
