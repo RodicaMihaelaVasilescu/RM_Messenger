@@ -120,7 +120,6 @@ namespace RM_Messenger.ViewModel
         signingInViewModel.CloseAction = () => window.Close();
       }
 
-      WindowManager.ResizeWindow(window);
       window.ResizeMode = ResizeMode.NoResize;
       signingInViewModel.ValidateLogin();
     }
