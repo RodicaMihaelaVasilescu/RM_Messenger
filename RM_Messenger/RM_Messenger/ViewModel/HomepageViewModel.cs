@@ -397,11 +397,12 @@ namespace RM_Messenger.ViewModel
       var currentUser = UserModel.Instance.Username;
       var recentList = new ContactListsModel();
       recentList.ContactsList = new ObservableCollection<DisplayedContactModel>();
-      var contacts = _context.RecentLists.Where(c => c.Sent_By == currentUser).ToList();
+      var contacts = _context.RecentLists.Where(c => c.Sent_By == currentUser).Select(s => s.Sent_To).ToList();
+      contacts = contacts.Distinct().ToList();
       contacts.Reverse();
       foreach (var contact in contacts)
       {
-        var sent_to = _context.Accounts.Where(a => a.User_ID == contact.Sent_To).FirstOrDefault();
+        var sent_to = _context.Accounts.Where(a => a.User_ID == contact).FirstOrDefault();
         var status = _context.AddRequests.Any(f => f.SentTo_User_ID == sent_to.User_ID &&
            f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? sent_to.Status : Resources.AddRequestPendingStatus;
 
