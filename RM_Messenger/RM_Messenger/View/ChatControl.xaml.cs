@@ -50,6 +50,7 @@ namespace RM_Messenger.View
       ChatTextBoxControl.GradientColor1.Color = themeColor.DockpanelGradientColor1;
       ChatTextBoxControl.GradientColor2.Color = themeColor.DockpanelGradientColor2;
       ChatTextBoxControl.GradientColor3.Color = themeColor.DockpanelGradientColor3;
+      DockPanelChat.Background = themeColor.ChatPanelBackgroundColor;
     }
   }
 }

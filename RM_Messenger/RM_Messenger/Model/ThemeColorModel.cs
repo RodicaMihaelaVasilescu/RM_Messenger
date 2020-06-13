@@ -12,5 +12,6 @@ namespace RM_Messenger.Model
     public Color MediumColorGradient;
     public Color LightColorGradient;
     public Brush DarkBackgroundColor;
+    public Brush ChatPanelBackgroundColor;
   }
 }
