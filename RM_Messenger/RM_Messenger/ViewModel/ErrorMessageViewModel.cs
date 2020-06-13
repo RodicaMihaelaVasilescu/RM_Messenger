@@ -48,13 +48,16 @@ namespace RM_Messenger.ViewModel
     public ErrorMessageViewModel(string errorMessage)
     {
       CloseCommand = new RelayCommand(LoginCommandExecute);
-      if (errorMessage == Properties.Resources.YouMustEnterAnIDAndPasswordError)
+      if (errorMessage == Properties.Resources.YouMustEnterAnIDAndPasswordError ||
+        errorMessage.Contains(Properties.Resources.EmptyIdError) ||
+        errorMessage == Properties.Resources.YouMustEnterAnIDAndPasswordError ||
+        errorMessage == Properties.Resources.YourIDAndPasswordDoNotMatchError)
       {
-        _imagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
+        ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
       }
       else
       {
-        _imagePath = "pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerEmoticon.png";
+        ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerEmoticon.png";
       }
       _errorMessage = errorMessage;
     }

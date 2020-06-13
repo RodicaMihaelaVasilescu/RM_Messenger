@@ -267,4 +267,7 @@
   <data name="YouMustEnterAnIDAndPasswordError" xml:space="preserve">
     <value>You must enter an ID and password.</value>
   </data>
+  <data name="YourIDAndPasswordDoNotMatchError" xml:space="preserve">
+    <value>Your ID and password do not match.</value>
+  </data>
 </root>

@@ -509,5 +509,14 @@ namespace RM_Messenger.Properties {
                 return ResourceManager.GetString("YouMustEnterAnIDAndPasswordError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your ID and password do not match..
+        /// </summary>
+        public static string YourIDAndPasswordDoNotMatchError {
+            get {
+                return ResourceManager.GetString("YourIDAndPasswordDoNotMatchError", resourceCulture);
+            }
+        }
     }
 }
