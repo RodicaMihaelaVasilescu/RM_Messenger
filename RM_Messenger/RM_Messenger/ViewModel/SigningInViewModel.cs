@@ -125,7 +125,17 @@ namespace RM_Messenger.ViewModel
       if (user == null)
       {
         CancelCommandExecute();
-        WindowManager.OpenLoginErrorWindow(window, Resources.IncorrectIDAndPassword);
+        var message = string.Empty;
+        if (string.IsNullOrEmpty(UserModel.Instance.Username) ||
+          string.IsNullOrEmpty(UserModel.Instance.EncryptedPassword))
+        {
+          message = Resources.YouMustEnterAnIDAndPasswordError;
+        }
+        else
+        {
+          message = Resources.IncorrectIDAndPassword;
+        }
+        WindowManager.OpenLoginErrorWindow(window, message);
         return;
       }
       var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();

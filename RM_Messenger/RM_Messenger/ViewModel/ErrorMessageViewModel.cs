@@ -48,10 +48,7 @@ namespace RM_Messenger.ViewModel
     public ErrorMessageViewModel(string errorMessage)
     {
       CloseCommand = new RelayCommand(LoginCommandExecute);
-      if (errorMessage == Properties.Resources.YouMustEnterAnIDAndPasswordError ||
-        errorMessage.Contains(Properties.Resources.EmptyIdError) ||
-        errorMessage == Properties.Resources.YouMustEnterAnIDAndPasswordError ||
-        errorMessage == Properties.Resources.YourIDAndPasswordDoNotMatchError)
+      if ( errorMessage == Properties.Resources.YourIDAndPasswordDoNotMatchError)
       {
         ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
       }
