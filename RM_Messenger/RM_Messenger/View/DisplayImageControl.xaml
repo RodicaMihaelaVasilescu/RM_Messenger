@@ -75,6 +75,6 @@
         Style="{StaticResource MaterialDesignRaisedAccentButton}" />
     </Grid>
 
-    <Separator Margin="50,30,0,0" />
+    <Separator Margin="50,30,10,0" />
   </StackPanel>
 </UserControl>

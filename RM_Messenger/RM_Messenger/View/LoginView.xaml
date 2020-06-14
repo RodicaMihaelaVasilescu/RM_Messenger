@@ -6,6 +6,7 @@
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   Background="White"
+  Title="RM! Messenger"
   Icon="../Resources/Icon.png"
   mc:Ignorable="d">
   <local:LoginControl />

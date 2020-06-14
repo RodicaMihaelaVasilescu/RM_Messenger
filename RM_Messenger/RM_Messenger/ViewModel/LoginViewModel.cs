@@ -120,7 +120,6 @@ namespace RM_Messenger.ViewModel
         signingInViewModel.CloseAction = () => window.Close();
       }
 
-      window.ResizeMode = ResizeMode.NoResize;
       signingInViewModel.ValidateLogin();
     }
 
@@ -133,9 +132,6 @@ namespace RM_Messenger.ViewModel
       {
         createNewAccountViewModel.CloseAction = () => window.Close();
       }
-
-      WindowManager.ResizeWindow(window);
-      window.ResizeMode = ResizeMode.NoResize;
     }
 
     public void ForgotPasswordCommandExecute()

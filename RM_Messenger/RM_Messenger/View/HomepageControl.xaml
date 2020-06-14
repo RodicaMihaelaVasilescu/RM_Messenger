@@ -774,7 +774,7 @@
 
           <ListView
             Name="OuterListView"
-            MaxHeight="350"
+            MaxHeight="353"
             BorderThickness="0"
             ItemContainerStyle="{StaticResource RemoveListViewItemHighlight}"
             ItemsSource="{Binding ContactsLists, UpdateSourceTrigger=PropertyChanged}"
@@ -951,7 +951,7 @@
 
                     <ListView
                       Name="InnerListView"
-                      Margin="20,5,10,20"
+                      Margin="20,0,10,10"
                       VerticalAlignment="Top"
                       BorderThickness="0"
                       Cursor="Hand"
@@ -1026,15 +1026,18 @@
       </Border>
       <StackPanel
         Grid.Row="4"
-        MaxWidth="474"
-        MaxHeight="170"
+        MaxHeight="80"
         Margin="10"
+        VerticalAlignment="Center"
         Background="White"
         ToolTip="RM! Messenger Ads">
         <Button Background="Transparent">
           <TextBlock>
             <Hyperlink NavigateUri="https://search.yahoo.com/" RequestNavigate="Hyperlink_RequestNavigate">
-              <Image gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/yahoo_ads.gif" Cursor="Hand" />
+              <Image
+                VerticalAlignment="Center"
+                gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/yahoo_ads.gif"
+                Cursor="Hand" />
             </Hyperlink>
           </TextBlock>
         </Button>

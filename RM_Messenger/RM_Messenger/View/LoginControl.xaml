@@ -205,7 +205,7 @@
 
     <StackPanel
       Grid.Row="10"
-      Margin="0,160,0,10"
+      Margin="0,165,0,10"
       HorizontalAlignment="Center"
       VerticalAlignment="Center">
       <Button

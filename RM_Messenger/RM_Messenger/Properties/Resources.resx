@@ -148,7 +148,7 @@
     <value>RM_Messenger.View.ChatControl</value>
   </data>
   <data name="ChatWindowTitle" xml:space="preserve">
-    <value>RM!Messenger - Chat</value>
+    <value>RM! Messenger - Chat</value>
   </data>
   <data name="ContactAlreadyExistsMessage" xml:space="preserve">
     <value>{0} already exists in your Messenger List and Address Book.</value>
@@ -199,7 +199,7 @@
     <value>RM_Messenger.View.HomepageControl</value>
   </data>
   <data name="HomepageWindowTitle" xml:space="preserve">
-    <value>RM!Messenger</value>
+    <value>RM! Messenger</value>
   </data>
   <data name="IdShouldStartWithALetterError" xml:space="preserve">
     <value>ID should start with a letter.</value>
@@ -214,7 +214,7 @@
     <value>RM_Messenger.View.LoginControl</value>
   </data>
   <data name="LoginWindowTitle" xml:space="preserve">
-    <value>RM!Messenger</value>
+    <value>RM! Messenger</value>
   </data>
   <data name="Next" xml:space="preserve">
     <value>Next</value>
@@ -244,7 +244,7 @@
     <value>RM_Messenger.View.SigningInControl</value>
   </data>
   <data name="SigningInWindowTitle" xml:space="preserve">
-    <value>RM!Messenger</value>
+    <value>RM! Messenger</value>
   </data>
   <data name="TextNotFoundError" xml:space="preserve">
     <value>Text not found</value>

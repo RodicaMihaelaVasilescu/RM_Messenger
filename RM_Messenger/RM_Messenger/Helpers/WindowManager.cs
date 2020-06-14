@@ -23,13 +23,11 @@ namespace RM_Messenger.Helpers
     }
     public static void ResizeWindow(Window window)
     {
-
       var desktopWorkingArea = SystemParameters.WorkArea;
       window.Width = desktopWorkingArea.Right / 4.5;
       window.Top = desktopWorkingArea.Top;
       window.Height = desktopWorkingArea.Bottom + 7;
       window.Left = desktopWorkingArea.Right - window.Width;
-      window.ResizeMode = ResizeMode.NoResize;
     }
     public static void OpenLoginErrorWindow(Window OwnerWindow, string errorMessage)
     {
@@ -90,8 +88,10 @@ namespace RM_Messenger.Helpers
       Window child = new Window
       {
         Tag = user.Username + "Child",
-        Title = Resources.ChatWindowTitle
-      };
+        Title = Resources.ChatWindowTitle,
+        MaxHeight = 540,
+        MaxWidth = 620
+    };
       var chatControl = new ChatControl();
       var chatViewModel = new ChatViewModel(child, selectedContact, chatControl.AutoScrollViewer);
       chatControl.DataContext = chatViewModel;

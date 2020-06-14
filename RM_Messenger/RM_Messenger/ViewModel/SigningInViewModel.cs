@@ -77,8 +77,6 @@ namespace RM_Messenger.ViewModel
         homepageViewModel.CloseAction = () => window.Close();
       }
 
-      //WindowManager.ResizeWindow(window);
-      window.ResizeMode = ResizeMode.NoResize;
       window.Show();
 
       OpenAddRequests();

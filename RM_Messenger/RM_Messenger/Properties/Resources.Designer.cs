@@ -151,7 +151,7 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RM!Messenger - Chat.
+        ///   Looks up a localized string similar to RM! Messenger - Chat.
         /// </summary>
         public static string ChatWindowTitle {
             get {
@@ -304,7 +304,7 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RM!Messenger.
+        ///   Looks up a localized string similar to RM! Messenger.
         /// </summary>
         public static string HomepageWindowTitle {
             get {
@@ -349,7 +349,7 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RM!Messenger.
+        ///   Looks up a localized string similar to RM! Messenger.
         /// </summary>
         public static string LoginWindowTitle {
             get {
@@ -439,7 +439,7 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to RM!Messenger.
+        ///   Looks up a localized string similar to RM! Messenger.
         /// </summary>
         public static string SigningInWindowTitle {
             get {
