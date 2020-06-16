@@ -288,23 +288,26 @@ namespace RM_Messenger.ViewModel
       SqlNotificationEventArgs e)
     {
       RegisterSqlDependency();
-      UploadedViewVisibility = Visibility.Visible;
+      DateTime lastUploadDate = UploadedFilesList.FirstOrDefault() != null ? UploadedFilesList.FirstOrDefault().Date : new DateTime();
+      Upload uploaded = _context.Uploads
+      .Where(
+      u => u.SentBy_User_ID == DisplayedUser.UserId &&
+      u.SentTo_User_ID == UserModel.Instance.Username &&
+      u.Status == Properties.Resources.SentStatus
+      && DateTime.Compare(u.Date, lastUploadDate) > 0).OrderByDescending(u=>u.Date)
+      .FirstOrDefault();
 
-      DateTime lastUploadDate = UploadedFilesList.FirstOrDefault() != null ? UploadedFilesList.LastOrDefault().Date : new DateTime();
-      App.Current.Dispatcher.Invoke((Action)delegate
+      if (uploaded != null)
       {
-        var uploaded = _context.Uploads
-        .Where(
-        u => u.SentBy_User_ID == DisplayedUser.UserId &&
-        u.SentTo_User_ID == UserModel.Instance.Username &&
-        u.Status == Properties.Resources.SentStatus
-        && DateTime.Compare(u.Date, lastUploadDate) > 0)
-        .FirstOrDefault();
-        if (uploaded != null)
+        App.Current.Dispatcher.Invoke((Action)delegate
         {
-          UploadedFilesList.Add(uploaded);
-        }
-      });
+          if (!UploadedFilesList.Any(u => u.Upload_ID == uploaded.Upload_ID))
+          {
+            UploadedFilesList.Add(uploaded);
+            UploadedViewVisibility = Visibility.Visible;
+          }
+        });
+      }
 
     }
 
