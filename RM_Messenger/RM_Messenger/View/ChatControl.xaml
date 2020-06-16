@@ -4,13 +4,16 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   xmlns:converter="clr-namespace:RM_Messenger.Converters"
   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:database="clr-namespace:RM_Messenger.Database"
   xmlns:helper="clr-namespace:RM_Messenger.Helpers"
   xmlns:local="clr-namespace:RM_Messenger.View"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  xmlns:model="clr-namespace:RM_Messenger.Model"
   Width="600"
   Height="500"
   Background="White"
+  Loaded="UserControl_Loaded"
   mc:Ignorable="d">
 
   <UserControl.Resources>
@@ -334,6 +337,7 @@
           Margin="-10,0,5,0"
           Source="{Binding DisplayedUser.OnOffImage}" />
         <TextBlock
+          x:Name="DisplayedUser_User_ID"
           Margin="0,-9"
           VerticalAlignment="Center"
           FontFamily="Calisto MT"
@@ -364,7 +368,8 @@
       <Grid.RowDefinitions>
         <RowDefinition Height="auto" />
         <RowDefinition Height="3*" />
-        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="4*" />
@@ -407,12 +412,13 @@
         </Button.Content>
       </Button>
 
+
       <Border
         Grid.Row="1"
-        Margin="5"
+        Margin="5,5,5,0"
         Background="White"
         BorderBrush="#1E98F7"
-        BorderThickness="1">
+        BorderThickness="1,1,1,0">
         <ScrollViewer
           x:Name="AutoScrollViewer"
           helper:AutoScrollHelper.AutoScroll="True"
@@ -434,10 +440,6 @@
                         Margin="2"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top">
-                        <Grid.RowDefinitions>
-                          <RowDefinition Height="auto" />
-                          <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
 
                         <local:EmoticonRichTextBoxMessagesControl
                           x:Name="ChatContent"
@@ -454,18 +456,160 @@
         </ScrollViewer>
       </Border>
 
+
+      <ListView
+        x:Name="UploadedFilesView"
+        Grid.Row="2"
+        Margin="5,0"
+        Background="White"
+        BorderBrush="#1E98F7"
+        BorderThickness="1,0,1,1"
+        ItemsSource="{Binding Path=UploadedFilesList, UpdateSourceTrigger=PropertyChanged}"
+        SelectedItem="{Binding SelectedUploadedFile, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+        SelectedValue="{Binding ElementName=UploadedFilesView, Path=DataContext.SelectedUploadedFile}">
+
+        <ListView.ItemContainerStyle>
+          <Style TargetType="{x:Type ListViewItem}">
+            <EventSetter Event="PreviewGotKeyboardFocus" Handler="SelectCurrentItem" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Template">
+              <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                  <ContentPresenter />
+                </ControlTemplate>
+              </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+              <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Gray" />
+              </Trigger>
+            </Style.Triggers>
+          </Style>
+        </ListView.ItemContainerStyle>
+
+        <ListView.ItemTemplate>
+          <DataTemplate DataType="{x:Type database:Upload}">
+            <Grid Background="AliceBlue" Visibility="{Binding UploadedViewVisibility}">
+              <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+              </Grid.RowDefinitions>
+              <DockPanel>
+                <TextBlock
+                  Grid.Row="0"
+                  Margin="12,0,0,0"
+                  VerticalAlignment="Center"
+                  Cursor="Hand"
+                  FontWeight="Bold"
+                  Foreground="DarkBlue"
+                  Text="{Binding Path=SentBy_User_ID}"
+                  TextWrapping="WrapWithOverflow"
+                  ToolTip="{Binding File_Name}" />
+
+                <TextBlock
+                  Grid.Row="0"
+                  Margin="0"
+                  VerticalAlignment="Center"
+                  Cursor="Hand"
+                  TextWrapping="WrapWithOverflow"
+                  ToolTip="{Binding File_Name}">
+
+                  <TextBlock.Text>
+                    <MultiBinding StringFormat=" sent: &quot;{0}&quot;">
+                      <Binding Path="File_Name" />
+                    </MultiBinding>
+                  </TextBlock.Text>
+                </TextBlock>
+              </DockPanel>
+
+              <DockPanel Grid.Row="1">
+                <Button
+                  x:Name="AcceptButton"
+                  Height="23"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  HorizontalContentAlignment="Left"
+                  VerticalContentAlignment="Bottom"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Command="{Binding ElementName=UploadedFilesView, Path=DataContext.AcceptUploadCommand}"
+                  Content="Accept"
+                  FontSize="11"
+                  FontWeight="Bold"
+                  Foreground="#5C7FAF"
+                  Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                  ToolTip="Accept" />
+                <Button
+                  x:Name="SaveAsButton"
+                  Height="23"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  HorizontalContentAlignment="Left"
+                  VerticalContentAlignment="Bottom"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Command="{Binding ElementName=UploadedFilesView, Path=DataContext.AcceptUploadCommand}"
+                  Content="Save As..."
+                  FontSize="11"
+                  FontWeight="Bold"
+                  Foreground="#5C7FAF"
+                  Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                  ToolTip="Save As..." />
+                <Button
+                  x:Name="DeclineButton"
+                  Height="23"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Center"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"
+                  Background="Transparent"
+                  BorderThickness="0"
+                  Command="{Binding ElementName=UploadedFilesView, Path=DataContext.CancelUploadCommand}"
+                  Content="Decline"
+                  FontSize="11"
+                  FontWeight="Bold"
+                  Foreground="#5C7FAF"
+                  Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                  ToolTip="Decline" />
+              </DockPanel>
+              <Button
+                x:Name="CloseButton"
+                Width="40"
+                Height="23"
+                Margin="0,0,0,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                HorizontalContentAlignment="Right"
+                VerticalContentAlignment="Center"
+                Background="Transparent"
+                BorderThickness="0"
+                Command="{Binding ElementName=UploadedFilesView, Path=DataContext.CancelUploadCommand}"
+                Content="x"
+                Cursor="Hand"
+                FontSize="11"
+                FontWeight="Bold"
+                Foreground="#5C7FAF"
+                Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+
+
+            </Grid>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+
+
       <local:ChatTextBoxControl
         x:Name="ChatTextBoxControl"
-        Grid.Row="2"
-        Margin="5"
+        Grid.Row="3"
+        Margin="10,5,5,5"
         Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, Mode=TwoWay}" />
 
       <Button
         Name="SendCommandButton"
-        Grid.Row="2"
+        Grid.Row="3"
         Width="0"
         Height="0"
-        Margin="5"
+        Margin="10,5,5,5"
         Click="OnForceUpdateClick"
         Command="{Binding SendCommand}" />
     </Grid>

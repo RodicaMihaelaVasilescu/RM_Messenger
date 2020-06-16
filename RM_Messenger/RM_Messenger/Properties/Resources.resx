@@ -228,6 +228,9 @@
   <data name="RememberMyIDPassword" xml:space="preserve">
     <value>RememberMyIDPassword</value>
   </data>
+  <data name="SavedStatus" xml:space="preserve">
+    <value>Saved</value>
+  </data>
   <data name="SentStatus" xml:space="preserve">
     <value>Sent</value>
   </data>

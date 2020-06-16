@@ -287,6 +287,7 @@
             Background="Transparent"
             BorderThickness="0"
             Click="TextFormat_Click"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
             Cursor="Hand"
             ToolTip="Format">
             <Button.Template>
@@ -314,6 +315,7 @@
             Background="Transparent"
             BorderThickness="0"
             Cursor="Hand"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
             ToolTip="Buzz">
             <Button.Template>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -331,9 +333,34 @@
                 </ControlTemplate.Triggers>
               </ControlTemplate>
             </Button.Template>
-            <!--<EventTrigger RoutedEvent="PreviewMouseDown">
-            <SoundPlayerAction Source="pack://application:,,,/RM_Messenger;component/Resources/Sounds/buzz.wav" />
-          </EventTrigger>-->
+          </Button>
+
+          <Button
+            x:Name="SendFileButton"
+            Margin="5,0"
+            HorizontalAlignment="Left"
+            Background="Transparent"
+            BorderThickness="0"
+            Click="SendFileButton_Click"
+            Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
+            Cursor="Hand"
+            ToolTip="Send File">
+            <Button.Template>
+              <ControlTemplate TargetType="{x:Type Button}">
+                <StackPanel>
+                  <Image
+                    x:Name="BuzzImage"
+                    Width="18"
+                    Height="18"
+                    Source="pack://application:,,,/RM_Messenger;component/Resources/SendFile.png" />
+                </StackPanel>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="Button.IsMouseOver" Value="True">
+                    <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/SendFile_MouseOver.png" />
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Button.Template>
           </Button>
         </StackPanel>
       </Border>
@@ -352,6 +379,7 @@
           TextOptions.TextRenderingMode="Aliased"
           VerticalScrollBarVisibility="Auto" />
         <Button
+          CommandTarget="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
           x:Name="SendButton"
           Width="80"
           Height="23"

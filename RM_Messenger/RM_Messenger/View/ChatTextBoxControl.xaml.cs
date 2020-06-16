@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RM_Messenger.Database;
+using RM_Messenger.Model;
+using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -45,6 +48,8 @@ namespace RM_Messenger.View
     #region Fields
 
     private int internalUpdatePending;
+
+    public string DisplayedContact_ID { get; set; }
 
     public Button SendMessageButton { get; set; }
 
@@ -201,7 +206,7 @@ namespace RM_Messenger.View
 
     private void TextFormat_Click(object sender, RoutedEventArgs e)
     {
-      if(TextFormatPanel.Visibility == Visibility.Visible)
+      if (TextFormatPanel.Visibility == Visibility.Visible)
       {
         TextFormatPanel.Visibility = Visibility.Collapsed;
       }
@@ -220,5 +225,38 @@ namespace RM_Messenger.View
       }
       base.OnPreviewKeyDown(e);
     }
+
+    private void SendFileButton_Click(object sender, RoutedEventArgs e)
+    {
+      Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog
+      {
+        Filter = "All files (*.*)|*.*|TXT files (*.txt)|*.png*|JPG files (*.jpg)|*.jpg*"
+      };
+      dialog.ShowDialog();
+      if (string.IsNullOrEmpty(dialog.FileName))
+      {
+        return;
+      }
+      byte[] bytes = System.IO.File.ReadAllBytes(dialog.FileName);
+      var newFile = dialog.FileName;
+      if (string.IsNullOrEmpty(newFile))
+      {
+        return;
+      }
+      RMMessengerEntities context = new RMMessengerEntities();
+      Upload upload = new Upload
+      {
+        SentBy_User_ID = UserModel.Instance.Username,
+        SentTo_User_ID = DisplayedContact_ID,
+        File_Name = Path.GetFileName(dialog.FileName),
+        Status = Properties.Resources.SentStatus,
+        Date = DateTime.Now
+      };
+      upload.Uploaded_File = bytes;
+      context.Uploads.Add(upload);
+      context.SaveChanges();
+
+    }
   }
 }
+

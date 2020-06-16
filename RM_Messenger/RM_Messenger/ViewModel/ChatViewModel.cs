@@ -15,6 +15,9 @@ using System.Windows.Media.Imaging;
 using System.Data;
 using System.Data.SqlClient;
 using System.Configuration;
+using System.Windows.Forms;
+using System.IO;
+using Message = RM_Messenger.Database.Message;
 
 namespace RM_Messenger.ViewModel
 {
@@ -29,15 +32,19 @@ namespace RM_Messenger.ViewModel
     private string messageBoxContent;
     private DisplayedContactModel _displayedUser;
     private ObservableCollection<MessageModel> messagesList = new ObservableCollection<MessageModel>();
-
+    private ObservableCollection<Upload> uploadedFilesList = new ObservableCollection<Upload>();
+    private Upload selectedUploadedFile;
     #endregion
 
     #region Public Properties
 
     public ICommand SendCommand { get; set; }
+    public ICommand CancelUploadCommand { get; set; }
+    public ICommand AcceptUploadCommand { get; set; }
     public Action CloseAction { get; set; }
     public ScrollViewer AutoScroll;
     private string documentXaml;
+    private Visibility _uploadedViewVisibility;
 
     public event PropertyChangedEventHandler PropertyChanged;
     public string DocumentXaml
@@ -104,6 +111,46 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("MessagesList"));
       }
     }
+    public ObservableCollection<Upload> UploadedFilesList
+    {
+      get { return uploadedFilesList; }
+      set
+      {
+        if (uploadedFilesList == value) return;
+        uploadedFilesList = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UploadedFilesList"));
+      }
+    }
+
+    public Upload SelectedUploadedFile
+    {
+      get { return selectedUploadedFile; }
+      set
+      {
+        if (selectedUploadedFile == value) return;
+        selectedUploadedFile = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedUploadedFile"));
+      }
+    }
+
+    public Visibility UploadedViewVisibility
+    {
+      get { return _uploadedViewVisibility; }
+      set
+      {
+        if (_uploadedViewVisibility == value) return;
+        _uploadedViewVisibility = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("UploadedViewVisibility"));
+      }
+    }
+
+    public override bool Equals(object obj)
+    {
+      if (this.selectedUploadedFile.Upload_ID == (obj as Upload).Upload_ID)
+        return true;
+      else
+        return false;
+    }
 
     #endregion
 
@@ -115,9 +162,12 @@ namespace RM_Messenger.ViewModel
       DisplayedUser = displayedUser;
       AutoScroll = scroll;
       SendCommand = new RelayCommand(SendCommandExecute);
+      CancelUploadCommand = new RelayCommand(CancelUploadCommandExecute);
+      AcceptUploadCommand = new RelayCommand(AcceptUploadCommandExecute);
       ProfilePicture = displayedUser.ImagePath;
       PersonalProfilePicture = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
       LoadMessages();
+      LoadUploadedFiles();
       RegisterSqlDependency();
     }
 
@@ -142,6 +192,25 @@ namespace RM_Messenger.ViewModel
 
         // Subscribe to the SqlDependency event.
         dependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
+
+        // Execute the command.
+
+        using (SqlDataReader reader = command.ExecuteReader())
+        {
+          // Process the DataReader.
+        }
+      }
+
+      string uploadsQuery = string.Format(
+ "SELECT Status FROM dbo.Uploads WHERE SentBy_User_ID = '{0}' AND SentTo_User_ID ='{1}' AND Status = 'Sent'", DisplayedUser.UserId, UserModel.Instance.Username);
+      using (SqlCommand command = new SqlCommand(uploadsQuery, connection))
+      {
+        // Create a dependency and associate it with the SqlCommand.
+        SqlDependency dependency = new SqlDependency(command);
+        // Maintain the reference in a class member.
+
+        // Subscribe to the SqlDependency event.
+        dependency.OnChange += new OnChangeEventHandler(OnUploadsDependencyChange);
 
         // Execute the command.
 
@@ -189,7 +258,7 @@ namespace RM_Messenger.ViewModel
       Message lastMessageFromDb = _context.Messages.Where(m => m.SentBy_User_ID == chatUser &&
       m.SentTo_User_ID == currentUser).OrderByDescending(m => m.Date).FirstOrDefault();
 
-      if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) <= 0)      
+      if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) <= 0)
       {
         return;
       }
@@ -218,6 +287,43 @@ namespace RM_Messenger.ViewModel
       {
         AutoScroll.ScrollToEnd();
       });
+    }
+
+    void OnUploadsDependencyChange(object sender,
+      SqlNotificationEventArgs e)
+    {
+      RegisterSqlDependency();
+      UploadedViewVisibility = Visibility.Visible;
+
+      DateTime lastUploadDate = UploadedFilesList.FirstOrDefault() != null ? UploadedFilesList.LastOrDefault().Date : new DateTime();
+      App.Current.Dispatcher.Invoke((Action)delegate
+      {
+        var uploaded = _context.Uploads
+        .Where(
+        u => u.SentBy_User_ID == DisplayedUser.UserId &&
+        u.SentTo_User_ID == UserModel.Instance.Username &&
+        u.Status == Properties.Resources.SentStatus
+        && DateTime.Compare(u.Date, lastUploadDate) > 0)
+        .FirstOrDefault();
+        if (uploaded != null)
+        {
+          UploadedFilesList.Add(uploaded);
+        }
+        else
+        {
+          var x = 1;
+        }
+      });
+
+    }
+
+
+    public void LoadUploadedFiles()
+    {
+      UploadedFilesList = new ObservableCollection<Upload>(_context.Uploads.Where(
+        u => u.SentBy_User_ID == DisplayedUser.UserId &&
+        u.SentTo_User_ID == UserModel.Instance.Username && u.Status == Properties.Resources.SentStatus).ToList().OrderByDescending(u => u.Date));
+      UploadedViewVisibility = UploadedFilesList.Any() ? Visibility.Visible : Visibility.Collapsed;
     }
 
     #region Private Methods
@@ -259,6 +365,7 @@ namespace RM_Messenger.ViewModel
       }
       return flowDocument;
     }
+
     public void SendMessage(object sender, EventArgs e)
     {
       SendCommandExecute();
@@ -301,6 +408,53 @@ namespace RM_Messenger.ViewModel
       MessageBoxContent = null;
       AutoScroll.ScrollToEnd();
     }
+
+    private void AcceptUploadCommandExecute()
+    {
+      if (SelectedUploadedFile == null)
+      {
+        return;
+      }
+      Upload upload = UploadedFilesList.Where(u => u.Upload_ID == SelectedUploadedFile.Upload_ID).FirstOrDefault();
+      using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+      {
+        saveFileDialog.FileName = upload.File_Name;
+        if (DialogResult.OK != saveFileDialog.ShowDialog())
+          return;
+        File.WriteAllBytes(saveFileDialog.FileName, upload.Uploaded_File);
+      }
+
+      UploadedFilesList.Remove(upload);
+      if (!UploadedFilesList.Any())
+      {
+        UploadedViewVisibility = Visibility.Collapsed;
+      }
+
+      var databaseUploadedFile = _context.Uploads.Where(u => u.Upload_ID == upload.Upload_ID).FirstOrDefault();
+      databaseUploadedFile.Status = Properties.Resources.AcceptedStatus;
+      _context.SaveChanges();
+    }
+
+    private void CancelUploadCommandExecute()
+    {
+      if (SelectedUploadedFile == null)
+      {
+        return;
+      }
+      Upload uploadedFileToRemove = UploadedFilesList.Where(u => u.Upload_ID == SelectedUploadedFile.Upload_ID).FirstOrDefault();
+      UploadedFilesList.Remove(uploadedFileToRemove);
+      if (!UploadedFilesList.Any())
+      {
+        UploadedViewVisibility = Visibility.Collapsed;
+      }
+
+      SelectedUploadedFile = null;
+
+      var databaseUploadedFile = _context.Uploads.Where(u => u.Upload_ID == uploadedFileToRemove.Upload_ID).FirstOrDefault();
+      databaseUploadedFile.Status = Properties.Resources.DeclinedStatus;
+      _context.SaveChanges();
+    }
+
 
     #endregion
 

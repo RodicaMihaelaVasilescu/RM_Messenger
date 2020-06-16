@@ -23,6 +23,9 @@
         <AssociationConnector Association="RMMessengerModel.FK_Messages_Sender_User" />
         <AssociationConnector Association="RMMessengerModel.FK_RecentList_Sent_By" />
         <AssociationConnector Association="RMMessengerModel.FK_RecentList_Sent_To" />
+        <EntityTypeShape EntityType="RMMessengerModel.Upload" Width="1.5" PointX="3" PointY="21" />
+        <AssociationConnector Association="RMMessengerModel.FK_Uploads_SentBy_User_ID" />
+        <AssociationConnector Association="RMMessengerModel.FK_Uploads_SentTo_User_ID" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

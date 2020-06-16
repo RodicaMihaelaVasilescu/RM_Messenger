@@ -24,6 +24,7 @@
           <Property Name="SentBy_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SentTo_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" />
         </EntityType>
         <EntityType Name="AddressBook">
           <Key>
@@ -67,6 +68,18 @@
           <Property Name="Sent_By" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Sent_To" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="date" />
+        </EntityType>
+        <EntityType Name="Uploads">
+          <Key>
+            <PropertyRef Name="Upload_ID" />
+          </Key>
+          <Property Name="Upload_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SentBy_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SentTo_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Uploaded_File" Type="varbinary(max)" Nullable="false" />
+          <Property Name="File_Name" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Status" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -207,6 +220,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Uploads_SentBy_User_ID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Uploads" Type="Self.Uploads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Uploads">
+              <PropertyRef Name="SentBy_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uploads_SentTo_User_ID">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Uploads" Type="Self.Uploads" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Uploads">
+              <PropertyRef Name="SentTo_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="RMMessengerModelStoreContainer">
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddRequests" EntityType="Self.AddRequests" Schema="dbo" store:Type="Tables" />
@@ -214,6 +251,7 @@
           <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecentList" EntityType="Self.RecentList" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Uploads" EntityType="Self.Uploads" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Accounts_Users" Association="Self.FK_Accounts_Users">
             <End Role="Users" EntitySet="Users" />
@@ -258,6 +296,14 @@
           <AssociationSet Name="FK_RecentList_Sent_To" Association="Self.FK_RecentList_Sent_To">
             <End Role="Users" EntitySet="Users" />
             <End Role="RecentList" EntitySet="RecentList" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uploads_SentBy_User_ID" Association="Self.FK_Uploads_SentBy_User_ID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Uploads" EntitySet="Uploads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uploads_SentTo_User_ID" Association="Self.FK_Uploads_SentTo_User_ID">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Uploads" EntitySet="Uploads" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -316,6 +362,15 @@
             <End Role="User" EntitySet="Users" />
             <End Role="RecentList" EntitySet="RecentLists" />
           </AssociationSet>
+          <EntitySet Name="Uploads" EntityType="RMMessengerModel.Upload" />
+          <AssociationSet Name="FK_Uploads_SentBy_User_ID" Association="RMMessengerModel.FK_Uploads_SentBy_User_ID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Upload" EntitySet="Uploads" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Uploads_SentTo_User_ID" Association="RMMessengerModel.FK_Uploads_SentTo_User_ID">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Upload" EntitySet="Uploads" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -339,6 +394,7 @@
           <Property Name="Status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_AddRequests_SentBy" FromRole="AddRequest" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="RMMessengerModel.FK_AddRequests_SentTo" FromRole="AddRequest" ToRole="User" />
+          <Property Name="Date" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="AddressBook">
           <Key>
@@ -408,6 +464,8 @@
           <NavigationProperty Name="Messages1" Relationship="RMMessengerModel.FK_Messages_Sender_User" FromRole="User" ToRole="Message" />
           <NavigationProperty Name="RecentLists" Relationship="RMMessengerModel.FK_RecentList_Sent_By" FromRole="User" ToRole="RecentList" />
           <NavigationProperty Name="RecentLists1" Relationship="RMMessengerModel.FK_RecentList_Sent_To" FromRole="User" ToRole="RecentList" />
+          <NavigationProperty Name="Uploads" Relationship="RMMessengerModel.FK_Uploads_SentBy_User_ID" FromRole="User" ToRole="Upload" />
+          <NavigationProperty Name="Uploads1" Relationship="RMMessengerModel.FK_Uploads_SentTo_User_ID" FromRole="User" ToRole="Upload" />
         </EntityType>
         <Association Name="FK_Accounts_Users">
           <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
@@ -541,6 +599,44 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Upload">
+          <Key>
+            <PropertyRef Name="Upload_ID" />
+          </Key>
+          <Property Name="Upload_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SentBy_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SentTo_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uploaded_File" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_Uploads_SentBy_User_ID" FromRole="Upload" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="RMMessengerModel.FK_Uploads_SentTo_User_ID" FromRole="Upload" ToRole="User" />
+          <Property Name="File_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Uploads_SentBy_User_ID">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.Upload" Role="Upload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Upload">
+              <PropertyRef Name="SentBy_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Uploads_SentTo_User_ID">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.Upload" Role="Upload" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="Upload">
+              <PropertyRef Name="SentTo_User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -562,6 +658,7 @@
           <EntitySetMapping Name="AddRequests">
             <EntityTypeMapping TypeName="RMMessengerModel.AddRequest">
               <MappingFragment StoreEntitySet="AddRequests">
+                <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="SentTo_User_ID" ColumnName="SentTo_User_ID" />
                 <ScalarProperty Name="SentBy_User_ID" ColumnName="SentBy_User_ID" />
@@ -621,6 +718,19 @@
               <MappingFragment StoreEntitySet="Users">
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Uploads">
+            <EntityTypeMapping TypeName="RMMessengerModel.Upload">
+              <MappingFragment StoreEntitySet="Uploads">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="File_Name" ColumnName="File_Name" />
+                <ScalarProperty Name="Uploaded_File" ColumnName="Uploaded_File" />
+                <ScalarProperty Name="SentTo_User_ID" ColumnName="SentTo_User_ID" />
+                <ScalarProperty Name="SentBy_User_ID" ColumnName="SentBy_User_ID" />
+                <ScalarProperty Name="Upload_ID" ColumnName="Upload_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

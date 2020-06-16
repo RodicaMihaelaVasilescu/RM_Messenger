@@ -94,6 +94,7 @@ namespace RM_Messenger.Helpers
     };
       var chatControl = new ChatControl();
       var chatViewModel = new ChatViewModel(child, selectedContact, chatControl.AutoScrollViewer);
+      chatControl.DisplayedUser_ID = selectedContact.UserId;
       chatControl.DataContext = chatViewModel;
       child.Content = chatControl;
       child.SizeToContent = SizeToContent.WidthAndHeight;
