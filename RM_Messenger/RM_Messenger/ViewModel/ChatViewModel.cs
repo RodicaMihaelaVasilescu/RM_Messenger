@@ -18,6 +18,7 @@ using System.Configuration;
 using System.Windows.Forms;
 using System.IO;
 using Message = RM_Messenger.Database.Message;
+using RM_Messenger.View;
 
 namespace RM_Messenger.ViewModel
 {
@@ -41,6 +42,7 @@ namespace RM_Messenger.ViewModel
     public ICommand SendCommand { get; set; }
     public ICommand CancelUploadCommand { get; set; }
     public ICommand AcceptUploadCommand { get; set; }
+    public ICommand TextEditorCommand { get; set; }
     public Action CloseAction { get; set; }
     public ScrollViewer AutoScroll;
     private string documentXaml;
@@ -156,6 +158,7 @@ namespace RM_Messenger.ViewModel
       SendCommand = new RelayCommand(SendCommandExecute);
       CancelUploadCommand = new RelayCommand(CancelUploadCommandExecute);
       AcceptUploadCommand = new RelayCommand(AcceptUploadCommandExecute);
+      TextEditorCommand = new RelayCommand(TextEditorCommandExecute);
       ProfilePicture = displayedUser.ImagePath;
       PersonalProfilePicture = Converters.GeneralConverters.ConvertToBitmapImage(UserModel.Instance.ProfilePicture);
       LoadMessages();
@@ -441,6 +444,12 @@ namespace RM_Messenger.ViewModel
       var databaseUploadedFile = _context.Uploads.Where(u => u.Upload_ID == uploadedFileToRemove.Upload_ID).FirstOrDefault();
       databaseUploadedFile.Status = Properties.Resources.DeclinedStatus;
       _context.SaveChanges();
+    }
+
+    private void TextEditorCommandExecute()
+    {
+      var textEditorWindow = new TextEditorView();
+      textEditorWindow.Show();
     }
 
 

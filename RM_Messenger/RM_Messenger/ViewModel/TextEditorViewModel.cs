@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using RM_Messenger.Command;
 using RM_Messenger.Properties;
+using System.Windows;
 
 namespace RM_Messenger.ViewModel
 {
@@ -253,7 +254,16 @@ namespace RM_Messenger.ViewModel
 
     public void SaveDocumentCommandExecute()
     {
-      File.WriteAllText(openedFile, Text);
+      MessageBoxResult result = MessageBox.Show(string.Format("Are you sure you want to save changes in \"{0}\" file?", Path.GetFileName(openedFile)), "Save", MessageBoxButton.YesNo);
+      switch (result)
+      {
+        case MessageBoxResult.Yes:
+          File.WriteAllText(openedFile, Text);
+          break;
+        case MessageBoxResult.No:
+          break;
+      }
+
     }
 
     public void CancelDocumentCommandExecute()

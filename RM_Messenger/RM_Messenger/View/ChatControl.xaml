@@ -125,7 +125,7 @@
       <RowDefinition Height="auto" />
       <RowDefinition />
     </Grid.RowDefinitions>
-    <DockPanel Margin="0">
+    <DockPanel Margin="0" Cursor="Hand">
       <DockPanel.Background>
         <LinearGradientBrush StartPoint="0,1" EndPoint="0,0">
           <GradientStop x:Name="DockpanelGradientColor2" Offset="0.19" />
@@ -159,7 +159,20 @@
         </MenuItem>
 
         <MenuItem Foreground="White" Header="_Edit" />
-        <MenuItem Foreground="White" Header="_View" />
+        <MenuItem
+          Cursor="Hand"
+          Foreground="White"
+          Header="_View">
+          <MenuItem
+            Command="{Binding TextEditorCommand}"
+            Cursor="Hand"
+            Foreground="Black"
+            Header="_Text Editor">
+            <MenuItem.Icon>
+              <materialDesign:PackIcon Kind="Abc" />
+            </MenuItem.Icon>
+          </MenuItem>
+        </MenuItem>
         <MenuItem Foreground="White" Header="_Actions" />
         <MenuItem Foreground="White" Header="_Help" />
       </Menu>
