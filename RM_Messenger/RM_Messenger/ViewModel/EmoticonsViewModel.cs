@@ -1,4 +1,5 @@
 ﻿using RM_Messenger.Command;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -16,8 +17,10 @@ namespace RM_Messenger.ViewModel
     #endregion
 
     #region Public Properties
+    public Action CloseAction { get; set; }
     public ICommand CancelCommand { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
+    public string TextEmoticon { get; set; }
 
     public List<List<string>> EmoticonsMatrix
     {
@@ -37,7 +40,6 @@ namespace RM_Messenger.ViewModel
       {
         if (_selectedEmoticon == value) return;
         _selectedEmoticon = value;
-        SelectedEmoticon = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedEmoticon"));
       }
     }

@@ -219,13 +219,13 @@
         <StackPanel Margin="5,2" Orientation="Horizontal">
           <Button
             x:Name="EmoticonsButton"
-            HorizontalAlignment="Left"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Top"
             Background="Transparent"
             BorderThickness="0"
             Cursor="Hand"
             MouseEnter="EmoticonsButton_MouseEnter"
-            MouseLeave="EmoticonsButton_MouseLeave"
-            ToolTip="Emoticons">
+            MouseLeave="EmoticonsButton_MouseLeave">
             <Button.Template>
               <ControlTemplate TargetType="{x:Type Button}">
                 <StackPanel>
@@ -233,7 +233,7 @@
                     x:Name="EmoticonsImage"
                     Width="21"
                     Height="21"
-                    Margin="0,-3,0,0"
+                    Margin="0,-4,0,0"
                     Source="pack://application:,,,/RM_Messenger;component/Resources/Emoticons.png" />
                 </StackPanel>
                 <ControlTemplate.Triggers>
@@ -245,9 +245,11 @@
             </Button.Template>
             <Popup
               x:Name="EmoticonsPopupTooltip"
+              MouseDown="EmoticonsPopupTooltip_MouseDown"
               MouseLeave="EmoticonsPopupTooltip_MouseLeave"
               Placement="Top"
-              PlacementTarget="{Binding ElementName=Emoticons}">
+              PlacementTarget="{Binding ElementName=EmoticonsButton}"
+              StaysOpen="True">
               <StackPanel>
                 <local:EmoticonsControl x:Name="EmoticonsControl" />
               </StackPanel>
@@ -314,8 +316,8 @@
             HorizontalAlignment="Left"
             Background="Transparent"
             BorderThickness="0"
-            Cursor="Hand"
             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
+            Cursor="Hand"
             ToolTip="Buzz">
             <Button.Template>
               <ControlTemplate TargetType="{x:Type Button}">
@@ -379,7 +381,6 @@
           TextOptions.TextRenderingMode="Aliased"
           VerticalScrollBarVisibility="Auto" />
         <Button
-          CommandTarget="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
           x:Name="SendButton"
           Width="80"
           Height="23"
@@ -389,6 +390,7 @@
           BorderBrush="Indigo"
           BorderThickness="2"
           Command="{Binding SendCommand}"
+          CommandTarget="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
           Content="Send"
           Cursor="Hand"
           Foreground="White"

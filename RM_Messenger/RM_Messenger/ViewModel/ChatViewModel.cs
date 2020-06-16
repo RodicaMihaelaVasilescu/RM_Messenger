@@ -144,14 +144,6 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-    public override bool Equals(object obj)
-    {
-      if (this.selectedUploadedFile.Upload_ID == (obj as Upload).Upload_ID)
-        return true;
-      else
-        return false;
-    }
-
     #endregion
 
     #region Constructor

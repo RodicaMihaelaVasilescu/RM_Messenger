@@ -1,5 +1,6 @@
 ﻿using RM_Messenger.Database;
 using RM_Messenger.Model;
+using RM_Messenger.ViewModel;
 using System;
 using System.IO;
 using System.Windows;
@@ -48,6 +49,7 @@ namespace RM_Messenger.View
     #region Fields
 
     private int internalUpdatePending;
+    private EmoticonsViewModel emoticonsViewModel;
 
     public string DisplayedContact_ID { get; set; }
 
@@ -67,6 +69,12 @@ namespace RM_Messenger.View
       InitializeComponent();
       Initialize();
       TextBox.Focus();
+      emoticonsViewModel = new EmoticonsViewModel();
+      if (emoticonsViewModel.CloseAction == null)
+      {
+        emoticonsViewModel.CloseAction = () => { EmoticonsPopupTooltip.IsOpen = false; };
+      }
+      EmoticonsPopupTooltip.DataContext = emoticonsViewModel;
     }
     #endregion
 
@@ -193,7 +201,10 @@ namespace RM_Messenger.View
 
     private void EmoticonsButton_MouseLeave(object sender, MouseEventArgs e)
     {
-      EmoticonsPopupTooltip.IsOpen = false;
+      if (!EmoticonsPopupTooltip.IsMouseOver)
+      {
+        EmoticonsPopupTooltip.IsOpen = false;
+      }
     }
 
     private void EmoticonsPopupTooltip_MouseLeave(object sender, MouseEventArgs e)
@@ -201,6 +212,14 @@ namespace RM_Messenger.View
       if (!EmoticonsPopupTooltip.IsMouseOver)
       {
         EmoticonsPopupTooltip.IsOpen = false;
+        var emoticonText = emoticonsViewModel.TextEmoticon;
+        if (!string.IsNullOrEmpty(emoticonText))
+        {
+          TextBox.CaretPosition.InsertTextInRun(emoticonsViewModel.TextEmoticon);
+          emoticonsViewModel.TextEmoticon = null;
+          TextBox.CaretPosition = TextBox.CaretPosition.DocumentEnd;
+          TextBox.Focus();
+        }
       }
     }
 
@@ -256,6 +275,13 @@ namespace RM_Messenger.View
       context.Uploads.Add(upload);
       context.SaveChanges();
 
+    }
+
+    private void EmoticonsPopupTooltip_MouseDown(object sender, MouseButtonEventArgs e)
+    {
+      EmoticonsViewModel vm = DataContext as EmoticonsViewModel;
+      if (vm != null)
+        TextBox.Document.Blocks.Add(new Paragraph(new Run(vm.TextEmoticon)));
     }
   }
 }
