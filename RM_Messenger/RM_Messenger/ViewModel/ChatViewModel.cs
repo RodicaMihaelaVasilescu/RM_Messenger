@@ -301,10 +301,6 @@ namespace RM_Messenger.ViewModel
         {
           UploadedFilesList.Add(uploaded);
         }
-        else
-        {
-          var x = 1;
-        }
       });
 
     }
