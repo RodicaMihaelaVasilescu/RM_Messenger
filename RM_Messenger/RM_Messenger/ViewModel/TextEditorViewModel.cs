@@ -247,6 +247,7 @@ namespace RM_Messenger.ViewModel
       IsSaveDocumentEnabled = !string.IsNullOrEmpty(openedFile);
       if (string.IsNullOrEmpty(openedFile))
       {
+        CancelDocumentCommandExecute();
         return;
       }
       Text = File.ReadAllText(openedFile);
@@ -259,6 +260,7 @@ namespace RM_Messenger.ViewModel
       {
         case MessageBoxResult.Yes:
           File.WriteAllText(openedFile, Text);
+          CancelDocumentCommandExecute();
           break;
         case MessageBoxResult.No:
           break;
