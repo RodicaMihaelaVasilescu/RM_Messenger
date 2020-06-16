@@ -135,7 +135,7 @@
             ToolTip="Bold">
             <Image
               SnapsToDevicePixels="True"
-              Source="pack://application:,,,/RM_Messenger;component/Resources/TextBox/FontBold.png"
+              Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/FontBold.png"
               Stretch="None" />
           </ToggleButton>
 
@@ -149,7 +149,7 @@
             ToolTip="Italic">
             <Image
               SnapsToDevicePixels="True"
-              Source="pack://application:,,,/RM_Messenger;component/Resources/TextBox/FontItalic.png"
+              Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/FontItalic.png"
               Stretch="None" />
           </ToggleButton>
 
@@ -163,7 +163,7 @@
             ToolTip="Underline">
             <Image
               SnapsToDevicePixels="True"
-              Source="pack://application:,,,/RM_Messenger;component/Resources/TextBox/FontUnderline.png"
+              Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/FontUnderline.png"
               Stretch="None" />
           </ToggleButton>
           <Grid Width="200">
@@ -269,11 +269,11 @@
                     x:Name="AudiblesImage"
                     Width="18"
                     Height="18"
-                    Source="pack://application:,,,/RM_Messenger;component/Resources/Audibles.png" />
+                    Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/Audibles.png" />
                 </StackPanel>
                 <ControlTemplate.Triggers>
                   <Trigger Property="Button.IsMouseOver" Value="True">
-                    <Setter TargetName="AudiblesImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/Audibles_MouseOver.png" />
+                    <Setter TargetName="AudiblesImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/Audibles_MouseOver.png" />
                   </Trigger>
                 </ControlTemplate.Triggers>
               </ControlTemplate>
@@ -297,11 +297,11 @@
                     x:Name="TextFormatImage"
                     Width="18"
                     Height="18"
-                    Source="pack://application:,,,/RM_Messenger;component/Resources/TextFormat.png" />
+                    Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/TextFormat.png" />
                 </StackPanel>
                 <ControlTemplate.Triggers>
                   <Trigger Property="Button.IsMouseOver" Value="True">
-                    <Setter TargetName="TextFormatImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/TextFormat_MouseOver.png" />
+                    <Setter TargetName="TextFormatImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/TextFormat_MouseOver.png" />
                   </Trigger>
                 </ControlTemplate.Triggers>
               </ControlTemplate>
@@ -324,11 +324,11 @@
                     x:Name="BuzzImage"
                     Width="18"
                     Height="18"
-                    Source="pack://application:,,,/RM_Messenger;component/Resources/BuzzIcon.png" />
+                    Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/BuzzIcon.png" />
                 </StackPanel>
                 <ControlTemplate.Triggers>
                   <Trigger Property="Button.IsMouseOver" Value="True">
-                    <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/BuzzIcon_MouseOver.png" />
+                    <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/BuzzIcon_MouseOver.png" />
                   </Trigger>
                 </ControlTemplate.Triggers>
               </ControlTemplate>
@@ -352,11 +352,11 @@
                     x:Name="BuzzImage"
                     Width="18"
                     Height="18"
-                    Source="pack://application:,,,/RM_Messenger;component/Resources/SendFile.png" />
+                    Source="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/SendFile.png" />
                 </StackPanel>
                 <ControlTemplate.Triggers>
                   <Trigger Property="Button.IsMouseOver" Value="True">
-                    <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/SendFile_MouseOver.png" />
+                    <Setter TargetName="BuzzImage" Property="Source" Value="pack://application:,,,/RM_Messenger;component/Resources/ChatTextBox/SendFile_MouseOver.png" />
                   </Trigger>
                 </ControlTemplate.Triggers>
               </ControlTemplate>

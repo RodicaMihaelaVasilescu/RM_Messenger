@@ -380,13 +380,13 @@
     <Resource Include="Resources\ActivitiesButtonIcon.png" />
     <Resource Include="Resources\ActivitiesButtonIcon_MouseOver.png" />
     <Resource Include="Resources\AddFriend.png" />
-    <Resource Include="Resources\Audibles.png" />
-    <Resource Include="Resources\Audibles_MouseOver.png" />
+    <Resource Include="Resources\ChatTextBox\Audibles.png" />
+    <Resource Include="Resources\ChatTextBox\Audibles_MouseOver.png" />
     <Resource Include="Resources\Background.jpg" />
     <Resource Include="Resources\banner.png" />
     <Resource Include="Resources\Busy.ico" />
-    <Resource Include="Resources\BuzzIcon.png" />
-    <Resource Include="Resources\BuzzIcon_MouseOver.png" />
+    <Resource Include="Resources\ChatTextBox\BuzzIcon.png" />
+    <Resource Include="Resources\ChatTextBox\BuzzIcon_MouseOver.png" />
     <Resource Include="Resources\Chat.ico" />
     <Resource Include="Resources\ChatBubble.png" />
     <Resource Include="Resources\ClearSearchIcon.png" />
@@ -421,8 +421,8 @@
     <Resource Include="Resources\SendEmailImage.png" />
     <Resource Include="Resources\SendImage.png" />
     <Resource Include="Resources\shadow.png" />
-    <Resource Include="Resources\TextFormat.png" />
-    <Resource Include="Resources\TextFormat_MouseOver.png" />
+    <Resource Include="Resources\ChatTextBox\TextFormat.png" />
+    <Resource Include="Resources\ChatTextBox\TextFormat_MouseOver.png" />
     <Resource Include="Resources\UpdatesButton.png" />
     <Resource Include="Resources\VideoCall.png" />
     <Resource Include="Resources\VideoCall_MouseOver.png" />
@@ -571,18 +571,18 @@
       <DependentUpon>EntityFramework.edmx</DependentUpon>
       <LastGenOutput>EntityFramework.cs</LastGenOutput>
     </Content>
-    <Resource Include="Resources\SendFile_Disabled.png" />
-    <Resource Include="Resources\SendFile_MouseOver.png" />
+    <Resource Include="Resources\ChatTextBox\SendFile_MouseOver.png" />
+    <Resource Include="Resources\ChatTextBox\SendFile.png" />
     <Content Include="Resources\Sounds\buzz.wav" />
     <Resource Include="Resources\TextEditor\background.jpg" />
     <Resource Include="Resources\TextEditor\pink_butterfly.png" />
     <Resource Include="Resources\TextEditor\search_icon.png" />
     <Resource Include="YahooMessenger.ico" />
-    <Resource Include="Resources\TextBox\TextFormat_Disabled.png" />
-    <Resource Include="Resources\TextBox\TextFormat_Enabled.png" />
-    <Resource Include="Resources\TextBox\FontBold.png" />
-    <Resource Include="Resources\TextBox\FontItalic.png" />
-    <Resource Include="Resources\TextBox\FontUnderline.png" />
+    <Resource Include="Resources\ChatTextBox\TextFormat_Disabled.png" />
+    <Resource Include="Resources\ChatTextBox\TextFormat_Enabled.png" />
+    <Resource Include="Resources\ChatTextBox\FontBold.png" />
+    <Resource Include="Resources\ChatTextBox\FontItalic.png" />
+    <Resource Include="Resources\ChatTextBox\FontUnderline.png" />
     <Resource Include="Resources\AddFriendRequest.png" />
     <Resource Include="Resources\search_button.png" />
     <Resource Include="Resources\yahoo_websearch.png" />
