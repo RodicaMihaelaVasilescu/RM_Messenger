@@ -38,7 +38,7 @@ namespace RM_Messenger.Helpers
       }
       if (email.Any(c => !(char.IsLetterOrDigit(c) || c == '.' || c == '_' || c == '@')) || email.Count(c => c == '_') > 1 || email.Count(c => c == '.') > 1 || email.Count(c => c == '@') > 1)
       {
-        validationMessage += string.Format("{0}\n", Resources.ExistentIdError);
+        validationMessage += string.Format("{0}\n", Resources.InvalidIdError);
       }
       return validationMessage;
     }

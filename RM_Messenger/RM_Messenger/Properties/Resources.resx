@@ -186,9 +186,6 @@
   <data name="ErrorMessageControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ErrorMessageControl</value>
   </data>
-  <data name="ExistentIdError" xml:space="preserve">
-    <value>You can not used this ID.</value>
-  </data>
   <data name="Finish" xml:space="preserve">
     <value>Finish</value>
   </data>
@@ -206,6 +203,9 @@
   </data>
   <data name="IncorrectIDAndPassword" xml:space="preserve">
     <value>Your ID and password do not match.</value>
+  </data>
+  <data name="InvalidIdError" xml:space="preserve">
+    <value>You can not use this ID.</value>
   </data>
   <data name="InvalidRegexError" xml:space="preserve">
     <value>Invalid regex</value>

@@ -268,15 +268,6 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can not used this ID..
-        /// </summary>
-        public static string ExistentIdError {
-            get {
-                return ResourceManager.GetString("ExistentIdError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Finish.
         /// </summary>
         public static string Finish {
@@ -327,6 +318,15 @@ namespace RM_Messenger.Properties {
         public static string IncorrectIDAndPassword {
             get {
                 return ResourceManager.GetString("IncorrectIDAndPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can not use this ID..
+        /// </summary>
+        public static string InvalidIdError {
+            get {
+                return ResourceManager.GetString("InvalidIdError", resourceCulture);
             }
         }
         

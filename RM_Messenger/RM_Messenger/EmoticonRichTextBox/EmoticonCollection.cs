@@ -54,7 +54,8 @@ namespace RM_Messenger
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/29.gif", Text = "8-|" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/30.gif", Text = "/:)" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/31.gif", Text = ":-&" });
-      Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/32.gif", Text = ":-$" });      Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/29.gif", Text = ":))" });
+      Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/32.gif", Text = ":-$" });      
+      Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/29.gif", Text = ":))" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/33.gif", Text = "[-(" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/34.gif", Text = ":O)" });
       Emoticons.Add(new EmoticonMapper { Icon = "pack://application:,,,/RM_Messenger;component/Resources/Emoticons/34.gif", Text = ":o)" });
