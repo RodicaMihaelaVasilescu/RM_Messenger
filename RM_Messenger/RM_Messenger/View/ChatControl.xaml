@@ -615,8 +615,6 @@
                 FontWeight="Bold"
                 Foreground="#5C7FAF"
                 Style="{StaticResource MaterialDesignRaisedAccentButton}" />
-
-
             </Grid>
           </DataTemplate>
         </ListView.ItemTemplate>
@@ -626,7 +624,7 @@
       <local:ChatTextBoxControl
         x:Name="ChatTextBoxControl"
         Grid.Row="3"
-        Margin="10,5,5,5"
+        Margin="5"
         Document="{Binding Path=MessageBoxContent, Converter={StaticResource flowDocumentConverter}, Mode=TwoWay}" />
 
       <Button
