@@ -674,7 +674,7 @@
               Foreground="Black"
               Text="{Binding SearchedUser, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
               <TextBox.InputBindings>
-                <KeyBinding Key="Return" Command="{Binding AddFriendCommand}" />
+                <KeyBinding Key="Return" Command="{Binding SearchFriendCommand}" />
               </TextBox.InputBindings>
               <TextBox.Style>
                 <Style xmlns:sys="clr-namespace:System;assembly=mscorlib" TargetType="TextBox">
@@ -908,7 +908,8 @@
                               FontWeight="{TemplateBinding FontWeight}"
                               Foreground="{TemplateBinding Foreground}"
                               IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                              Style="{StaticResource ExpanderRightHeaderStyle}">
+                              Style="{StaticResource ExpanderRightHeaderStyle}"
+                              Visibility="{Binding ArrowVisibility}">
                               <ToggleButton.FocusVisualStyle>
                                 <Style>
                                   <Setter Property="Control.Template">

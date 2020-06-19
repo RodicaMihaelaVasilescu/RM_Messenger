@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Input;
 using RM_Messenger.Database;
 using System.Collections.ObjectModel;
+using System.Windows;
 
 namespace RM_Messenger.Model
 {
@@ -12,6 +13,7 @@ namespace RM_Messenger.Model
     public string DisplayedName { get; set; }
     public string ImagePath { get; set; }
     public bool IsExpanded { get; set; } = false;
+    public Visibility ArrowVisibility { get; set; } = Visibility.Visible;
     public ObservableCollection<DisplayedContactModel> ContactsList { get; set; }
     public DisplayedContactModel SelectedContact { get; set; }
 

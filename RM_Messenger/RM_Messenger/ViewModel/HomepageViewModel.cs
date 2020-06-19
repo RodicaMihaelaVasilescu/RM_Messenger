@@ -29,11 +29,14 @@ namespace RM_Messenger.ViewModel
     public ICommand LogoutCommand { get; set; }
     public ICommand SendCommand { get; set; }
     public ICommand AddFriendCommand { get; set; }
+    public ICommand SearchFriendCommand { get; set; }
     public ICommand ChangeStatusCommand { get; set; }
     public ICommand RefreshCommand { get; set; }
     public ICommand TextEditorCommand { get; set; }
     public ICommand ChangeColorCommand { get; set; }
     public string OnOffImage { get; set; } = UserModel.Instance.IsOnline ? "pack://application:,,,/RM_Messenger;component/Resources/Online.ico" : "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
+
+    private ObservableCollection<DisplayedContactModel> searchResults;
 
     public ObservableCollection<ContactListsModel> ContactsLists
     {
@@ -157,6 +160,7 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Status"));
       }
     }
+
     public string SearchedUser
     {
       get { return _searchedUser; }
@@ -164,6 +168,23 @@ namespace RM_Messenger.ViewModel
       {
         if (_searchedUser == value) return;
         _searchedUser = value;
+        if (string.IsNullOrEmpty(value))
+        {
+          InitializeContactList();
+        }
+        else
+        {
+          searchResults = new ObservableCollection<DisplayedContactModel>
+            (AddressBookList.Where(a => a.UserId.ToLower().StartsWith(value.ToLower())).OrderBy(u => u.UserId));
+          ContactsLists = new ObservableCollection<ContactListsModel>();
+          var searchListModel = new ContactListsModel
+          {
+            IsExpanded = true,
+            ContactsList = searchResults,
+            ArrowVisibility = Visibility.Collapsed
+          };
+          ContactsLists.Add(searchListModel);
+        }
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SearchedUser"));
       }
     }
@@ -189,6 +210,8 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("ProfilePicture"));
       }
     }
+
+    public ObservableCollection<DisplayedContactModel> AddressBookList { get; private set; }
 
     #endregion
 
@@ -223,6 +246,7 @@ namespace RM_Messenger.ViewModel
       LogoutCommand = new RelayCommand(LogoutCommandExecute);
       ChangeStatusCommand = new RelayCommand(ChangeStatusCommandExecute);
       AddFriendCommand = new RelayCommand(AddFriendCommandExecute);
+      SearchFriendCommand = new RelayCommand(SearchFriendCommandExecute);
       RefreshCommand = new RelayCommand(RefreshCommandExecute);
       TextEditorCommand = new RelayCommand(TextEditorCommandExecute);
       ChangeColorCommand = new RelayCommand(ChangeColorCommandExecute);
@@ -416,6 +440,17 @@ namespace RM_Messenger.ViewModel
       addContactWindow.ShowDialog();
     }
 
+    private void SearchFriendCommandExecute()
+    {
+      if (!searchResults.Any())
+      {
+        AddFriendCommandExecute();
+      }
+      else
+      {
+        var chatControl = WindowManager.OpenChatWindow(searchResults.FirstOrDefault());
+      }
+    }
     private void LoadAddressBook()
     {
 
@@ -439,6 +474,7 @@ namespace RM_Messenger.ViewModel
       addressBook.IsExpanded = false;
       addressBook.DisplayedName = string.Format("Address Book ({0})", addressBook.ContactsList.Count);
       ContactsLists.Add(addressBook);
+      AddressBookList = addressBook.ContactsList;
     }
 
     private void LoadRecentList()
