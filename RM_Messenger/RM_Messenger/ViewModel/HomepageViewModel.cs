@@ -170,7 +170,7 @@ namespace RM_Messenger.ViewModel
         _searchedUser = value;
         if (string.IsNullOrEmpty(value))
         {
-          InitializeContactList();
+          ContactsLists = AllContactsLists;
         }
         else
         {
@@ -212,6 +212,7 @@ namespace RM_Messenger.ViewModel
     }
 
     public ObservableCollection<DisplayedContactModel> AddressBookList { get; private set; }
+    public ObservableCollection<ContactListsModel> AllContactsLists { get; private set; }
 
     #endregion
 
@@ -421,6 +422,8 @@ namespace RM_Messenger.ViewModel
       LoadRecentList();
       LoadFriendList();
       LoadAddressBook();
+      AllContactsLists = new ObservableCollection<ContactListsModel>();
+      AllContactsLists = ContactsLists;
     }
 
     private void AddFriendCommandExecute()
@@ -449,6 +452,7 @@ namespace RM_Messenger.ViewModel
       else
       {
         var chatControl = WindowManager.OpenChatWindow(searchResults.FirstOrDefault());
+        ContactsLists = AllContactsLists;
       }
     }
     private void LoadAddressBook()
