@@ -89,15 +89,16 @@ namespace RM_Messenger.Helpers
       {
         Tag = user.Username + "Child",
         Title = Resources.ChatWindowTitle,
-        MaxHeight = 540,
-        MaxWidth = 620
-    };
+        Height = 540,
+        MinHeight = 440,
+        Width = 620,
+        MinWidth = 520
+      };
       var chatControl = new ChatControl();
       var chatViewModel = new ChatViewModel(child, selectedContact, chatControl.AutoScrollViewer);
       chatControl.DisplayedUser_ID = selectedContact.UserId;
       chatControl.DataContext = chatViewModel;
       child.Content = chatControl;
-      child.SizeToContent = SizeToContent.WidthAndHeight;
       child.Icon = BitmapFrame.Create(new Uri("pack://application:,,,/Resources/Chat.ico", UriKind.RelativeOrAbsolute));
       child.Show();
 

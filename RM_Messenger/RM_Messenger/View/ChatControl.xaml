@@ -10,8 +10,6 @@
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
   xmlns:model="clr-namespace:RM_Messenger.Model"
-  Width="600"
-  Height="500"
   Background="White"
   Loaded="UserControl_Loaded"
   mc:Ignorable="d">
@@ -386,7 +384,7 @@
       </Grid.RowDefinitions>
       <Grid.ColumnDefinitions>
         <ColumnDefinition Width="4*" />
-        <ColumnDefinition />
+        <ColumnDefinition Width="auto" />
       </Grid.ColumnDefinitions>
 
       <DockPanel
@@ -395,15 +393,27 @@
         Grid.Column="1"
         Margin="0,5,5,5">
         <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
           <StackPanel
             Grid.Row="0"
             VerticalAlignment="Top"
-            Background="White"
+            Background="Transparent"
             Cursor="Hand">
-            <Image Source="{Binding ProfilePicture}" ToolTip="Profile Picture" />
+            <Image
+              MaxWidth="110"
+              MaxHeight="110"
+              Source="{Binding ProfilePicture}"
+              ToolTip="Profile Picture" />
           </StackPanel>
+          <StackPanel Grid.Row="1" />
           <StackPanel
-            Grid.Row="1"
+            Grid.Row="2"
+            MaxWidth="70"
+            MaxHeight="70"
             Margin="20,0"
             VerticalAlignment="Bottom"
             Background="White">
@@ -438,9 +448,11 @@
           PreviewMouseWheel="TS_PreviewMouseWheel"
           VerticalScrollBarVisibility="Auto">
           <ListBox
+            Name="MessagesListBox"
             Margin="5,10"
             BorderThickness="0"
-            ItemsSource="{Binding MessagesList, Mode=OneWay}">
+            ItemsSource="{Binding MessagesList, Mode=OneWay}"
+            ScrollViewer.HorizontalScrollBarVisibility="Hidden">
             <ListBox.Resources>
               <Style TargetType="{x:Type ListBoxItem}">
                 <Setter Property="OverridesDefaultStyle" Value="true" />
@@ -448,18 +460,18 @@
                 <Setter Property="Template">
                   <Setter.Value>
                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                      <Grid
-                        MaxWidth="400"
+                      <StackPanel
                         Margin="2"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Top">
-
+                        VerticalAlignment="Top"
+                        ScrollViewer.HorizontalScrollBarVisibility="Hidden">
                         <local:EmoticonRichTextBoxMessagesControl
                           x:Name="ChatContent"
                           Grid.Row="1"
+                          Width="{Binding ElementName=MessagesListBox, Path=ActualWidth}"
                           Document="{Binding Content, Mode=OneTime}"
                           ToolTip="{Binding ToolTip}" />
-                      </Grid>
+                      </StackPanel>
                     </ControlTemplate>
                   </Setter.Value>
                 </Setter>

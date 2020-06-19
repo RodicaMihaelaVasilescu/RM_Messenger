@@ -51,7 +51,7 @@
           <Property Name="Message_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="SentBy_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="SentTo_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="Text" Type="nvarchar" MaxLength="500" />
+          <Property Name="Text" Type="nvarchar(max)" />
           <Property Name="FontStyle" Type="nvarchar" MaxLength="50" />
           <Property Name="FontSize" Type="nvarchar" MaxLength="50" />
           <Property Name="Bold" Type="bit" />
@@ -425,7 +425,7 @@
           <Property Name="Message_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SentBy_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="SentTo_User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="Text" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Text" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="FontStyle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="FontSize" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Bold" Type="Boolean" />

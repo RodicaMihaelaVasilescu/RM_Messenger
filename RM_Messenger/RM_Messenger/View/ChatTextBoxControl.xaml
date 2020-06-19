@@ -367,10 +367,10 @@
         </StackPanel>
       </Border>
 
-      <Grid>
+      <Grid MaxHeight="43">
         <RichTextBox
           x:Name="TextBox"
-          Padding="0,0,80,0"
+          Padding="0,5,80,2"
           VerticalContentAlignment="Center"
           AcceptsReturn="True"
           AcceptsTab="True"
@@ -383,8 +383,8 @@
         <Button
           x:Name="SendButton"
           Width="80"
-          Height="23"
-          Margin="3"
+          MinHeight="30"
+          Margin="5,7"
           HorizontalAlignment="Right"
           VerticalAlignment="Center"
           BorderBrush="Indigo"
