@@ -163,11 +163,15 @@
         </Grid>
         <CheckBox
           Margin="5,35,5,5"
+          VerticalAlignment="Center"
+          VerticalContentAlignment="Bottom"
           Content="Add my name to the RM! Member Directory so my friends can find me"
           Foreground="White"
           IsChecked="True" />
         <CheckBox
           Margin="5,10"
+          VerticalAlignment="Center"
+          VerticalContentAlignment="Bottom"
           Content="Send me special offers from selected RM! partnersthrough RM! Delivers"
           Foreground="White" />
 
