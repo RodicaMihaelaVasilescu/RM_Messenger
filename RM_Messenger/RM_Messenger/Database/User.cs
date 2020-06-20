@@ -30,6 +30,7 @@ namespace RM_Messenger.Database
             this.RecentLists1 = new HashSet<RecentList>();
             this.Uploads = new HashSet<Upload>();
             this.Uploads1 = new HashSet<Upload>();
+            this.EmailConfirmations = new HashSet<EmailConfirmation>();
         }
     
         public string User_ID { get; set; }
@@ -61,5 +62,7 @@ namespace RM_Messenger.Database
         public virtual ICollection<Upload> Uploads { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Upload> Uploads1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EmailConfirmation> EmailConfirmations { get; set; }
     }
 }

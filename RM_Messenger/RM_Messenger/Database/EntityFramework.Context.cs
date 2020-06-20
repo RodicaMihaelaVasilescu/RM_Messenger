@@ -33,5 +33,6 @@ namespace RM_Messenger.Database
         public virtual DbSet<RecentList> RecentLists { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<Upload> Uploads { get; set; }
+        public virtual DbSet<EmailConfirmation> EmailConfirmations { get; set; }
     }
 }

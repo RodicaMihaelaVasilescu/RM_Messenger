@@ -6,7 +6,11 @@
   xmlns:gif="http://wpfanimatedgif.codeplex.com"
   xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Width="530"
+  Height="400"
   Background="White"
+  FontFamily="Calisto MT"
+  FontWeight="Thin"
   mc:Ignorable="d">
 
   <UserControl.Resources>
@@ -18,207 +22,273 @@
     </ResourceDictionary>
   </UserControl.Resources>
 
-  <Grid Margin="7,0,7,7" Background="#76246E">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="auto" />
-      <RowDefinition Height="*" />
-    </Grid.RowDefinitions>
+  <Grid Margin="2" Background="#76246E">
+    <Grid Margin="15">
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="*" />
+        <RowDefinition Height="auto" />
+        <RowDefinition Height="auto" />
+      </Grid.RowDefinitions>
 
-    <DockPanel Margin="0">
-      <Menu Background="Transparent" DockPanel.Dock="Top">
-        <MenuItem Foreground="White" Header="Messenger">
-          <MenuItem Foreground="Black" Header="_New">
-            <MenuItem.Icon>
-              <materialDesign:PackIcon Kind="OpenInNew" />
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Foreground="Black" Header="_Open">
-            <MenuItem.Icon>
-              <materialDesign:PackIcon Kind="MenuOpen" />
-            </MenuItem.Icon>
-          </MenuItem>
-          <MenuItem Foreground="Black" Header="_Save">
-            <MenuItem.Icon>
-              <materialDesign:PackIcon Kind="ContentSave" />
-            </MenuItem.Icon>
-          </MenuItem>
-          <Separator />
-          <MenuItem Foreground="Black" Header="_Exit">
-            <MenuItem.Icon>
-              <materialDesign:PackIcon Kind="ExitRun" />
-            </MenuItem.Icon>
-          </MenuItem>
-        </MenuItem>
-        <MenuItem Foreground="White" Header="_Help" />
-      </Menu>
-    </DockPanel>
-
-    <Image
-      Grid.Row="1"
-      Width="180"
-      Height="120"
-      Margin="0,25,0,0"
-      gif:ImageBehavior.AnimatedSource="pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerSleep.gif" />
-
-    <Label
-      Grid.Row="2"
-      Margin="40,0"
-      HorizontalAlignment="Stretch"
-      Content="Yahoo! _ID:"
-      Foreground="LightGray" />
-
-    <TextBox
-      Grid.Row="3"
-      Width="100"
-      Margin="40,0"
-      HorizontalAlignment="Center"
-      Background="Transparent"
-      BorderThickness="0"
-      FontSize="13"
-      FontWeight="Bold"
-      Foreground="LightGray"
-      Text="{Binding MessageOnSingingIn}"
-      TextAlignment="Center"
-      TextWrapping="Wrap" />
-
-    <TextBox
-      x:Name="Email"
-      Grid.Row="3"
-      Height="20"
-      Margin="40,0"
-      Padding="3,0"
-      HorizontalAlignment="Stretch"
-      VerticalAlignment="Center"
-      VerticalContentAlignment="Center"
-      Background="White"
-      BorderBrush="White"
-      FontSize="12"
-      Foreground="Black"
-      IsEnabled="True"
-      KeyDown="Email_KeyDown"
-      Text="{Binding Email, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-      TextWrapping="NoWrap" />
-
-    <Label
-      Grid.Row="4"
-      Margin="40,0"
-      HorizontalAlignment="Stretch"
-      Content="_Password:"
-      Foreground="LightGray" />
-
-    <PasswordBox
-      Name="Password"
-      Grid.Row="5"
-      Height="20"
-      Margin="40,0"
-      Padding="3,0,30,0"
-      HorizontalAlignment="Stretch"
-      VerticalAlignment="Center"
-      VerticalContentAlignment="Center"
-      Background="White"
-      BorderBrush="White"
-      FontSize="12"
-      Foreground="Black"
-      KeyDown="Password_KeyDown"
-      PasswordChanged="Password_PasswordChanged" />
-
-    <StackPanel
-      Grid.Row="7"
-      Margin="40,20"
-      HorizontalAlignment="Stretch"
-      Orientation="Horizontal">
-      <Button
-        x:Name="CreateAccountButton"
-        Height="23"
-        Margin="0,0,10,0"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Top"
-        BorderBrush="White"
-        BorderThickness="0.5"
-        Command="{Binding CreateAccountCommand}"
-        Content="Create"
-        FontSize="10"
-        Foreground="White"
-        Style="{StaticResource MaterialDesignRaisedAccentButton}">
-        <Button.Background>
-          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#7B4171" />
-            <GradientStop Offset="0.445" Color="#693060" />
-            <GradientStop Offset="0.53" Color="#481041" />
-          </LinearGradientBrush>
-        </Button.Background>
-      </Button>
-      <Button
-        x:Name="CancelButton"
-        Height="23"
-        Margin="10,0,0,0"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Top"
-        BorderBrush="White"
-        BorderThickness="0.5"
-        Command="{Binding CancelCommand}"
-        Content="Cancel"
-        FontSize="10"
-        Foreground="White"
-        Style="{StaticResource MaterialDesignRaisedAccentButton}">
-        <Button.Background>
-          <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#7B4171" />
-            <GradientStop Offset="0.445" Color="#693060" />
-            <GradientStop Offset="0.53" Color="#481041" />
-          </LinearGradientBrush>
-        </Button.Background>
-      </Button>
-    </StackPanel>
-
-    <TextBlock
-      Name="PasswordValidationMessage"
-      Text="{Binding PasswordValidationMessage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-      Visibility="Hidden" />
-
-    <StackPanel
-      Grid.Row="10"
-      Margin="0,160,0,10"
-      HorizontalAlignment="Center"
-      VerticalAlignment="Center">
-      <Button
-        x:Name="Register"
-        Height="21"
+      <TextBlock
+        Grid.Row="0"
         HorizontalAlignment="Left"
-        VerticalAlignment="Bottom"
-        HorizontalContentAlignment="Left"
-        VerticalContentAlignment="Bottom"
-        Background="Transparent"
-        BorderThickness="0"
-        Command="{Binding RegisterCommand}"
-        Content="Get a new Yahoo! ID..."
-        FontSize="11"
-        Foreground="#5C7FAF"
-        Style="{StaticResource MaterialDesignRaisedAccentButton}" />
-      <Button
-        x:Name="ForgotPassword"
-        Height="23"
-        HorizontalAlignment="Left"
-        VerticalAlignment="Bottom"
-        HorizontalContentAlignment="Center"
-        VerticalContentAlignment="Center"
-        Background="Transparent"
-        BorderThickness="0"
-        Command="{Binding ForgotPasswordCommand}"
-        Content="Forgot your password?"
-        FontSize="11"
-        Foreground="#5C7FAF"
-        Style="{StaticResource MaterialDesignRaisedAccentButton}" />
+        FontSize="25"
+        Foreground="White"
+        Text="Personal account information" />
 
-    </StackPanel>
+      <TextBlock
+        Grid.Row="1"
+        Margin="0,10"
+        HorizontalAlignment="Left"
+        Foreground="White"
+        Text="This information will help us personalize various areas of RM! with content that is relevant to you. It also helps us better understand the type of people who use RM!"
+        TextWrapping="Wrap" />
+
+      <StackPanel Grid.Row="2" Margin="20">
+
+        <Grid>
+          <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+          </Grid.RowDefinitions>
+          <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition />
+          </Grid.ColumnDefinitions>
+          <TextBlock
+            Grid.Column="0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Text="First Name:" />
+          <TextBox
+            x:Name="FirstNameTextBox"
+            Grid.Column="1"
+            Height="20"
+            Margin="5"
+            Padding="3,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="0.5"
+            FontSize="12"
+            Foreground="Black"
+            IsEnabled="True"
+            PreviewKeyUp="FirstName_PreviewKeyDown"
+            Text="{Binding FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="NoWrap" />
+
+          <TextBlock
+            Grid.Row="1"
+            Grid.Column="0"
+            Margin="5"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Text="Gender:" />
+          <ComboBox
+            Grid.Row="1"
+            Grid.Column="1"
+            Margin="5"
+            HorizontalAlignment="Stretch"
+            IsReadOnly="True"
+            SelectedIndex="0">
+            <ComboBoxItem IsSelected="True" />
+            <ComboBoxItem>Male</ComboBoxItem>
+            <ComboBoxItem>Female</ComboBoxItem>
+          </ComboBox>
+
+          <TextBlock
+            Grid.Row="0"
+            Grid.Column="2"
+            Margin="10,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Text="Last Name:" />
+          <TextBox
+            x:Name="LastNameTextBox"
+            Grid.Row="0"
+            Grid.Column="3"
+            Height="20"
+            Margin="5"
+            Padding="3,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="0.5"
+            FontSize="12"
+            Foreground="Black"
+            IsEnabled="True"
+            PreviewKeyUp="LastName_PreviewKeyDown"
+            Text="{Binding LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="NoWrap" />
+
+          <TextBlock
+            Grid.Row="1"
+            Grid.Column="2"
+            Margin="10,0"
+            HorizontalAlignment="Left"
+            VerticalAlignment="Center"
+            Foreground="White"
+            Text="Zip/Postal Code:" />
+          <TextBox
+            x:Name="PostalCodeTextBox"
+            Grid.Row="1"
+            Grid.Column="3"
+            Height="20"
+            Margin="5"
+            Padding="3,0"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Center"
+            VerticalContentAlignment="Center"
+            Background="White"
+            BorderBrush="Black"
+            BorderThickness="0.5"
+            FontSize="12"
+            Foreground="Black"
+            IsEnabled="True"
+            Text="{Binding PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+            TextWrapping="NoWrap" />
+        </Grid>
+        <CheckBox
+          Margin="5,35,5,5"
+          Content="Add my name to the RM! Member Directory so my friends can find me"
+          Foreground="White"
+          IsChecked="True" />
+        <CheckBox
+          Margin="5,10"
+          Content="Send me special offers from selected RM! partnersthrough RM! Delivers"
+          Foreground="White" />
+
+        <Button
+          Height="23"
+          Margin="5,10"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Center"
+          BorderBrush="White"
+          BorderThickness="0.5"
+          Click="ViewPolicyButton_Click"
+          Content="View the RM! Privacy Policy"
+          FontSize="10"
+          FontWeight="Thin"
+          Foreground="White"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}">
+          <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Offset="0" Color="#7B4171" />
+              <GradientStop Offset="0.445" Color="#693060" />
+              <GradientStop Offset="0.53" Color="#481041" />
+            </LinearGradientBrush>
+          </Button.Background>
+        </Button>
+      </StackPanel>
+
+      <Separator
+        Grid.Row="4"
+        Grid.ColumnSpan="2"
+        VerticalAlignment="Bottom"
+        HorizontalContentAlignment="Center" />
+
+
+      <StackPanel
+        Grid.Row="5"
+        Grid.ColumnSpan="2"
+        HorizontalAlignment="Right"
+        Orientation="Horizontal">
+
+        <Button
+          x:Name="BackButton"
+          Width="80"
+          Height="23"
+          Margin="5,10"
+          HorizontalAlignment="Left"
+          VerticalAlignment="Top"
+          BorderBrush="White"
+          BorderThickness="0.5"
+          Command="{Binding BackCommand}"
+          Content="&lt; Back"
+          FontSize="10"
+          FontWeight="Thin"
+          Foreground="White"
+          IsEnabled="False"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}">
+          <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Offset="0" Color="#7B4171" />
+              <GradientStop Offset="0.445" Color="#693060" />
+              <GradientStop Offset="0.53" Color="#481041" />
+            </LinearGradientBrush>
+          </Button.Background>
+        </Button>
+
+        <Button
+          x:Name="NextButton"
+          Width="80"
+          Height="23"
+          Margin="5,10"
+          HorizontalAlignment="Center"
+          VerticalAlignment="Top"
+          BorderBrush="White"
+          BorderThickness="0.5"
+          Command="{Binding NextCommand}"
+          Content="Next &gt;"
+          FontSize="10"
+          FontWeight="Thin"
+          Foreground="White"
+          IsDefault="True"
+          IsEnabled="{Binding IsNextButtonEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}">
+          <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Offset="0" Color="#7B4171" />
+              <GradientStop Offset="0.445" Color="#693060" />
+              <GradientStop Offset="0.53" Color="#481041" />
+            </LinearGradientBrush>
+          </Button.Background>
+        </Button>
+
+        <Button
+          x:Name="CancelButton"
+          Width="80"
+          Height="23"
+          Margin="5,10,0,10"
+          HorizontalAlignment="Right"
+          VerticalAlignment="Top"
+          BorderBrush="White"
+          BorderThickness="0.5"
+          Command="{Binding CancelCommand}"
+          Content="Cancel"
+          FontSize="10"
+          FontWeight="Thin"
+          Foreground="White"
+          Style="{StaticResource MaterialDesignRaisedAccentButton}">
+          <Button.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+              <GradientStop Offset="0" Color="#7B4171" />
+              <GradientStop Offset="0.445" Color="#693060" />
+              <GradientStop Offset="0.53" Color="#481041" />
+            </LinearGradientBrush>
+          </Button.Background>
+        </Button>
+      </StackPanel>
+
+
+
+      <TextBlock
+        Name="PasswordValidationMessage"
+        Text="{Binding PasswordValidationMessage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+        Visibility="Hidden" />
+    </Grid>
   </Grid>
 </UserControl>

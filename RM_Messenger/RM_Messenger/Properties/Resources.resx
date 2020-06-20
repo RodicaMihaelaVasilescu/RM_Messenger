@@ -162,6 +162,12 @@
   <data name="CreateNewAccountControlPath" xml:space="preserve">
     <value>RM_Messenger.View.CreateNewAccountControl</value>
   </data>
+  <data name="CreateNewAccountMailSubject" xml:space="preserve">
+    <value>RM! Messenger ID - Create new account.</value>
+  </data>
+  <data name="CreateNewAccountNextControl" xml:space="preserve">
+    <value>RM_Messenger.View.CreateNewAccountNextControl</value>
+  </data>
   <data name="CreateNewAccountWindowTitle" xml:space="preserve">
     <value>Create Account</value>
   </data>
@@ -173,6 +179,12 @@
   </data>
   <data name="DisplayImageTitle" xml:space="preserve">
     <value>Display Image</value>
+  </data>
+  <data name="EmailConfirmationCodeControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.EmailConfirmationCodeControl</value>
+  </data>
+  <data name="EmailConfirmationCodeControlTitle" xml:space="preserve">
+    <value>Email Verification</value>
   </data>
   <data name="EmptyIdError" xml:space="preserve">
     <value>The ID cannot be empty.</value>
@@ -197,6 +209,9 @@
   </data>
   <data name="HomepageWindowTitle" xml:space="preserve">
     <value>RM! Messenger</value>
+  </data>
+  <data name="IDNotAvailableError" xml:space="preserve">
+    <value>This ID is not available.</value>
   </data>
   <data name="IdShouldStartWithALetterError" xml:space="preserve">
     <value>ID should start with a letter.</value>

@@ -20,7 +20,7 @@ namespace RM_Messenger.Helpers
       return validationMessage;
     }
 
-    public static string ValidateEmail(string email)
+    public static string ValidateUsername(string email)
     {
       string validationMessage = string.Empty;
       if (!email.Any())

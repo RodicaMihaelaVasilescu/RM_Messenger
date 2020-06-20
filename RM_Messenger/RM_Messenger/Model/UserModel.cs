@@ -11,6 +11,8 @@
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public bool IsOnline { get; set; } = true;
+    public string Email { get; set; }
+    public string PostalCode { get; set; }
     public string EncryptedPassword { get; set; }
 
   }

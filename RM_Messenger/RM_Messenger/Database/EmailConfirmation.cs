@@ -12,16 +12,12 @@ namespace RM_Messenger.Database
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class EmailConfirmation
     {
-        public int User_Account_ID { get; set; }
+        public int EmailConfirmation_ID { get; set; }
         public string User_ID { get; set; }
-        public string First_Name { get; set; }
-        public string Last_Name { get; set; }
-        public byte[] Profile_Picture { get; set; }
-        public string Status { get; set; }
-        public string Email { get; set; }
-        public string PostalCode { get; set; }
+        public int Code { get; set; }
+        public Nullable<bool> IsConfirmed { get; set; }
     
         public virtual User User { get; set; }
     }

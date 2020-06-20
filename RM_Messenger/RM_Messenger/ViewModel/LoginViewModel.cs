@@ -7,6 +7,7 @@ using RM_Messenger.Helpers;
 using RM_Messenger.Properties;
 using RM_Messenger.Command;
 using RM_Messenger.Database;
+using RM_Messenger.View;
 
 namespace RM_Messenger.ViewModel
 {
@@ -125,13 +126,16 @@ namespace RM_Messenger.ViewModel
 
     private void CreateNewAccountCommandExecute()
     {
-      var createNewAccountViewModel = new CreateNewAccountViewModel(window);
-      WindowManager.ChangeWindowContent(window, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
+      Window createNewAccountWindow = new Window();
+      var createNewAccountViewModel = new CreateNewAccountViewModel(createNewAccountWindow);
+      WindowManager.CreateGeneralWindow(createNewAccountWindow, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
 
       if (createNewAccountViewModel.CloseAction == null)
       {
         createNewAccountViewModel.CloseAction = () => window.Close();
       }
+      createNewAccountWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+      createNewAccountWindow.Show();
     }
 
     public void ForgotPasswordCommandExecute()

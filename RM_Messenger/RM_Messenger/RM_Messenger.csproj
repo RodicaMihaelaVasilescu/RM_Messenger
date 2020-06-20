@@ -149,6 +149,9 @@
     <Compile Include="Database\AddressBook.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\EmailConfirmation.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\EntityFramework.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -203,6 +206,7 @@
     <Compile Include="ViewModel\AddToMessengerRequestFirstViewModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
+    <Compile Include="ViewModel\CreateNewAccountNextViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
     <Compile Include="ViewModel\DisplayImageViewModel.cs" />
     <Compile Include="ViewModel\EmoticonsViewModel.cs" />
@@ -238,8 +242,14 @@
     <Compile Include="View\CreateNewAccountControl.xaml.cs">
       <DependentUpon>CreateNewAccountControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CreateNewAccountNextControl.xaml.cs">
+      <DependentUpon>CreateNewAccountNextControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\DisplayImageControl.xaml.cs">
       <DependentUpon>DisplayImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmailConfirmationCodeControl.xaml.cs">
+      <DependentUpon>EmailConfirmationCodeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmoticonRichTextBoxMessagesControl.xaml.cs">
       <DependentUpon>EmoticonRichTextBoxMessagesControl.xaml</DependentUpon>
@@ -338,7 +348,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\CreateNewAccountNextControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\DisplayImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmailConfirmationCodeControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

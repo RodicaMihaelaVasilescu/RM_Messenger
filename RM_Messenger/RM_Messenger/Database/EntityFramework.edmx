@@ -15,6 +15,8 @@
           <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
           <Property Name="Profile_Picture" Type="varbinary(max)" />
           <Property Name="Status" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AddRequests">
           <Key>
@@ -34,6 +36,15 @@
           <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Friend_User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="datetime" />
+        </EntityType>
+        <EntityType Name="EmailConfirmation">
+          <Key>
+            <PropertyRef Name="EmailConfirmation_ID" />
+          </Key>
+          <Property Name="EmailConfirmation_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="int" Nullable="false" />
+          <Property Name="IsConfirmed" Type="bit" />
         </EntityType>
         <EntityType Name="Friendships">
           <Key>
@@ -248,6 +259,7 @@
           <EntitySet Name="Accounts" EntityType="Self.Accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddRequests" EntityType="Self.AddRequests" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EmailConfirmation" EntityType="Self.EmailConfirmation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecentList" EntityType="Self.RecentList" Schema="dbo" store:Type="Tables" />
@@ -371,6 +383,11 @@
             <End Role="User" EntitySet="Users" />
             <End Role="Upload" EntitySet="Uploads" />
           </AssociationSet>
+          <EntitySet Name="EmailConfirmations" EntityType="RMMessengerModel.EmailConfirmation" />
+          <AssociationSet Name="FK_EmailConfirmation_Users" Association="RMMessengerModel.FK_EmailConfirmation_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="EmailConfirmation" EntitySet="EmailConfirmations" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
           <Key>
@@ -383,6 +400,8 @@
           <Property Name="Profile_Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
           <Property Name="Status" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_Accounts_Users" FromRole="Account" ToRole="User" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="AddRequest">
           <Key>
@@ -466,6 +485,7 @@
           <NavigationProperty Name="RecentLists1" Relationship="RMMessengerModel.FK_RecentList_Sent_To" FromRole="User" ToRole="RecentList" />
           <NavigationProperty Name="Uploads" Relationship="RMMessengerModel.FK_Uploads_SentBy_User_ID" FromRole="User" ToRole="Upload" />
           <NavigationProperty Name="Uploads1" Relationship="RMMessengerModel.FK_Uploads_SentTo_User_ID" FromRole="User" ToRole="Upload" />
+          <NavigationProperty Name="EmailConfirmations" Relationship="RMMessengerModel.FK_EmailConfirmation_Users" FromRole="User" ToRole="EmailConfirmation" />
         </EntityType>
         <Association Name="FK_Accounts_Users">
           <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
@@ -637,6 +657,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="EmailConfirmation">
+          <Key>
+            <PropertyRef Name="EmailConfirmation_ID" />
+          </Key>
+          <Property Name="EmailConfirmation_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Code" Type="Int32" Nullable="false" />
+          <Property Name="IsConfirmed" Type="Boolean" />
+          <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_EmailConfirmation_Users" FromRole="EmailConfirmation" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_EmailConfirmation_Users">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.EmailConfirmation" Role="EmailConfirmation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="EmailConfirmation">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -646,6 +688,8 @@
           <EntitySetMapping Name="Accounts">
             <EntityTypeMapping TypeName="RMMessengerModel.Account">
               <MappingFragment StoreEntitySet="Accounts">
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="Profile_Picture" ColumnName="Profile_Picture" />
                 <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
@@ -731,6 +775,16 @@
                 <ScalarProperty Name="SentTo_User_ID" ColumnName="SentTo_User_ID" />
                 <ScalarProperty Name="SentBy_User_ID" ColumnName="SentBy_User_ID" />
                 <ScalarProperty Name="Upload_ID" ColumnName="Upload_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EmailConfirmations">
+            <EntityTypeMapping TypeName="RMMessengerModel.EmailConfirmation">
+              <MappingFragment StoreEntitySet="EmailConfirmation">
+                <ScalarProperty Name="IsConfirmed" ColumnName="IsConfirmed" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="EmailConfirmation_ID" ColumnName="EmailConfirmation_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

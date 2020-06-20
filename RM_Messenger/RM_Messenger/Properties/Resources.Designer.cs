@@ -196,6 +196,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RM! Messenger ID - Create new account..
+        /// </summary>
+        public static string CreateNewAccountMailSubject {
+            get {
+                return ResourceManager.GetString("CreateNewAccountMailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.CreateNewAccountNextControl.
+        /// </summary>
+        public static string CreateNewAccountNextControl {
+            get {
+                return ResourceManager.GetString("CreateNewAccountNextControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Account.
         /// </summary>
         public static string CreateNewAccountWindowTitle {
@@ -228,6 +246,24 @@ namespace RM_Messenger.Properties {
         public static string DisplayImageTitle {
             get {
                 return ResourceManager.GetString("DisplayImageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.EmailConfirmationCodeControl.
+        /// </summary>
+        public static string EmailConfirmationCodeControlPath {
+            get {
+                return ResourceManager.GetString("EmailConfirmationCodeControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email Verification.
+        /// </summary>
+        public static string EmailConfirmationCodeControlTitle {
+            get {
+                return ResourceManager.GetString("EmailConfirmationCodeControlTitle", resourceCulture);
             }
         }
         
@@ -300,6 +336,15 @@ namespace RM_Messenger.Properties {
         public static string HomepageWindowTitle {
             get {
                 return ResourceManager.GetString("HomepageWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This ID is not available..
+        /// </summary>
+        public static string IDNotAvailableError {
+            get {
+                return ResourceManager.GetString("IDNotAvailableError", resourceCulture);
             }
         }
         
