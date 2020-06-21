@@ -47,23 +47,6 @@ namespace RM_Messenger.View
     {
       Process.Start("https://github.com/RodicaMihaelaVasilescu/RM_Messenger");
     }
-    //private void Password_PasswordChanged(object sender, RoutedEventArgs e)
-    //{
-    //  UserModel.Instance.EncryptedPassword = Encryption.Sha256(Password.Password);
-    //  PasswordValidationMessage.Text = Validator.ValidatePassword(Password.Password);
-    //}
 
-    //private void Username_KeyDown(object sender, KeyEventArgs e)
-    //{
-    //  if (e.Key == Key.Enter)
-    //  {
-    //    Password.Focus();
-    //  }
-    //}
-
-    //private void Password_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
-    //{
-    //  CreateAccountButton.IsDefault = true;
-    //}
   }
 }

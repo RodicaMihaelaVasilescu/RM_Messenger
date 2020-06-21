@@ -105,7 +105,7 @@ namespace RM_Messenger.ViewModel
 
       if (String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword) || String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword))
       {
-        WindowManager.OpenLoginErrorWindow(window, Resources.YouMustEnterAnIDAndPasswordError);
+        WindowManager.OpenLoginErrorWindow(window, Resources.YouMustEnterAnIDAndPasswordError, true);
         return;
       }
       OpenSigningInWindow();
@@ -140,8 +140,18 @@ namespace RM_Messenger.ViewModel
 
     public void ForgotPasswordCommandExecute()
     {
-      //to do
+        Window forgotPasswordWindow = new Window();
+        var forgotPasswordViewModel = new ForgotPasswordViewModel(forgotPasswordWindow);
+        WindowManager.CreateGeneralWindow(forgotPasswordWindow, forgotPasswordViewModel, Resources.ForgotPasswordControlTitle, Resources.ForgotPasswordControlPath);
+
+        if (forgotPasswordViewModel.CloseAction == null)
+        {
+          forgotPasswordViewModel.CloseAction = () => forgotPasswordWindow.Close();
+        }
+        forgotPasswordWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        forgotPasswordWindow.Show();
     }
+
     #endregion
 
     #region INotifyPropertyChanged

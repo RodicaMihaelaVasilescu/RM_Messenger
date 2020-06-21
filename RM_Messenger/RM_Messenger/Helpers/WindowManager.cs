@@ -29,13 +29,13 @@ namespace RM_Messenger.Helpers
       window.Height = desktopWorkingArea.Bottom + 7;
       window.Left = desktopWorkingArea.Right - window.Width;
     }
-    public static void OpenLoginErrorWindow(Window OwnerWindow, string errorMessage)
+    public static void OpenLoginErrorWindow(Window OwnerWindow, string errorMessage, bool displayDefaultSmiley = true)
     {
       if (!OwnerWindow.IsVisible)
       {
         return;
       }
-      var errorMessageViewModel = new ErrorMessageViewModel(errorMessage);
+      var errorMessageViewModel = new ErrorMessageViewModel(errorMessage, displayDefaultSmiley);
       var errorWindow = new Window();
       WindowManager.CreateGeneralWindow(errorWindow, errorMessageViewModel, Resources.SignInErrorWindowTitle, Resources.ErrorMessageControlPath);
 

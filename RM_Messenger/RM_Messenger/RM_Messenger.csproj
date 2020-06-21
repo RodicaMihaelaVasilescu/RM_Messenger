@@ -205,6 +205,7 @@
     <Compile Include="ViewModel\AddContactFirstViewModel.cs" />
     <Compile Include="ViewModel\AddToMessengerRequestSecondViewModel.cs" />
     <Compile Include="ViewModel\AddToMessengerRequestFirstViewModel.cs" />
+    <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\ChangeProfilePictureViewModel.cs" />
     <Compile Include="ViewModel\ChatViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountNextViewModel.cs" />
@@ -215,6 +216,7 @@
     <Compile Include="ViewModel\ErrorMessageViewModel.cs" />
     <Compile Include="ViewModel\HomepageViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="ViewModel\ForgotPasswordViewModel.cs" />
     <Compile Include="ViewModel\SigningInViewModel.cs" />
     <Compile Include="ViewModel\TextEditorViewModel.cs" />
     <Compile Include="View\AddContactFirstControl.xaml.cs">
@@ -265,6 +267,9 @@
     <Compile Include="View\ErrorMessageControl.xaml.cs">
       <DependentUpon>ErrorMessageControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ChangePasswordControl.xaml.cs">
+      <DependentUpon>ChangePasswordControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\HomepageControl.xaml.cs">
       <DependentUpon>HomepageControl.xaml</DependentUpon>
     </Compile>
@@ -273,6 +278,9 @@
     </Compile>
     <Compile Include="View\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ForgotPasswordControl.xaml.cs">
+      <DependentUpon>ForgotPasswordControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\SigningInControl.xaml.cs">
       <DependentUpon>SigningInControl.xaml</DependentUpon>
@@ -381,6 +389,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="View\ChangePasswordControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\HomepageControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -390,6 +402,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\LoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ForgotPasswordControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

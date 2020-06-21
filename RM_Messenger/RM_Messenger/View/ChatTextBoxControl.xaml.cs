@@ -279,10 +279,10 @@ namespace RM_Messenger.View
 
     private void EmoticonsPopupTooltip_MouseDown(object sender, MouseButtonEventArgs e)
     {
-      EmoticonsViewModel vm = DataContext as EmoticonsViewModel;
-      if (vm != null)
+      EmoticonsViewModel viewModel = DataContext as EmoticonsViewModel;
+      if (viewModel != null)
       {
-        TextBox.Document.Blocks.Add(new Paragraph(new Run(vm.TextEmoticon)));
+        TextBox.Document.Blocks.Add(new Paragraph(new Run(viewModel.TextEmoticon)));
         TextBox.Focus();
       }
     }

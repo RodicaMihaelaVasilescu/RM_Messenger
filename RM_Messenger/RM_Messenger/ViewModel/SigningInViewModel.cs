@@ -128,12 +128,13 @@ namespace RM_Messenger.ViewModel
           string.IsNullOrEmpty(UserModel.Instance.EncryptedPassword))
         {
           message = Resources.YouMustEnterAnIDAndPasswordError;
+          WindowManager.OpenLoginErrorWindow(window, message, true);
         }
         else
         {
           message = Resources.IncorrectIDAndPassword;
+          WindowManager.OpenLoginErrorWindow(window, message, false);
         }
-        WindowManager.OpenLoginErrorWindow(window, message);
         return;
       }
       var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();

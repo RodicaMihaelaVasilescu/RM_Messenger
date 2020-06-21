@@ -120,6 +120,9 @@
   <data name="AcceptedStatus" xml:space="preserve">
     <value>Accepted</value>
   </data>
+  <data name="AccountSuccessfullyCreated" xml:space="preserve">
+    <value>Your account has been successfully created!</value>
+  </data>
   <data name="AddContactFirstControlPath" xml:space="preserve">
     <value>RM_Messenger.View.AddContactFirstControl</value>
   </data>
@@ -144,6 +147,12 @@
   <data name="AddToMessengerRequestWindowTitle" xml:space="preserve">
     <value>Add To Messenger Request</value>
   </data>
+  <data name="ChangePasswordControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.ChangePasswordControl</value>
+  </data>
+  <data name="ChangePasswordControlTitle" xml:space="preserve">
+    <value>Change Password</value>
+  </data>
   <data name="ChatControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ChatControl</value>
   </data>
@@ -158,6 +167,9 @@
   </data>
   <data name="ContactHasBeenAddedMessage" xml:space="preserve">
     <value>{0} has been added to your Messenger List and Address Book, pending his or her response to your request.</value>
+  </data>
+  <data name="CreateAccountMailBodyMessage" xml:space="preserve">
+    <value>We received your request to create an RM! ID account.\n\nThe validation code is {0}.\n\nIf it wasn't you, please disregard this email.</value>
   </data>
   <data name="CreateNewAccountControlPath" xml:space="preserve">
     <value>RM_Messenger.View.CreateNewAccountControl</value>
@@ -198,6 +210,9 @@
   <data name="EmailConfirmationCodeFinishedControlTitle" xml:space="preserve">
     <value>Account successfully created</value>
   </data>
+  <data name="EmailVerificationFailed" xml:space="preserve">
+    <value>Email verification failed. Please make sure the email is correct.</value>
+  </data>
   <data name="EmptyIdError" xml:space="preserve">
     <value>The ID cannot be empty.</value>
   </data>
@@ -212,6 +227,12 @@
   </data>
   <data name="Finish" xml:space="preserve">
     <value>Finish</value>
+  </data>
+  <data name="ForgotPasswordControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.ForgotPasswordControl</value>
+  </data>
+  <data name="ForgotPasswordControlTitle" xml:space="preserve">
+    <value>Forgot Password</value>
   </data>
   <data name="FriendListName" xml:space="preserve">
     <value>Friends</value>
@@ -248,6 +269,9 @@
   </data>
   <data name="NoResponseStatus" xml:space="preserve">
     <value>No response</value>
+  </data>
+  <data name="PasswordSuccessfullyChanged" xml:space="preserve">
+    <value>Your password has been successfully changed!</value>
   </data>
   <data name="RecentListName" xml:space="preserve">
     <value>Recent</value>

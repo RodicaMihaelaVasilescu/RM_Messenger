@@ -70,6 +70,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your account has been successfully created!.
+        /// </summary>
+        public static string AccountSuccessfullyCreated {
+            get {
+                return ResourceManager.GetString("AccountSuccessfullyCreated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.AddContactFirstControl.
         /// </summary>
         public static string AddContactFirstControlPath {
@@ -142,6 +151,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.ChangePasswordControl.
+        /// </summary>
+        public static string ChangePasswordControlPath {
+            get {
+                return ResourceManager.GetString("ChangePasswordControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Password.
+        /// </summary>
+        public static string ChangePasswordControlTitle {
+            get {
+                return ResourceManager.GetString("ChangePasswordControlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.ChatControl.
         /// </summary>
         public static string ChatControlPath {
@@ -183,6 +210,15 @@ namespace RM_Messenger.Properties {
         public static string ContactHasBeenAddedMessage {
             get {
                 return ResourceManager.GetString("ContactHasBeenAddedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We received your request to create an RM! ID account.\n\nThe validation code is {0}.\n\nIf it wasn&apos;t you, please disregard this email..
+        /// </summary>
+        public static string CreateAccountMailBodyMessage {
+            get {
+                return ResourceManager.GetString("CreateAccountMailBodyMessage", resourceCulture);
             }
         }
         
@@ -304,6 +340,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email verification failed. Please make sure the email is correct..
+        /// </summary>
+        public static string EmailVerificationFailed {
+            get {
+                return ResourceManager.GetString("EmailVerificationFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The ID cannot be empty..
         /// </summary>
         public static string EmptyIdError {
@@ -345,6 +390,24 @@ namespace RM_Messenger.Properties {
         public static string Finish {
             get {
                 return ResourceManager.GetString("Finish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.ForgotPasswordControl.
+        /// </summary>
+        public static string ForgotPasswordControlPath {
+            get {
+                return ResourceManager.GetString("ForgotPasswordControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Forgot Password.
+        /// </summary>
+        public static string ForgotPasswordControlTitle {
+            get {
+                return ResourceManager.GetString("ForgotPasswordControlTitle", resourceCulture);
             }
         }
         
@@ -453,6 +516,15 @@ namespace RM_Messenger.Properties {
         public static string NoResponseStatus {
             get {
                 return ResourceManager.GetString("NoResponseStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your password has been successfully changed!.
+        /// </summary>
+        public static string PasswordSuccessfullyChanged {
+            get {
+                return ResourceManager.GetString("PasswordSuccessfullyChanged", resourceCulture);
             }
         }
         

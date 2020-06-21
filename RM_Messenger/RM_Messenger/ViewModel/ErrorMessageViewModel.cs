@@ -45,16 +45,16 @@ namespace RM_Messenger.ViewModel
     #endregion
 
     #region Constructor
-    public ErrorMessageViewModel(string errorMessage)
+    public ErrorMessageViewModel(string errorMessage, bool displayDefaultSmiley)
     {
       CloseCommand = new RelayCommand(LoginCommandExecute);
-      if (errorMessage == Properties.Resources.YourIDAndPasswordDoNotMatchError || errorMessage == Properties.Resources.IDNotAvailableError)
+      if (displayDefaultSmiley)
       {
-        ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
+        ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerEmoticon.png";
       }
       else
       {
-        ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/YahooMessengerEmoticon.png";
+        ImagePath = "pack://application:,,,/RM_Messenger;component/Resources/SadEmoticon.png";
       }
       _errorMessage = errorMessage;
     }

@@ -39,6 +39,7 @@ namespace RM_Messenger.ViewModel
     public ICommand BackCommand { get; set; }
     public ICommand CancelCommand { get; set; }
     public ICommand CreateAccountCommand { get; set; }
+    public string _successfulConfirmationMessage = Resources.AccountSuccessfullyCreated;
 
     public List<string> IdSuggestionsList
     {
@@ -77,7 +78,7 @@ namespace RM_Messenger.ViewModel
         {
           SelectedIdSuggestion = IdSuggestionsList.LastOrDefault();
         }
-        IsFinishButtonEnabled = !string.IsNullOrEmpty(value) && !String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword);
+        IsFinishButtonEnabled = !string.IsNullOrEmpty(value) && !String.IsNullOrEmpty(UserModel.Instance.NewEncryptedPassword);
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Username"));
       }
     }
@@ -149,6 +150,17 @@ namespace RM_Messenger.ViewModel
         createNewAccountViewModel.CloseAction = () => window.Close();
       }
     }
+    public string SuccessfulConfirmationMessage
+    {
+      get { return _successfulConfirmationMessage; }
+      set
+      {
+        if (_successfulConfirmationMessage == value) return;
+        _successfulConfirmationMessage = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SuccessfulConfirmationMessage"));
+      }
+    }
+
 
     private void CreateAccountCommandExecute()
     {
@@ -157,12 +169,12 @@ namespace RM_Messenger.ViewModel
       newUser.ProfilePicture = data;
       newUser.Username = Username;
       newUser.Email = Email;
-      newUser.EncryptedPassword = UserModel.Instance.EncryptedPassword;
+      newUser.NewEncryptedPassword = UserModel.Instance.NewEncryptedPassword;
       UserModel.Instance.Username = Username;
 
       if (_context.Users.Any(u => u.User_ID == UserModel.Instance.Username))
       {
-        WindowManager.OpenLoginErrorWindow(window, Resources.IDNotAvailableError);
+        WindowManager.OpenLoginErrorWindow(window, Resources.IDNotAvailableError, false);
         return;
       }
 
@@ -171,13 +183,13 @@ namespace RM_Messenger.ViewModel
 
       if (!string.IsNullOrEmpty(validationMessage))
       {
-        WindowManager.OpenLoginErrorWindow(window, validationMessage);
+        WindowManager.OpenLoginErrorWindow(window, validationMessage, true);
         return;
       }
 
       if (!string.IsNullOrEmpty(validationMessage))
       {
-        WindowManager.OpenLoginErrorWindow(window, validationMessage);
+        WindowManager.OpenLoginErrorWindow(window, validationMessage, true);
         return;
       }
 
@@ -187,10 +199,7 @@ namespace RM_Messenger.ViewModel
         return;
       }
       SaveAccountInDatabase();
-      //WindowManager.OpenLoginErrorWindow(window, "Account Successfully created!");
       WindowManager.ChangeWindowContent(window, this, Resources.EmailConfirmationCodeFinishedControlTitle, Resources.EmailConfirmationCodeFinishedControlPath);
-
-      //this.CloseAction();
     }
 
     private void CheckEmail()
@@ -199,7 +208,7 @@ namespace RM_Messenger.ViewModel
 
       if (!SendEmail.SendEmailExecute(Email, Resources.CreateNewAccountMailSubject, string.Format("We received your request to create an RM! ID account.\n\nThe validation code is {0}.\n\nIf it wasn't you, please disregard this email.", confirmationCode)))
       {
-        WindowManager.OpenLoginErrorWindow(window, "The email is not valid.");
+        WindowManager.OpenLoginErrorWindow(window, "The email is not valid.", false);
         return;
       }
       else
@@ -222,7 +231,7 @@ namespace RM_Messenger.ViewModel
         }
         _context.SaveChanges();
         var emailConfirmationCodeViewModel = new EmailConfirmationCodeViewModel(window, newUser);
-        WindowManager.ChangeWindowContent(window, emailConfirmationCodeViewModel, Resources.EmailConfirmationCodeControlTitle, Resources.EmailConfirmationCodeControlPath);
+        WindowManager.ChangeWindowContent(window, emailConfirmationCodeViewModel, Resources.CreateNewAccountWindowTitle, Resources.EmailConfirmationCodeControlPath);
         if (emailConfirmationCodeViewModel.CloseAction == null)
         {
           emailConfirmationCodeViewModel.CloseAction = () => window.Close();
@@ -235,7 +244,7 @@ namespace RM_Messenger.ViewModel
       var user = new User
       {
         User_ID = Username,
-        Password = newUser.EncryptedPassword,
+        Password = newUser.NewEncryptedPassword,
       };
       _context.Users.Add(user);
 

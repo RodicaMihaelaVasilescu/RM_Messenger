@@ -20,17 +20,17 @@ namespace RM_Messenger.ViewModel
     #region Private Properties
     private string _verificationCode;
     private string _verificationCodeMessage;
+    private Window window;
+    private UserModel user;
+    private RMMessengerEntities _context;
+    private string _displayedMailMessage;
     #endregion
 
     #region Properties
 
     public Action CloseAction { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
-
-    private Window window;
-    private UserModel newUser;
-    private RMMessengerEntities _context;
-    private string _displayedMailMessage;
+    private string _successfulConfirmationMessage = Resources.AccountSuccessfullyCreated;
 
     public ICommand BackCommand { get; set; }
     public ICommand NextCommand { get; set; }
@@ -58,6 +58,16 @@ namespace RM_Messenger.ViewModel
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VerificationCodeMessage"));
       }
     }
+    public string SuccessfulConfirmationMessage
+    {
+      get { return _successfulConfirmationMessage; }
+      set
+      {
+        if (_successfulConfirmationMessage == value) return;
+        _successfulConfirmationMessage = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SuccessfulConfirmationMessage"));
+      }
+    }
 
     public string DisplayedMailMessage
     {
@@ -74,26 +84,42 @@ namespace RM_Messenger.ViewModel
     #endregion
 
     #region Constructor
-    public EmailConfirmationCodeViewModel(Window window, UserModel newUser)
+    public EmailConfirmationCodeViewModel(Window window, UserModel user = null)
     {
       this.window = window;
-      this.newUser = newUser;
+      this.user = user;
       _context = new RMMessengerEntities();
       BackCommand = new RelayCommand(BackCommandExecute);
       NextCommand = new RelayCommand(NextCommandExecute);
       CancelCommand = new RelayCommand(CloseCommandExecute);
       SendAnotherVerificationCodeCommand = new RelayCommand(SendAnotherVerificationCodeExecute);
-      _displayedMailMessage = string.Format("We've sent you a verification code on {0}. Please type the code you received:", newUser.Email);
+      _displayedMailMessage = string.Format("We've sent you a verification code on {0}. Please type the code you received:", user.Email);
     }
 
     private void BackCommandExecute()
     {
-      var createNewAccountNextViewModel = new CreateNewAccountNextViewModel(window, newUser);
-      WindowManager.CreateGeneralWindow(window, createNewAccountNextViewModel, Resources.CreateNewAccountNextWindowTitle, Resources.CreateNewAccountNextControlPath);
-
-      if (createNewAccountNextViewModel.CloseAction == null)
+      if (window.Title == Resources.CreateNewAccountWindowTitle)
       {
-        createNewAccountNextViewModel.CloseAction = () => window.Close();
+        var createNewAccountNextViewModel = new CreateNewAccountNextViewModel(window, user);
+        WindowManager.CreateGeneralWindow(window, createNewAccountNextViewModel, Resources.CreateNewAccountNextWindowTitle, Resources.CreateNewAccountNextControlPath);
+
+        if (createNewAccountNextViewModel.CloseAction == null)
+        {
+          createNewAccountNextViewModel.CloseAction = () => window.Close();
+        }
+        return;
+      }
+      if (window.Title == Resources.ForgotPasswordControlTitle)
+      {
+        var forgotPasswordViewModel = new ForgotPasswordViewModel(window, user.Username);
+        WindowManager.ChangeWindowContent(window, forgotPasswordViewModel, Resources.ForgotPasswordControlTitle, Resources.ForgotPasswordControlPath);
+
+        if (forgotPasswordViewModel.CloseAction == null)
+        {
+          forgotPasswordViewModel.CloseAction = () => window.Close();
+        }
+        window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+        window.Show();
       }
     }
 
@@ -106,17 +132,40 @@ namespace RM_Messenger.ViewModel
 
     private void NextCommandExecute()
     {
-
-      var confirmation = _context.EmailConfirmations.Where(e => e.User_ID == UserModel.Instance.Username).FirstOrDefault();
-      if (VerificationCode == confirmation.Code.ToString())
+      if (window.Title == Resources.ForgotPasswordControlTitle)
       {
-        confirmation.IsConfirmed = true;
-        SaveAccountInDatabase();
-        WindowManager.ChangeWindowContent(window, this, Resources.EmailConfirmationCodeFinishedControlTitle, Resources.EmailConfirmationCodeFinishedControlPath);
+        var confirmation = _context.EmailConfirmations.Where(e => e.User_ID == user.Username).FirstOrDefault();
+        if (VerificationCode == confirmation.Code.ToString())
+        {
+          confirmation.IsConfirmed = true;
+          var changePasswordViewModel = new ChangePasswordViewModel(window, user);
+          WindowManager.ChangeWindowContent(window, changePasswordViewModel, Resources.ChangePasswordControlTitle, Resources.ChangePasswordControlPath);
+          if (changePasswordViewModel.CloseAction == null)
+          {
+            changePasswordViewModel.CloseAction = () => window.Close();
+          }
+        }
+        else
+        {
+          VerificationCodeMessage =Resources.EmailVerificationFailed;
+        }
+        return;
       }
-      else
+
+      if (window.Title == Resources.CreateNewAccountWindowTitle)
       {
-        VerificationCodeMessage = "The email verification failed. Please make sure you typed the right address.";
+        var confirmation = _context.EmailConfirmations.Where(e => e.User_ID == user.Username).FirstOrDefault();
+        if (VerificationCode == confirmation.Code.ToString())
+        {
+          confirmation.IsConfirmed = true;
+          SaveAccountInDatabase();
+          WindowManager.ChangeWindowContent(window, this, Resources.EmailConfirmationCodeFinishedControlTitle, Resources.EmailConfirmationCodeFinishedControlPath);
+        }
+        else
+        {
+          VerificationCodeMessage = Resources.EmailVerificationFailed;
+        }
+        return;
       }
     }
 
@@ -124,9 +173,9 @@ namespace RM_Messenger.ViewModel
     {
       var confirmationCode = new Random().Next(1000, 9999);
 
-      if (!SendEmail.SendEmailExecute(newUser.Email, Resources.CreateNewAccountMailSubject, string.Format("We received your request to create an RM! ID account.\n\nThe validation code is {0}.\n\nIf it wasn't you, please disregard this email.", confirmationCode)))
+      if (!SendEmail.SendEmailExecute(user.Email, Resources.CreateNewAccountMailSubject, string.Format(Resources.CreateAccountMailBodyMessage, confirmationCode)))
       {
-        WindowManager.OpenLoginErrorWindow(window, "The email is not valid.");
+        WindowManager.OpenLoginErrorWindow(window, "The email is not valid.", false);
         return;
       }
       else
@@ -137,7 +186,7 @@ namespace RM_Messenger.ViewModel
           Code = confirmationCode,
           IsConfirmed = false
         };
-        var emailConfirmation = _context.EmailConfirmations.FirstOrDefault(u => u.User_ID == newUser.Username);
+        var emailConfirmation = _context.EmailConfirmations.FirstOrDefault(u => u.User_ID == user.Username);
         if (emailConfirmation == null)
         {
           _context.EmailConfirmations.Add(newEmailConfirmation);
@@ -156,24 +205,24 @@ namespace RM_Messenger.ViewModel
     {
       string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\Resources\\OfflineProfilePicture.jpg";
       byte[] data = File.ReadAllBytes(path);
-      newUser.ProfilePicture = data;
-      newUser.EncryptedPassword = UserModel.Instance.EncryptedPassword;
+      this.user.ProfilePicture = data;
+      this.user.NewEncryptedPassword = UserModel.Instance.NewEncryptedPassword;
 
       var user = new User
       {
-        User_ID = newUser.Username,
-        Password = newUser.EncryptedPassword,
+        User_ID = this.user.Username,
+        Password = this.user.NewEncryptedPassword,
       };
       _context.Users.Add(user);
 
       var account = new Account
       {
-        First_Name = newUser.FirstName,
-        Last_Name = newUser.LastName,
-        Email = newUser.Email,
-        User_ID = newUser.Username,
-        Profile_Picture = newUser.ProfilePicture,
-        PostalCode = newUser.PostalCode
+        First_Name = this.user.FirstName,
+        Last_Name = this.user.LastName,
+        Email = this.user.Email,
+        User_ID = this.user.Username,
+        Profile_Picture = this.user.ProfilePicture,
+        PostalCode = this.user.PostalCode
       };
       _context.Accounts.Add(account);
       _context.SaveChanges();
