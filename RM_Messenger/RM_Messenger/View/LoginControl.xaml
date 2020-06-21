@@ -141,6 +141,7 @@
         x:Name="RememberMyIDPassword"
         Background="White"
         Content="_Remember my ID &amp; password"
+        Cursor="Hand"
         FontSize="11"
         Foreground="LightGray"
         IsChecked="{Binding RememberMyIDPassword}" />
@@ -148,6 +149,7 @@
         Name="SignInAutomatically"
         Background="White"
         Content="Sign in _automatically"
+        Cursor="Hand"
         FontSize="11"
         Foreground="LightGray"
         IsChecked="{Binding SignInAutomatically}" />
@@ -155,6 +157,7 @@
         Name="SignInAsInvisible"
         Background="White"
         Content="Sign in as _invisible to everyone"
+        Cursor="Hand"
         FontSize="11"
         Foreground="LightGray"
         IsChecked="{Binding SignInAsInvisible}" />
