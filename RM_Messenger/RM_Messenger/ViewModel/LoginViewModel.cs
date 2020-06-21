@@ -132,7 +132,7 @@ namespace RM_Messenger.ViewModel
 
       if (createNewAccountViewModel.CloseAction == null)
       {
-        createNewAccountViewModel.CloseAction = () => window.Close();
+        createNewAccountViewModel.CloseAction = () => createNewAccountWindow.Close();
       }
       createNewAccountWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
       createNewAccountWindow.Show();
