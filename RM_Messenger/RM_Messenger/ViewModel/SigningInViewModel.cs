@@ -118,6 +118,7 @@ namespace RM_Messenger.ViewModel
         return;
       }
 
+      UserModel.Instance.Username = string.IsNullOrEmpty(UserModel.Instance.Username) ? string.Empty : UserModel.Instance.Username.Split('@')[0];
       var user = _context.Users.FirstOrDefault(u => u.User_ID == UserModel.Instance.Username &&
    u.Password == UserModel.Instance.EncryptedPassword);
       if (user == null)
