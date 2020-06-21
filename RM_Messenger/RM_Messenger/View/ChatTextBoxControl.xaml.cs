@@ -281,7 +281,10 @@ namespace RM_Messenger.View
     {
       EmoticonsViewModel vm = DataContext as EmoticonsViewModel;
       if (vm != null)
+      {
         TextBox.Document.Blocks.Add(new Paragraph(new Run(vm.TextEmoticon)));
+        TextBox.Focus();
+      }
     }
   }
 }

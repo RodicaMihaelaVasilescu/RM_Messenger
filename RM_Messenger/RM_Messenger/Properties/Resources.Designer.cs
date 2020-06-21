@@ -214,6 +214,24 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.CreateNewAccountNextControl.
+        /// </summary>
+        public static string CreateNewAccountNextControlPath {
+            get {
+                return ResourceManager.GetString("CreateNewAccountNextControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create RM! ID.
+        /// </summary>
+        public static string CreateNewAccountNextWindowTitle {
+            get {
+                return ResourceManager.GetString("CreateNewAccountNextWindowTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create Account.
         /// </summary>
         public static string CreateNewAccountWindowTitle {
@@ -264,6 +282,24 @@ namespace RM_Messenger.Properties {
         public static string EmailConfirmationCodeControlTitle {
             get {
                 return ResourceManager.GetString("EmailConfirmationCodeControlTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RM_Messenger.View.EmailConfirmationCodeFinishedControl.
+        /// </summary>
+        public static string EmailConfirmationCodeFinishedControlPath {
+            get {
+                return ResourceManager.GetString("EmailConfirmationCodeFinishedControlPath", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account successfully created.
+        /// </summary>
+        public static string EmailConfirmationCodeFinishedControlTitle {
+            get {
+                return ResourceManager.GetString("EmailConfirmationCodeFinishedControlTitle", resourceCulture);
             }
         }
         

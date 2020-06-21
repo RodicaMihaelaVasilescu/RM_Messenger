@@ -287,8 +287,6 @@
         </Button>
       </StackPanel>
 
-
-
       <TextBlock
         Name="PasswordValidationMessage"
         Text="{Binding PasswordValidationMessage, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"

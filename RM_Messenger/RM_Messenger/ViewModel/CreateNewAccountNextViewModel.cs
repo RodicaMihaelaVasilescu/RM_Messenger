@@ -18,43 +18,27 @@ namespace RM_Messenger.ViewModel
 {
   class CreateNewAccountNextViewModel : INotifyPropertyChanged
   {
-    public event PropertyChangedEventHandler PropertyChanged;
+    #region Private Properties
 
-    private string _username;
     private Window window;
-
-    public UserModel NewUser { get; }
-
+    public UserModel newUser { get; set; }
     private RMMessengerEntities _context;
-
-    public RelayCommand CreateAccountCommand { get; }
-
     private List<string> _idSuggestionsList;
     private string _selectedIdSuggestion;
-    private bool _isFinishButtonEnabled;
-    private string _passwordValidationMessage;
+    private string _username;
     private string _email;
     private string _finishVerificationEmailButton = Resources.Next;
+    private bool _isFinishButtonEnabled;
+    private string _passwordValidationMessage;
+    #endregion
 
+    #region Public Properties
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    public Action CloseAction { get; set; }
     public ICommand BackCommand { get; set; }
-    public ICommand VerificationEmailCommand { get; set; }
-    public RelayCommand CancelCommand { get; }
-
-    public string Username
-    {
-      get { return _username; }
-      set
-      {
-        if (_username == value) return;
-        _username = value.ToLower();
-        if (!IdSuggestionsList.Where(id => id == value).Any())
-        {
-          SelectedIdSuggestion = IdSuggestionsList.LastOrDefault();
-        }
-        IsFinishButtonEnabled = !string.IsNullOrEmpty(value) && !String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword);
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Username"));
-      }
-    }
+    public ICommand CancelCommand { get; set; }
+    public ICommand CreateAccountCommand { get; set; }
 
     public List<string> IdSuggestionsList
     {
@@ -82,14 +66,41 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-    public string VerificationCode
+    public string Username
     {
-      get { return _verificationCode; }
+      get { return _username; }
       set
       {
-        if (_verificationCode == value) return;
-        _verificationCode = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VerificationCode"));
+        if (_username == value) return;
+        _username = value.ToLower();
+        if (!IdSuggestionsList.Where(id => id == value).Any())
+        {
+          SelectedIdSuggestion = IdSuggestionsList.LastOrDefault();
+        }
+        IsFinishButtonEnabled = !string.IsNullOrEmpty(value) && !String.IsNullOrEmpty(UserModel.Instance.EncryptedPassword);
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Username"));
+      }
+    }
+
+    public string Email
+    {
+      get { return _email; }
+      set
+      {
+        if (_email == value) return;
+        _email = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
+      }
+    }
+
+    public string PasswordValidationMessage
+    {
+      get { return _passwordValidationMessage; }
+      set
+      {
+        if (_passwordValidationMessage == value) return;
+        _passwordValidationMessage = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PasswordValidationMessage"));
       }
     }
 
@@ -104,74 +115,141 @@ namespace RM_Messenger.ViewModel
       }
     }
 
-    private bool accountSaved = false;
-    private string _verificationCode;
-    private string _verificationCodeMessage;
-
-    public string VerificationCodeMessage
-    {
-      get { return _verificationCodeMessage; }
-      set
-      {
-        if (_verificationCodeMessage == value) return;
-        _verificationCodeMessage = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VerificationCodeMessage"));
-      }
-    }
-    public string FinishVerificationEmailButton
-    {
-      get { return _finishVerificationEmailButton; }
-      set
-      {
-        if (_finishVerificationEmailButton == value) return;
-        _finishVerificationEmailButton = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("FinishVerificationEmailButton"));
-      }
-    }
-    public string PasswordValidationMessage
-    {
-      get { return _passwordValidationMessage; }
-      set
-      {
-        if (_passwordValidationMessage == value) return;
-        _passwordValidationMessage = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("PasswordValidationMessage"));
-      }
-    }
-
-    public string Email
-    {
-      get { return _email; }
-      set
-      {
-        if (_email == value) return;
-        _email = value;
-        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Email"));
-      }
-    }
-    public Action CloseAction { get; set; }
-
+    #endregion
 
     #region Constructor
     public CreateNewAccountNextViewModel(Window window, UserModel user)
     {
       this.window = window;
-      NewUser = user;
+      newUser = user;
       _context = new RMMessengerEntities();
-      CreateAccountCommand = new RelayCommand(CreateAccountCommandExecute);
       BackCommand = new RelayCommand(BackCommandExecute);
-      VerificationEmailCommand = new RelayCommand(VerificationEmailCommandExecute);
-
       CancelCommand = new RelayCommand(CancelCommandExecute);
+      CreateAccountCommand = new RelayCommand(CreateAccountCommandExecute);
       InitializeIdSuggestions();
-      //NextCommand = new RelayCommand(NextCommandCommandExecute);
-      //ForgotPasswordCommand = new RelayCommand(ForgotPasswordCommandExecute);
-      //CancelCommand = new RelayCommand(CancelCommandExecute);
+      if (newUser != null)
+      {
+        Username = newUser.Username;
+        Email = newUser.Email;
+      }
     }
 
     private void CancelCommandExecute()
     {
       CloseAction?.Invoke();
+    }
+
+    private void BackCommandExecute()
+    {
+      var createNewAccountViewModel = new CreateNewAccountViewModel(window, newUser);
+      WindowManager.CreateGeneralWindow(window, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
+
+      if (createNewAccountViewModel.CloseAction == null)
+      {
+        createNewAccountViewModel.CloseAction = () => window.Close();
+      }
+    }
+
+    private void CreateAccountCommandExecute()
+    {
+      string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\Resources\\OfflineProfilePicture.jpg";
+      byte[] data = File.ReadAllBytes(path);
+      newUser.ProfilePicture = data;
+      newUser.Username = Username;
+      newUser.Email = Email;
+      newUser.EncryptedPassword = UserModel.Instance.EncryptedPassword;
+      UserModel.Instance.Username = Username;
+
+      if (_context.Users.Any(u => u.User_ID == UserModel.Instance.Username))
+      {
+        WindowManager.OpenLoginErrorWindow(window, Resources.IDNotAvailableError);
+        return;
+      }
+
+      string validationMessage = Validator.ValidateUsername(UserModel.Instance.Username);
+      validationMessage += PasswordValidationMessage;
+
+      if (!string.IsNullOrEmpty(validationMessage))
+      {
+        WindowManager.OpenLoginErrorWindow(window, validationMessage);
+        return;
+      }
+
+      if (!string.IsNullOrEmpty(validationMessage))
+      {
+        WindowManager.OpenLoginErrorWindow(window, validationMessage);
+        return;
+      }
+
+      if (!string.IsNullOrEmpty(Email))
+      {
+        CheckEmail();
+        return;
+      }
+      SaveAccountInDatabase();
+      //WindowManager.OpenLoginErrorWindow(window, "Account Successfully created!");
+      WindowManager.ChangeWindowContent(window, this, Resources.EmailConfirmationCodeFinishedControlTitle, Resources.EmailConfirmationCodeFinishedControlPath);
+
+      //this.CloseAction();
+    }
+
+    private void CheckEmail()
+    {
+      var confirmationCode = new Random().Next(1000, 9999);
+
+      if (!SendEmail.SendEmailExecute(Email, Resources.CreateNewAccountMailSubject, string.Format("We received your request to create an RM! ID account.\n\nThe validation code is {0}.\n\nIf it wasn't you, please disregard this email.", confirmationCode)))
+      {
+        WindowManager.OpenLoginErrorWindow(window, "The email is not valid.");
+        return;
+      }
+      else
+      {
+        var newEmailConfirmation = new EmailConfirmation
+        {
+          User_ID = UserModel.Instance.Username,
+          Code = confirmationCode,
+          IsConfirmed = false
+        };
+        var emailConfirmation = _context.EmailConfirmations.FirstOrDefault(u => u.User_ID == newUser.Username);
+        if (emailConfirmation == null)
+        {
+          _context.EmailConfirmations.Add(newEmailConfirmation);
+        }
+        else
+        {
+          emailConfirmation.Code = confirmationCode;
+          emailConfirmation.IsConfirmed = false;
+        }
+        _context.SaveChanges();
+        var emailConfirmationCodeViewModel = new EmailConfirmationCodeViewModel(window, newUser);
+        WindowManager.ChangeWindowContent(window, emailConfirmationCodeViewModel, Resources.EmailConfirmationCodeControlTitle, Resources.EmailConfirmationCodeControlPath);
+        if (emailConfirmationCodeViewModel.CloseAction == null)
+        {
+          emailConfirmationCodeViewModel.CloseAction = () => window.Close();
+        }
+      }
+    }
+
+    private void SaveAccountInDatabase()
+    {
+      var user = new User
+      {
+        User_ID = Username,
+        Password = newUser.EncryptedPassword,
+      };
+      _context.Users.Add(user);
+
+      var account = new Account
+      {
+        First_Name = newUser.FirstName,
+        Last_Name = newUser.LastName,
+        Email = newUser.Email,
+        User_ID = Username,
+        Profile_Picture = newUser.ProfilePicture,
+        PostalCode = newUser.PostalCode
+      };
+      _context.Accounts.Add(account);
+      _context.SaveChanges();
     }
 
     private void InitializeIdSuggestions()
@@ -181,7 +259,7 @@ namespace RM_Messenger.ViewModel
       {
         // generate random username
         var idSuggestion = string.Format("{0}_{1}{2}",
-          NewUser.FirstName.ToLower(), NewUser.LastName.ToLower(), new Random().Next(10, 1000));
+          newUser.FirstName.ToLower(), newUser.LastName.ToLower(), new Random().Next(10, 1000));
 
         //check if the username is not already used and has not been previuously generated
         if (!_context.Users.Where(u => u.User_ID == idSuggestion).Any() &&
@@ -198,140 +276,6 @@ namespace RM_Messenger.ViewModel
       SelectedIdSuggestion = IdSuggestionsList.LastOrDefault();
     }
 
-    private void BackCommandExecute()
-    {
-      var createNewAccountViewModel = new CreateNewAccountViewModel(window, NewUser);
-      WindowManager.CreateGeneralWindow(window, createNewAccountViewModel, Resources.CreateNewAccountWindowTitle, Resources.CreateNewAccountControlPath);
-
-      if (createNewAccountViewModel.CloseAction == null)
-      {
-        createNewAccountViewModel.CloseAction = () => window.Close();
-      }
-    }
-
-    private void VerificationEmailCommandExecute()
-    {
-      if (accountSaved == true)
-      {
-        CloseAction?.Invoke();
-        return;
-      }
-      var confirmation = _context.EmailConfirmations.Where(e => e.User_ID == UserModel.Instance.Username).FirstOrDefault();
-      if (VerificationCode == confirmation.Code.ToString())
-      {
-        confirmation.IsConfirmed = true;
-        SaveAccountInDatabase();
-        VerificationCodeMessage = "The account has been successfully saved!";
-        accountSaved = true;
-        FinishVerificationEmailButton = Resources.Finish;
-      }
-      else
-      {
-        VerificationCodeMessage = "The email verification failed. Please make sure you typed the right address.";
-      }
-    }
-
-
-
-    private void CreateAccountCommandExecute()
-    {
-      UserModel.Instance.Username = Username;
-      if (_context.Users.Any(u => u.User_ID == UserModel.Instance.Username))
-      {
-        WindowManager.OpenLoginErrorWindow(window, Resources.IDNotAvailableError);
-        return;
-      }
-
-      string validationMessage = Validator.ValidateUsername(UserModel.Instance.Username);
-      validationMessage += PasswordValidationMessage;
-
-      if (!string.IsNullOrEmpty(validationMessage))
-      {
-        WindowManager.OpenLoginErrorWindow(window, validationMessage);
-        return;
-      }
-
-      if (!string.IsNullOrEmpty(Email))
-      {
-        var confirmationCode = new Random().Next(1000, 9999);
-        if (!SendEmail(Email, Resources.CreateNewAccountMailSubject, string.Format("We received your request to create an RM! ID account.\n\nThe validation code is {0}.\n\nIf it wasn't you, please disregard this email.", confirmationCode)))
-        {
-          WindowManager.OpenLoginErrorWindow(window, "The email is not valid.");
-          return;
-        }
-        else
-        {
-          _context.EmailConfirmations.Add(new EmailConfirmation
-          {
-            User_ID = UserModel.Instance.Username,
-            Code = confirmationCode,
-            IsConfirmed = false
-          });
-          _context.SaveChanges();
-          WindowManager.ChangeWindowContent(window, this, Resources.EmailConfirmationCodeControlTitle, Resources.EmailConfirmationCodeControlPath);
-        }
-      }
-
-      //SaveAccountInDatabase();
-
-
-    }
-
-    private void SaveAccountInDatabase()
-    {
-      string path = Path.GetDirectoryName(Path.GetDirectoryName(Directory.GetCurrentDirectory())) + "\\Resources\\OfflineProfilePicture.jpg";
-      byte[] data = File.ReadAllBytes(path);
-      UserModel.Instance.ProfilePicture = data;
-
-      var user = new User
-      {
-        User_ID = UserModel.Instance.Username,
-        Password = UserModel.Instance.EncryptedPassword,
-      };
-      _context.Users.Add(user);
-      var account = new Account
-      {
-        First_Name = NewUser.FirstName,
-        Last_Name = NewUser.LastName,
-        Email = NewUser.Email,
-        User_ID = UserModel.Instance.Username,
-        Profile_Picture = UserModel.Instance.ProfilePicture
-      };
-      _context.Accounts.Add(account);
-      _context.SaveChanges();
-
-      // WindowManager.OpenLoginErrorWindow(window, "Account successfully created");
-      // var loginViewModel = new LoginViewModel(window);
-      //WindowManager.ChangeWindowContent(window, loginViewModel, Resources.CreateNewAccountWindowTitle, Resources.LoginControlPath);
-      // this.CloseAction?.Invoke();
-    }
-
-    public bool SendEmail(string email, string emailSubject, string emailContent)
-    {
-      if (email == null)
-      {
-        return false;
-      }
-      try
-      {
-        MailMessage mail = new MailMessage();
-        SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-        mail.From = new MailAddress("RM.Messenger.App@gmail.com");
-        mail.To.Add(email);
-        mail.Subject = emailSubject;
-        mail.Body = emailContent;
-        SmtpServer.Port = 587;
-        SmtpServer.Credentials = new System.Net.NetworkCredential("RM.Messenger.App@gmail.com", "RM_Messenger_App2@gmail.com");
-        SmtpServer.EnableSsl = true;
-        SmtpServer.Send(mail);
-        return true;
-      }
-      catch (Exception e)
-      {
-        return false;
-        // ValidationMessage = "The email you entered is not valid. Please re-enter your email.";
-      }
-    }
     #endregion
 
   }

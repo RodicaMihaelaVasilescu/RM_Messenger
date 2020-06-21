@@ -168,6 +168,12 @@
   <data name="CreateNewAccountNextControl" xml:space="preserve">
     <value>RM_Messenger.View.CreateNewAccountNextControl</value>
   </data>
+  <data name="CreateNewAccountNextControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.CreateNewAccountNextControl</value>
+  </data>
+  <data name="CreateNewAccountNextWindowTitle" xml:space="preserve">
+    <value>Create RM! ID</value>
+  </data>
   <data name="CreateNewAccountWindowTitle" xml:space="preserve">
     <value>Create Account</value>
   </data>
@@ -185,6 +191,12 @@
   </data>
   <data name="EmailConfirmationCodeControlTitle" xml:space="preserve">
     <value>Email Verification</value>
+  </data>
+  <data name="EmailConfirmationCodeFinishedControlPath" xml:space="preserve">
+    <value>RM_Messenger.View.EmailConfirmationCodeFinishedControl</value>
+  </data>
+  <data name="EmailConfirmationCodeFinishedControlTitle" xml:space="preserve">
+    <value>Account successfully created</value>
   </data>
   <data name="EmptyIdError" xml:space="preserve">
     <value>The ID cannot be empty.</value>

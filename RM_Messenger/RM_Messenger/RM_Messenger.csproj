@@ -190,6 +190,7 @@
     <Compile Include="Helpers\AutoScrollHelper.cs" />
     <Compile Include="Helpers\EncryptionSHA256.cs" />
     <Compile Include="Helpers\ExpanderHelper.cs" />
+    <Compile Include="Helpers\SendEmail.cs" />
     <Compile Include="Helpers\ThemeColorsHelper.cs" />
     <Compile Include="Helpers\Validator.cs" />
     <Compile Include="Helpers\WindowManager.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="ViewModel\CreateNewAccountNextViewModel.cs" />
     <Compile Include="ViewModel\CreateNewAccountViewModel.cs" />
     <Compile Include="ViewModel\DisplayImageViewModel.cs" />
+    <Compile Include="ViewModel\EmailConfirmationCodeViewModel.cs" />
     <Compile Include="ViewModel\EmoticonsViewModel.cs" />
     <Compile Include="ViewModel\ErrorMessageViewModel.cs" />
     <Compile Include="ViewModel\HomepageViewModel.cs" />
@@ -250,6 +252,9 @@
     </Compile>
     <Compile Include="View\EmailConfirmationCodeControl.xaml.cs">
       <DependentUpon>EmailConfirmationCodeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\EmailConfirmationCodeFinishedControl.xaml.cs">
+      <DependentUpon>EmailConfirmationCodeFinishedControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\EmoticonRichTextBoxMessagesControl.xaml.cs">
       <DependentUpon>EmoticonRichTextBoxMessagesControl.xaml</DependentUpon>
@@ -357,6 +362,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\EmailConfirmationCodeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\EmailConfirmationCodeFinishedControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
