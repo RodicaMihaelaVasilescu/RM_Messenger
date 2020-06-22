@@ -147,6 +147,9 @@
   <data name="AddToMessengerRequestWindowTitle" xml:space="preserve">
     <value>Add To Messenger Request</value>
   </data>
+  <data name="Buzz" xml:space="preserve">
+    <value>BUZZ!!!</value>
+  </data>
   <data name="ChangePasswordControlPath" xml:space="preserve">
     <value>RM_Messenger.View.ChangePasswordControl</value>
   </data>

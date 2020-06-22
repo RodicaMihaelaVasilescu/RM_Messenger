@@ -151,6 +151,15 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BUZZ!!!.
+        /// </summary>
+        public static string Buzz {
+            get {
+                return ResourceManager.GetString("Buzz", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RM_Messenger.View.ChangePasswordControl.
         /// </summary>
         public static string ChangePasswordControlPath {

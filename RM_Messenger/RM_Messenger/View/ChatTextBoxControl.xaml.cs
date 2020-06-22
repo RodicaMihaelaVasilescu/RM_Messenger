@@ -286,6 +286,22 @@ namespace RM_Messenger.View
         TextBox.Focus();
       }
     }
+
+    private void BuzzIcon_Click(object sender, RoutedEventArgs e)
+    {
+      RMMessengerEntities _context = new RMMessengerEntities();
+      var message = new Message
+      {
+        Date = DateTime.Now,
+        SentBy_User_ID = UserModel.Instance.Username,
+        SentTo_User_ID = DisplayedContact_ID,
+        Text = Properties.Resources.Buzz
+      };
+
+      _context.Messages.Add(message);
+      _context.SaveChanges();
+      TextBox.Focus();
+    }
   }
 }
 

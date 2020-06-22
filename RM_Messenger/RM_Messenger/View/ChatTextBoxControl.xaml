@@ -316,6 +316,7 @@
             HorizontalAlignment="Left"
             Background="Transparent"
             BorderThickness="0"
+            Click="BuzzIcon_Click"
             Command="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=local:ChatControl}}"
             Cursor="Hand"
             ToolTip="Buzz">

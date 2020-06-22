@@ -251,7 +251,8 @@ namespace RM_Messenger.ViewModel
       }
 
       Message lastMessageFromDb = _context.Messages.Where(m => m.SentBy_User_ID == chatUser &&
-      m.SentTo_User_ID == currentUser).OrderByDescending(m => m.Date).FirstOrDefault();
+      m.SentTo_User_ID == currentUser || m.SentBy_User_ID == currentUser &&
+      m.SentTo_User_ID == chatUser).OrderByDescending(m => m.Date).FirstOrDefault();
 
       if (lastMessageFromDb == null || DateTime.Compare(lastMessageFromDb.Date, dateOfLastDisplayedMessage) <= 0)
       {
@@ -261,8 +262,8 @@ namespace RM_Messenger.ViewModel
       var message = new Message
       {
         Date = lastMessageFromDb.Date,
-        SentTo_User_ID = currentUser,
-        SentBy_User_ID = chatUser,
+        SentTo_User_ID = lastMessageFromDb.SentTo_User_ID,
+        SentBy_User_ID = lastMessageFromDb.SentBy_User_ID,
         Text = lastMessageFromDb.Text
       };
 
@@ -294,7 +295,7 @@ namespace RM_Messenger.ViewModel
       u => u.SentBy_User_ID == DisplayedUser.UserId &&
       u.SentTo_User_ID == UserModel.Instance.Username &&
       u.Status == Properties.Resources.SentStatus
-      && DateTime.Compare(u.Date, lastUploadDate) > 0).OrderByDescending(u=>u.Date)
+      && DateTime.Compare(u.Date, lastUploadDate) > 0).OrderByDescending(u => u.Date)
       .FirstOrDefault();
 
       if (uploaded != null)
@@ -341,7 +342,18 @@ namespace RM_Messenger.ViewModel
       var flowDocument = new FlowDocument();
       if (!string.IsNullOrEmpty(sentBy as string))
       {
+
         var paragraph = new Paragraph();
+        if (message == Properties.Resources.Buzz)
+        {
+          paragraph = new Paragraph(new Bold(new Run(Properties.Resources.Buzz))
+          {
+            Foreground = Brushes.Red
+
+          });
+          flowDocument.Blocks.Add(paragraph);
+          return flowDocument;
+        }
         if (sentBy == DisplayedUser.UserId)
         {
           Bold myBold = new Bold(new Run(sentBy + ": "));
