@@ -616,6 +616,9 @@
     </Content>
     <Resource Include="Resources\ChatTextBox\SendFile_MouseOver.png" />
     <Resource Include="Resources\ChatTextBox\SendFile.png" />
+    <Content Include="Resources\ChatTextBox\buzz.wav">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\Sounds\buzz.wav" />
     <Resource Include="Resources\TextEditor\background.jpg" />
     <Resource Include="Resources\TextEditor\pink_butterfly.png" />

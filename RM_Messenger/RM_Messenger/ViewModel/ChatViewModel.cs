@@ -186,7 +186,7 @@ namespace RM_Messenger.ViewModel
         // Maintain the reference in a class member.
 
         // Subscribe to the SqlDependency event.
-        dependency.OnChange += new OnChangeEventHandler(OnDependencyChange);
+        dependency.OnChange += new OnChangeEventHandler(OnMessagesDependencyChange);
 
         // Execute the command.
 
@@ -197,7 +197,8 @@ namespace RM_Messenger.ViewModel
       }
 
       string uploadsQuery = string.Format(
- "SELECT Status FROM dbo.Uploads WHERE SentBy_User_ID = '{0}' AND SentTo_User_ID ='{1}' AND Status = 'Sent'", DisplayedUser.UserId, UserModel.Instance.Username);
+            "SELECT Status FROM dbo.Uploads WHERE SentBy_User_ID = '{0}' AND SentTo_User_ID ='{1}' AND Status = 'Sent'",
+             DisplayedUser.UserId, UserModel.Instance.Username);
       using (SqlCommand command = new SqlCommand(uploadsQuery, connection))
       {
         // Create a dependency and associate it with the SqlCommand.
@@ -206,19 +207,12 @@ namespace RM_Messenger.ViewModel
 
         // Subscribe to the SqlDependency event.
         dependency.OnChange += new OnChangeEventHandler(OnUploadsDependencyChange);
-
-        // Execute the command.
-
-        using (SqlDataReader reader = command.ExecuteReader())
-        {
-          // Process the DataReader.
-        }
       }
       connection.Close();
     }
 
     // Handler method
-    void OnDependencyChange(object sender,
+    void OnMessagesDependencyChange(object sender,
        SqlNotificationEventArgs e)
     {
       RegisterSqlDependency();

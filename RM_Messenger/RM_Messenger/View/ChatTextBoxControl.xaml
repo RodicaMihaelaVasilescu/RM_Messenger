@@ -336,6 +336,14 @@
                 </ControlTemplate.Triggers>
               </ControlTemplate>
             </Button.Template>
+
+            <Style TargetType="Button">
+              <Style.Triggers>
+                <EventTrigger RoutedEvent="PreviewMouseDown">
+                  <SoundPlayerAction Source="/RM_Messenger;component/Resources/ChatTextBox/buzz.wav" />
+                </EventTrigger>
+              </Style.Triggers>
+            </Style>
           </Button>
 
           <Button
