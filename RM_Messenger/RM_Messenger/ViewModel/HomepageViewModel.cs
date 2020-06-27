@@ -372,6 +372,10 @@ namespace RM_Messenger.ViewModel
         }
         addRequestWindow.Owner = window;
         addRequestWindow.Left = window.Left - 400 + offset;
+        if (addRequestWindow.Left < 0)
+        {
+          addRequestWindow.Left = 0;
+        }
         addRequestWindow.Top = window.Top + 150 + offset;
         offset += 60;
         addRequestWindow.Tag = "Child";
