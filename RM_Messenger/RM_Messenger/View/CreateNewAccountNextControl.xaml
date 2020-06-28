@@ -120,6 +120,7 @@
           <RowDefinition Height="auto" />
           <RowDefinition Height="auto" />
           <RowDefinition Height="auto" />
+          <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
         <ListBox
           x:Name="TurnChargeBasedOnSelector"
@@ -161,8 +162,8 @@
 
         <Label
           Grid.Row="1"
-          Margin="0,10,0,0"
           HorizontalAlignment="Stretch"
+          VerticalContentAlignment="Center"
           Content="_Password:"
           Foreground="LightGray" />
 
@@ -172,6 +173,7 @@
           Grid.Column="1"
           Width="120"
           Height="20"
+          Margin="0,10,0,5"
           Padding="3,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
@@ -183,8 +185,8 @@
           PasswordChanged="Password_PasswordChanged" />
         <Label
           Grid.Row="2"
-          Margin="0,10,0,0"
           HorizontalAlignment="Stretch"
+          VerticalContentAlignment="Center"
           Content="_Retype Password:"
           Foreground="LightGray" />
 
@@ -194,6 +196,7 @@
           Grid.Column="1"
           Width="120"
           Height="20"
+          Margin="0,5,0,0"
           Padding="3,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
@@ -205,17 +208,24 @@
           PasswordChanged="RetypePassword_PasswordChanged" />
 
         <Label
+          Name="PassowrdsMatching"
           Grid.Row="3"
-          Margin="0,10,0,0"
+          Grid.Column="1"
+          Content=""
+          Foreground="LightGray" />
+        <Label
+          Grid.Row="4"
           HorizontalAlignment="Stretch"
+          VerticalContentAlignment="Center"
           Content="Mail (optional):"
           Foreground="LightGray" />
         <TextBox
           x:Name="EmailTextBox"
-          Grid.Row="3"
+          Grid.Row="4"
           Grid.Column="3"
           Width="120"
           Height="20"
+          Margin="0,0,0,5"
           Padding="3,0"
           HorizontalAlignment="Left"
           VerticalAlignment="Center"
@@ -223,15 +233,15 @@
           Background="White"
           BorderBrush="Black"
           BorderThickness="0.5"
-          TextChanged="EmailTextBox_TextChanged"
           FontSize="12"
           Foreground="Black"
           IsEnabled="True"
           Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+          TextChanged="EmailTextBox_TextChanged"
           TextWrapping="NoWrap" />
 
         <Label
-          Grid.Row="4"
+          Grid.Row="5"
           Grid.ColumnSpan="2"
           HorizontalAlignment="Stretch"
           Content="*If you choose to enter your email, you'll receive a confirmation code."

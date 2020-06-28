@@ -30,6 +30,16 @@ namespace RM_Messenger.View
     private void RetypePassword_PasswordChanged(object sender, RoutedEventArgs e)
     {
       NextButton.IsEnabled = IsFinishButtonEnabled();
+      if (Password.Password != RetypePassword.Password)
+      {
+        PassowrdsMatching.Content = "✘ Passwords do not match";
+        PassowrdsMatching.Foreground = Brushes.OrangeRed;
+      }
+      else
+      {
+        PassowrdsMatching.Content = "✔ Passwords match";
+        PassowrdsMatching.Foreground = Brushes.LightGreen;
+      }
     }
 
     private void Password_PasswordChanged(object sender, RoutedEventArgs e)
