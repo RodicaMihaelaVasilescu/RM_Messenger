@@ -207,6 +207,11 @@ namespace RM_Messenger.ViewModel
 
         // Subscribe to the SqlDependency event.
         dependency.OnChange += new OnChangeEventHandler(OnUploadsDependencyChange);
+
+        using (SqlDataReader reader = command.ExecuteReader())
+        {
+          // Process the DataReader.
+        }
       }
       connection.Close();
     }
