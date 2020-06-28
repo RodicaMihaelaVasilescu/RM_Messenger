@@ -397,7 +397,7 @@ namespace RM_Messenger.ViewModel
       var friendList = new ContactListsModel
       {
         ContactsList = new ObservableCollection<DisplayedContactModel>(_context.Friendships.
-        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a => a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_ID }))
+        Where(f => f.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(f => f.Date).Select(f => new DisplayedContactModel { UserId = f.Friend_ID }))
       };
 
       foreach (var friend in friendList.ContactsList)
@@ -406,8 +406,7 @@ namespace RM_Messenger.ViewModel
          _context.Accounts.Where(a => a.User_ID == friend.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         friend.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
         var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
-        friend.Status = _context.AddRequests.Any(f => f.SentTo_User_ID == friend.UserId &&
-           f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? friendAccount.Status : Resources.AddRequestPendingStatus;
+        friend.Status = _context.Accounts.Where(a => a.User_ID == friend.UserId).Select(a => a.Status).FirstOrDefault();
       }
 
       friendList.IsExpanded = friendList.ContactsList.Any();
@@ -475,8 +474,7 @@ namespace RM_Messenger.ViewModel
           _context.Accounts.Where(a => a.User_ID == address.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         address.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
         var friendAccount = _context.Accounts.Where(a => a.User_ID == address.UserId).FirstOrDefault();
-        address.Status = _context.AddRequests.Any(f => f.SentTo_User_ID == address.UserId &&
-            f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? friendAccount.Status : Resources.AddRequestPendingStatus;
+        address.Status = friendAccount.Status;
       }
 
       addressBook.IsExpanded = false;
@@ -496,8 +494,7 @@ namespace RM_Messenger.ViewModel
       foreach (var contact in contacts)
       {
         var sent_to = _context.Accounts.Where(a => a.User_ID == contact).FirstOrDefault();
-        var status = _context.AddRequests.Any(f => f.SentTo_User_ID == sent_to.User_ID &&
-           f.SentBy_User_ID == currentUser && f.Status == Resources.AcceptedStatus) ? sent_to.Status : Resources.AddRequestPendingStatus;
+        var status = sent_to.Status;
 
         recentList.ContactsList.Add(new DisplayedContactModel
         {
