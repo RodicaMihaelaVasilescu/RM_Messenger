@@ -397,7 +397,7 @@ namespace RM_Messenger.ViewModel
       var friendList = new ContactListsModel
       {
         ContactsList = new ObservableCollection<DisplayedContactModel>(_context.Friendships.
-        Where(f => f.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(f => f.Date).Select(f => new DisplayedContactModel { UserId = f.Friend_ID }))
+        Where(a => a.User_ID == UserModel.Instance.Username).ToList().OrderByDescending(a => a.Date).Select(a => new DisplayedContactModel { UserId = a.Friend_ID }))
       };
 
       foreach (var friend in friendList.ContactsList)
@@ -406,7 +406,7 @@ namespace RM_Messenger.ViewModel
          _context.Accounts.Where(a => a.User_ID == friend.UserId).Select(u => u.Profile_Picture).FirstOrDefault());
         friend.OnOffImage = "pack://application:,,,/RM_Messenger;component/Resources/Offline.ico";
         var friendAccount = _context.Accounts.Where(a => a.User_ID == friend.UserId).FirstOrDefault();
-        friend.Status = _context.Accounts.Where(a => a.User_ID == friend.UserId).Select(a => a.Status).FirstOrDefault();
+        friend.Status = friendAccount.Status;
       }
 
       friendList.IsExpanded = friendList.ContactsList.Any();
