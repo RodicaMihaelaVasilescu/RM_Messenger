@@ -51,6 +51,7 @@ namespace RM_Messenger.ViewModel
       var user = _context.Accounts.Where(u => u.User_ID == Username).FirstOrDefault();
       if (user == null)
       {
+        WindowManager.OpenLoginErrorWindow(window, "The user you have entered does not exist.", false);
         return;
       }
       var userModel = new UserModel
@@ -64,7 +65,7 @@ namespace RM_Messenger.ViewModel
       }
       else
       {
-        WindowManager.OpenLoginErrorWindow(window, "Sorry, you don't have an email to recover your password.", false);
+        WindowManager.OpenLoginErrorWindow(window, "Sorry, you don't have an email in order to recover your password.", false);
       }
     }
 
