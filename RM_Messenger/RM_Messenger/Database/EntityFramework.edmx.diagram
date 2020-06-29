@@ -28,6 +28,8 @@
         <AssociationConnector Association="RMMessengerModel.FK_Uploads_SentTo_User_ID" />
         <EntityTypeShape EntityType="RMMessengerModel.EmailConfirmation" Width="1.5" PointX="18" PointY="11.875" />
         <AssociationConnector Association="RMMessengerModel.FK_EmailConfirmation_Users" />
+        <EntityTypeShape EntityType="RMMessengerModel.LoginSession" Width="1.5" PointX="16.875" PointY="16.75" />
+        <AssociationConnector Association="RMMessengerModel.FK_LoginSessions_Users" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

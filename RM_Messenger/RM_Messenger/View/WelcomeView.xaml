@@ -1,0 +1,105 @@
+﻿<Window
+  x:Class="RM_Messenger.View.WelcomeView"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+  xmlns:local="clr-namespace:RM_Messenger.View"
+  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+  Title="Welcome to RM! Messenger"
+  Width="620"
+  Height="500"
+  Background="White"
+  FontFamily="Calisto MT"
+  mc:Ignorable="d">
+  <Window.CommandBindings>
+    <CommandBinding Command="ApplicationCommands.Close" Executed="CloseCommandHandler" />
+  </Window.CommandBindings>
+  <Window.Resources>
+    <ResourceDictionary>
+      <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Shadows.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Button.xaml" />
+      </ResourceDictionary.MergedDictionaries>
+    </ResourceDictionary>
+  </Window.Resources>
+
+  <Grid Margin="5">
+    <Grid.Background>
+      <ImageBrush
+        AlignmentX="Center"
+        AlignmentY="Top"
+        ImageSource="pack://application:,,,/RM_Messenger;component/Resources/Welcome_image.jpg"
+        Stretch="Fill" />
+    </Grid.Background>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+      <RowDefinition Height="auto" />
+
+    </Grid.RowDefinitions>
+
+    <Label
+      Margin="60,80,0,0"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      Content="WELCOME TO RM! MESSENGER"
+      FontSize="16"
+      FontWeight="Bold"
+      Foreground="White" />
+    <Label
+      Grid.Row="1"
+      Margin="60,-10,0,0"
+      VerticalAlignment="Top"
+      Content="Staying in touch has never been easier (or more fun)!"
+      FontSize="14"
+      FontWeight="Thin"
+      Foreground="White" />
+
+
+
+    <Label
+      Grid.Row="2"
+      Margin="60,15,0,0"
+      HorizontalAlignment="Left"
+      VerticalAlignment="Center"
+      Content="More friends = more fun"
+      FontSize="15"
+      FontWeight="Bold"
+      Foreground="White" />
+    <Label
+      Grid.Row="3"
+      Margin="36,-25,0,0"
+      VerticalAlignment="Top"
+      xml:space="preserve"
+      FontSize="14"
+      FontWeight="Thin"
+      Foreground="White">
+      Use our wizard to add friends tha already use RM! Messenger and
+      new ones from your RM! Address Book or Outlook.
+    </Label>
+
+    <Button
+      Grid.Row="4"
+      Width="200"
+      Height="40"
+      Margin="0,40,0,0"
+      VerticalAlignment="Top"
+      BorderBrush="White"
+      Command="ApplicationCommands.Close"
+      Content="Start Adding Friends"
+      FontWeight="Bold"
+      Foreground="Black"
+      Style="{StaticResource MaterialDesignRaisedAccentButton}">
+      <Button.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+          <GradientStop Offset="0" Color="#fdf6d3" />
+          <GradientStop Offset="0.445" Color="#ffea9e" />
+          <GradientStop Offset="0.53" Color="#feda50" />
+        </LinearGradientBrush>
+      </Button.Background>
+    </Button>
+  </Grid>
+</Window>

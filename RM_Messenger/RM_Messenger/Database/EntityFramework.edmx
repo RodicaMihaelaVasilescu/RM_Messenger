@@ -55,6 +55,14 @@
           <Property Name="Friend_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Date" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="LoginSessions">
+          <Key>
+            <PropertyRef Name="LoginSession_ID" />
+          </Key>
+          <Property Name="LoginSession_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User_ID" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Messages">
           <Key>
             <PropertyRef Name="Message_ID" />
@@ -183,6 +191,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LoginSessions_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="LoginSessions" Type="Self.LoginSessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="LoginSessions">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Messages_Receiver_User">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Messages" Type="Self.Messages" Multiplicity="*" />
@@ -261,6 +281,7 @@
           <EntitySet Name="AddressBook" EntityType="Self.AddressBook" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailConfirmation" EntityType="Self.EmailConfirmation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Friendships" EntityType="Self.Friendships" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginSessions" EntityType="Self.LoginSessions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RecentList" EntityType="Self.RecentList" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Uploads" EntityType="Self.Uploads" Schema="dbo" store:Type="Tables" />
@@ -292,6 +313,10 @@
           <AssociationSet Name="FK_Friendships_User_ID" Association="Self.FK_Friendships_User_ID">
             <End Role="Users" EntitySet="Users" />
             <End Role="Friendships" EntitySet="Friendships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginSessions_Users" Association="Self.FK_LoginSessions_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LoginSessions" EntitySet="LoginSessions" />
           </AssociationSet>
           <AssociationSet Name="FK_Messages_Receiver_User" Association="Self.FK_Messages_Receiver_User">
             <End Role="Users" EntitySet="Users" />
@@ -387,6 +412,11 @@
           <AssociationSet Name="FK_EmailConfirmation_Users" Association="RMMessengerModel.FK_EmailConfirmation_Users">
             <End Role="User" EntitySet="Users" />
             <End Role="EmailConfirmation" EntitySet="EmailConfirmations" />
+          </AssociationSet>
+          <EntitySet Name="LoginSessions" EntityType="RMMessengerModel.LoginSession" />
+          <AssociationSet Name="FK_LoginSessions_Users" Association="RMMessengerModel.FK_LoginSessions_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LoginSession" EntitySet="LoginSessions" />
           </AssociationSet>
         </EntityContainer>
         <EntityType Name="Account">
@@ -486,6 +516,7 @@
           <NavigationProperty Name="Uploads" Relationship="RMMessengerModel.FK_Uploads_SentBy_User_ID" FromRole="User" ToRole="Upload" />
           <NavigationProperty Name="Uploads1" Relationship="RMMessengerModel.FK_Uploads_SentTo_User_ID" FromRole="User" ToRole="Upload" />
           <NavigationProperty Name="EmailConfirmations" Relationship="RMMessengerModel.FK_EmailConfirmation_Users" FromRole="User" ToRole="EmailConfirmation" />
+          <NavigationProperty Name="LoginSessions" Relationship="RMMessengerModel.FK_LoginSessions_Users" FromRole="User" ToRole="LoginSession" />
         </EntityType>
         <Association Name="FK_Accounts_Users">
           <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
@@ -679,6 +710,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LoginSession">
+          <Key>
+            <PropertyRef Name="LoginSession_ID" />
+          </Key>
+          <Property Name="LoginSession_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User_ID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="User" Relationship="RMMessengerModel.FK_LoginSessions_Users" FromRole="LoginSession" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_LoginSessions_Users">
+          <End Type="RMMessengerModel.User" Role="User" Multiplicity="1" />
+          <End Type="RMMessengerModel.LoginSession" Role="LoginSession" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="LoginSession">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -785,6 +837,15 @@
                 <ScalarProperty Name="Code" ColumnName="Code" />
                 <ScalarProperty Name="User_ID" ColumnName="User_ID" />
                 <ScalarProperty Name="EmailConfirmation_ID" ColumnName="EmailConfirmation_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginSessions">
+            <EntityTypeMapping TypeName="RMMessengerModel.LoginSession">
+              <MappingFragment StoreEntitySet="LoginSessions">
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="LoginSession_ID" ColumnName="LoginSession_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

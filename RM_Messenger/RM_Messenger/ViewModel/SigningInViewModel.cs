@@ -3,6 +3,7 @@ using RM_Messenger.Database;
 using RM_Messenger.Helpers;
 using RM_Messenger.Model;
 using RM_Messenger.Properties;
+using RM_Messenger.View;
 using System;
 using System.ComponentModel;
 using System.Linq;
@@ -67,7 +68,7 @@ namespace RM_Messenger.ViewModel
       WindowManager.ChangeWindowContent(window, loginViewModel, Resources.LoginWindowTitle, Resources.LoginControlPath);
     }
 
-    private void OpenHomepageWindow()
+    private void OpenHomepageWindow(User user)
     {
       homepageViewModel = new HomepageViewModel(window);
       WindowManager.ChangeWindowContent(window, homepageViewModel, Resources.HomepageWindowTitle, Resources.HomepageControlPath);
@@ -80,6 +81,19 @@ namespace RM_Messenger.ViewModel
       window.Show();
 
       OpenAddRequests();
+      var loginSession = _context.LoginSessions.Where(u => u.User_ID == user.User_ID).FirstOrDefault();
+      if (loginSession != null)
+      {
+        Window welcomeWindow = new WelcomeView();
+        welcomeWindow.Show();
+        welcomeWindow.Left = window.Left - welcomeWindow.Width;
+      }
+      _context.LoginSessions.Add(new LoginSession
+      {
+        User_ID = user.User_ID,
+        Date = DateTime.Now
+      });
+      _context.SaveChanges();
     }
 
     private void OpenAddRequests()
@@ -141,7 +155,7 @@ namespace RM_Messenger.ViewModel
       var account = _context.Accounts.Where(a => a.User_ID == user.User_ID).FirstOrDefault();
       UserModel.Instance.ProfilePicture = account.Profile_Picture;
       UserModel.Instance.Status = account.Status;
-      OpenHomepageWindow();
+      OpenHomepageWindow(user);
     }
 
     #endregion

@@ -170,6 +170,9 @@
     <Compile Include="Database\Friendship.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\LoginSession.cs">
+      <DependentUpon>EntityFramework.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\Message.cs">
       <DependentUpon>EntityFramework.tt</DependentUpon>
     </Compile>
@@ -287,6 +290,9 @@
     </Compile>
     <Compile Include="View\TextEditorView.xaml.cs">
       <DependentUpon>TextEditorView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\WelcomeView.xaml.cs">
+      <DependentUpon>WelcomeView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -414,6 +420,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TextEditorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\WelcomeView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -619,6 +629,7 @@
     <Content Include="Resources\ChatTextBox\buzz.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Welcome_image.jpg" />
     <Content Include="Resources\Sounds\buzz.wav" />
     <Resource Include="Resources\TextEditor\background.jpg" />
     <Resource Include="Resources\TextEditor\pink_butterfly.png" />
