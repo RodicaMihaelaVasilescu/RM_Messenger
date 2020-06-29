@@ -43,6 +43,20 @@ namespace RM_Messenger.View
       FinishButton.IsEnabled = IsFinishButtonEnabled();
       UserModel.Instance.NewEncryptedPassword = Encryption.Sha256(Password.Password);
       PasswordValidationMessage.Text = Validator.ValidatePassword(Password.Password);
+      if (string.IsNullOrEmpty(RetypePassword.Password))
+      {
+        return;
+      }
+      if (Password.Password != RetypePassword.Password)
+      {
+        PassowrdsMatching.Content = "✘ Passwords do not match";
+        PassowrdsMatching.Foreground = Brushes.OrangeRed;
+      }
+      else
+      {
+        PassowrdsMatching.Content = "✔ Passwords match";
+        PassowrdsMatching.Foreground = Brushes.LightGreen;
+      }
     }
 
     private void EmailTextBox_TextChanged(object sender, TextChangedEventArgs e)
