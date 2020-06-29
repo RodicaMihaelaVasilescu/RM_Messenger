@@ -82,7 +82,7 @@ namespace RM_Messenger.ViewModel
 
       OpenAddRequests();
       var loginSession = _context.LoginSessions.Where(u => u.User_ID == user.User_ID).FirstOrDefault();
-      if (loginSession != null)
+      if (loginSession == null)
       {
         Window welcomeWindow = new WelcomeView();
         welcomeWindow.Show();
