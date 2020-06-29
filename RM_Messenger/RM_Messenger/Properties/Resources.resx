@@ -121,7 +121,7 @@
     <value>Accepted</value>
   </data>
   <data name="AccountSuccessfullyCreated" xml:space="preserve">
-    <value>Your account has been successfully created!</value>
+    <value>{0}, your account has been successfully created!</value>
   </data>
   <data name="AddContactFirstControlPath" xml:space="preserve">
     <value>RM_Messenger.View.AddContactFirstControl</value>
@@ -274,7 +274,7 @@
     <value>No response</value>
   </data>
   <data name="PasswordSuccessfullyChanged" xml:space="preserve">
-    <value>Your password has been successfully changed!</value>
+    <value>{0}, your password has been successfully changed!</value>
   </data>
   <data name="RecentListName" xml:space="preserve">
     <value>Recent</value>

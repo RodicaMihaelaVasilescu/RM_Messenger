@@ -70,7 +70,7 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your account has been successfully created!.
+        ///   Looks up a localized string similar to {0}, your account has been successfully created!.
         /// </summary>
         public static string AccountSuccessfullyCreated {
             get {
@@ -529,7 +529,7 @@ namespace RM_Messenger.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your password has been successfully changed!.
+        ///   Looks up a localized string similar to {0}, your password has been successfully changed!.
         /// </summary>
         public static string PasswordSuccessfullyChanged {
             get {

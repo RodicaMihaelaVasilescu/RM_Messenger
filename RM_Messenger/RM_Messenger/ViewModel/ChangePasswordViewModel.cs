@@ -34,7 +34,7 @@ namespace RM_Messenger.ViewModel
     }
 
     public event PropertyChangedEventHandler PropertyChanged;
-    private string _successfulConfirmationMessage = Resources.PasswordSuccessfullyChanged;
+    private string _successfulConfirmationMessage;
     public Action CloseAction { get; set; }
     public ICommand BackCommand { get; set; }
     public ICommand CancelCommand { get; set; }
@@ -71,6 +71,7 @@ namespace RM_Messenger.ViewModel
       CancelCommand = new RelayCommand(CancelCommandExecute);
       NextCommand = new RelayCommand(NextCommandExecute);
       Username = user.Username;
+      _successfulConfirmationMessage = string.Format(Resources.PasswordSuccessfullyChanged, user.Username);
 
     }
 

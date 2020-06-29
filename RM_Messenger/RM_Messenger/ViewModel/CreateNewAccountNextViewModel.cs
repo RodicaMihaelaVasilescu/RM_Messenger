@@ -39,7 +39,7 @@ namespace RM_Messenger.ViewModel
     public ICommand BackCommand { get; set; }
     public ICommand CancelCommand { get; set; }
     public ICommand CreateAccountCommand { get; set; }
-    public string _successfulConfirmationMessage = Resources.AccountSuccessfullyCreated;
+    public string _successfulConfirmationMessage;
 
     public List<string> IdSuggestionsList
     {
@@ -127,6 +127,7 @@ namespace RM_Messenger.ViewModel
       BackCommand = new RelayCommand(BackCommandExecute);
       CancelCommand = new RelayCommand(CancelCommandExecute);
       CreateAccountCommand = new RelayCommand(CreateAccountCommandExecute);
+      _successfulConfirmationMessage = string.Format(Resources.AccountSuccessfullyCreated, user.Username);
       InitializeIdSuggestions();
       if (newUser != null)
       {
@@ -199,6 +200,7 @@ namespace RM_Messenger.ViewModel
         return;
       }
       SaveAccountInDatabase();
+      _successfulConfirmationMessage = string.Format(Resources.AccountSuccessfullyCreated, Username);
       WindowManager.ChangeWindowContent(window, this, Resources.EmailConfirmationCodeFinishedControlTitle, Resources.EmailConfirmationCodeFinishedControlPath);
     }
 

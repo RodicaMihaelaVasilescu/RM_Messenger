@@ -30,7 +30,8 @@ namespace RM_Messenger.ViewModel
 
     public Action CloseAction { get; set; }
     public event PropertyChangedEventHandler PropertyChanged;
-    private string _successfulConfirmationMessage = Resources.AccountSuccessfullyCreated;
+    private string _successfulConfirmationMessage;
+    private Visibility _emoticonVisibility;
 
     public ICommand BackCommand { get; set; }
     public ICommand NextCommand { get; set; }
@@ -56,6 +57,17 @@ namespace RM_Messenger.ViewModel
         if (_verificationCodeMessage == value) return;
         _verificationCodeMessage = value;
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VerificationCodeMessage"));
+      }
+    }
+
+    public Visibility EmoticonVisibility
+    {
+      get { return _emoticonVisibility; }
+      set
+      {
+        if (_emoticonVisibility == value) return;
+        _emoticonVisibility = value;
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("EmoticonVisibility"));
       }
     }
     public string SuccessfulConfirmationMessage
@@ -94,6 +106,9 @@ namespace RM_Messenger.ViewModel
       CancelCommand = new RelayCommand(CloseCommandExecute);
       SendAnotherVerificationCodeCommand = new RelayCommand(SendAnotherVerificationCodeExecute);
       _displayedMailMessage = string.Format("We've sent you a verification code on {0}. Please type the code you received:", user.Email);
+      _successfulConfirmationMessage = string.Format(Resources.AccountSuccessfullyCreated, user.Username);
+      _emoticonVisibility = Visibility.Hidden;
+
     }
 
     private void BackCommandExecute()
@@ -148,6 +163,7 @@ namespace RM_Messenger.ViewModel
         else
         {
           VerificationCodeMessage =Resources.EmailVerificationFailed;
+          EmoticonVisibility = Visibility.Visible;
         }
         return;
       }
@@ -164,6 +180,7 @@ namespace RM_Messenger.ViewModel
         else
         {
           VerificationCodeMessage = Resources.EmailVerificationFailed;
+          EmoticonVisibility = Visibility.Visible;
         }
         return;
       }
