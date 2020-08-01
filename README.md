@@ -1,13 +1,19 @@
 # RM! Messenger
 ## Inspired by Yahoo! Messenger
-
 ![alt text](Demo/RM!Messenger.gif)
+![alt text](Demo/Search.gif)
 
 #### Updates: Send files
 ![alt text](Demo/SendFiles.png)
 
 #### Updates: Chat
-![alt text](Demo/RM!Chat.gif)
+![alt text](Demo/Chat.gif)
+
+#### Updates: Create Account
+![alt text](Demo/Validations.gif)
+
+#### Updates: Welcome page
+![alt text](Demo/Welcome_to_RM_Messenger.PNG)
 
 #### Updates: Emoticons
 ![alt text](Demo/RM!MessengerEmoticons.png)
