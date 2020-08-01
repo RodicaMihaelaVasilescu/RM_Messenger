@@ -3,10 +3,8 @@
 ![alt text](Demo/RM!Messenger.gif)
 ![alt text](Demo/Search.gif)
 
-#### Updates: Send files
-![alt text](Demo/SendFiles.png)
-
 #### Updates: Chat
+### Add files, BUZZ button
 ![alt text](Demo/Chat.gif)
 
 #### Updates: Create Account
