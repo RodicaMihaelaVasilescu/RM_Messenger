@@ -13,9 +13,6 @@
 #### Updates: Welcome page
 ![alt text](Demo/Welcome_to_RM_Messenger.PNG)
 
-#### Updates: Emoticons
-![alt text](Demo/RM!MessengerEmoticons.png)
-
 #### Updates: Change Color Theme
 ![alt text](Demo/PinkAndIndigoTheme.png)
 ![alt text](Demo/BlueChat.png)
