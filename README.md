@@ -10,9 +10,6 @@
 #### Updates: Create Account
 ![alt text](Demo/Validations.gif)
 
-#### Updates: Welcome page
-![alt text](Demo/Welcome_to_RM_Messenger.PNG)
-
 #### Updates: Change Color Theme
 ![alt text](Demo/PinkAndIndigoTheme.png)
 ![alt text](Demo/BlueChat.png)
