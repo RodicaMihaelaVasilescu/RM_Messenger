@@ -18,7 +18,7 @@
 #### Updates: Add To Messenger Request
 ![alt text](Demo/RM!AddToMessengerRequest.JPG)
 
-#### Updates: Add To Contact List
+#### Updates: Add To Contacts List
 ![alt text](Demo/RM!AddToContactList.gif)
 
 #### Updates: Add Emoticons
